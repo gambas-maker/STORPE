@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_145411) do
+ActiveRecord::Schema.define(version: 2020_06_08_150006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,21 @@ ActiveRecord::Schema.define(version: 2020_06_08_145411) do
     t.index ["user_id"], name: "index_player_seasons_on_user_id"
   end
 
+  create_table "season_matches", force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_season_matches_on_match_id"
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer "start_date"
+    t.integer "end_date"
+    t.string "division"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -68,4 +83,5 @@ ActiveRecord::Schema.define(version: 2020_06_08_145411) do
 
   add_foreign_key "forecasts", "player_seasons"
   add_foreign_key "player_seasons", "users"
+  add_foreign_key "season_matches", "matches"
 end
