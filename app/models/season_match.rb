@@ -1,3 +1,3 @@
 class SeasonMatch < ApplicationRecord
-  belongs_to :match
+  belongs_to :match, :season
 end

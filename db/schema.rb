@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_150006) do
+ActiveRecord::Schema.define(version: 2020_06_08_150757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_150006) do
     t.integer "number_of_points"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "season_id"
+    t.index ["season_id"], name: "index_player_seasons_on_season_id"
     t.index ["user_id"], name: "index_player_seasons_on_user_id"
   end
 
@@ -55,7 +57,9 @@ ActiveRecord::Schema.define(version: 2020_06_08_150006) do
     t.bigint "match_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "season_id"
     t.index ["match_id"], name: "index_season_matches_on_match_id"
+    t.index ["season_id"], name: "index_season_matches_on_season_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -82,6 +86,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_150006) do
   end
 
   add_foreign_key "forecasts", "player_seasons"
+  add_foreign_key "player_seasons", "seasons"
   add_foreign_key "player_seasons", "users"
   add_foreign_key "season_matches", "matches"
+  add_foreign_key "season_matches", "seasons"
 end
