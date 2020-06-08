@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_144954) do
+ActiveRecord::Schema.define(version: 2020_06_08_145411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,22 @@ ActiveRecord::Schema.define(version: 2020_06_08_144954) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["player_season_id"], name: "index_forecasts_on_player_season_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.string "result"
+    t.string "team_home"
+    t.string "team_away"
+    t.string "sport"
+    t.string "team_home_logo_url"
+    t.string "team_away_logo_url"
+    t.string "country"
+    t.string "league"
+    t.integer "points"
+    t.integer "negative_points"
+    t.string "kick_off"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "player_seasons", force: :cascade do |t|
