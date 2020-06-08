@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_144148) do
+ActiveRecord::Schema.define(version: 2020_06_08_144954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forecasts", force: :cascade do |t|
+    t.bigint "player_season_id", null: false
+    t.integer "points_win"
+    t.integer "points_lose"
+    t.boolean "confirmed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_season_id"], name: "index_forecasts_on_player_season_id"
+  end
 
   create_table "player_seasons", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -40,5 +50,6 @@ ActiveRecord::Schema.define(version: 2020_06_08_144148) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "forecasts", "player_seasons"
   add_foreign_key "player_seasons", "users"
 end
