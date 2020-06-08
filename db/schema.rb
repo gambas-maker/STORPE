@@ -10,10 +10,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_143227) do
+ActiveRecord::Schema.define(version: 2020_06_08_151159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forecasts", force: :cascade do |t|
+    t.bigint "player_season_id", null: false
+    t.integer "points_win"
+    t.integer "points_lose"
+    t.boolean "confirmed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "match_id"
+    t.index ["match_id"], name: "index_forecasts_on_match_id"
+    t.index ["player_season_id"], name: "index_forecasts_on_player_season_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.string "result"
+    t.string "team_home"
+    t.string "team_away"
+    t.string "sport"
+    t.string "team_home_logo_url"
+    t.string "team_away_logo_url"
+    t.string "country"
+    t.string "league"
+    t.integer "points"
+    t.integer "negative_points"
+    t.string "kick_off"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "player_seasons", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.float "ratio"
+    t.integer "rank"
+    t.integer "number_of_points"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "season_id"
+    t.index ["season_id"], name: "index_player_seasons_on_season_id"
+    t.index ["user_id"], name: "index_player_seasons_on_user_id"
+  end
+
+  create_table "season_matches", force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "season_id"
+    t.index ["match_id"], name: "index_season_matches_on_match_id"
+    t.index ["season_id"], name: "index_season_matches_on_season_id"
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer "start_date"
+    t.integer "end_date"
+    t.string "division"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +80,17 @@ ActiveRecord::Schema.define(version: 2020_06_08_143227) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "pseudo"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "forecasts", "matches"
+  add_foreign_key "forecasts", "player_seasons"
+  add_foreign_key "player_seasons", "seasons"
+  add_foreign_key "player_seasons", "users"
+  add_foreign_key "season_matches", "matches"
+  add_foreign_key "season_matches", "seasons"
 end
