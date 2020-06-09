@@ -1,9 +1,11 @@
 .main {
-  margin:2px;
-  display:flex;
+
+  display: flex;
   justify-content:center;
-  height: 100vh;
+
   color: white;
+
+  width: 100%;
 .btn {
     display: block;
     margin: 0 auto;
@@ -12,10 +14,6 @@
 
 }
 
-body{
-  background: linear-gradient(rgba(49,41,91,1), rgba(49,41,88,1), rgba(49,41,79,1),rgba(49,41,71,1) );
-
-}
 
 
 #join_the_championship{
@@ -74,8 +72,21 @@ a{
     font-weight: 400;
     line-height: 1.5;
     color: white;
-    background-color: white;
-    border-radius: 25px;
+    background-color: transparent;
+
+    border-right: none;
+    border-left:none;
+    border-top: none;
+    border-bottom: 1px solid white ;
+    &:hover{
+      background-color: transparent;
+      border-right: none;
+      border-left:none;
+      border-top: none;
+      border-bottom: 1px solid white ;
+      color:white;
+    }
+
 
 }
 
