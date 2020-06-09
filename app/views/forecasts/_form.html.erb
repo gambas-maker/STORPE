@@ -1,0 +1,14 @@
+<%= simple_form_for [ @forecast ] do |f| %>
+
+  <div>
+  <%= f.input :outcome %>
+  </div>
+
+  <!-- Trouver un moyen de faire 3 checkbox, un choix uniquement,
+    chaque checkbox a une valeur qui sera attribuée à l'outcome.
+    L'outcome sera ensuite comparé au result du tableau Matches.-->
+
+<input type="submit" name="commit" value="Confirmer" class="button" data-disable-with="Confirmer">
+<% end %>
+
+
