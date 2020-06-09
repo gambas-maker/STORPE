@@ -11,3 +11,11 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "pages/login";
+@import "components/photo_background";
+
+body{
+  padding-bottom:290px;
+  background: linear-gradient(rgba(49,41,91,1), rgba(49,41,88,1), rgba(49,41,79,1),rgba(49,41,71,1) );
+  width: 100%;
+}
