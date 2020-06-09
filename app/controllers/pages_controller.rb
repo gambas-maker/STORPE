@@ -8,5 +8,6 @@ class PagesController < ApplicationController
   end
 
   def contact
+    # Ajouter un moyen d'envoyer un formulaire titre, message, mail.
   end
 end

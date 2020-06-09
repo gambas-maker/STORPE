@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_151159) do
+ActiveRecord::Schema.define(version: 2020_06_09_102431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_151159) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "match_id"
+    t.string "outcome"
     t.index ["match_id"], name: "index_forecasts_on_match_id"
     t.index ["player_season_id"], name: "index_forecasts_on_player_season_id"
   end
