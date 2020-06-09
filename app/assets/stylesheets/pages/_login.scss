@@ -1,0 +1,99 @@
+.main {
+
+  display: flex;
+  justify-content:center;
+
+  color: white;
+
+  width: 100%;
+.btn {
+    display: block;
+    margin: 0 auto;
+    width:200px;
+  }
+
+}
+
+
+
+#join_the_championship{
+  font-size: 18px;
+  font-family: "Montserrat";
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  text-align: center;
+  width: 218px;
+
+
+
+}
+
+
+.btn-signup{
+  background: transparent;
+  border: 0.5px solid #FFFFFF;
+  border-radius: 25px;
+  opacity: 1;
+  color:white;
+  width: 100%;
+  text-decoration: none;
+
+  &:hover{
+    color:white;
+  }
+}
+
+a{
+  text-decoration: none !important;
+  color: rgba(49,41,91,1);
+}
+.btn-login{
+  background: white;
+  border: 0.5px solid #FFFFFF;
+  border-radius: 25px;
+  opacity: 1;
+
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 20px;
+
+  &:hover{
+    color:black;
+  }
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    background-color: transparent;
+
+    border-right: none;
+    border-left:none;
+    border-top: none;
+    border-bottom: 1px solid white ;
+    &:hover{
+      background-color: transparent;
+      border-right: none;
+      border-left:none;
+      border-top: none;
+      border-bottom: 1px solid white ;
+      color:white;
+    }
+
+
+}
+
+.nav{
+height: 70px;
+width: 100%;
+align-items: center;
+justify-content: center;
+}
+
