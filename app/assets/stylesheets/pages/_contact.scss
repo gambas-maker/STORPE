@@ -1,0 +1,39 @@
+.nav {
+  height: 70px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#contact {
+  font-size: 18px;
+  font-family: "Montserrat";
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.feedback-input {
+  color:white;
+  font-weight:normal;
+  font-size: 12px;
+  border-radius: 20px;
+  line-height: 22px;
+  background-color: transparent;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+.feedback-input:focus { border:1px solid #CC4949; }
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize:vertical;
+}
+
+.contact {
+  padding: 20px;
+}

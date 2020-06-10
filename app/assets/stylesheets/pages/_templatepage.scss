@@ -1,0 +1,239 @@
+.topimage {
+  mix-blend-mode: lighten;
+  opacity: 1;
+  background-size: cover;
+  margin-bottom: 25px;
+  position: relative;
+}
+.toptitle {
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 32px;
+  width:100%;
+  height:100%;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.info {
+  width: 100%;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.08);
+  }
+
+.infoplayer {
+  position: relative;
+  color: white;
+}
+
+.logoplayer {
+  position: absolute;
+  left: 120px;
+  top: 15px;
+}
+
+.pseudoplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 180px;
+  top: 20px;
+}
+
+.positionplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  left: 180px;
+  top: 55px;
+}
+
+.divisionplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 8px;
+  left: 215px;
+  top: 57px;
+}
+
+.hr1 {
+  position: absolute;
+  border-top: 1px solid white;
+  margin-left: 63px;
+  margin-right: 90px;
+  opacity: 0.5;
+  top: 90px;
+}
+
+.hr2 {
+  position: absolute;
+  border-top: 1px solid white;
+  margin-left: 63px;
+  margin-right: 90px;
+  opacity: 0.5;
+  top: 420px;
+}
+
+.matcheslabel {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 80px;
+  top: 310px;
+}
+
+.ratiolabel {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 80px;
+  top: 330px;
+}
+
+.pointswonlabel {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 80px;
+  top: 350px;
+}
+
+.footballpointslabel {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 80px;
+  top: 370px;
+}
+
+.basketballpointslabel {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 80px;
+  top: 390px;
+}
+
+.matchesplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: lighter;
+  left: 265px;
+  top: 310px;
+}
+
+.ratioplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: lighter;
+  left: 265px;
+  top: 330px;
+}
+
+.pointswonplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: lighter;
+  left: 265px;
+  top: 350px;
+}
+
+.footballpointsplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: lighter;
+  left: 265px;
+  top: 370px;
+}
+
+.basketballpointsplayer {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: lighter;
+  left: 265px;
+  top: 390px;
+}
+
+.logopredictedmatches {
+  position: absolute;
+  left: 47%;
+  top: 432px;
+}
+
+.minilogopredictedmatches {
+  position: absolute;
+  left: 47%;
+  top: 432px;
+}
+
+.predictedmatches {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 42%;
+  top: 464px;
+}
+
+
+.favorite {
+  position: absolute;
+  left: 69%;
+  top: 432px;
+}
+
+.favoritelabel {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 66%;
+  top: 464px;
+}
+.boost {
+  position: absolute;
+  left: 24%;
+  top: 432px;
+}
+
+.boostlabel {
+  position: absolute;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  left: 23%;
+  top: 464px;
+}
