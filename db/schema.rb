@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_102431) do
+ActiveRecord::Schema.define(version: 2020_06_10_122416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,11 +37,14 @@ ActiveRecord::Schema.define(version: 2020_06_09_102431) do
     t.string "team_away_logo_url"
     t.string "country"
     t.string "league"
-    t.integer "points"
+    t.float "points_home"
     t.integer "negative_points"
     t.string "kick_off"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "points_draw"
+    t.float "points_away"
+    t.integer "fixture_id"
   end
 
   create_table "player_seasons", force: :cascade do |t|
