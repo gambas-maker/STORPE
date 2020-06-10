@@ -1,20 +1,15 @@
 .main {
-
   display: flex;
   justify-content:center;
-
   color: white;
-
   width: 100%;
-.btn {
-    display: block;
-    margin: 0 auto;
-    width:200px;
-  }
-
 }
 
-
+.btn {
+    display: block;
+    margin: 0px;
+    width:100%;
+  }
 
 #join_the_championship{
   font-size: 18px;
@@ -24,9 +19,6 @@
 
   text-align: center;
   width: 218px;
-
-
-
 }
 
 
@@ -86,14 +78,13 @@ a{
       border-bottom: 1px solid white ;
       color:white;
     }
-
-
 }
 
-.nav{
-height: 70px;
-width: 100%;
-align-items: center;
-justify-content: center;
+
+.nav {
+  height: 70px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
