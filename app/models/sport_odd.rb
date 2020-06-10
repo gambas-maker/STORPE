@@ -6,9 +6,11 @@ require 'json'
 class SportOdd
   BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
   LEAGUE_IDS = [1, 524, 3, 4, 754]
-  def self.matches_for_week(league_id)
-    7.times do |index|
-      matches_for_day(league_id, Date.today + index)
+  LEAGUE_IDS.each do |league_id|
+    def self.matches_for_week(league_id)
+        7.times do |index|
+          matches_for_day(league_id, Date.today + index)
+        end
     end
   end
 
@@ -33,6 +35,7 @@ class SportOdd
     end_point = URI("#{BASE_URL}v2/odds/fixture/#{game.fixture_id}")
     matches = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][0]["values"][0]["odd"].to_i
     matches.each do |match|
+      Match.create(points_home: match, points_draw: match, points_away: match)
     end
   end
 
