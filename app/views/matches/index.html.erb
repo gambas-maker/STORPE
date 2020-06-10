@@ -1,5 +1,5 @@
 <h1>Liste des matchs à venir</h1>
 
 <% @matches.each do |match| %>
-<%= match["api"]["fixtures"] %>
+<%= match.team_home %>
 <% end %>

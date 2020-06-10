@@ -5,22 +5,38 @@ require 'json'
 
 class SportOdd
   BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
-  LEAGUE_ID = { fr: 1, gb: 2, it: 3, es: 4, de: 5 }
-  def self.matches_for_week
-    end_point = "#{BASE_URL}fixtures/league/#{LEAGUE_ID}/#{date}?timezone=Europe%252FLondon"
-    matches = call_api(end_point)["api"]["fixtures"]
-    matches.each do |match|
-      Match.create(fixture_id: )
+  LEAGUE_IDS = [1, 524, 3, 4, 754]
+  def self.matches_for_week(league_id)
+    7.times do |index|
+      matches_for_day(league_id, Date.today + index)
+    end
+  end
+
+  def self.matches_for_day(league_id, date)
+    end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}")
+    response = call_api(end_point)
+    if response["results"].to_i.positive?
+      matches = call_api(end_point)["api"]["fixtures"]
+      matches.each do |match|
+        Match.create(team_home: match["homeTeam"]["team_name"], team_home_logo_url: match["homeTeam"]["logo"], team_away: match["awayTeam"]["team_name"], team_away_logo_url: match["awayTeam"]["logo"])
+      end
+    end
+  end
+
+  def self.all_matches_for_week
+    LEAGUE_IDS.each do |league_id|
+      matches_for_week(league_id)
     end
   end
 
   def self.get_odds_for_match(game)
-    end_point = "#{BASE_URL}v2/odds/fixture/%7B#{game.fixture_id}%7D"
+    end_point = URI("#{BASE_URL}v2/odds/fixture/#{game.fixture_id}")
+    matches = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][0]["values"][0]["odd"].to_i
+    matches.each do |match|
+    end
   end
 
-  private
-
-  def call_api(url)
+  def self.call_api(url)
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -30,6 +46,6 @@ class SportOdd
     request["x-rapidapi-key"] = '66ffc34423msh0c2c25d40ae94fbp153beajsn6c4930448075'
 
     response = http.request(request)
-    bon = JSON.parse(response.body)
+    JSON.parse(response.body)
   end
 end
