@@ -8,9 +8,9 @@ class SportOdd
   LEAGUE_IDS = [1, 524, 3, 4, 754]
   LEAGUE_IDS.each do |league_id|
     def self.matches_for_week(league_id)
-        7.times do |index|
-          matches_for_day(league_id, Date.today + index)
-        end
+      7.times do |index|
+        matches_for_day(league_id, Date.today + index)
+      end
     end
   end
 
