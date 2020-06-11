@@ -105,176 +105,31 @@
   </div>
 
 
-
-  <div class="rank  d-flex  flex-column m-auto mt-5">
-    <h2 class="stat m-auto ">RANKING</h2>
-    <table class="table table-borderless">
-      <thead>
-        <tr>
-          <th  scope="col">POS</th>
-          <th  scope="col">NAME</th>
-          <th  scope="col">MATCHES</th>
-          <th  scope="col">RATIO</th>
-          <th  scope="col">PTS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-        <tr>
-          <th scope="row">5</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-        <tr>
-          <th scope="row">6</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-        <tr>
-          <th scope="row">7</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-        <tr>
-          <th scope="row">8</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-        <tr>
-          <th scope="row">9</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">10</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <th scope="row">11</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">12</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">13</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-        <tr>
-          <th scope="row">14</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-       <tr>
-          <th scope="row">15</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-        <tr>
-          <th scope="row">16</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-          <tr>
-          <th scope="row">17</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-          <tr>
-          <th scope="row">18</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-         <tr>
-          <th scope="row">19</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-         <tr>
-          <th scope="row">20</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-      </tbody>
-    </table>
-
-</div>
-
-
-
 <% @matches.each do |match| %>
-  <%= match.team_home %>
-  <%= match.points_home %>
-  <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
-  <%= match.team_away  %>
-  <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
-  <%= match.points_away %>
-  <%= match.points_draw %>
-  <%= match.country %>
-  <%= match.league %>
-  <%= match.result %>
-  <%= match.kick_off %>
-  <h4>Les negatives points:</h4>
-  <%= match.negative_points_home %>
-  <%= match.negative_points_draw %>
-  <%= match.negative_points_away %>
-  <br>
+    <%= match.team_home %>
+    <%= match.points_home %>
+    <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
+
+    <% match.forecasts.each do |forecast| %>
+    <%= link_to 'Post', new_match_forecast_path(forecast), method: :create %>
+    <% end %>
+    <%= match.points_draw %>
+
+    <%= match.team_away  %>
+    <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
+    <%= match.points_away %>
+
+
+
+    <%= match.country %>
+    <%= match.league %>
+    <%= match.result %>
+    <%= match.kick_off %>
+    <h4>Les negatives points:</h4>
+    <%= match.negative_points_home %>
+    <%= match.negative_points_draw %>
+    <%= match.negative_points_away %>
+    <br>
 <% end %>
 
 <%=  render "shared/navbarbottom" %>

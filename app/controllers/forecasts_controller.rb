@@ -4,14 +4,14 @@ class ForecastsController < ApplicationController
   end
 
   def new
-    @match = Match.find(params[:match_id])
+    @match = Match.find(match.id)
     @forecast = Forecast.new
   end
 
   def create
     @forecast = Forecast.new(forecast_params)
     @forecast.user = current_user
-    @forecast.match = Match.find(params[:match_id])
+    @forecast.match = Match.find(match.id)
 
     if @forecast.save
       redirect_to matchs_path

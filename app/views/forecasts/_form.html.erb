@@ -4,7 +4,7 @@
 <%= @match.team_away  %>
 <%= image_tag "#{@match.team_away_logo_url}", width: 60 %>
 
-<%= simple_form_for [ @forecast ] do |f| %>
+<%= simple_form_for [ @match, @forecast ] do |f| %>
 
   <div>
   <%= f.input :outcome %>
