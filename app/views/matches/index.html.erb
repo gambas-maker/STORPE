@@ -256,13 +256,25 @@
 
 </div>
 
-</div>
+
 
 <% @matches.each do |match| %>
   <%= match.team_home %>
+  <%= match.points_home %>
   <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
-  <%= match.team_away %>
+  <%= match.team_away  %>
   <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
+  <%= match.points_away %>
+  <%= match.points_draw %>
+  <%= match.country %>
+  <%= match.league %>
+  <%= match.result %>
+  <%= match.kick_off %>
+  <h4>Les negatives points:</h4>
+  <%= match.negative_points_home %>
+  <%= match.negative_points_draw %>
+  <%= match.negative_points_away %>
+  <br>
 <% end %>
 
 <%=  render "shared/navbarbottom" %>
