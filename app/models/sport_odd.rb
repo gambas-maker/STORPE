@@ -21,20 +21,29 @@ class SportOdd
 
   def self.matches_for_day(league_id, date)
     end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}")
-    response = call_api(end_point)
 
     matches = call_api(end_point)["api"]["fixtures"]
     matches.each do |match|
-      Match.create(team_home: match["homeTeam"]["team_name"], team_home_logo_url: match["homeTeam"]["logo"], team_away: match["awayTeam"]["team_name"], team_away_logo_url: match["awayTeam"]["logo"])
+      new_match = Match.create(team_home: match["homeTeam"]["team_name"], team_home_logo_url: match["homeTeam"]["logo"], team_away: match["awayTeam"]["team_name"], team_away_logo_url: match["awayTeam"]["logo"], fixture_id: match["fixture_id"])
+      get_odds_for_match(new_match)
     end
   end
 
-  def self.get_odds_for_match(game)
-    end_point = URI("#{BASE_URL}v2/odds/fixture/#{game.fixture_id}")
-    matches = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][0]["values"][0]["odd"].to_i
-    matches.each do |match|
-      Match.create(points_home: match, points_draw: match, points_away: match)
+  def self.get_odd(match_odds, type)
+    odd_hash = match_odds.find do |bet_hash|
+      bet_hash["value"] == type
     end
+    return odd_hash["odd"]
+  end
+
+  def self.get_odds_for_match(game)
+    end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
+    match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][0]["values"]
+    game.update(
+      points_home: get_odd(match_odds, "Home"),
+      points_draw: get_odd(match_odds, "Draw"),
+      points_away: get_odd(match_odds, "Away")
+    )
   end
 
   def self.call_api(url)

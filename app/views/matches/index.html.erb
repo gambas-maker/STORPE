@@ -34,9 +34,12 @@
 
 <% @matches.each do |match| %>
   <%= match.team_home %>
+  <%= match.points_home %>
   <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
   <%= match.team_away %>
   <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
+  <%= match.points_away %>
+  <%= match.points_draw %>
 <% end %>
 
 <%=  render "shared/navbarbottom" %>
