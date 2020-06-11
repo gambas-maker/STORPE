@@ -5,12 +5,16 @@ require 'json'
 
 class SportOdd
   BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
-  LEAGUE_IDS = [754, 1, 524, 3, 4]
+  LEAGUE_IDS = [525, 524, 775, 891, 754]
+  # 525 = France, 524 = Angleterre, 775 = Espagne, 891 = Italie, 754 = Allemagne
 
   def self.all_matches_for_week
     LEAGUE_IDS.each do |league_id|
       matches_for_week(league_id)
     end
+    points_home_negative_points
+    points_draw_negative_points
+    points_away_negative_points
   end
 
   def self.matches_for_week(league_id)
@@ -35,7 +39,6 @@ class SportOdd
         kick_off: match["event_date"]
       )
       get_odds_for_match(new_match)
-      get_results_for_match(new_match)
     end
   end
 
@@ -59,9 +62,9 @@ class SportOdd
   def self.get_results_for_match(game)
     end_point = URI("#{BASE_URL}predictions/#{game.fixture_id}")
     match_results = call_api(end_point)["api"]["predictions"][0]
-      game.update(
-        result: match_results["match_winner"][1]
-      )
+    game.update(
+      result: match_results["match_winner"][1]
+    )
   end
 
   def self.call_api(url)
@@ -75,5 +78,80 @@ class SportOdd
 
     response = http.request(request)
     JSON.parse(response.body)
+  end
+
+  def self.points_home_negative_points
+    @matches = Match.all
+    @matches.each do |game|
+      if game.points_home < 11
+        game.update(negative_points_home: -15)
+      elsif game.points_home >= 11 && game.points_home < 13
+        game.update(negative_points_home: -11)
+      elsif game.points_home >= 13 && game.points_home < 15
+        game.update(negative_points_home: -10)
+      elsif game.points_home >= 15 && game.points_home < 16
+        game.update(negative_points_home: -9)
+      elsif game.points_home >= 16 && game.points_home < 18
+        game.update(negative_points_home: -8)
+      elsif game.points_home >= 18 && game.points_home < 20
+        game.update(negative_points_home: -7)
+      elsif game.points_home >= 20 && game.points_home < 22.5
+        game.update(negative_points_home: -7)
+      elsif game.points_home >= 22.5 && game.points_home < 25
+        game.update(negative_points_home: -6)
+      elsif game.points_home > 25
+        game.update(negative_points_home: -5)
+      end
+    end
+  end
+
+  def self.points_draw_negative_points
+    @matches = Match.all
+    @matches.each do |game|
+      if game.points_draw < 11
+        game.update(negative_points_draw: -15)
+      elsif game.points_draw >= 11 && game.points_draw < 13
+        game.update(negative_points_draw: -11)
+      elsif game.points_draw >= 13 && game.points_draw < 15
+        game.update(negative_points_draw: -10)
+      elsif game.points_draw >= 15 && game.points_draw < 16
+        game.update(negative_points_draw: -9)
+      elsif game.points_draw >= 16 && game.points_draw < 18
+        game.update(negative_points_draw: -8)
+      elsif game.points_draw >= 18 && game.points_draw < 20
+        game.update(negative_points_draw: -7)
+      elsif game.points_draw >= 20 && game.points_draw < 22.5
+        game.update(negative_points_draw: -7)
+      elsif game.points_draw >= 22.5 && game.points_draw < 25
+        game.update(negative_points_draw: -6)
+      elsif game.points_draw > 25
+        game.update(negative_points_draw: -5)
+      end
+    end
+  end
+
+  def self.points_away_negative_points
+    @matches = Match.all
+    @matches.each do |game|
+      if game.points_away < 11
+        game.update(negative_points_away: -15)
+      elsif game.points_away >= 11 && game.points_away < 13
+        game.update(negative_points_away: -11)
+      elsif game.points_away >= 13 && game.points_away < 15
+        game.update(negative_points_away: -10)
+      elsif game.points_away >= 15 && game.points_away < 16
+        game.update(negative_points_away: -9)
+      elsif game.points_away >= 16 && game.points_away < 18
+        game.update(negative_points_away: -8)
+      elsif game.points_away >= 18 && game.points_away < 20
+        game.update(negative_points_away: -7)
+      elsif game.points_away >= 20 && game.points_away < 22.5
+        game.update(negative_points_away: -7)
+      elsif game.points_away >= 22.5 && game.points_away < 25
+        game.update(negative_points_away: -6)
+      elsif game.points_away > 25
+        game.update(negative_points_away: -5)
+      end
+    end
   end
 end
