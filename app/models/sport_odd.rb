@@ -5,29 +5,27 @@ require 'json'
 
 class SportOdd
   BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
-  LEAGUE_IDS = [1, 524, 3, 4, 754]
-  LEAGUE_IDS.each do |league_id|
-    def self.matches_for_week(league_id)
-        7.times do |index|
-          matches_for_day(league_id, Date.today + index)
-        end
+  LEAGUE_IDS = [754, 1, 524, 3, 4]
+
+  def self.all_matches_for_week
+    LEAGUE_IDS.each do |league_id|
+      matches_for_week(league_id)
+    end
+  end
+
+  def self.matches_for_week(league_id)
+    7.times do |index|
+      matches_for_day(league_id, Date.today + index)
     end
   end
 
   def self.matches_for_day(league_id, date)
     end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}")
     response = call_api(end_point)
-    if response["results"].to_i.positive?
-      matches = call_api(end_point)["api"]["fixtures"]
-      matches.each do |match|
-        Match.create(team_home: match["homeTeam"]["team_name"], team_home_logo_url: match["homeTeam"]["logo"], team_away: match["awayTeam"]["team_name"], team_away_logo_url: match["awayTeam"]["logo"])
-      end
-    end
-  end
 
-  def self.all_matches_for_week
-    LEAGUE_IDS.each do |league_id|
-      matches_for_week(league_id)
+    matches = call_api(end_point)["api"]["fixtures"]
+    matches.each do |match|
+      Match.create(team_home: match["homeTeam"]["team_name"], team_home_logo_url: match["homeTeam"]["logo"], team_away: match["awayTeam"]["team_name"], team_away_logo_url: match["awayTeam"]["logo"])
     end
   end
 
