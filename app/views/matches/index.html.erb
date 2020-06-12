@@ -107,6 +107,7 @@
 
 
 <% @matches.each do |match| %>
+<div data-id="<%= match.id %>" class="my-2">
     <%= match.team_home %>
     <%= match.points_home %>
     <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
@@ -115,7 +116,11 @@
     <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
     <%= match.points_away %>
 
-    <%= link_to "make a forecast", new_match_forecast_path(match) %>
+    <div class="displaysquares" data-id="<%= match.id %>">
+      <div class="square" data-outcome="1"></div>
+      <div class="square" data-outcome="NULL"></div>
+      <div class="square" data-outcome="2"></div>
+    </div>
 
     <%= match.country %>
     <%= match.league %>
@@ -125,7 +130,7 @@
     <%= match.negative_points_home %>
     <%= match.negative_points_draw %>
     <%= match.negative_points_away %>
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+  </div>
 <% end %>
 
 <%=  render "shared/navbarbottom" %>
