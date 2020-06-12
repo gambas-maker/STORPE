@@ -36,7 +36,7 @@ class SportOdd
         fixture_id: match["fixture_id"],
         country: match["league"]["country"],
         league: match["league"]["name"],
-        kick_off: match["event_date"]
+        kick_off: DateTime.parse(match["event_date"])
       )
       get_odds_for_match(new_match)
     end
@@ -153,5 +153,15 @@ class SportOdd
         game.update(negative_points_away: -5)
       end
     end
+  end
+
+  def self.sort
+    date_array = []
+    @matches = Match.all
+    @matches.each do |m|
+      date_clean = m.kick_off.to_i
+      date_array << date_clean
+    end
+    date_array.sort
   end
 end

@@ -7,7 +7,9 @@
 <%= simple_form_for [ @match, @forecast ] do |f| %>
 
   <div>
-  <%= f.input :outcome %>
+  <%= f.check_box 1 :outcome %>
+  <%= f.check_box 2 :outcome %>
+  <%= f.check_box 3 :outcome %>
   </div>
 
   <!-- Trouver un moyen de faire 3 checkbox, un choix uniquement,

@@ -100,26 +100,22 @@
         <h3 class="typo">120</h3>
       </div>
     </div>
-    <svg class=" center-block mx-auto mt-5" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+    <svg class="center-block mx-auto mt-5" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
 
   </div>
+  <br><br><br><br>
 
 
 <% @matches.each do |match| %>
     <%= match.team_home %>
     <%= match.points_home %>
     <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
-
-    <% match.forecasts.each do |forecast| %>
-    <%= link_to 'Post', new_match_forecast_path(forecast), method: :create %>
-    <% end %>
     <%= match.points_draw %>
-
     <%= match.team_away  %>
     <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
     <%= match.points_away %>
 
-
+    <%= link_to "make a forecast", new_match_forecast_path(match) %>
 
     <%= match.country %>
     <%= match.league %>
@@ -129,7 +125,7 @@
     <%= match.negative_points_home %>
     <%= match.negative_points_draw %>
     <%= match.negative_points_away %>
-    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
 <% end %>
 
 <%=  render "shared/navbarbottom" %>
