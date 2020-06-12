@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   get 'contact', to: 'pages#contact'
 
+
   resources :matches, only: [:index] do
     resources :forecasts, only: [:new, :create, :show, :confirm_pending]
   end
   resources :forecasts, only: [:destroy]
   resources :seasons, only: [:show]
+  resources :player_seasons, only: [:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
