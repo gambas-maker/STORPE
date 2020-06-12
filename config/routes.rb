@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'about', to: 'pages#about'
   get 'contact', to: 'pages#contact'
-  get 'store_outcome', to: 'forecasts#outcome'
+  get 'store_outcome', to: 'forecasts#outcome', defaults: {format: :json}
 
   resources :matches, only: [:index] do
     resources :forecasts, only: [:new, :create, :show, :confirm_pending]

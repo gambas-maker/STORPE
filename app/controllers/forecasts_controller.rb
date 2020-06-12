@@ -30,8 +30,7 @@ class ForecastsController < ApplicationController
 
 
   def store_outcome
-
-
+    render json: {status: "success"}
   end
 
 
