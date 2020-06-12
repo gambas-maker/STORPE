@@ -7,11 +7,10 @@ const selectOutcome = () => {
       const id = event.currentTarget.parentNode.dataset.id;
       console.log(id);
 
-      fetch("/store_outcome") //store_outcome?result='+result+'&match='+id
-      .then(response => response.JSON())
-      .then((data) => {
+      fetch('store_outcome') //store_outcome?result='+result+'&match='+id
+        .then(response => response.JSON())
+        .then((data) => {
       console.log(data);
-
       });
     });
   });
