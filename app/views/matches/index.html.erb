@@ -8,11 +8,11 @@
 
           <div>
             <div class=" d-flex">
-              <h3 class="typo">PLAYABLE</h3>
+              <h3 class="typo">Matchs pronostiqués</h3>
               <h3 class="pl-2 typos">45/50</h3>
             </div>
             <div class="d-flex">
-              <h3 class="typo">POTENTIAL POINTS</h3>
+              <h3 class="typo">Points potentiels</h3>
               <h3 class="pl-2 typos">35</h3>
             </div>
           </div>
@@ -32,7 +32,7 @@
         <div class="d-flex justify-content-center">
           <h3 class="typopo"><%= match.kick_off %></h3>
         </div>
-        <div class="d-flex flex-row justify-content-around mt-3 mb-3">
+        <div class="d-flex flex-row justify-content-around mt-3 mb-3" data-id="<%= match.id %>">
           <div class="d-flex flex-column align-items-center col-4">
             <div class="row">
             <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
@@ -45,17 +45,10 @@
             <p class="typopo text-center">VS</p>
             <div class="d-flex flex-row align-items-center col-4">
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1"></label>
-                </div>
-                <div class="form-check flex-column">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1"></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1"></label>
+                <div class="displaysquares" data-id="<%= match.id %>">
+                  <div class="square" data-outcome="1"></div>
+                  <div class="square" data-outcome="NULL"></div>
+                  <div class="square" data-outcome="2"></div>
                 </div>
 
             </div>
@@ -85,31 +78,31 @@
   </div>
   <br><br><br><br>
 
-<% @matches.each do |match| %>
-<div data-id="<%= match.id %>" class="my-2">
-    <%= match.team_home %>
-    <%= match.points_home %>
-    <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
-    <%= match.points_draw %>
-    <%= match.team_away  %>
-    <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
-    <%= match.points_away %>
+<%# @matches.each do |match| %>
 
-    <div class="displaysquares" data-id="<%= match.id %>">
-      <div class="square" data-outcome="1"></div>
+    <%# match.team_home %>
+    <%# match.points_home %>
+    <%# image_tag "#{match.team_home_logo_url}", width: 60 %>
+    <%# match.points_draw %>
+    <%# match.team_away  %>
+    <%# image_tag "#{match.team_away_logo_url}", width: 60 %>
+    <%# match.points_away %>
+
+
+      <!-- <div class="square" data-outcome="1"></div>
       <div class="square" data-outcome="NULL"></div>
       <div class="square" data-outcome="2"></div>
-    </div>
+    </div> -->
 
-    <%= match.country %>
-    <%= match.league %>
-    <%= match.result %>
-    <%= match.kick_off %>
-    <h4>Les negatives points:</h4>
-    <%= match.negative_points_home %>
-    <%= match.negative_points_draw %>
-    <%= match.negative_points_away %>
+    <%# match.country %>
+    <%# match.league %>
+    <%# match.result %>
+    <%# match.kick_off %>
+    <!-- <h4>Les negatives points:</h4>
+    <%# match.negative_points_home %>
+    <%# match.negative_points_draw %>
+    <%# match.negative_points_away %>
   </div>
-<% end %>
+<# end %> -->
 
 <%=  render "shared/navbarbottom" %>
