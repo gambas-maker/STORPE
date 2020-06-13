@@ -80,4 +80,36 @@
       </div>
     </div>
 
+    <svg class="center-block mx-auto mt-5" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+
+  </div>
+  <br><br><br><br>
+
+<% @matches.each do |match| %>
+<div data-id="<%= match.id %>" class="my-2">
+    <%= match.team_home %>
+    <%= match.points_home %>
+    <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
+    <%= match.points_draw %>
+    <%= match.team_away  %>
+    <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
+    <%= match.points_away %>
+
+    <div class="displaysquares" data-id="<%= match.id %>">
+      <div class="square" data-outcome="1"></div>
+      <div class="square" data-outcome="NULL"></div>
+      <div class="square" data-outcome="2"></div>
+    </div>
+
+    <%= match.country %>
+    <%= match.league %>
+    <%= match.result %>
+    <%= match.kick_off %>
+    <h4>Les negatives points:</h4>
+    <%= match.negative_points_home %>
+    <%= match.negative_points_draw %>
+    <%= match.negative_points_away %>
+  </div>
+<% end %>
+
 <%=  render "shared/navbarbottom" %>
