@@ -1,20 +1,18 @@
-<%= @match.team_home %>
-<%= @match.points_home %>
-<%= image_tag "#{@match.team_home_logo_url}", width: 60 %>
-<%= @match.team_away  %>
-<%= image_tag "#{@match.team_away_logo_url}", width: 60 %>
-
-<%= simple_form_for [ @forecast ] do |f| %>
+<%= simple_form_for [ @m, @forecast ] do |f| %>
 
   <div>
-  <%= f.input :outcome %>
+  <%= f.check_box :outcome, { checked: true }, '1', '' %>
+  <%= f.check_box :outcome, { checked: true }, 'NULL', '' %>
+  <%= f.check_box :outcome, { checked: true }, '2', '' %>
+
+
+  <%= f.submit %>
   </div>
 
   <!-- Trouver un moyen de faire 3 checkbox, un choix uniquement,
     chaque checkbox a une valeur qui sera attribuée à l'outcome.
     L'outcome sera ensuite comparé au result du tableau Matches.-->
 
-<input type="submit" name="commit" value="Confirmer" class="button" data-disable-with="Confirmer">
 <% end %>
 
 
