@@ -1,0 +1,46 @@
+.modal-content {
+  background: #322A48;
+  height: 45vh;
+  overflow-y: scroll;
+}
+
+.modal-dialog {
+  position: absolute;
+  bottom: 5px !important;
+}
+
+.close {
+  color: white;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-footer {
+  border: none;
+}
+
+.typocenter {
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.prono {
+  border-bottom: solid 1px gray;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.modal-title {
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 10px;
+  margin-top: 10px;
+}
