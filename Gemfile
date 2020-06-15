@@ -25,6 +25,9 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'excon'
 
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

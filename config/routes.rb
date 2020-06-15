@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   get 'contact', to: 'pages#contact'
   get 'store_outcome', to: 'forecasts#store_outcome', defaults: {format: :json}
-
+  require "sidekiq/web"
+  authenticate :user, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   resources :matches, only: [:index] do
     resources :forecasts, only: [:new, :create, :show, :confirm_pending]

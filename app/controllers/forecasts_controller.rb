@@ -28,11 +28,9 @@ class ForecastsController < ApplicationController
     # Verifiez le chemin, peut etre confirm pending path?
   end
 
-
   def store_outcome
     render json: {status: "success"}
   end
-
 
   def confirm_pending
   end
