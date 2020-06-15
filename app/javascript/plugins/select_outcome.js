@@ -1,8 +1,10 @@
 const selectOutcome = () => {
   const selects = document.querySelectorAll(".square");
   selects.forEach((outcome)=>{
-    outcome.addEventListener("click",(event) =>{
-      event.currentTarget.classList.toggle('active')
+    outcome.addEventListener("click",(event) => {
+  $('input[type="checkbox"]').on('change', function() {
+   $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
+});
       const result = event.currentTarget.dataset.outcome;
       console.log(result);
       const id = event.currentTarget.parentNode.dataset.id;
