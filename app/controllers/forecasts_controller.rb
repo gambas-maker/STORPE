@@ -29,10 +29,31 @@ class ForecastsController < ApplicationController
   end
 
   def store_outcome
-    render json: {status: "success"}
+    id = params[:match]
+    # match = Match.find(id)
+    outcome = params[:result]
+    player = params[:player]
+    @forecast = Forecast.where(match: id, player_season: player).first
+    if @forecast.nil?
+    @forecast = Forecast.new
+    @forecast.outcome = outcome
+    @forecast.match_id = id
+    @forecast.player_season_id = player
+    @forecast.confirmed = false
+    @forecast.save
+    else
+      @forecast.outcome = outcome
+      @forecast.save
+    end
+    render json: { status: @forecast }
   end
 
   def confirm_pending
+    player = PlayerSeason.find(params[:player])
+    @forecasts = Forecast.where(confirmed: false, player_season: player)
+    @forecasts.update(confirmed: true)
+
+    render json: { status: "succes" }
   end
 
   private
