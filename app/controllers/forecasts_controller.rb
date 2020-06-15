@@ -1,20 +1,21 @@
 class ForecastsController < ApplicationController
   def show
-    @forecast = Forecast.find(params[:id])
+    @forecast = Forecast.find(match.id)
   end
 
   def new
-    @match = Match.find(params[:match_id])
+    @m = Match.find(params[:match_id])
     @forecast = Forecast.new
   end
 
   def create
+    @m = Match.find(params[:match_id])
     @forecast = Forecast.new(forecast_params)
-    @forecast.user = current_user
-    @forecast.match = Match.find(params[:match_id])
+    @forecast.player_season_id = current_user
+    @forecast.m = Match.find(params[:match_id])
 
     if @forecast.save
-      redirect_to matchs_path
+      redirect_to matches_path
     else
       render :new
     end
@@ -27,12 +28,16 @@ class ForecastsController < ApplicationController
     # Verifiez le chemin, peut etre confirm pending path?
   end
 
+  def store_outcome
+    render json: {status: "success"}
+  end
+
   def confirm_pending
   end
 
   private
 
   def forecast_params
-    parmas.require(:forecast).permit(:outcome)
+    params.require(:forecast).permit(:outcome)
   end
 end

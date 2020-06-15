@@ -18,14 +18,13 @@ class SportOdd
   end
 
   def self.matches_for_week(league_id)
-    7.times do |index|
+    3.times do |index|
       matches_for_day(league_id, Date.today + index)
     end
   end
 
   def self.matches_for_day(league_id, date)
     end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}")
-
     matches = call_api(end_point)["api"]["fixtures"]
     matches.each do |match|
       new_match = Match.create(
@@ -36,7 +35,7 @@ class SportOdd
         fixture_id: match["fixture_id"],
         country: match["league"]["country"],
         league: match["league"]["name"],
-        kick_off: match["event_date"]
+        kick_off: DateTime.parse(match["event_date"])
       )
       get_odds_for_match(new_match)
     end
@@ -53,10 +52,10 @@ class SportOdd
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
     match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][0]["values"]
     game.update(
-      points_home: get_odd(match_odds, "Home").to_i * 10,
-      points_draw: get_odd(match_odds, "Draw").to_i * 10,
-      points_away: get_odd(match_odds, "Away").to_i * 10
-    )
+        points_home: get_odd(match_odds, "Home").to_i * 10,
+        points_draw: get_odd(match_odds, "Draw").to_i * 10,
+        points_away: get_odd(match_odds, "Away").to_i * 10
+      )
   end
 
   def self.get_results_for_match(game)
@@ -153,5 +152,15 @@ class SportOdd
         game.update(negative_points_away: -5)
       end
     end
+  end
+
+  def self.sort
+    date_array = []
+    @matches = Match.all
+    @matches.each do |m|
+      date_clean = m.kick_off.to_i
+      date_array << date_clean
+    end
+    date_array.sort
   end
 end

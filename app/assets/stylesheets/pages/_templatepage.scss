@@ -5,15 +5,12 @@
   background:url('https://res.cloudinary.com/dos4x9flk/image/upload/v1591708660/4siwGa_xp5dmj.png') no-repeat center center fixed;
   background-size: cover;
 }
-
-
 .toptitle {
   color: white;
   font-family: 'Montserrat';
   font-weight: bold;
   font-size: 32px;
 }
-
 .stat{
   color:white;
   font-size:18px;
@@ -30,7 +27,7 @@
 
 .info {
   width: 375px;
-  height: 100vh;
+  height: auto;
   background-color: rgba(255, 255, 255, 0.08);
   }
 
@@ -38,30 +35,27 @@
   height:1000px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.08);
-  width: 375px;
-
+  width: 750px;
 }
 .stats {
   background-color: rgba(255, 255, 255, 0.08);
   padding: 20px;
   height:500px;
-  width: 700px;
+  width: 750px;
+}
+@media screen and (max-width: 1128px) {
+    .stats  {
+        width: 375px;
+    }
 }
 
-@media (max-width: 768px) {
-  .stats .rank {
-    width: 700px;
+@media screen and (max-width: 1128px) {
+    .rank {
+        width: 375px;
+    }
+}
+
     /* Overrides the above styles on screens larger than 36em */
-  }
-}
-
-@media (max-width: 414px) {
-  .stats .rank .info {
-    width: 375px;
-    /* Overrides the above styles on screens larger than 36em */
-  }
-}
-
 
 
 .typo {
@@ -78,42 +72,27 @@
   font-weight: lighter;
 }
 
-
-
 .hr1 {
-
   border-top: 1px solid white;
-
   opacity: 0.5;
-
 }
-
 .hr2 {
-
   border-top: 1px solid white;
-
   opacity: 0.5;
-
 }
-
-
 .lol {
   display: flex;
-
   align-items: center;
 }
-
 th{
   font-size:15px;
   font-family: "Montserrat";
   font-weight:bold;
   color:white;
 }
-
 td{
   font-size:10px;
   font-family: "Montserrat";
   font-weight:bold;
   color:white;
-
 }
