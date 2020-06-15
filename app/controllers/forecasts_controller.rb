@@ -42,8 +42,8 @@ class ForecastsController < ApplicationController
     @forecast.confirmed = false
     @forecast.save
     else
-      @forecast.outcome = outcome
-      @forecast.save
+    @forecast.outcome = outcome
+    @forecast.save
     end
     render json: { status: @forecast }
   end
