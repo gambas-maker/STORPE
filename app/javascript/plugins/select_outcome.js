@@ -2,6 +2,7 @@ const selectOutcome = () => {
   const selects = document.querySelectorAll(".square");
   selects.forEach((outcome)=>{
     outcome.addEventListener("click",(event) =>{
+      event.currentTarget.classList.toggle('active')
       const result = event.currentTarget.dataset.outcome;
       console.log(result);
       const id = event.currentTarget.parentNode.dataset.id;
