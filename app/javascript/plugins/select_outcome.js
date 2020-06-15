@@ -6,9 +6,10 @@ const selectOutcome = () => {
       console.log(result);
       const id = event.currentTarget.parentNode.dataset.id;
       console.log(id);
-
-      fetch('store_outcome') //store_outcome?result='+result+'&match='+id
-        .then(response => response.JSON())
+      const player = document.getElementById('season_player').value;
+      const url = 'store_outcome?result='+result+'&match='+id+'&player='+player
+      fetch(url)
+        .then(response => response.json())
         .then((data) => {
       console.log(data);
       });
@@ -16,4 +17,18 @@ const selectOutcome = () => {
   });
 }
 
-export {selectOutcome};
+const validePanier = () => {
+  const panier = document.getElementById('panier');
+  panier.addEventListener("click", (event) =>{
+    console.log("click")
+    const player = document.getElementById('season_player').value;
+    fetch('confirm_pending?player='+player)
+    .then(response => response.json())
+    .then((data) => {
+    console.log(data);
+    });
+  })
+}
+export { selectOutcome, validePanier };
+
+

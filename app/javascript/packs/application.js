@@ -24,10 +24,11 @@ require("channels")
 
 // External imports
 import "bootstrap";
-import {selectOutcome} from "../plugins/select_outcome";
+import {selectOutcome,validePanier} from "../plugins/select_outcome";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 selectOutcome();
+validePanier();
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();

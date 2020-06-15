@@ -1,0 +1,55 @@
+.btn-filter {
+  background: transparent;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: solid 1px white;
+  &:hover {
+    color: #FBB03B;
+    border-bottom-color: #FBB03B;
+  }
+}
+
+.filterbar {
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-bottom: 15px;
+  padding-top: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+}
+
+.btn-ok {
+  background: transparent;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  border: solid 1px white;
+  border-radius: 50px;
+  text-decoration: none;
+  &:hover {
+    color: #FBB03B;
+    border-bottom-color: #FBB03B;
+  }
+}
+
+.dropdown-menu {
+  background-color: white;
+  border: none;
+  width: 30px !important;
+}
+
+.dropdown-item {
+  color: #403B68;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.dropdown-menu.show {
+  width: 30px !important;
+}
