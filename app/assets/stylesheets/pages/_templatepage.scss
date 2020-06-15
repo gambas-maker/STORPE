@@ -12,9 +12,6 @@
   font-family: 'Montserrat';
   font-weight: bold;
   font-size: 32px;
-
-
-
 }
 
 .stat{
@@ -24,12 +21,17 @@
   font-family: 'Montserrat';
 }
 
+.typopo{
+  color:white;
+  font-size:14px;
+  font-weight: bold;
+  font-family: 'Montserrat';
+}
+
 .info {
   width: 375px;
-  height: 500px;
+  height: 100vh;
   background-color: rgba(255, 255, 255, 0.08);
-
-
   }
 
 .rank{
@@ -39,7 +41,7 @@
   width: 375px;
 
 }
-.stats{
+.stats {
   background-color: rgba(255, 255, 255, 0.08);
   padding: 20px;
   height:500px;
@@ -63,14 +65,18 @@
 
 
 .typo {
-
   color: white;
   font-family: 'Montserrat';
   font-size: 10px;
   font-weight: bold;
-
 }
 
+.typos {
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 10px;
+  font-weight: lighter;
+}
 
 
 

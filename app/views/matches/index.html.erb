@@ -1,43 +1,65 @@
-
 <div class="topimage w-100 d-flex mb-3">
   <h2 class="toptitle m-auto">MATCH</h2>
 </div>
-<div class="stats  d-flex  flex-column m-auto mt-5 ">
-    <div class="container mt-5 float-left" >
-      <div class="d-flex justify-content-between pr-5">
+
+<div class="d-flex flex-column">
+    <div class="mt-1 float-left" >
+      <div class="d-flex pr-5 pl-4">
         <h3 class="typo">PLAYABLE</h3>
-        <h3 class="typo">45/50</h3>
+        <h3 class="d-flex pl-2 typos">45/50</h3>
       </div>
-      <div class="d-flex justify-content-between pr-5">
+      <div class="d-flex pr-5 pl-4">
         <h3 class="typo">POTENTIAL POINTS</h3>
-        <h3 class="typo">35</h3>
+        <h3 class="d-flex pl-2 typos">35</h3>
+      </div>
       </div>
 
-    </div>
+      <div class="info">
+        <div class="d-flex justify-content-between flex-row m-3">
+          <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
+          <h3 class="typopo d-flex justify-content-center">PRONO</h3>
+          <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
+        </div>
+        <% @matches.each do |match| %>
+        <div class="d-flex justify-content-center">
+          <h3 class="typopo"><%= match.kick_off %></h3>
+        </div>
+        <div class="d-flex flex-row justify-content-around mt-3 mb-3">
+          <div class="d-flex flex-column align-items-center">
+            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+            <h3 class="typopo"><%= match.team_home %></h3>
+          </div>
 
+          <div class="d-flex flex-column justify-content-center">
+            <p class="typopo text-center">VS</p>
+            <div class="d-flex justify-content-around align-items-center">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1"></label>
+                </div>
+                <div class="typo form-check flex-column">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1"></label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1"></label>
+                </div>
+            </div>
+          </div>
 
-    <% @matches.each do |match| %>
-  <%= match.team_home %>
-  <%= match.points_home %>
-  <%= image_tag "#{match.team_home_logo_url}", width: 60 %>
-  <%= match.team_away  %>
-  <%= image_tag "#{match.team_away_logo_url}", width: 60 %>
-  <%= match.points_away %>
-  <%= match.points_draw %>
-  <%= match.country %>
-  <%= match.league %>
-  <%= match.result %>
-  <%= match.kick_off %>
-  <h4>Les negatives points:</h4>
-  <%= match.negative_points_home %>
-  <%= match.negative_points_draw %>
-  <%= match.negative_points_away %>
-  <br>
-<% end %>
-
-  </div>
-
-
-
-
+          <div class="d-flex flex-column align-items-center">
+            <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+            <h3 class="typopo"><%= match.team_away  %></h3>
+          </div>
+        </div>
+        <div class="typo d-flex justify-content-around flex-row m-3">
+          <%= match.points_home %> <p>/</p><%= match.negative_points_home %>
+          <%= match.points_draw %> <p>/</p><%= match.negative_points_draw %>
+          <%= match.points_away %> <p>/</p><%= match.negative_points_away %>
+        </div>
+        <% end %>
+      </div>
+</div>
 <%=  render "shared/navbarbottom" %>
+
