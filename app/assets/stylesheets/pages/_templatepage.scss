@@ -2,9 +2,27 @@
   mix-blend-mode: lighten;
   opacity: 1;
   height: 250px;
-  background:url('https://res.cloudinary.com/dos4x9flk/image/upload/v1591708660/4siwGa_xp5dmj.png') no-repeat center center fixed;
+  background:url('https://res.cloudinary.com/dos4x9flk/image/upload/v1591708660/4siwGa_xp5dmj.png');
   background-size: cover;
 }
+
+.topimagechampionship {
+  mix-blend-mode: lighten;
+  opacity: 1;
+  height: 250px;
+  background:url('https://res.cloudinary.com/dos4x9flk/image/upload/v1592316368/Group_62_rkgmpl.png');
+  background-size: cover;
+
+}
+.topimageprofile{
+  mix-blend-mode: lighten;
+  opacity: 1;
+  height: 250px;
+  background:url('https://res.cloudinary.com/dos4x9flk/image/upload/v1592316236/Group_129_2x_wbcoj7.png');
+  background-size: cover;
+
+}
+
 .toptitle {
   color: white;
   font-family: 'Montserrat';
@@ -63,14 +81,14 @@
 .typo {
   color: white;
   font-family: 'Montserrat';
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
 }
 
 .typos {
   color: white;
   font-family: 'Montserrat';
-  font-size: 10px;
+  font-size: 12px;
   font-weight: lighter;
 }
 
@@ -105,4 +123,22 @@ td{
   width: 40px;
   padding: 13px;
   text-align: center;
+}
+
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index:100;
+  background-color:#403a67;
+  width:375px;
+
+
+}
+
+
+@media (max-width: 576px){
+  .topimageprofile, .topimagechampionship, .topimage {
+    height: 150px;
+  }
 }

@@ -1,26 +1,112 @@
 .navbarbottom {
   flex-shrink: 0;  margin-top: 80px;
 }
+.navbarbottom {
+    height:100vh;
+    width:30%;
+    overflow: hidden;
+    bottom:70px;
+    height: 500px;
+    position: fixed;
+    left: 0;
+    z-index: 100;
+    margin-top:0;
+
+  }
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
 
 .navbarbottom {
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
-  background: linear-gradient(rgba(49,41,91,1), rgba(49,41,88,1), rgba(49,41,79,1),rgba(49,41,71,1) );
-  color: white;
-  text-align: center;
-  height: 55px;
-  border-top: 1px solid rgba(255,255,255,0.5);
+  bottom: 0;
+  height:68px;
+  margin-bottom: 0;
+
 
 }
 
-.navbarbottom-links {
+.navbarbottom ul {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-around;
-  margin-top: 10px;
+  width: 100%;
+  height: 70px;
+  margin: 0;
+  padding: 0;
+
 }
+}
+
+
 
 .icon:hover {
   filter: url(#filter1);
 }
+
+
+
+
+ul{
+  list-style: none;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  background-color: #322958;
+  width: 100px;
+  border-radius: 0 20px 20px 0 ;
+  box-shadow: 10px 0 5px -2px #2A233E;
+}
+
+// @media screen and (max-width: 380px) {
+//   .navbarbottom {
+
+//   overflow: hidden;
+//   position: fixed;
+
+//   bottom: 0 !important;
+//   width: 100%;
+//   background: linear-gradient(rgba(49,41,91,1), rgba(49,41,88,1), rgba(49,41,79,1),rgba(49,41,71,1) );
+//   color: white;
+//   text-align: center;
+//   height: 55px;
+//   border-top: 1px solid rgba(255,255,255,0.5);
+
+
+
+// }
+
+// .navbarbottom > ul {
+//   display: flex;
+//   justify-content: space-around;
+//   flex-direction: row !important;
+//   align-items: center;
+//   width: 100%;
+//   bottom:0;
+
+
+
+// }
+//  }
+
+
+
+// @media screen and (min-width: 400px){
+//   .navbarbottom > ul {
+//   display: flex;
+//   justify-content: space-around;
+//   flex-direction: row !important;
+//   align-items: center;
+//   width: 100%;
+
+
+
+// }
+
+// }
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+
+
+
