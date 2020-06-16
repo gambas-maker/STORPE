@@ -7,11 +7,7 @@
           <div>
             <div class=" d-flex">
               <h3 class="typo">Matchs pronostiqués</h3>
-              <h3 class="pl-2 typos">45/50</h3>
-            </div>
-            <div class="d-flex">
-              <h3 class="typo">Points potentiels</h3>
-              <h3 class="pl-2 typos">35</h3>
+              <h3 class="pl-2 typos"><%= @forecasts.count %>/50</h3>
             </div>
           </div>
           <div id = "panier">
@@ -24,32 +20,24 @@
     <div class="filterbar d-flex justify-content-around flex-row">
       <div class="dropdown">
         <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          FOOTBALL
+          SPORT
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">BasketBall</a>
+          <a class="dropdown-item" href="#">Football</a>
         </div>
       </div>
       <div class="dropdown">
         <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          FRANCE
+          Ligue
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          LIGUE 1
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Ligue 1</a>
-          <a class="dropdown-item" href="#">Liga BBVA</a>
-          <a class="dropdown-item" href="#">Bundesliga</a>
+          <a class="dropdown-item" href="#">Tous</a>
+          <a class="dropdown-item" href="#">Allemagne</a>
+          <a class="dropdown-item" href="#">Angleterre</a>
+          <a class="dropdown-item" href="#">Espagne</a>
+          <a class="dropdown-item" href="#">France</a>
+          <a class="dropdown-item" href="#">Italie</a>
         </div>
       </div>
         <button type="button" class="btn-ok">OK</button>
@@ -69,6 +57,7 @@
         <% @matches.each do |match| %>
         <div class="d-flex justify-content-center mb-4 mt-4">
           <h3 class="typopo"><%= match.kick_off %></h3>
+          <h4 class="typopo"><%= match.league %></h4>
         </div>
         <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
           <div class="d-flex flex-column align-items-center col-4">
@@ -82,13 +71,11 @@
           <div class="d-flex flex-column justify-content-center">
             <p class="typopo text-center">VS</p>
             <div class="d-flex flex-row align-items-center col-4">
-​
                 <div class="displaysquares" data-id="<%= match.id %>">
-                  <div class="square" data-outcome="1"></div>
-                  <div class="square" data-outcome="NULL"></div>
-                  <div class="square" data-outcome="2"></div>
+                  <input type="checkbox" class="square" data-outcome="1"></input>
+                  <input type="checkbox" class="square" data-outcome="NULL"></input>
+                  <input type="checkbox" class="square" data-outcome="2"></input>
                 </div>
-​
             </div>
           </div>
           <div class="d-flex flex-column align-items-center text-align-center col-4 ">
@@ -144,4 +131,18 @@
 <# end %> -->
 
 <%=  render "shared/navbarbottom" %>
-
+<script type='text/javascript'>
+(function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }
+    else
+      localStorage.removeItem('firstLoad');
+  }
+})();
+</script>
