@@ -1,96 +1,96 @@
 <div class="position-relative">
-<div class="topimage w-100 d-flex">
-  <h2 class="toptitle m-auto">MATCH</h2>
-</div>
-<div class="sticky" style="margin: 0 auto">
-<div class="d-flex justify-content-center pt-4">
-  <div class="d-flex justify-content-around mb-3" style="width: 375px;">
-    <div>
-      <div class=" d-flex">
-        <h3 class="typo">Matchs pronostiqués</h3>
-        <h3 class="pl-2 typos"><%= current_user.forecasts.count %>/50</h3>
-      </div>
-      <div class=" d-flex">
-        <h3 class="typo">Points potentiels</h3>
-        <% total1 = 0 %>
-        <% total2 = 0 %>
-        <% total3 = 0 %>
-        <h3 class="pl-2 typos"><% current_user.forecasts.each do |forecast| %>
-          <% if forecast.outcome == "1" %>
-          <% total1 += forecast.match.points_home%>
-          <% elsif forecast.outcome == "NULL" %>
-          <% total2 += forecast.match.points_draw%>
-          <% elsif forecast.outcome == "2" %>
-          <% total3 += forecast.match.points_away%>
-          <% end %>
-          <% end %>
-          <%= total = (total1 + total2 + total3)  %>
-        </h3>
-      </div>
-    </div>
-    <div id = "panier">
-      <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Vous avez validé votre sélection!</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="typopo">Retrouve tes <%= current_user.forecasts.count%> sur ton profil !</p>
-            </div>
-            <div class="modal-footer align-items-center">
-              <button type="button" class="rejoins"><%= link_to 'Tcheker mes pronos', player_season_path(current_user)%></button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <div class="topimage w-100 d-flex">
+    <h2 class="toptitle m-auto">MATCH</h2>
+  </div>
+  <div class="sticky" style="margin: 0 auto">
+    <div class="d-flex justify-content-center pt-4">
+      <div class="d-flex justify-content-around mb-3" style="width: 375px;">
+        <div>
+          <div class=" d-flex">
+            <h3 class="typo">Matchs pronostiqués</h3>
+            <h3 class="pl-2 typos"><%= current_user.forecasts.count %>/50</h3>
+          </div>
+          <div class=" d-flex">
+            <h3 class="typo">Points potentiels</h3>
+            <% total1 = 0 %>
+            <% total2 = 0 %>
+            <% total3 = 0 %>
+            <h3 class="pl-2 typos"><% current_user.forecasts.each do |forecast| %>
+              <% if forecast.outcome == "1" %>
+              <% total1 += forecast.match.points_home%>
+              <% elsif forecast.outcome == "NULL" %>
+              <% total2 += forecast.match.points_draw%>
+              <% elsif forecast.outcome == "2" %>
+              <% total3 += forecast.match.points_away%>
+              <% end %>
+              <% end %>
+              <%= total = (total1 + total2 + total3)  %>
+            </h3>
+          </div>
+        </div>
+        <div id = "panier">
+          <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Vous avez validé votre sélection!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="typopo">Retrouve tes <%= current_user.forecasts.count%> pronos' sur ton profil !</p>
+                </div>
+                <div class="modal-footer align-items-center">
+                  <button type="button" class="rejoins"><%= link_to 'Tcheker mes pronos', player_season_path(current_user)%></button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="d-flex justify-content-center">
-  <div class="infobis">
-    <div class="filterbar d-flex justify-content-around flex-row">
-      <div class="dropdown">
-        <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          SPORT
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">BasketBall</a>
-          <a class="dropdown-item" href="#">Football</a>
+    <div class="d-flex justify-content-center">
+      <div class="infobis">
+        <div class="filterbar d-flex justify-content-around flex-row">
+          <div class="dropdown">
+            <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              SPORT
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">BasketBall</a>
+              <a class="dropdown-item" href="#">Football</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              LIGUE
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Tous</a>
+              <a class="dropdown-item" href="#">Allemagne</a>
+              <a class="dropdown-item" href="#">Angleterre</a>
+              <a class="dropdown-item" href="#">Espagne</a>
+              <a class="dropdown-item" href="#">France</a>
+              <a class="dropdown-item" href="#">Italie</a>
+            </div>
+          </div>
+          <button type="button" class="btn-ok">OK</button>
         </div>
       </div>
-      <div class="dropdown">
-        <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Ligue
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Tous</a>
-          <a class="dropdown-item" href="#">Allemagne</a>
-          <a class="dropdown-item" href="#">Angleterre</a>
-          <a class="dropdown-item" href="#">Espagne</a>
-          <a class="dropdown-item" href="#">France</a>
-          <a class="dropdown-item" href="#">Italie</a>
-        </div>
-      </div>
-      <button type="button" class="btn-ok">OK</button>
     </div>
   </div>
-</div>
-</div>
-<div class="d-flex justify-content-center">
-  <div class="info">
-    <div class="d-flex justify-content-between flex-row m-3">
-      <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
-      <h3 class="typopo d-flex justify-content-center">PRONO</h3>
-      <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
-    </div>
-    <input type="hidden" id ="season_player" value="<%= @player %>">
-    <% @matches.each do |match| %>
+  <div class="d-flex justify-content-center">
+    <div class="info">
+      <div class="d-flex justify-content-between flex-row m-3">
+        <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
+        <h3 class="typopo d-flex justify-content-center">PRONO</h3>
+        <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
+      </div>
+      <input type="hidden" id ="season_player" value="<%= @player %>">
+      <% @matches.each do |match| %>
       <div class="d-flex justify-content-center mb-2 mt-2">
         <h4 class="typopo"><%= match.league %></h4>
       </div>
@@ -134,10 +134,9 @@
         </div>
       </div>
       <% end %>
+    </div>
   </div>
-</div>
-<svg class="center-block mx-auto mt-5" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
-
+  <svg class="center-block mx-auto mt-5" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
 <%=  render "shared/navbarbottom" %>
 <script type='text/javascript'>
   (function()
