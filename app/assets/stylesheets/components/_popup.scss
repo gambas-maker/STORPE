@@ -1,12 +1,5 @@
 .modal-content {
   background: #322A48;
-  height: 45vh;
-  overflow-y: scroll;
-}
-
-.modal-dialog {
-  position: absolute;
-  bottom: 5px !important;
 }
 
 .close {
@@ -43,4 +36,18 @@
   text-align: center;
   margin-left: 10px;
   margin-top: 10px;
+}
+
+.btn-ranking {
+  width: 375px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btnbis {
+  width: 130px;
+}
+
+.modal-body {
+  padding: 0px !important;
 }
