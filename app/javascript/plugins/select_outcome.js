@@ -32,6 +32,6 @@ const validePanier = () => {
     });
   })
 }
-export { selectOutcome, validePanier };
+export { selectOutcome, validePanier};
 
 
