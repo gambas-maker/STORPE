@@ -1,23 +1,59 @@
 <div class="position-relative">
 <div class="topimage w-100 d-flex">
-        <h2 class="toptitle m-auto">MATCH</h2>
+  <h2 class="toptitle m-auto">MATCH</h2>
 </div>
-​<div class="sticky" style="margin: 0 auto">
+<div class="sticky" style="margin: 0 auto">
 <div class="d-flex justify-content-center pt-4">
-      <div class="d-flex justify-content-around mb-3" style="width: 375px;">
-          <div>
-            <div class=" d-flex">
-              <h3 class="typo">Matchs pronostiqués</h3>
-              <h3 class="pl-2 typos"><%= @forecasts.count %>/50</h3>
+  <div class="d-flex justify-content-around mb-3" style="width: 375px;">
+    <div>
+      <div class=" d-flex">
+        <h3 class="typo">Matchs pronostiqués</h3>
+        <h3 class="pl-2 typos"><%= current_user.forecasts.count %>/50</h3>
+      </div>
+      <div class=" d-flex">
+        <h3 class="typo">Points potentiels</h3>
+        <% total1 = 0 %>
+        <% total2 = 0 %>
+        <% total3 = 0 %>
+        <h3 class="pl-2 typos"><% current_user.forecasts.each do |forecast| %>
+          <% if forecast.outcome == "1" %>
+          <% total1 += forecast.match.points_home%>
+          <% elsif forecast.outcome == "NULL" %>
+          <% total2 += forecast.match.points_draw%>
+          <% elsif forecast.outcome == "2" %>
+          <% total3 += forecast.match.points_away%>
+          <% end %>
+          <% end %>
+          <%= total = (total1 + total2 + total3)  %>
+        </h3>
+      </div>
+    </div>
+    <div id = "panier">
+      <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Vous avez validé votre sélection!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="typopo">Retrouve tes <%= current_user.forecasts.count%> sur ton profil !</p>
+            </div>
+            <div class="modal-footer align-items-center">
+              <button type="button" class="rejoins"><%= link_to 'Tcheker mes pronos', player_season_path(current_user)%></button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
-          <div id = "panier">
-            <button type="button" class="btn btn-outline-light typo">Valider ma sélection</button>
-          </div>
+        </div>
       </div>
+    </div>
+  </div>
 </div>
 <div class="d-flex justify-content-center">
-<div class="infobis">
+  <div class="infobis">
     <div class="filterbar d-flex justify-content-around flex-row">
       <div class="dropdown">
         <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,111 +77,80 @@
           <a class="dropdown-item" href="#">Italie</a>
         </div>
       </div>
-        <button type="button" class="btn-ok">OK</button>
+      <button type="button" class="btn-ok">OK</button>
     </div>
+  </div>
 </div>
 </div>
-</div>
-​
 <div class="d-flex justify-content-center">
-​
-      <div class="info">
-        <div class="d-flex justify-content-between flex-row m-3">
-          <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
-          <h3 class="typopo d-flex justify-content-center">PRONO</h3>
-          <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
-        </div>
-        <input type="hidden" id ="season_player" value="<%= @player %>">
-        <% @matches.each do |match| %>
-        <div class="d-flex justify-content-center mb-4 mt-4">
-          <h3 class="typopo"><%= match.kick_off %></h3>
-          <h4 class="typopo"><%= match.league %></h4>
-        </div>
-        <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
-          <div class="d-flex flex-column align-items-center col-4">
-            <div class="row">
-            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
-            </div>
-            <div class="row text-align-center">
-            <h3 class="typopo"><%= match.team_home %></h3>
-            </div>
-          </div>
-          <div class="d-flex flex-column justify-content-center">
-            <p class="typopo text-center">VS</p>
-            <div class="d-flex flex-row align-items-center col-4">
-                <div class="displaysquares" data-id="<%= match.id %>">
-                  <input type="checkbox" class="square" data-outcome="1"></input>
-                  <input type="checkbox" class="square" data-outcome="NULL"></input>
-                  <input type="checkbox" class="square" data-outcome="2"></input>
-                </div>
-            </div>
-          </div>
-          <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-            <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
-            <h3 class="typopo"><%= match.team_away  %></h3>
-          </div>
-        </div>
-        <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
-          <div>
-          <%= match.points_home %> / <%= match.negative_points_home %>
-          </div>
-          <div>
-          <%= match.points_draw %> / <%= match.negative_points_draw %>
-          </div>
-          <div>
-          <%= match.points_away %> / <%= match.negative_points_away %>
-          </div>
-        </div>
-        <% end %>
-      </div>
+  <div class="info">
+    <div class="d-flex justify-content-between flex-row m-3">
+      <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
+      <h3 class="typopo d-flex justify-content-center">PRONO</h3>
+      <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
     </div>
-​
-
-​
+    <input type="hidden" id ="season_player" value="<%= @player %>">
+    <% @matches.each do |match| %>
+      <div class="d-flex justify-content-center mb-2 mt-2">
+        <h4 class="typopo"><%= match.league %></h4>
+      </div>
+      <div class="d-flex justify-content-center mb-2 mt-2">
+        <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
+        <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
+      </div>
+      <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+        <div class="d-flex flex-column align-items-center col-4">
+          <div class="row">
+            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+          </div>
+          <div class="row text-align-center">
+            <h3 class="typopo"><%= match.team_home %></h3>
+          </div>
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+          <p class="typopo text-center">VS</p>
+          <div class="d-flex flex-row align-items-center col-4">
+            <div class="displaysquares" data-id="<%= match.id %>">
+              <input type="checkbox" class="square" data-outcome="1"></input>
+              <input type="checkbox" class="square" data-outcome="NULL"></input>
+              <input type="checkbox" class="square" data-outcome="2"></input>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+          <h3 class="typopo"><%= match.team_away  %></h3>
+        </div>
+      </div>
+      <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
+        <div>
+          <%= match.points_home %> / <%= match.negative_points_home %>
+        </div>
+        <div>
+          <%= match.points_draw %> / <%= match.negative_points_draw %>
+        </div>
+        <div>
+          <%= match.points_away %> / <%= match.negative_points_away %>
+        </div>
+      </div>
+      <% end %>
   </div>
-
-​  <%=  render "shared/navbarbottom" %>
 </div>
-<%# @matches.each do |match| %>
-​
-    <%# match.team_home %>
-    <%# match.points_home %>
-    <%# image_tag "#{match.team_home_logo_url}", width: 60 %>
-    <%# match.points_draw %>
-    <%# match.team_away  %>
-    <%# image_tag "#{match.team_away_logo_url}", width: 60 %>
-    <%# match.points_away %>
-​
-​
-      <!-- <div class="square" data-outcome="1"></div>
-      <div class="square" data-outcome="NULL"></div>
-      <div class="square" data-outcome="2"></div>
-    </div> -->
-​
-    <%# match.country %>
-    <%# match.league %>
-    <%# match.result %>
-    <%# match.kick_off %>
-    <!-- <h4>Les negatives points:</h4>
-    <%# match.negative_points_home %>
-    <%# match.negative_points_draw %>
-    <%# match.negative_points_away %>
-  </div>
-<# end %> -->
+<svg class="center-block mx-auto mt-5" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
 
-
+<%=  render "shared/navbarbottom" %>
 <script type='text/javascript'>
-(function()
-{
-  if( window.localStorage )
+  (function()
   {
-    if( !localStorage.getItem('firstLoad') )
+    if( window.localStorage )
     {
-      localStorage['firstLoad'] = true;
-      window.location.reload();
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
     }
-    else
-      localStorage.removeItem('firstLoad');
-  }
-})();
+  })();
 </script>

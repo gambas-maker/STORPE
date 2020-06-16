@@ -1,5 +1,5 @@
 class Match < ApplicationRecord
-  has_many :forecasts
+  has_many :forecasts, dependent: :destroy
   has_many :season_matchs
 
   # after_commit :async_update # Run on create & update
