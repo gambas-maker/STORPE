@@ -55,15 +55,16 @@
     <div class="d-flex justify-content-center">
       <div class="infobis">
         <div class="filterbar d-flex justify-content-around flex-row">
-          <div class="dropdown">
-            <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              SPORT
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">BasketBall</a>
-              <a class="dropdown-item" href="#">Football</a>
+            <div>
+              <%= form_tag matches_path, method: :get do %>
+              <%= select_tag :query,
+                raw("<option class='dropdown-item'>SPORT</option>
+                  <option class='dropdown-item' >Football</option>
+                  <option class='dropdown-item' >Basketball</option>"),
+                  class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
+              <% end %>
             </div>
-          </div>
+            <div>
           <%= form_tag matches_path, method: :get do %>
           <%= select_tag :query,
                 raw("<option class='dropdown-item'>PAYS</option>
@@ -71,8 +72,11 @@
                   <option class='dropdown-item' value='Germany'>Allemagne</option>
                   <option class='dropdown-item' value='Spain'>Espagne</option>
                   <option class='dropdown-item' value='Italy'>Italie</option>
-                  <option class='dropdown-item' value='England'>Angleterre</option>") %>
-          <%= submit_tag "OK", class: "btn-ok" %>
+                  <option class='dropdown-item' value='England'>Angleterre</option>"),
+                  class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
+            </div>
+            <div class="mt-1">
+            <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
             <% end %>
 
 
