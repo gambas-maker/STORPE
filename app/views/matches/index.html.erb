@@ -2,7 +2,7 @@
   <div class="topimage w-100 d-flex">
     <h2 class="toptitle m-auto">MATCH</h2>
   </div>
-  <div class="sticky" style="margin: 0 auto">
+    <div class="sticky" style="margin: 0 auto">
     <div class="d-flex justify-content-center pt-4">
       <div class="d-flex justify-content-around mb-3" style="width: 375px;">
         <div>
@@ -39,11 +39,11 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="z-index: 100;">
                   <p class="typopo">Retrouve tes <%= current_user.forecasts.count%> pronos' sur ton profil !</p>
                 </div>
                 <div class="modal-footer align-items-center">
-                  <button type="button" class="rejoins"><%= link_to 'Tcheker mes pronos', player_season_path(current_user)%></button>
+                  <button type="button" class="rejoins"><%= link_to 'Tcheker mes pronos', season_path(current_user)%></button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
