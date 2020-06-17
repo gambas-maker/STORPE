@@ -33,22 +33,27 @@
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
+            <div class="float-right p-2">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Vous avez validé votre sélection!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <h2 class="stat m-auto ">Vous avez validé votre sélection!</h2>
+
                 </div>
                 <div class="modal-body" style="z-index: 100;">
+
                   <p class="typopo">Retrouve tes pronos' sur la page championnat !</p>
                 </div>
-                <div class="modal-footer align-items-center">
-                  <button type="button" class="rejoins"><%= link_to 'Tcheker mes pronos', season_path(current_user)%></button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button type="button" class="rejoins typopo"><%= link_to 'Tcheker mes pronos', season_path(current_user)%></button>
+
                 </div>
-              </div>
+
             </div>
           </div>
+         </div>
         </div>
       </div>
     </div>
