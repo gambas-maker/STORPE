@@ -64,28 +64,16 @@
               <a class="dropdown-item" href="#">Football</a>
             </div>
           </div>
-          <div class="dropdown" >
-            <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              PAYS
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <%= form_tag matches_path, method: :get do %>
-              <%= select_tag :query,
-                raw("<option class='dropdown-item'>France</option>
-                  <option class='dropdown-item'>Germany</option>
-                  <option class='dropdown-item'>Spain</option>
-                  <option class='dropdown-item'>Italy</option>
-                  <option class='dropdown-item'>England</option>") %>
-              <%= submit_tag "OK", class: "btn-ok" %>
+          <%= form_tag matches_path, method: :get do %>
+          <%= select_tag :query,
+                raw("<option class='dropdown-item'>PAYS</option>
+                  <option class='dropdown-item' value='France'>France</option>
+                  <option class='dropdown-item' value='Germany'>Allemagne</option>
+                  <option class='dropdown-item' value='Spain'>Espagne</option>
+                  <option class='dropdown-item' value='Italy'>Italie</option>
+                  <option class='dropdown-item' value='England'>Angleterre</option>") %>
+          <%= submit_tag "OK", class: "btn-ok" %>
             <% end %>
-          </div>
-
-        </div>
-
-
-<!--   <%= select_tag(:query, options_for_select([ ['Allemagne', "Germany"], ['Anglais', "England"]] ), {:class => 'dropdown-item'})  %>
- -->
 
 
 
