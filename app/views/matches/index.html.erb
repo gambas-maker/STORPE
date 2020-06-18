@@ -29,7 +29,7 @@
           </div>
         </div>
         <div id = "panier">
-          <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
+         <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -43,7 +43,8 @@
 
                 </div>
                 <div class="modal-body" style="z-index: 100;">
-                  <p class="typopo">Retrouve tes pronos' sur ton profil !</p>
+
+                  <p class="typopo">Retrouve tes pronos' sur la page championnat !</p>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                   <button type="button" class="rejoins typopo"><%= link_to 'Tcheker mes pronos', season_path(current_user)%></button>
@@ -59,30 +60,32 @@
     <div class="d-flex justify-content-center">
       <div class="infobis">
         <div class="filterbar d-flex justify-content-around flex-row">
-          <div class="dropdown">
-            <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              SPORT
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">BasketBall</a>
-              <a class="dropdown-item" href="#">Football</a>
+            <div>
+              <%= form_tag matches_path, method: :get do %>
+              <%= select_tag :query,
+                raw("<option class='dropdown-item'>SPORT</option>
+                  <option class='dropdown-item' >Football</option>
+                  <option class='dropdown-item' >Basketball</option>"),
+                  class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
+              <% end %>
             </div>
-          </div>
-          <div class="dropdown">
-            <button class="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              LIGUE
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Tous</a>
-              <a class="dropdown-item" href="#">Allemagne</a>
-              <a class="dropdown-item" href="#">Angleterre</a>
-              <a class="dropdown-item" href="#">Espagne</a>
-              <a class="dropdown-item" href="#">France</a>
-              <a class="dropdown-item" href="#">Italie</a>
+            <div>
+          <%= form_tag matches_path, method: :get do %>
+          <%= select_tag :query,
+                raw("<option class='dropdown-item'>PAYS</option>
+                  <option class='dropdown-item' value='France'>France</option>
+                  <option class='dropdown-item' value='Germany'>Allemagne</option>
+                  <option class='dropdown-item' value='Spain'>Espagne</option>
+                  <option class='dropdown-item' value='Italy'>Italie</option>
+                  <option class='dropdown-item' value='England'>Angleterre</option>"),
+                  class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
             </div>
-          </div>
-          <button type="button" class="btn-ok">OK</button>
-        </div>
+            <div class="mt-1">
+            <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
+            <% end %>
+
+
+
       </div>
     </div>
   </div>
@@ -94,7 +97,9 @@
         <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
       </div>
       <input type="hidden" id ="season_player" value="<%= @player %>">
+
       <% @matches.each do |match| %>
+
       <div class="d-flex justify-content-center mb-2 mt-2">
         <h4 class="typopo"><%= match.league %></h4>
       </div>
