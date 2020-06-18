@@ -104,17 +104,27 @@
   display: flex;
   align-items: center;
 }
+.cla{
+  font-size:12px;
+  font-family: "Montserrat";
+  font-weight:bold;
+  color:#FBB03B;
+}
+
 th{
   font-size:15px;
   font-family: "Montserrat";
   font-weight:bold;
   color:white;
+  text-align: center;
 }
+
 td{
   font-size:10px;
   font-family: "Montserrat";
   font-weight:bold;
   color:white;
+  text-align: center;
 }
 
 .circle {
