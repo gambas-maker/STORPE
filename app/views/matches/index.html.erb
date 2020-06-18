@@ -130,13 +130,13 @@
       </div>
       <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
         <div>
-          <%= match.points_home %> / <%= match.negative_points_home %>
+          Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
         </div>
         <div>
-          <%= match.points_draw %> / <%= match.negative_points_draw %>
+          Pts : +<%= match.points_draw.to_i %> / <%= match.negative_points_draw %>
         </div>
         <div>
-          <%= match.points_away %> / <%= match.negative_points_away %>
+          Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
         </div>
       </div>
       <% end %>
