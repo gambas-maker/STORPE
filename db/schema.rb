@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_143218) do
+ActiveRecord::Schema.define(version: 2020_07_03_083437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "forecasts", force: :cascade do |t|
-    t.bigint "player_season_id", null: false
     t.integer "points_win"
     t.integer "points_lose"
     t.boolean "confirmed"
@@ -24,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_143218) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "match_id"
     t.string "outcome"
+    t.bigint "player_season_id"
     t.index ["match_id"], name: "index_forecasts_on_match_id"
     t.index ["player_season_id"], name: "index_forecasts_on_player_season_id"
   end
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 2020_06_11_143218) do
     t.integer "fixture_id"
     t.integer "negative_points_draw"
     t.integer "negative_points_away"
+  end
+
+  create_table "player_forecasts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "player_season_id"
+    t.bigint "forecast_id"
+    t.index ["forecast_id"], name: "index_player_forecasts_on_forecast_id"
+    t.index ["player_season_id"], name: "index_player_forecasts_on_player_season_id"
   end
 
   create_table "player_seasons", force: :cascade do |t|
@@ -95,6 +104,8 @@ ActiveRecord::Schema.define(version: 2020_06_11_143218) do
 
   add_foreign_key "forecasts", "matches"
   add_foreign_key "forecasts", "player_seasons"
+  add_foreign_key "player_forecasts", "forecasts"
+  add_foreign_key "player_forecasts", "player_seasons"
   add_foreign_key "player_seasons", "seasons"
   add_foreign_key "player_seasons", "users"
   add_foreign_key "season_matches", "matches"
