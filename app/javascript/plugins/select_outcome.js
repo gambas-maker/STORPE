@@ -9,9 +9,8 @@ const selectOutcome = () => {
       console.log(result);
       const id = event.currentTarget.parentNode.dataset.id;
       console.log(id);
-      const player = document.getElementById('season_player').value;
-      console.log(player);
-      const url = 'store_outcome?result='+result+'&match='+id+'&player='+player
+
+      const url = 'store_outcome?result='+result+'&match='+id
       fetch(url)
         .then(response => response.json())
         .then((data) => {
