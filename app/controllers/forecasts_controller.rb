@@ -35,6 +35,7 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     @forecast = Forecast.where(match: id, player_season: player).first
     if @forecast.nil?
+    @playerseason = PlayerSeason.create!(user_id: current_user.id, season_id: 4)
     @forecast = Forecast.new
     @forecast.outcome = outcome
     @forecast.match_id = id
