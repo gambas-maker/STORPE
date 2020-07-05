@@ -32,15 +32,15 @@ class ForecastsController < ApplicationController
     id = params[:match]
     # match = Match.find(id)
     outcome = params[:result]
-    player = params[:player]
+    player = current_user.player_season_ids
     @forecast = Forecast.where(match: id, player_season: player).first
     if @forecast.nil?
     @forecast = Forecast.new
     @forecast.outcome = outcome
     @forecast.match_id = id
-    @forecast.player_season_id = player
+    @forecast.player_season_id = player[0]
     @forecast.confirmed = false
-    @forecast.save
+    @forecast.save!
     else
     @forecast.outcome = outcome
     @forecast.save
@@ -49,7 +49,7 @@ class ForecastsController < ApplicationController
   end
 
   def confirm_pending
-    player = PlayerSeason.find(params[:player])
+    player = PlayerSeason.find(current_user.player_season_ids)
     @forecasts = Forecast.where(confirmed: false, player_season: player)
     @forecasts.update(confirmed: true)
 
