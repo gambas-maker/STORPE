@@ -38,7 +38,7 @@ class ForecastsController < ApplicationController
     @forecast = Forecast.new
     @forecast.outcome = outcome
     @forecast.match_id = id
-    @forecast.player_season_id = player
+    @forecast.player_season_id = player[0]
     @forecast.confirmed = false
     @forecast.save!
     else
