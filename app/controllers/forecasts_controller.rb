@@ -35,7 +35,7 @@ class ForecastsController < ApplicationController
     if PlayerSeason.exists?(user_id: current_user.id)
       player = current_user.player_season_ids
     else
-      @playerseason = PlayerSeason.create!(user_id: current_user.id, season_id: 4)
+      @playerseason = PlayerSeason.create!(user_id: current_user.id, season_id: Season.last.id)
       player = current_user.player_season_ids
     end
     @forecast = Forecast.where(match: id, player_season: player).first
