@@ -1,4 +1,5 @@
 :schedule:
   season_job:
     cron: '0 * * * * *'
+    queue: default
     class: SeasonJob

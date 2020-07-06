@@ -1,8 +1,5 @@
-require 'sidekiq-scheduler'
-
 class SeasonJob < ApplicationJob
   queue_as :default
-  include Sidekiq::Worker
 
   def perform
     puts "New season is coming!"
