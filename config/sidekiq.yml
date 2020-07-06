@@ -1,0 +1,5 @@
+:schedule:
+  SeasonJob:
+    cron: '023***'
+    queue: default
+    enabled: true
