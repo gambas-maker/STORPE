@@ -18,3 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every :monday, at: '7am' do
+  runner "SeasonJob.perform_now"
+end
