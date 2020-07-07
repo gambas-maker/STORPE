@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
-  get 'about', to: 'pages#about'
-  get 'contact', to: 'pages#contact'
-  get 'store_outcome', to: 'forecasts#store_outcome', defaults: {format: :json}
-  get 'confirm_pending', to: 'forecasts#confirm_pending', defaults: {format: :json}
+
   require "sidekiq/web"
   authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
+  get 'about', to: 'pages#about'
+  get 'contact', to: 'pages#contact'
+  get 'store_outcome', to: 'forecasts#store_outcome', defaults: {format: :json}
+  get 'confirm_pending', to: 'forecasts#confirm_pending', defaults: {format: :json}
 
   resources :matches, only: [:index] do
     resources :forecasts, only: [:new, :create, :show, :confirm_pending]

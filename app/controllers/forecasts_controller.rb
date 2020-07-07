@@ -32,18 +32,23 @@ class ForecastsController < ApplicationController
     id = params[:match]
     # match = Match.find(id)
     outcome = params[:result]
-    player = current_user.player_season_ids
+    if PlayerSeason.exists?(user_id: current_user.id)
+      player = current_user.player_season_ids
+    else
+      @playerseason = PlayerSeason.create!(user_id: current_user.id, season_id: Season.last.id)
+      player = current_user.player_season_ids
+    end
     @forecast = Forecast.where(match: id, player_season: player).first
     if @forecast.nil?
-    @forecast = Forecast.new
-    @forecast.outcome = outcome
-    @forecast.match_id = id
-    @forecast.player_season_id = player[0]
-    @forecast.confirmed = false
-    @forecast.save!
+      @forecast = Forecast.new
+      @forecast.outcome = outcome
+      @forecast.match_id = id
+      @forecast.player_season_id = player[0]
+      @forecast.confirmed = false
+      @forecast.save!
     else
-    @forecast.outcome = outcome
-    @forecast.save
+      @forecast.outcome = outcome
+      @forecast.save
     end
     render json: { status: @forecast }
   end
