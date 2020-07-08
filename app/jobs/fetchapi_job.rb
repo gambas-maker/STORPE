@@ -2,8 +2,8 @@ class FetchapiJob < ApplicationJob
   queue_as :default
 
   def perform
-    puts "I'm going to create the weekly games"
-    SportOdd.all_matches_for_week
-    puts "I'm done"
+    puts "I'm going to create games for the next two days"
+    SportOdd.matches_for_four_days
+    puts "I'm done with matches from Mon/Wed to Tue/Thu"
   end
 end
