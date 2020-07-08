@@ -3,22 +3,22 @@ require 'net/http'
 require 'openssl'
 require 'json'
 
-class SportOdd
+class SportOddEnd
   BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
   LEAGUE_IDS = [525, 524, 775, 891, 754]
   # 525 = France, 524 = Angleterre, 775 = Espagne, 891 = Italie, 754 = Allemagne
 
-  def self.matches_for_four_days
+  def self.matches_for_last_days
     LEAGUE_IDS.each do |league_id|
-      matches_for_two_days(league_id)
+      matches_for_three_days(league_id)
     end
     points_home_negative_points
     points_draw_negative_points
     points_away_negative_points
   end
 
-  def self.matches_for_two_days(league_id)
-    2.times do |index|
+  def self.matches_for_three_days(league_id)
+    3.times do |index|
       matches_for_day(league_id, Date.today + index)
     end
   end
@@ -164,3 +164,4 @@ class SportOdd
     date_array.sort
   end
 end
+
