@@ -1,7 +1,7 @@
 require_relative '../models/sport_odd'
 class MatchesController < ApplicationController
   def index
-    @forecasts = Forecast.where(confirmed: false)
+    @forecasts = Forecast.where(confirmed: true)
     @matches = Match.all
     @player = 1
     league_filters
