@@ -24,7 +24,7 @@ class SportOdd
   end
 
   def self.matches_for_day(league_id, date)
-    end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}")
+    end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}?timezone=Europe/Paris")
     matches = call_api(end_point)["api"]["fixtures"]
     matches.each do |match|
       new_match = Match.create(
