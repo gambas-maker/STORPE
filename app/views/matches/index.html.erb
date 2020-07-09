@@ -96,8 +96,7 @@
           <input type="hidden" id ="season_player" value="<%= @player %>">
 
           <% @matches.each do |match, forecast| %>
-          <%  %>
-          <% if Time.zone.parse(match.kick_off) > Time.now && match.forecasts.exists? %>
+          <% if Time.parse(match.kick_off) > Time.now %>
             <div class="d-flex justify-content-center mb-2 mt-2">
               <h4 class="typopo"><%= match.league %></h4>
             </div>
@@ -140,51 +139,8 @@
                 Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
               </div>
             </div>
-          <% else match.kick_off.to_date > Time.now && current_user.forecasts %>
-          <div class="opacite">
-          <div class="d-flex justify-content-center mb-2 mt-2">
-              <h4 class="typopo"><%= match.league %></h4>
-            </div>
-            <div class="d-flex justify-content-center mb-2 mt-2">
-              <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
-              <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
-            </div>
-            <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
-              <div class="d-flex flex-column align-items-center col-4">
-                <div class="row">
-                  <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
-                </div>
-                <div class="row text-align-center">
-                  <h3 class="typopo"><%= match.team_home %></h3>
-                </div>
-              </div>
-              <div class="d-flex flex-column justify-content-center">
-                <p class="typopo text-center">VS</p>
-                <div class="d-flex flex-row align-items-center col-4">
-                  <div class="displaysquares" data-id="<%= match.id %>">
-                    <input type="checkbox" class="square" data-outcome="1"></input>
-                    <input type="checkbox" class="square" data-outcome="NULL"></input>
-                    <input type="checkbox" class="square" data-outcome="2"></input>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
-                <h3 class="typopo"><%= match.team_away  %></h3>
-              </div>
-            </div>
-            <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
-              <div>
-                Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
-              </div>
-              <div>
-                Pts : +<%= match.points_draw.to_i %> / <%= match.negative_points_draw %>
-              </div>
-              <div>
-                Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
-              </div>
-            </div>
-            </div>
+          <% else %>
+
           <% end %>
           <% end %>
         </div>
