@@ -4,11 +4,11 @@ const selectOutcome = () => {
     outcome.addEventListener("click",(event) => {
   $('input[type="checkbox"]').on('change', function() {
    $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
+    if ( $(this).is(':checked')) console.log('good');
+    else console.log('bad');
 });
       const result = event.currentTarget.dataset.outcome;
       console.log(result);
-      const selects = document.querySelectorAll(".square");
-      console.log(selects);
       const id = event.currentTarget.parentNode.dataset.id;
       console.log(id);
 
