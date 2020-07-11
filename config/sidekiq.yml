@@ -1,17 +1,14 @@
 :schedule:
   season_job:
     cron: '0 9 * * MON'
-    queue: default
     class: SeasonJob
 
 :schedule:
   fetchapi_job:
     cron: '0 8 * * MON,WED'
-    queue: default
     class: FetchapiJob
 
 :schedule:
   fetchapilast_job:
-    cron: '0 19 * * FRI'
-    queue: default
+    cron: '* * * * *'
     class: FetchapilastJob

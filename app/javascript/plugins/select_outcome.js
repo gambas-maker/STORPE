@@ -7,6 +7,8 @@ const selectOutcome = () => {
 });
       const result = event.currentTarget.dataset.outcome;
       console.log(result);
+      const selects = document.querySelectorAll(".square");
+      console.log(selects);
       const id = event.currentTarget.parentNode.dataset.id;
       console.log(id);
 
@@ -22,6 +24,7 @@ const selectOutcome = () => {
 
 const validePanier = () => {
   const panier = document.getElementById('panier');
+
   panier.addEventListener("click", (event) =>{
     console.log("click")
     const player = document.getElementById('season_player').value;
@@ -32,6 +35,7 @@ const validePanier = () => {
     });
   })
 }
+
 export { selectOutcome, validePanier};
 
 
