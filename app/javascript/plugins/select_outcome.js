@@ -4,15 +4,14 @@ const selectOutcome = () => {
     outcome.addEventListener("click",(event) => {
   $('input[type="checkbox"]').on('change', function() {
    $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
-    if ( $(this).is(':checked')) console.log('good');
-    else console.log('bad');
 });
       const result = event.currentTarget.dataset.outcome;
       console.log(result);
       const id = event.currentTarget.parentNode.dataset.id;
       console.log(id);
-
-      const url = 'store_outcome?result='+result+'&match='+id
+      const box = event.currentTarget.checked;
+      console.log(box);
+      const url = 'store_outcome?result='+result+'&match='+id+'&box='+box
       fetch(url)
         .then(response => response.json())
         .then((data) => {
@@ -24,7 +23,6 @@ const selectOutcome = () => {
 
 const validePanier = () => {
   const panier = document.getElementById('panier');
-
   panier.addEventListener("click", (event) =>{
     console.log("click")
     const player = document.getElementById('season_player').value;
