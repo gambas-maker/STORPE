@@ -1,11 +1,11 @@
 :schedule:
   season_job:
-    cron: '0 9 * * MON'
+    cron: '0 6 * * MON'
     class: SeasonJob
 
 :schedule:
   fetchapi_job:
-    cron: '0 8 * * MON,WED'
+    cron: '0 7 * * MON,WED'
     class: FetchapiJob
 
 :schedule:
