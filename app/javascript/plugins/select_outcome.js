@@ -7,12 +7,11 @@ const selectOutcome = () => {
 });
       const result = event.currentTarget.dataset.outcome;
       console.log(result);
-      const selects = document.querySelectorAll(".square");
-      console.log(selects);
       const id = event.currentTarget.parentNode.dataset.id;
       console.log(id);
-
-      const url = 'store_outcome?result='+result+'&match='+id
+      const box = event.currentTarget.checked;
+      console.log(box);
+      const url = 'store_outcome?result='+result+'&match='+id+'&box='+box
       fetch(url)
         .then(response => response.json())
         .then((data) => {
@@ -24,7 +23,6 @@ const selectOutcome = () => {
 
 const validePanier = () => {
   const panier = document.getElementById('panier');
-
   panier.addEventListener("click", (event) =>{
     console.log("click")
     const player = document.getElementById('season_player').value;

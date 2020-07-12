@@ -10,5 +10,5 @@
 
 :schedule:
   fetchapilast_job:
-    cron: '* * * * *'
+    cron: '0 19 * * FRI'
     class: FetchapilastJob

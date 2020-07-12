@@ -24,7 +24,6 @@ class ForecastsController < ApplicationController
   def destroy
     @forecast = Forecast.find(params[:id])
     @forecast.destroy
-    redirect_to forecasts_path
     # Verifiez le chemin, peut etre confirm pending path?
   end
 
@@ -32,23 +31,29 @@ class ForecastsController < ApplicationController
     id = params[:match]
     # match = Match.find(id)
     outcome = params[:result]
+    check = params[:box]
     if PlayerSeason.exists?(user_id: current_user.id)
       player = current_user.player_season_ids
     else
       @playerseason = PlayerSeason.create!(user_id: current_user.id, season_id: Season.last.id)
       player = current_user.player_season_ids
     end
-    @forecast = Forecast.where(match: id, player_season: player).first
-    if @forecast.nil?
-      @forecast = Forecast.new
-      @forecast.outcome = outcome
-      @forecast.match_id = id
-      @forecast.player_season_id = player[0]
-      @forecast.confirmed = false
-      @forecast.save!
-    else
-      @forecast.outcome = outcome
-      @forecast.save
+    if check == "true"
+      @forecast = Forecast.where(match: id, player_season: player).first
+      if @forecast.nil?
+        @forecast = Forecast.new
+        @forecast.outcome = outcome
+        @forecast.match_id = id
+        @forecast.player_season_id = player[0]
+        @forecast.confirmed = false
+        @forecast.save!
+      else
+        @forecast.outcome = outcome
+        @forecast.save
+      end
+    else check == "false"
+        @forecast = Forecast.where(match: id, player_season: player).first
+        @forecast.destroy
     end
     render json: { status: @forecast }
   end
