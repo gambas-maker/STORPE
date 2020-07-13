@@ -1,15 +1,15 @@
 
 :schedule:
   season_job:
-    cron: '0 16 * * MON'
+    cron: '0 17 * * MON'
     class: SeasonJob
 
 :schedule:
   fetchapi_job:
-    cron: '0 17 * * MON,WED'
+    cron: '0 18 * * MON'
     class: FetchapiJob
 
 :schedule:
   fetchapilast_job:
-    cron: '0 18 * * MON'
+    cron: '0 16 * * MON'
     class: FetchapilastJob
