@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_191840) do
+ActiveRecord::Schema.define(version: 2020_07_13_082314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 2020_07_06_191840) do
     t.bigint "match_id"
     t.string "outcome"
     t.bigint "player_season_id"
+    t.bigint "season_id"
     t.index ["match_id"], name: "index_forecasts_on_match_id"
     t.index ["player_season_id"], name: "index_forecasts_on_player_season_id"
+    t.index ["season_id"], name: "index_forecasts_on_season_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_191840) do
 
   add_foreign_key "forecasts", "matches"
   add_foreign_key "forecasts", "player_seasons"
+  add_foreign_key "forecasts", "seasons"
   add_foreign_key "player_seasons", "seasons"
   add_foreign_key "player_seasons", "users"
   add_foreign_key "season_matches", "matches"
