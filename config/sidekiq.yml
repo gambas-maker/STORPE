@@ -1,14 +1,23 @@
+:concurrency: 3
+:verbose: true
+:queues:
+  - default
+  - api_job
+
 :schedule:
   season_job:
     cron: '0 6 * * MON'
     class: SeasonJob
+    queue: default
 
 :schedule:
   fetchapi_job:
     cron: '0 7 * * MON,WED'
     class: FetchapiJob
+    queue: api_job
 
 :schedule:
   fetchapilast_job:
     cron: '0 19 * * FRI'
     class: FetchapilastJob
+    queue: api_job

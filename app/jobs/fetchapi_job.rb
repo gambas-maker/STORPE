@@ -1,6 +1,7 @@
 require 'sidekiq-scheduler'
 
 class FetchapiJob < ApplicationJob
+  sidekiq_options queue: :api_job
 
   def perform
     puts "I'm going to create games for the next two days"
