@@ -277,6 +277,9 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
+    simple_scheduler (1.2.0)
+      rails (>= 5.0)
+      sidekiq (>= 5.0)
     spoon (0.0.6)
       ffi
     spring (2.1.0)
@@ -365,6 +368,7 @@ DEPENDENCIES
   sidekiq-failures (~> 1.0)
   sidekiq-scheduler
   simple_form
+  simple_scheduler
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

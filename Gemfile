@@ -29,7 +29,7 @@ gem 'whenever', require: false
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'sidekiq-scheduler'
-
+gem "simple_scheduler"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
