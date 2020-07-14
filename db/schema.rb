@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_082314) do
+ActiveRecord::Schema.define(version: 2020_07_14_123558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "championships", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "season_id"
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.index ["season_id"], name: "index_championships_on_season_id"
+  end
 
   create_table "forecasts", force: :cascade do |t|
     t.integer "points_win"
@@ -63,15 +73,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_082314) do
     t.index ["user_id"], name: "index_player_seasons_on_user_id"
   end
 
-  create_table "season_matches", force: :cascade do |t|
-    t.bigint "match_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "season_id"
-    t.index ["match_id"], name: "index_season_matches_on_match_id"
-    t.index ["season_id"], name: "index_season_matches_on_season_id"
-  end
-
   create_table "seasons", force: :cascade do |t|
     t.integer "start_date"
     t.integer "end_date"
@@ -96,11 +97,10 @@ ActiveRecord::Schema.define(version: 2020_07_13_082314) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "championships", "seasons"
   add_foreign_key "forecasts", "matches"
   add_foreign_key "forecasts", "player_seasons"
   add_foreign_key "forecasts", "seasons"
   add_foreign_key "player_seasons", "seasons"
   add_foreign_key "player_seasons", "users"
-  add_foreign_key "season_matches", "matches"
-  add_foreign_key "season_matches", "seasons"
 end
