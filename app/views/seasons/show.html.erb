@@ -11,7 +11,7 @@
         <div>
           <h3 class="typo"><%= current_user.name %></h3>
           <h3 class="typo circle">10e</h3>
-          <h3 class="typo mt-2">DIVISION 2</h3>
+          <h3 class="typo mt-2">@championship.name</h3>
         </div>
       </div>
       <svg class=" center-block mx-auto mt-1" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
@@ -65,158 +65,30 @@
                   <th scope="col">PTS</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Pates</td>
-                  <td>36</td>
-                  <td>0.44</td>
-                  <td>397</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>32</td>
-                  <td>0.50</td>
-                  <td>345</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Rob974</td>
-                  <td>35</td>
-                  <td>0.49</td>
-                  <td>344</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>KCrocs</td>
-                  <td>32</td>
-                  <td>0.48</td>
-                  <td>343</td>
-                </tr>
+              <% @playerseasons.each do |playerseason| %>
+              <% user_championships = current_user.player_seasons.map(&:championship).uniq %>
+                <% if user_championships.include?(playerseason.championship) %>
+                  <tbody>
+                    <tr>
+                      <th scope="row">9</th>
+                      <td>current_user.email</td>
+                      <td>36</td>
+                      <td>0.44</td>
+                      <td>310</td>
+                    </tr>
+                    <!-- <tr>
+                      playerseason == @playerseason
+                        <th class="cla" scope="row">10</th>
+                        <td class="cla">Gambas</td>
+                        <td class="cla">33</td>
+                        <td class="cla">0.50</td>
+                        <td class="cla">300</td>
 
-                <tr>
-                  <th scope="row">5</th>
-                  <td>Justice</td>
-                  <td>31</td>
-                  <td>0.5</td>
-                  <td>333</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">6</th>
-                  <td>DarkKev</td>
-                  <td>30</td>
-                  <td>0.45</td>
-                  <td>313</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">7</th>
-                  <td>Balkany</td>
-                  <td>35</td>
-                  <td>0.44</td>
-                  <td>312</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">8</th>
-                  <td>Wolvie</td>
-                  <td>37</td>
-                  <td>0.43</td>
-                  <td>311</td>
-                </tr>
-                <tr>
-                  <th scope="row">9</th>
-                  <td>OliT</td>
-                  <td>36</td>
-                  <td>0.44</td>
-                  <td>310</td>
-                </tr>
-                <tr>
-                    <th class="cla" scope="row">10</th>
-                    <td class="cla">Gambas</td>
-                    <td class="cla">33</td>
-                    <td class="cla">0.50</td>
-                    <td class="cla">300</td>
-
-                </tr>
-                <tr>
-                  <th scope="row">11</th>
-                  <td>Kamoul</td>
-                  <td>35</td>
-                  <td>0.70</td>
-                  <td>254</td>
-                </tr>
-                <tr>
-                  <th scope="row">12</th>
-                  <td>Popote</td>
-                  <td>29</td>
-                  <td>0.69</td>
-                  <td>250</td>
-                </tr>
-                <tr>
-                  <th scope="row">13</th>
-                  <td>MarkyM</td>
-                  <td>20</td>
-                  <td>0.67</td>
-                  <td>215</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">14</th>
-                  <td>VideoV</td>
-                  <td>29</td>
-                  <td>0.66</td>
-                  <td>202</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">15</th>
-                  <td>Mydou</td>
-                  <td>22</td>
-                  <td>0.64</td>
-                  <td>178</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">16</th>
-                  <td>Sami13</td>
-                  <td>20</td>
-                  <td>0.60</td>
-                  <td>177</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">17</th>
-                  <td>BicBic</td>
-                  <td>24</td>
-                  <td>0.50</td>
-                  <td>159</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">18</th>
-                  <td>Gourdon</td>
-                  <td>26</td>
-                  <td>0.47</td>
-                  <td>156</td>
-                </tr>
-                <tr>
-                  <th scope="row">19</th>
-                  <td>MichelS</td>
-                  <td>28</td>
-                  <td>0.45</td>
-                  <td>147</td>
-                </tr>
-                <tr>
-                  <th scope="row">20</th>
-                  <td>Rageux</td>
-                  <td>49</td>
-                  <td>0.20</td>
-                  <td>143</td>
-                </tr>
-              </tbody>
+                    </tr> -->
+                    <% else %>
+                  </tbody>
+                <% end %>
+              <% end %>
             </table>
 
           </div>

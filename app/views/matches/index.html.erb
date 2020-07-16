@@ -95,7 +95,7 @@
           </div>
           <input type="hidden" id ="season_player" value="<%= @player %>">
 
-          <% @matches.each do |match, forecast| %>
+          <% @matches.each do |match| %>
           <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? %>
             <div class="d-flex justify-content-center mb-2 mt-2">
               <h4 class="typopo"><%= match.league %></h4>
