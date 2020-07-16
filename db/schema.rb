@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_195716) do
+ActiveRecord::Schema.define(version: 2020_07_16_143041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_195716) do
     t.integer "fixture_id"
     t.integer "negative_points_draw"
     t.integer "negative_points_away"
+    t.string "event_stamp"
   end
 
   create_table "player_seasons", force: :cascade do |t|

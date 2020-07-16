@@ -26,15 +26,18 @@ class SportOdd
   def self.matches_for_day(league_id, date)
     end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}?timezone=Europe/Paris")
     matches = call_api(end_point)["api"]["fixtures"]
+    sport = "football"
     matches.each do |match|
       new_match = Match.create(
         team_home: match["homeTeam"]["team_name"],
         team_home_logo_url: match["homeTeam"]["logo"],
         team_away: match["awayTeam"]["team_name"],
         team_away_logo_url: match["awayTeam"]["logo"],
+        sport: sport,
         fixture_id: match["fixture_id"],
         country: match["league"]["country"],
         league: match["league"]["name"],
+        event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
         kick_off: DateTime.parse(match["event_date"])
       )
       get_odds_for_match(new_match)
