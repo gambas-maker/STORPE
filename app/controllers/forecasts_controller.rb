@@ -28,6 +28,7 @@ class ForecastsController < ApplicationController
   end
 
   def store_outcome
+    @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids)
     id = params[:match]
     # match = Match.find(id)
     outcome = params[:result]
@@ -38,23 +39,26 @@ class ForecastsController < ApplicationController
       @playerseason = PlayerSeason.create!(user_id: current_user.id, season_id: Season.last.id)
       player = current_user.player_season_ids
     end
-    if check == "true"
-      @forecast = Forecast.where(match: id, player_season: player).first
-      if @forecast.nil?
-        @forecast = Forecast.new
-        @forecast.outcome = outcome
-        @forecast.match_id = id
-        @forecast.player_season_id = player[0]
-        @forecast.season_id = Season.last.id
-        @forecast.confirmed = false
-        @forecast.save!
-      else
-        @forecast.outcome = outcome
-        @forecast.save
-      end
-    else check == "false"
+    if @forecasts.count < 50
+      if check == "true"
+        @forecast = Forecast.where(match: id, player_season: player).first
+        if @forecast.nil?
+          @forecast = Forecast.new
+          @forecast.outcome = outcome
+          @forecast.match_id = id
+          @forecast.player_season_id = player[0]
+          @forecast.season_id = Season.last.id
+          @forecast.confirmed = false
+          @forecast.save!
+        else
+          @forecast.outcome = outcome
+          @forecast.save
+        end
+      else check == "false"
         @forecast = Forecast.where(match: id, player_season: player).first
         @forecast.destroy
+      end
+    else
     end
     render json: { status: @forecast }
   end
