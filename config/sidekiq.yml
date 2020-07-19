@@ -5,3 +5,7 @@
     cron: '0 12 * * MON,WED'
   FetchapilastJob:
     cron: '0 11 * * FRI'
+  ResultsJob:
+    cron: '0 24 * * *'
+  CalculatepointsJob:
+    cron: '0 1 * * *'
