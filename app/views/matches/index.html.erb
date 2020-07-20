@@ -10,23 +10,23 @@
             <h3 class="typo">Matchs pronostiqués</h3>
             <h3 class="pl-2 typos"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count %>/50</h3>
           </div>
-          <div class=" d-flex">
-            <h3 class="typo">Points potentiels</h3>
-            <% total1 = 0 %>
-            <% total2 = 0 %>
-            <% total3 = 0 %>
-            <h3 class="pl-2 typos"><% current_user.forecasts.where(confirmed: true).each do |forecast| %>
-              <% if forecast.outcome == "1" %>
-              <% total1 += forecast.match.points_home%>
-              <% elsif forecast.outcome == "NULL" %>
-              <% total2 += forecast.match.points_draw%>
-              <% elsif forecast.outcome == "2" %>
-              <% total3 += forecast.match.points_away%>
-              <% end %>
-              <% end %>
-              <%= total = (total1 + total2 + total3)  %>
-            </h3>
-          </div>
+          <!-- <div class=" d-flex">
+            <h3 class="typo">Points potentiels</h3> -->
+            <%# total1 = 0 %>
+            <%# total2 = 0 %>
+            <%# total3 = 0 %>
+            <!-- <h3 class="pl-2 typos"> --><%# current_user.forecasts.where(confirmed: true).each do |forecast| %>
+              <%# if forecast.outcome == "1" %>
+              <%# total1 += forecast.match.points_home%>
+              <%# elsif forecast.outcome == "N" %>
+              <%# total2 += forecast.match.points_draw%>
+              <%# elsif forecast.outcome == "2" %>
+              <%# total3 += forecast.match.points_away%>
+              <%# end %>
+              <%# end %>
+              <%#= total = (total1 + total2 + total3)  %>
+            <!-- </h3> -->
+          <!-- </div> -->
         </div>
         <div id = "panier">
          <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
@@ -55,6 +55,8 @@
       </div>
     </div>
   </div>
+  <% if current_user.forecasts.count > 50 %>
+  <% end %>
   <div class="d-flex justify-content-center">
     <div class="infobis">
       <div class="filterbar d-flex justify-content-around flex-row">
