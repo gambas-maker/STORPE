@@ -33,12 +33,7 @@ class ForecastsController < ApplicationController
     # match = Match.find(id)
     outcome = params[:result]
     check = params[:box]
-    if PlayerSeason.exists?(user_id: current_user.id)
-      player = current_user.player_season_ids
-    else
-      @playerseason = PlayerSeason.create!(user_id: current_user.id, season_id: Season.last.id)
-      player = current_user.player_season_ids
-    end
+    player = current_user.player_season_ids
     if @forecasts.count < 50
       if check == "true"
         @forecast = Forecast.where(match: id, player_season: player).first

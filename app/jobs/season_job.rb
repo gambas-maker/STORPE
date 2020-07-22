@@ -6,6 +6,7 @@ class SeasonJob < ApplicationJob
     @season = Season.create!
     puts "New is season is ready"
     PlayerSeason.update_all(season_id: @season.id)
+    Championship.update_all(season_id: @season.id)
     @playerseasons = PlayerSeason.where(season_id: Season.last.id)
     @playerseasons.each do |playerseason|
       playerseason.update(number_of_points: 0)
