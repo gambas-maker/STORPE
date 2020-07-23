@@ -15,7 +15,7 @@ class ChampionshipJob < ApplicationJob
       puts count.class
       if count.empty?
         Championship.create(season_id: Season.last.id, name: "CFA")
-        PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: Championship.last.id)
+        PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: Championship.last.id, number_of_points: 0)
       else
         var = count.min
         puts var
@@ -29,7 +29,7 @@ class ChampionshipJob < ApplicationJob
         end
         object.select { |un| un[0] }
         puts object
-          PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: object[0].id)
+        PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: object[0].id, number_of_points: 0)
       end
     end
   end
