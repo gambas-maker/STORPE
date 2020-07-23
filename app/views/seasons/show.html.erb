@@ -11,7 +11,7 @@
         <div>
           <h3 class="typo"><%= current_user.name %></h3>
           <h3 class="typo circle">10e</h3>
-          <h3 class="typo mt-2">@championship.name</h3>
+          <h3 class="typo mt-2"><%=  @championship.name %></h3>
         </div>
       </div>
       <svg class=" center-block mx-auto mt-1" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
@@ -60,37 +60,38 @@
                 <tr>
                   <th scope="col">POS</th>
                   <th scope="col">NOM</th>
-                  <th scope="col">MATCHES</th>
+                  <th scope="col">MATCHS</th>
                   <th scope="col">RATIO</th>
                   <th scope="col">PTS</th>
                 </tr>
               </thead>
+              <% classement = {} %>
+              <% x = 0 %>
               <% @playerseasons.each do |playerseason| %>
-              <% user_championships = current_user.player_seasons.map(&:championship).uniq %>
-                <% if user_championships.include?(playerseason.championship) %>
-                  <tbody>
-                    <tr>
-                      <th scope="row">9</th>
-                      <td>current_user.email</td>
-                      <td>36</td>
-                      <td>0.44</td>
-                      <td>310</td>
-                    </tr>
-                    <!-- <tr>
-                      playerseason == @playerseason
-                        <th class="cla" scope="row">10</th>
-                        <td class="cla">Gambas</td>
-                        <td class="cla">33</td>
-                        <td class="cla">0.50</td>
-                        <td class="cla">300</td>
-
-                    </tr> -->
-                    <% else %>
-                  </tbody>
+                <% classement[playerseason] = playerseason.number_of_points %>
                 <% end %>
+                <% classement.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
+                  <tbody>
+                    <% if current_user.id == playerseason.user_id%>
+                    <% puts classement.class %>
+                    <tr>
+                      <th class="cla" scope="row"><%= x += 1%></th>
+                      <% puts classement %>
+                      <td class="cla" ><%=  playerseason.id %></td>
+                      <td class="cla" ><%=  playerseason.forecasts.count %></td>
+                      <td class="cla" ><%=  playerseason.ratio %></td>
+                      <td class="cla" ><%=  valeur %></td>
+                    <% else %>
+                      <th scope="row"><%= x += 1%></th>
+                      <td><%=  playerseason.id %></td>
+                      <td><%=  playerseason.forecasts.count %></td>
+                      <td><%=  playerseason.ratio %></td>
+                      <td><%=  valeur %></td>
+                    </tr>
+                  </tbody>
+                    <% end %>
               <% end %>
             </table>
-
           </div>
         </div>
       </div>
