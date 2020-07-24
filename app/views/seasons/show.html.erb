@@ -70,7 +70,7 @@
               <% @playerseasons.each do |playerseason| %>
                 <% classement[playerseason] = playerseason.number_of_points %>
                 <% end %>
-                <% classement.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
+                <% classement.to_a.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
                   <tbody>
                     <% if current_user.id == playerseason.user_id%>
                     <% puts classement.class %>
