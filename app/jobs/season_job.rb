@@ -2,7 +2,6 @@ require 'sidekiq-scheduler'
 
 class SeasonJob < ApplicationJob
   def perform
-    puts "New season is coming!"
     @season = Season.create!
     puts "New season is ready"
     PlayerSeason.update_all(season_id: @season.id)
@@ -12,6 +11,6 @@ class SeasonJob < ApplicationJob
       playerseason.update(number_of_points: 0)
     end
     puts "All player seasons are updated same for Championship"
-
+    PromotionJob.perform_now
   end
 end
