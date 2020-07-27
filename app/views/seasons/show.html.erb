@@ -73,10 +73,8 @@
                 <% classement.to_a.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
                   <tbody>
                     <% if current_user.id == playerseason.user_id%>
-                    <% puts classement.class %>
                     <tr>
                       <th class="cla" scope="row"><%= x += 1%></th>
-                      <% puts classement %>
                       <td class="cla" ><%=  playerseason.id %></td>
                       <td class="cla" ><%=  playerseason.forecasts.count %></td>
                       <td class="cla" ><%=  playerseason.ratio %></td>
