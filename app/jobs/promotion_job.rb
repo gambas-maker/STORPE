@@ -7,8 +7,8 @@ class PromotionJob < ApplicationJob
     @forecasts = Forecast.where(season_id: Season.last.id)
     @championships.each do |championship|
       ranking = {}
-      championship.player_seasons.forecasts.where(season_id: Season.last.id).each do |playerseason|
-      if playerseason.forecasts.exists?
+      championship.player_seasons.each do |playerseason|
+      if playerseason.forecasts.where(season_id: Season.last.id).exists?
         puts "hello"
         championship.player_seasons.each { |hash| ranking[hash] = hash.number_of_points }
         ranking.keys.sort_by { |key| ranking[key] }.reverse.each do |key|
