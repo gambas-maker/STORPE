@@ -5,8 +5,8 @@ require 'json'
 
 class SportOdd
   BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
-  LEAGUE_IDS = [525, 524, 775, 891, 754]
-  # 525 = France, 524 = Angleterre, 775 = Espagne, 891 = Italie, 754 = Allemagne
+  LEAGUE_IDS = [525, 524, 775, 891, 754, 530, 514]
+  # 525 = France, 524 = Angleterre, 775 = Espagne, 891 = Italie, 754 = Allemagne, 530 = Champions League, 514 = Europa League
 
   def self.matches_for_four_days
     LEAGUE_IDS.each do |league_id|
