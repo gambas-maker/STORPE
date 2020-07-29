@@ -11,6 +11,5 @@ class SeasonJob < ApplicationJob
       playerseason.update(number_of_points: 0)
     end
     puts "All player seasons are updated same for Championship"
-    PromotionJob.perform_now
   end
 end
