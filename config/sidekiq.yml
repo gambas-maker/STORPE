@@ -6,6 +6,6 @@
   FetchapilastJob:
     cron: '0 11 * * FRI'
   ResultsJob:
-    cron: '0 24 * * *'
+    cron: '0 0 * * *'
   RecalcpointsJob:
     cron: '0 1 * * *'
