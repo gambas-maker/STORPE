@@ -70,24 +70,26 @@
               <% @playerseasons.each do |playerseason| %>
                 <% classement[playerseason] = playerseason.number_of_points %>
                 <% end %>
-                <% classement.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
+                <% classement.to_a.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
                   <tbody>
                     <% if current_user.id == playerseason.user_id%>
-                    <% puts classement.class %>
                     <tr>
                       <th class="cla" scope="row"><%= x += 1%></th>
-                      <% puts classement %>
                       <td class="cla" ><%=  playerseason.id %></td>
                       <td class="cla" ><%=  playerseason.forecasts.count %></td>
                       <td class="cla" ><%=  playerseason.ratio %></td>
                       <td class="cla" ><%=  valeur %></td>
-                    <% else %>
+                    </tr>
+                    <% elsif playerseason.forecasts.exists? %>
+                    <tr>
                       <th scope="row"><%= x += 1%></th>
                       <td><%=  playerseason.id %></td>
                       <td><%=  playerseason.forecasts.count %></td>
                       <td><%=  playerseason.ratio %></td>
                       <td><%=  valeur %></td>
                     </tr>
+                    <% else %>
+
                   </tbody>
                     <% end %>
               <% end %>

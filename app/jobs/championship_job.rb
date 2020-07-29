@@ -11,14 +11,13 @@ class ChampionshipJob < ApplicationJob
       @championships.each do |championship|
         count << championship.player_seasons.count
       end
-      count.map { |number| number if number < 20 }
-      puts count.class
-      if count.empty?
+      array = count.reject { |number| number >= 20 }
+      if array.empty?
         Championship.create(season_id: Season.last.id, name: "CFA")
         PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: Championship.last.id, number_of_points: 0)
       else
         var = count.min
-        puts var
+
         object = []
         @championships.each do |championship|
           if championship.player_seasons.count == var
@@ -28,7 +27,6 @@ class ChampionshipJob < ApplicationJob
           end
         end
         object.select { |un| un[0] }
-        puts object
         PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: object[0].id, number_of_points: 0)
       end
     end
