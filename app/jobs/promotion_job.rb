@@ -29,7 +29,7 @@ class PromotionJob < ApplicationJob
         end
       end
     end
-    # PromotionldcJob.perform_now
+    PromotionldcJob.perform_now
   end
 end
 
