@@ -2,10 +2,8 @@ require 'sidekiq-scheduler'
 
 class SeasonJob < ApplicationJob
   def perform
-    @season = Season.create!
-    puts "New season is ready"
-    PlayerSeason.update_all(season_id: @season.id)
-    Championship.update_all(season_id: @season.id)
+    PlayerSeason.update_all(season_id: Season.last.id)
+    Championship.update_all(season_id: Season.last.id)
     @playerseasons = PlayerSeason.where(season_id: Season.last.id)
     @playerseasons.each do |playerseason|
       playerseason.update(number_of_points: 0)
