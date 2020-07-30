@@ -21,11 +21,11 @@ class PromotionldcJob < ApplicationJob
         @champion_bas.each do |championbas|
           array = []
           championbas.player_seasons.count <= 16 ? array << championbas : array
-          array.empty? ? ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.create!(name: "LDC", season_id: Season.last.id).id, season_id: Season.last.id ) } : ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id) }
         end
+        array.empty? ? ranking.sort_by { |k, v| v }.reverse.last(2).each { |k, v| puts k.update(championship_id: Championship.create!(name: "LDC", season_id: Season.last.id).id, season_id: Season.last.id ) } : ranking.sort_by { |k, v| v }.reverse.last(2).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id) }
       end
     end
+    # Si ajout d'un niveau deplacer ce job dans le job du prochain niveau et ici appeler le prochain niveau de promotion
+    SeasonJob.perform_now
   end
-  # Si ajout d'un niveau deplacer ce job dans le job du prochain niveau et ici appeler le prochain niveau de promotion
-  SeasonJob.perform_now
 end
