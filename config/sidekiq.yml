@@ -1,5 +1,5 @@
 :schedule:
-  SeasonJob:
+  PromotionJob:
     cron: '0 12 * * MON'
   FetchapiJob:
     cron: '0 12 * * MON,WED'
