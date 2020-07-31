@@ -2,32 +2,30 @@ class PromotionJob < ApplicationJob
   queue_as :default
 
   def perform
-    @championships = Championship.all
+    @season = Season.create!
+    puts "New season is ready"
+    @champ = Championship.where(name: "LDC")
+    @championships = Championship.where(name: "CFA")
     @playerseasons = PlayerSeason.all
-    @forecasts = Forecast.where(season_id: Season.last.id)
+    @forecasts = Forecast.where(season_id: Season.last.id - 1)
+    puts @forecasts
     @championships.each do |championship|
       ranking = {}
-      championship.player_seasons.each { |hash| ranking[hash] = hash.number_of_points }
+      championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.exists? }.each { |hash| ranking[hash] = hash.number_of_points }
       if championship.player_seasons.count >= 8
-        ranking.sort_by { |k, v| v }.reverse.first(4)
-        puts ranking.sort_by { |k, v| k.forecasts.where(season_id: Season.last.id).exists? v }.reverse.last(4)
-        if championship.name == "CFA"
-          if @championships.where(name: "LDC").exists? && @championships.where(name: "LDC").player_seasons.count < 20
-            puts champion.player_seasons
-            ranking.each { |x| x.update(championship_id: Championship.where(name: "LDC")) }
-          else
-            Championship.create!(name: "LDC", season_id: Season.last.id)
-            puts ranking.class
-            ranking.each { |x| puts x }
-          end
-        else
-        end
-      else
         array = []
-        array_1 = []
-        puts array << ranking.sort_by { |k, v| v }.reverse.first(2)
-        puts array_1 << ranking.sort_by { |k, v| k.forecasts.where(season_id: Season.last.id).exists? v }.reverse.last(2)
+        @champ.each do |champion|
+          champion.player_seasons.count <= 16 ? array << champion : array
+        end
+        array.empty? ? ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: Championship.create!(name: "LDC", season_id: Season.last.id).id, season_id: Season.last.id ) } : ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id) }
+      else
+        @champ.each do |champion|
+          array = []
+          champion.player_seasons.count <= 16 ? array << champion : array
+        end
+        array.empty? ? ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.create!(name: "LDC", season_id: Season.last.id).id, season_id: Season.last.id) } : ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id) }
       end
     end
+    PromotionldcJob.perform_now
   end
 end

@@ -17,7 +17,6 @@ class ChampionshipJob < ApplicationJob
         PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: Championship.last.id, number_of_points: 0)
       else
         var = count.min
-
         object = []
         @championships.each do |championship|
           if championship.player_seasons.count == var
