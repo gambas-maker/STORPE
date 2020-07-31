@@ -2,7 +2,7 @@
   PromotionJob:
     cron: '0 12 * * MON'
   FetchapiJob:
-    cron: '0 12 * * MON,WED'
+    cron: '0 13 * * MON,WED'
   FetchapilastJob:
     cron: '0 11 * * FRI'
   ResultsJob:
