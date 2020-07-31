@@ -5,13 +5,13 @@ class PromotionJob < ApplicationJob
     @season = Season.create!
     puts "New season is ready"
     @champ = Championship.where(name: "LDC")
-    puts @champ
     @championships = Championship.where(name: "CFA")
     @playerseasons = PlayerSeason.all
     @forecasts = Forecast.where(season_id: Season.last.id - 1)
+    puts @forecasts
     @championships.each do |championship|
       ranking = {}
-      championship.player_seasons.where(season_id: Season.last.id - 1).take_while { |i| i.forecasts.exists? }.each { |hash| ranking[hash] = hash.number_of_points }
+      championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.exists? }.each { |hash| ranking[hash] = hash.number_of_points }
       if championship.player_seasons.count >= 8
         array = []
         @champ.each do |champion|
