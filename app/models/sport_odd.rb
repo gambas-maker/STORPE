@@ -37,7 +37,7 @@ class SportOdd
         fixture_id: match["fixture_id"],
         country: match["league"]["country"],
         league: match["league"]["name"],
-        event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
+        event_stamp: DateTime.strptime(match["timestamp"].to_s, '%s').to_date,
         kick_off: DateTime.parse(match["event_date"])
       )
       get_odds_for_match(new_match)
