@@ -8,7 +8,6 @@ class PromotionJob < ApplicationJob
     @championships = Championship.where(name: "CFA")
     @playerseasons = PlayerSeason.all
     @forecasts = Forecast.where(season_id: Season.last.id - 1)
-    puts @forecasts
     @championships.each do |championship|
       ranking = {}
       championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.exists? }.each { |hash| ranking[hash] = hash.number_of_points }
