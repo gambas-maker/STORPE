@@ -36,18 +36,26 @@ class Basketballmatch < ApplicationRecord
         league: match["league"]["name"],
         event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
         kick_off: DateTime.parse(match["date"])
-        )
+      )
       get_odds_for_match(new_match)
     end
   end
 
   def self.get_odd(match_odds, type)
-      odd_hash = match_odds.find do |bet_hash|
-        bet_hash["value"] == type
-      end
-      odd_hash["odd"]
+    odd_hash = match_odds.find do |bet_hash|
+      bet_hash["value"] == type
     end
+    odd_hash["odd"]
+  end
 
+  def self.get_odds_for_match(game)
+    end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
+    match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["values"]
+    game.update(
+      points_home: get_odd(match_odds, "Home").to_i * 10,
+      points_away: get_odd(match_odds, "Away").to_i * 10
+    )
+  end
 
   def self.call_api(url)
     http = Net::HTTP.new(url.host, url.port)
