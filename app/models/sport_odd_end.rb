@@ -4,7 +4,7 @@ require 'openssl'
 require 'json'
 
 class SportOddEnd
-  BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
+  BASE_URL = "https://v2.api-football.com/"
   LEAGUE_IDS = [525, 524, 775, 891, 754]
   # 525 = France, 524 = Angleterre, 775 = Espagne, 891 = Italie, 754 = Allemagne
 
@@ -76,7 +76,7 @@ class SportOddEnd
 
     request = Net::HTTP::Get.new(url)
     request["x-rapidapi-host"] = 'api-football-v1.p.rapidapi.com'
-    request["x-rapidapi-key"] = '66ffc34423msh0c2c25d40ae94fbp153beajsn6c4930448075'
+    request["x-rapidapi-key"] = 'b80a756af310bf59a5acbabb98107fe7'
 
     response = http.request(request)
     JSON.parse(response.body)

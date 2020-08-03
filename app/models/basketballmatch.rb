@@ -33,8 +33,9 @@ class Basketballmatch < ApplicationRecord
         team_away: match["teams"]["away"]["name"],
         team_away_logo_url: match["teams"]["away"]["logo"],
         sport: sport,
+        fixture_id: match["id"],
         league: match["league"]["name"],
-        event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
+        event_stamp: DateTime.strptime(match["timestamp"].to_s, '%s').to_date,
         kick_off: DateTime.parse(match["date"])
       )
       get_odds_for_match(new_match)
@@ -49,8 +50,8 @@ class Basketballmatch < ApplicationRecord
   end
 
   def self.get_odds_for_match(game)
-    end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
-    match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["values"]
+    end_point = URI("#{BASE_URL}odds?league=12&season=2019-2020&game=#{game.fixture_id}")
+    match_odds = call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["values"]
     game.update(
       points_home: get_odd(match_odds, "Home").to_i * 10,
       points_away: get_odd(match_odds, "Away").to_i * 10
@@ -64,9 +65,59 @@ class Basketballmatch < ApplicationRecord
 
     request = Net::HTTP::Get.new(url)
     request["x-rapidapi-host"] = 'api-basketball.p.rapidapi.com'
-    request["x-rapidapi-key"] = '66ffc34423msh0c2c25d40ae94fbp153beajsn6c4930448075'
+    request["x-rapidapi-key"] = 'b80a756af310bf59a5acbabb98107fe7'
 
     response = http.request(request)
     JSON.parse(response.body)
+  end
+
+  def self.points_home_negative_points
+    @matches = Match.all
+    @matches.each do |game|
+      if game.points_home < 11
+        game.update(negative_points_home: -15)
+      elsif game.points_home >= 11 && game.points_home < 13
+        game.update(negative_points_home: -11)
+      elsif game.points_home >= 13 && game.points_home < 15
+        game.update(negative_points_home: -10)
+      elsif game.points_home >= 15 && game.points_home < 16
+        game.update(negative_points_home: -9)
+      elsif game.points_home >= 16 && game.points_home < 18
+        game.update(negative_points_home: -8)
+      elsif game.points_home >= 18 && game.points_home < 20
+        game.update(negative_points_home: -7)
+      elsif game.points_home >= 20 && game.points_home < 22.5
+        game.update(negative_points_home: -7)
+      elsif game.points_home >= 22.5 && game.points_home < 25
+        game.update(negative_points_home: -6)
+      elsif game.points_home > 25
+        game.update(negative_points_home: -5)
+      end
+    end
+  end
+
+  def self.points_away_negative_points
+    @matches = Match.all
+    @matches.each do |game|
+      if game.points_away < 11
+        game.update(negative_points_away: -15)
+      elsif game.points_away >= 11 && game.points_away < 13
+        game.update(negative_points_away: -11)
+      elsif game.points_away >= 13 && game.points_away < 15
+        game.update(negative_points_away: -10)
+      elsif game.points_away >= 15 && game.points_away < 16
+        game.update(negative_points_away: -9)
+      elsif game.points_away >= 16 && game.points_away < 18
+        game.update(negative_points_away: -8)
+      elsif game.points_away >= 18 && game.points_away < 20
+        game.update(negative_points_away: -7)
+      elsif game.points_away >= 20 && game.points_away < 22.5
+        game.update(negative_points_away: -7)
+      elsif game.points_away >= 22.5 && game.points_away < 25
+        game.update(negative_points_away: -6)
+      elsif game.points_away > 25
+        game.update(negative_points_away: -5)
+      end
+    end
   end
 end
