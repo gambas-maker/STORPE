@@ -51,12 +51,16 @@ class Basketballmatch < ApplicationRecord
 
   def self.get_odds_for_match(game)
     end_point = URI("#{BASE_URL}odds?league=12&season=2019-2020&game=#{game.fixture_id}")
-    match_odds = call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["values"]
-    if match_odds[1]["odd"].present?
-      game.update(
-        points_home: get_odd(match_odds, "Home").to_i * 10,
-        points_away: get_odd(match_odds, "Away").to_i * 10
-      )
+    result = call_api(end_point)["results"]
+    if result.zero?
+    else
+      match_odds = call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["values"]
+      if match_odds[1]["odd"].present?
+        game.update(
+          points_home: get_odd(match_odds, "Home").to_i * 10,
+          points_away: get_odd(match_odds, "Away").to_i * 10
+        )
+      end
     end
   end
 

@@ -3,6 +3,10 @@
     cron: '0 12 * * MON'
   FetchapiJob:
     cron: '0 13 * * MON,WED'
+  FetchapibasketJob:
+    cron: '0 15 * * MON'
+  FetchapibaskettomorrowJob:
+    cron: '0 16 * * *'
   FetchapilastJob:
     cron: '0 11 * * FRI'
   ResultsJob:

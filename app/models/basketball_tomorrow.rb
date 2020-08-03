@@ -52,7 +52,6 @@ class BasketballTomorrow < ApplicationRecord
   def self.get_odds_for_match(game)
     end_point = URI("#{BASE_URL}odds?league=12&season=2019-2020&game=#{game.fixture_id}")
     result = call_api(end_point)["results"]
-    puts result
     if result.zero?
     else
       match_odds = call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["values"]
@@ -61,7 +60,6 @@ class BasketballTomorrow < ApplicationRecord
           points_home: get_odd(match_odds, "Home").to_i * 10,
           points_away: get_odd(match_odds, "Away").to_i * 10
         )
-      else match_odds.nil?
       end
     end
   end
