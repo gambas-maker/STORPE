@@ -83,7 +83,7 @@ class SportOdd
   end
 
   def self.points_home_negative_points
-    @matches = Match.all
+    @matches = Match.where(sport: "football")
     @matches.each do |game|
       if game.points_home < 11
         game.update(negative_points_home: -15)
