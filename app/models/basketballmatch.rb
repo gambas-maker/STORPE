@@ -59,10 +59,11 @@ class Basketballmatch < ApplicationRecord
   end
 
   def self.get_results_for_match(game)
-    end_point = URI("#{BASE_URL}fixtures/id/#{game.fixture_id}?timezone=Europe/Paris")
-    match_results = call_api(end_point)["api"]["fixtures"][0]["score"]
+    end_point = URI("#{BASE_URL}games?id=#{game.fixture_id}&league=12&season=2019-2020&timezone=Europe/Paris")
+    match_results = call_api(end_point)["response"][0]["scores"]
     game.update(
-      result: match_results["fulltime"]
+      result_home: match_results["home"]["total"],
+      result_away: match_results["away"]["total"]
     )
   end
 
