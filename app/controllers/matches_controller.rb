@@ -2,8 +2,7 @@ require_relative '../models/sport_odd'
 class MatchesController < ApplicationController
   def index
     @forecasts = Forecast.where(confirmed: true)
-    @matches = Match.all
-    @player = 1
+    @matches = Match.where(event_stamp: Date.today.to_s || Date.tomorrow.to_s || (Date.tomorrow + 1).to_s)
     league_filters
   end
 
