@@ -58,6 +58,14 @@ class Basketballmatch < ApplicationRecord
     )
   end
 
+  def self.get_results_for_match(game)
+    end_point = URI("#{BASE_URL}fixtures/id/#{game.fixture_id}?timezone=Europe/Paris")
+    match_results = call_api(end_point)["api"]["fixtures"][0]["score"]
+    game.update(
+      result: match_results["fulltime"]
+    )
+  end
+
   def self.call_api(url)
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
