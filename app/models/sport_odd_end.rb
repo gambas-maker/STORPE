@@ -4,7 +4,7 @@ require 'openssl'
 require 'json'
 
 class SportOddEnd
-  BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/"
+  BASE_URL = "https://v2.api-football.com/"
   LEAGUE_IDS = [525, 524, 775, 891, 754]
   # 525 = France, 524 = Angleterre, 775 = Espagne, 891 = Italie, 754 = Allemagne
 
@@ -55,10 +55,10 @@ class SportOddEnd
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
     match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["values"]
     game.update(
-        points_home: get_odd(match_odds, "Home").to_i * 10,
-        points_draw: get_odd(match_odds, "Draw").to_i * 10,
-        points_away: get_odd(match_odds, "Away").to_i * 10
-      )
+      points_home: get_odd(match_odds, "Home").to_f * 10,
+      points_draw: get_odd(match_odds, "Draw").to_f * 10,
+      points_away: get_odd(match_odds, "Away").to_f * 10
+    )
   end
 
   def self.get_results_for_match(game)
@@ -76,14 +76,14 @@ class SportOddEnd
 
     request = Net::HTTP::Get.new(url)
     request["x-rapidapi-host"] = 'api-football-v1.p.rapidapi.com'
-    request["x-rapidapi-key"] = '66ffc34423msh0c2c25d40ae94fbp153beajsn6c4930448075'
+    request["x-rapidapi-key"] = 'b80a756af310bf59a5acbabb98107fe7'
 
     response = http.request(request)
     JSON.parse(response.body)
   end
 
   def self.points_home_negative_points
-    @matches = Match.all
+    @matches = Match.where(sport: "football")
     @matches.each do |game|
       if game.points_home < 11
         game.update(negative_points_home: -15)

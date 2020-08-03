@@ -62,26 +62,29 @@
       <div class="filterbar d-flex justify-content-around flex-row">
         <div>
           <%= form_tag matches_path, method: :get do %>
-          <%= select_tag :query,
-          raw("<option class='dropdown-item'>SPORT</option>
-            <option class='dropdown-item' >Football</option>
-            <option class='dropdown-item' >Basketball</option>"),
+          <%= select_tag :sport,
+          raw("<option class='dropdown-item' value=''>SPORT</option>
+            <option class='dropdown-item' value='Football'>Football</option>
+            <option class='dropdown-item' value='Basketball'>Basketball</option>"),
             class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
-            <% end %>
           </div>
           <div>
             <%= form_tag matches_path, method: :get do %>
             <%= select_tag :query,
-            raw("<option class='dropdown-item' value=''>PAYS</option>
-              <option class='dropdown-item' value='France'>France</option>
-              <option class='dropdown-item' value='Germany'>Allemagne</option>
-              <option class='dropdown-item' value='Spain'>Espagne</option>
-              <option class='dropdown-item' value='Italy'>Italie</option>
-              <option class='dropdown-item' value='England'>Angleterre</option>"),
+            raw("<option class='dropdown-item' value=''>LIGUE</option>
+              <option class='dropdown-item' value='NBA'>NBA</option>
+              <option class='dropdown-item' value='LDC'>Ligue des Champions</option>
+              <option class='dropdown-item' value='LE'>Ligue Europa</option>
+              <option class='dropdown-item' value='France'>Ligue 1</option>
+              <option class='dropdown-item' value='Germany'>Bundesliga</option>
+              <option class='dropdown-item' value='Spain'>Liga</option>
+              <option class='dropdown-item' value='Italy'>Serie A</option>
+              <option class='dropdown-item' value='England'>Premier league</option>"),
               class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
             </div>
             <div class="mt-1">
               <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
+              <% end %>
               <% end %>
             </div>
           </div>
@@ -98,7 +101,8 @@
           <input type="hidden" id ="season_player" value="<%= @player %>">
 
           <% @matches.each do |match| %>
-          <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? %>
+          <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? %>
+          <% if match.sport == "football" %>
             <div class="d-flex justify-content-center mb-2 mt-2">
               <h4 class="typopo"><%= match.league %></h4>
             </div>
@@ -141,6 +145,47 @@
                 Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
               </div>
             </div>
+            <% else %>
+              <div class="d-flex justify-content-center mb-2 mt-2">
+                <h4 class="typopo"><%= match.league %></h4>
+              </div>
+              <div class="d-flex justify-content-center mb-2 mt-2">
+                <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
+                <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
+              </div>
+              <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+                <div class="d-flex flex-column align-items-center col-4">
+                  <div class="row">
+                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+                  </div>
+                  <div class="row text-align-center">
+                    <h3 class="typopo"><%= match.team_home %></h3>
+                  </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                  <p class="typopo text-center">VS</p>
+                  <div class="d-flex flex-row align-items-center col-4">
+                    <div class="displaysquares" data-id="<%= match.id %>">
+                      <input type="checkbox" class="square" data-outcome="1"></input>
+                      <input type="checkbox" class="square" data-outcome="2"></input>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+                  <h3 class="typopo"><%= match.team_away  %></h3>
+                </div>
+              </div>
+              <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
+                <div>
+                  Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
+                </div>
+
+                <div>
+                  Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+                </div>
+              </div>
+            <% end %>
           <% else %>
 
           <% end %>
