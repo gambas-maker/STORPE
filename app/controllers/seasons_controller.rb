@@ -5,6 +5,6 @@ class SeasonsController < ApplicationController
     @championship = Championship.where(id: current_user.player_seasons[0].championship.id)
     @playerseasons = PlayerSeason.where(championship_id: current_user.player_seasons[0].championship.id)
     @season = Season.last
-    @forecasts = Forecast.where(confirmed: true)
+    @forecasts = Forecast.where(confirmed: true, season_id: Season.last.id)
   end
 end

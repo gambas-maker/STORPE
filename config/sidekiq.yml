@@ -18,4 +18,4 @@
   RecalcpointsJob:
     cron: '0 1 * * *'
   ResultsbasketJob:
-    cron: '0 7,20 * * *'
+    cron: '0 7,23 * * *'
