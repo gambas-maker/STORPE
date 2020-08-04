@@ -6,5 +6,7 @@ class UpdatebasketpointsJob < ApplicationJob
     @matches.each do |match|
       BasketballTomorrow.get_odds_for_match(match)
     end
+    BasketballTomorrow.points_home_negative_points
+    BasketballTomorrow.points_away_negative_points
   end
 end
