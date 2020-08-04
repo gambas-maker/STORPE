@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :forecasts, through: :player_seasons
 
   after_commit :async_update
+  validates_uniqueness_of :pseudo
 
   private
 

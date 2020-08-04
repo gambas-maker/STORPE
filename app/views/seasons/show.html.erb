@@ -49,7 +49,7 @@
           <% pointsb = 0 %>
           <% current_user.forecasts.each do |forecast| %>
             <% if forecast.match.sport == "basketball" && forecast.points_win.present? %>
-            <% pointsb += forecast.points_win %>
+              <% pointsb += forecast.points_win %>
             <% else %>
             <% end %>
           <% end %>
@@ -94,7 +94,7 @@
                     <% if current_user.id == playerseason.user_id%>
                     <tr>
                       <th class="cla" scope="row"><%= x += 1%></th>
-                      <td class="cla" ><%=  playerseason.id %></td>
+                      <td class="cla" ><%=  current_user.pseudo %></td>
                       <td class="cla" ><%=  playerseason.forecasts.count %></td>
                       <td class="cla" ><%=  playerseason.ratio %></td>
                       <td class="cla" ><%=  valeur %></td>
@@ -102,7 +102,7 @@
                     <% elsif playerseason.forecasts.exists? %>
                     <tr>
                       <th scope="row"><%= x += 1%></th>
-                      <td><%=  playerseason.id %></td>
+                      <td><%=  playerseason.user.pseudo %></td>
                       <td><%=  playerseason.forecasts.count %></td>
                       <td><%=  playerseason.ratio %></td>
                       <td><%=  valeur %></td>
