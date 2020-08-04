@@ -22,8 +22,12 @@
         </div>
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">RATIO</h3>
+          <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0%>
+          <h3 class="typo">0</h3>
+          <% else %>
           <% ratio = current_user.forecasts.where(confirmed: true, points_win: present?).count/(current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count ) * 100 %>
           <h3 class="typo"><%= ratio %></h3>
+          <% end %>
         </div>
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">POINTS REMPORTÉS</h3>
