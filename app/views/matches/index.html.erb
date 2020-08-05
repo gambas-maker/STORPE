@@ -60,21 +60,22 @@
   <div class="d-flex justify-content-center">
     <div class="infobis">
       <div class="filterbar d-flex justify-content-around flex-row">
-        <div>
-          <%= form_tag matches_path, method: :get do %>
-          <%= select_tag :sport,
+        <!-- <div> -->
+          <%#=# form_tag matches_path, method: :get do %>
+          <%#=# select_tag :sport,
           raw("<option class='dropdown-item' value=''>SPORT</option>
             <option class='dropdown-item' value='Football'>Football</option>
             <option class='dropdown-item' value='Basketball'>Basketball</option>"),
             class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
-          </div>
+          <!-- </div> -->
           <div>
             <%= form_tag matches_path, method: :get do %>
             <%= select_tag :query,
             raw("<option class='dropdown-item' value=''>LIGUE</option>
+              <option class='dropdown-item' value=''>Tout</option>
               <option class='dropdown-item' value='NBA'>NBA</option>
               <option class='dropdown-item' value='LDC'>Ligue des Champions</option>
-              <option class='dropdown-item' value='LE'>Ligue Europa</option>
+              <option class='dropdown-item' value='UEFA Europa League'>Ligue Europa</option>
               <option class='dropdown-item' value='France'>Ligue 1</option>
               <option class='dropdown-item' value='Germany'>Bundesliga</option>
               <option class='dropdown-item' value='Spain'>Liga</option>
@@ -85,7 +86,7 @@
             <div class="mt-1">
               <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
               <% end %>
-              <% end %>
+              <%# end %>
             </div>
           </div>
         </div>
