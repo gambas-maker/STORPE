@@ -108,7 +108,7 @@ class SportOdd
   end
 
   def self.points_draw_negative_points
-    @matches = Match.all
+    @matches = Match.where(sport: "football")
     @matches.each do |game|
       if game.points_draw < 11
         game.update(negative_points_draw: -15)
@@ -133,7 +133,7 @@ class SportOdd
   end
 
   def self.points_away_negative_points
-    @matches = Match.all
+    @matches = Match.where(sport: "football")
     @matches.each do |game|
       if game.points_away < 11
         game.update(negative_points_away: -15)
