@@ -23,10 +23,10 @@
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">RATIO</h3>
           <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0%>
-          <h3 class="typo">0</h3>
+          <h3 class="typo">0%</h3>
           <% else %>
-          <% ratio = current_user.forecasts.where(confirmed: true, season_id: Season.last.id, points_win: present?).count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count * 100 %>
-          <h3 class="typo"><%= ratio %></h3>
+          <% ratio = current_user.forecasts.where(confirmed: true, season_id: Season.last.id, points_win: present?).count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count.to_f * 100 %>
+          <h3 class="typo"><%= ratio %>%</h3>
           <% end %>
         </div>
         <div class="d-flex justify-content-between">
@@ -37,8 +37,8 @@
           <h3 class="typo mr-3">POINTS FOOTBALL</h3>
           <% points = 0 %>
           <% current_user.forecasts.each do |forecast| %>
-            <% if forecast.match.sport == "football" && forecast.points_win.present? %>
-            <% points += forecast.points_win %>
+            <% if forecast.match.sport == "football" %>
+            <% points += (forecast.points_win + forecast.points_lose) %>
             <% else %>
             <% end %>
           <% end %>
@@ -48,8 +48,8 @@
           <h3 class="typo mr-3">POINTS BASKETBALL</h3>
           <% pointsb = 0 %>
           <% current_user.forecasts.each do |forecast| %>
-            <% if forecast.match.sport == "basketball" && forecast.points_win.present? %>
-              <% pointsb += forecast.points_win %>
+            <% if forecast.match.sport == "basketball" %>
+              <% pointsb += (forecast.points_win + forecast.points_lose) %>
             <% else %>
             <% end %>
           <% end %>
