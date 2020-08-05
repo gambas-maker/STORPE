@@ -41,6 +41,8 @@ class ForecastsController < ApplicationController
           @forecast = Forecast.new
           @forecast.outcome = outcome
           @forecast.match_id = id
+          @forecast.points_win = 0
+          @forecast.points_lose = 0
           @forecast.player_season_id = player[0]
           @forecast.season_id = Season.last.id
           @forecast.confirmed = false
