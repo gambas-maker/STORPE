@@ -18,7 +18,7 @@
       <div class="container mt-3" style=" padding: 0 20%;"  >
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">MATCHS</h3>
-          <h3 class="typo"><%= current_user.forecasts.where(confirmed: true).count %></h3>
+          <h3 class="typo"><%= current_user.forecasts.select{|v| v.points_win.positive? || v.points_lose.negative?}.count %></h3>
         </div>
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">RATIO</h3>
@@ -113,7 +113,7 @@
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-3">POINTS REMPORTÉS</h3>
         <% points = 0 %>
-        <% current_user.forecasts.where(season_id: Season.last.id).each do |forecast| %>
+        <% current_user.forecasts.where(season_id: Season.last.id - 1).each do |forecast| %>
           <% if forecast.points_win.present? %>
           <% points += forecast.points_win %>
           <% end %>
