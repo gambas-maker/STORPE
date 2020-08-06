@@ -23,10 +23,10 @@
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">RATIO</h3>
           <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0%>
-          <h3 class="typo">0</h3>
+          <h3 class="typo">0%</h3>
           <% else %>
-          <% ratio = current_user.forecasts.where(confirmed: true, points_win: present?).count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count.to_f* 100 %>
-          <h3 class="typo"><%= ratio %></h3>
+          <% ratio = current_user.forecasts.select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f* 100 %>
+          <h3 class="typo"><%= ratio.round %>%</h3>
           <% end %>
         </div>
         <div class="d-flex justify-content-between">
@@ -85,11 +85,11 @@
       </div>
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-2">RATIO</h3>
-        <% if  current_user.forecasts.where(confirmed: true, points_win: present?).count == 0%>
-          <h3 class="typo">0</h3>
+        <% if  current_user.forecasts.where(confirmed: true).count == 0%>
+          <h3 class="typo">0%</h3>
         <% else %>
-          <% ratio = current_user.forecasts.where(confirmed: true, points_win: present?).count/(current_user.forecasts.where(confirmed: true).count ) * 100 %>
-          <h3 class="typo"><%= ratio %></h3>
+          <% ratio = current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100 %>
+          <h3 class="typo"><%= ratio.round %>%</h3>
         <% end %>
       </div>
     </div>
@@ -103,11 +103,11 @@
       </div>
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-3">RATIO</h3>
-        <% if  current_user.forecasts.where(confirmed: true, points_win: present?, season_id: Season.last.id - 1).count == 0%>
-          <h3 class="typo">0</h3>
+        <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).count == 0%>
+          <h3 class="typo">0%</h3>
         <% else %>
-          <% ratio = current_user.forecasts.where(confirmed: true, points_win: present?, season_id: Season.last.id - 1).count/(current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count ) * 100 %>
-          <h3 class="typo"><%= ratio %></h3>
+          <% ratio = current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100 %>
+          <h3 class="typo"><%= ratio.round %>%</h3>
         <% end %>
       </div>
       <div class="d-flex justify-content-between">
