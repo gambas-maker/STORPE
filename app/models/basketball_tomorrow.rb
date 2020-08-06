@@ -49,6 +49,15 @@ class BasketballTomorrow < ApplicationRecord
     odd_hash["odd"]
   end
 
+  def self.get_results_for_match(game)
+    end_point = URI("#{BASE_URL}games?id=#{game.fixture_id}&league=12&season=2019-2020&timezone=Europe/Paris")
+    match_results = call_api(end_point)["response"][0]["scores"]
+    game.update(
+      result_home: match_results["home"]["total"],
+      result_away: match_results["away"]["total"]
+    )
+  end
+
   def self.get_odds_for_match(game)
     end_point = URI("#{BASE_URL}odds?league=12&season=2019-2020&game=#{game.fixture_id}")
     result = call_api(end_point)["results"]
