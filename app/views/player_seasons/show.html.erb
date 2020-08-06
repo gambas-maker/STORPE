@@ -32,19 +32,17 @@
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">POINTS REMPORTÉS</h3>
           <% all = 0 %>
-          <% current_user.forecasts.each do |forecast| %>
-            <% if forecast.points_win.present? %>
-              <% all += forecast.points_win %>
-            <% end %>
+          <% current_user.forecasts.where(confirmed:true).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+              <% all += (forecast.points_win + forecast.points_lose) %>
           <% end %>
           <h3 class="typo"><%= all %></h3>
         </div>
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">POINTS FOOTBALL</h3>
           <% points = 0 %>
-          <% current_user.forecasts.each do |forecast| %>
-            <% if forecast.match.sport == "football" && forecast.points_win.present? %>
-            <% points += forecast.points_win %>
+          <% current_user.forecasts.where(confirmed:true).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+            <% if forecast.match.sport == "football"%>
+            <% points += (forecast.points_win + forecast.points_lose) %>
             <% end %>
           <% end %>
           <h3 class="typo"><%= points %></h3>
@@ -52,9 +50,9 @@
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">POINTS BASKETBALL</h3>
           <% pointsb = 0 %>
-          <% current_user.forecasts.each do |forecast| %>
-            <% if forecast.match.sport == "basketball" && forecast.points_win.present? %>
-            <% pointsb += forecast.points_win %>
+          <% current_user.forecasts.where(confirmed:true,).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+            <% if forecast.match.sport == "basketball" %>
+            <% pointsb += (forecast.points_win + forecast.points_lose) %>
             <% end %>
           <% end %>
           <h3 class="typo"><%= pointsb %></h3>
