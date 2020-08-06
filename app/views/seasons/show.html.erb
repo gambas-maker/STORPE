@@ -95,7 +95,7 @@
                     <tr>
                       <th class="cla" scope="row"><%= x += 1%></th>
                       <td class="cla" ><%=  current_user.pseudo %></td>
-                      <td class="cla" ><%=  playerseason.forecasts.count %></td>
+                      <td class="cla" ><%=  playerseason.forecasts.select{|v| v.points_win.positive? || v.points_lose.negative? }.count %></td>
                       <td class="cla" ><%=  playerseason.ratio %></td>
                       <td class="cla" ><%=  valeur %></td>
                     </tr>
@@ -103,7 +103,7 @@
                     <tr>
                       <th scope="row"><%= x += 1%></th>
                       <td><%=  playerseason.user.pseudo %></td>
-                      <td><%=  playerseason.forecasts.count %></td>
+                      <td><%=  playerseason.forecasts.select{|v| v.points_win.positive? || v.points_lose.negative?}.count %></td>
                       <td><%=  playerseason.ratio %></td>
                       <td><%=  valeur %></td>
                     </tr>
