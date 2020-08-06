@@ -25,8 +25,8 @@
           <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0%>
           <h3 class="typo">0%</h3>
           <% else %>
-          <% ratio = current_user.forecasts.where(confirmed: true, season_id: Season.last.id, points_win: present?).count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count.to_f * 100 %>
-          <h3 class="typo"><%= ratio %>%</h3>
+          <% ratio = current_user.forecasts.select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100 %>
+          <h3 class="typo"><%= ratio.round %>%</h3>
           <% end %>
         </div>
         <div class="d-flex justify-content-between">
@@ -36,9 +36,9 @@
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">POINTS FOOTBALL</h3>
           <% points = 0 %>
-          <% current_user.forecasts.each do |forecast| %>
+          <% current_user.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
             <% if forecast.match.sport == "football" %>
-            <% points += (forecast.points_win + forecast.points_lose) %>
+              <% points += (forecast.points_win + forecast.points_lose) %>
             <% else %>
             <% end %>
           <% end %>
@@ -47,7 +47,7 @@
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">POINTS BASKETBALL</h3>
           <% pointsb = 0 %>
-          <% current_user.forecasts.each do |forecast| %>
+          <% current_user.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
             <% if forecast.match.sport == "basketball" %>
               <% pointsb += (forecast.points_win + forecast.points_lose) %>
             <% else %>
@@ -95,7 +95,7 @@
                     <tr>
                       <th class="cla" scope="row"><%= x += 1%></th>
                       <td class="cla" ><%=  current_user.pseudo %></td>
-                      <td class="cla" ><%=  playerseason.forecasts.select{|v| v.points_win.positive? || v.points_lose.negative? }.count %></td>
+                      <td class="cla" ><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative? }.count %></td>
                       <td class="cla" ><%=  playerseason.ratio %></td>
                       <td class="cla" ><%=  valeur %></td>
                     </tr>
@@ -103,7 +103,7 @@
                     <tr>
                       <th scope="row"><%= x += 1%></th>
                       <td><%=  playerseason.user.pseudo %></td>
-                      <td><%=  playerseason.forecasts.select{|v| v.points_win.positive? || v.points_lose.negative?}.count %></td>
+                      <td><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count %></td>
                       <td><%=  playerseason.ratio %></td>
                       <td><%=  valeur %></td>
                     </tr>
