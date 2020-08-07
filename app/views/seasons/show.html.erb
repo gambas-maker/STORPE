@@ -145,7 +145,11 @@
               </div>
             </div>
             <div class="d-flex flex-column justify-content-center">
-              <p class="typopo text-center"><%= forecast.outcome %></p>
+              <% if  forecast.outcome == "NULL"%>
+                <p class="typopo text-center">Nul</p>
+              <% else %>
+                <p class="typopo text-center"><%= forecast.outcome %></p>
+              <% end %>
               <% if  forecast.points_win.positive?%>
                 <p class="typopo text-center text-success">+<%= forecast.points_win %>pts</p>
               <% elsif forecast.points_lose.negative?%>
