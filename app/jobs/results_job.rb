@@ -7,6 +7,7 @@ class ResultsJob < ApplicationJob
     @matches.each do |game|
       SportOdd.get_results_for_match(game)
     end
+    CalculatepointsJob.perform_now
+    RecalcpointsJob.perform_now
   end
-  puts "All the results are gathered"
 end
