@@ -5,14 +5,13 @@ class PointsjoueurJob < ApplicationJob
     @playerseason = PlayerSeason.where(user_id: @user.id)
     @forecasts = Forecast.where(player_season_id: @playerseason, season_id: Season.last.id)
     points = []
-    puts points
     @forecasts.each do |forecast|
       if forecast.points_win.positive?
         points << forecast.points_win
       else forecast.points_lose.negative?
         points << forecast.points_lose
       end
-      @playerseason.update(number_of_points: points.sum)
     end
+    @playerseason.update(number_of_points: points.sum)
   end
 end
