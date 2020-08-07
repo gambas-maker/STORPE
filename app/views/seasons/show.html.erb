@@ -37,10 +37,9 @@
           <h3 class="typo mr-3">POINTS FOOTBALL</h3>
           <% points = 0 %>
           <% current_user.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-            <% if forecast.match.sport == "football" && forecast.points_win.positive? %>
-              <% points += forecast.points_win %>
-            <% else forecast.match.sport == "football" && forecast.points_lose.negative?%>
-              <% points += forecast.points_lose %>
+            <% if forecast.match.sport == "football" %>
+              <% points += (forecast.points_win + forecast.points_lose) %>
+            <% else %>
             <% end %>
           <% end %>
           <h3 class="typo"><%= points %></h3>
@@ -49,10 +48,9 @@
           <h3 class="typo mr-3">POINTS BASKETBALL</h3>
           <% pointsb = 0 %>
           <% current_user.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-            <% if forecast.match.sport == "basketball" && forecast.points_win.positive? %>
-              <% pointsb += forecast.points_win %>
-            <% else forecast.match.sport == "basketball" && forecast.points_lose.negative? %>
-              <% pointsb += forecast.points_lose %>
+            <% if forecast.match.sport == "basketball" %>
+              <% pointsb += (forecast.points_win + forecast.points_lose) %>
+            <% else %>
             <% end %>
           <% end %>
           <h3 class="typo"><%= pointsb %></h3>
@@ -148,9 +146,19 @@
             </div>
             <div class="d-flex flex-column justify-content-center">
               <p class="typopo text-center"><%= forecast.outcome %></p>
-              <div class="d-flex flex-row align-items-center col-4">
-
-              </div>
+              <% if  forecast.points_win.positive?%>
+                <p class="typopo text-center text-success">+<%= forecast.points_win %>pts</p>
+              <% elsif forecast.points_lose.negative?%>
+                <p class="typopo text-center text-danger"><%= forecast.points_lose %>pts</p>
+              <% else forecast.points_lose.zero? && forecast.points_lose.zero? %>
+                <% if forecast.outcome == "1" %>
+                  <p class="typopo text-success-center"><%= forecast.match.points_home.round %>pts</p>
+                <% elsif forecast.outcome == "2"%>
+                  <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
+                <% else forecast.outcome == "NULL"%>
+                  <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
+                <% end %>
+              <% end %>
             </div>
             <div class="d-flex flex-column align-items-center text-align-center col-4 ">
               <h3 class="typopo"><%= image_tag "#{forecast.match.team_away_logo_url}", width: 50 %></h3>
