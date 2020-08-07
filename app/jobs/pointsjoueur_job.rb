@@ -11,7 +11,7 @@ class PointsjoueurJob < ApplicationJob
       else forecast.points_lose.negative?
         points << forecast.points_lose
       end
+      @playerseason.update(number_of_points: points.sum)
     end
-    @playerseason.update(number_of_points: points.sum)
   end
 end
