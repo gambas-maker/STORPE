@@ -4,27 +4,30 @@
 
 <div class="main">
   <div class="login">
-    <h2 id="join_the_championship typopo">Welcome back </h2>
+    <h2 id="join_the_championship typopo">Bon retour parmis-nous.</h2>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-inputs">
         <%= f.input :email,
-                    required: false,
+                    required: true,
                     autofocus: true,
-                    input_html: { autocomplete: "email" } %>
+                    input_html: { autocomplete: "Email" } %>
         <%= f.input :password,
-                    required: false,
-                    input_html: { autocomplete: "current-password" } %>
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                    required: true,
+                    label: "Mot de passe",
+                    input_html: { autocomplete: "Mot de passe actuel" } %>
+        <%= f.input :remember_me,
+                    label: "Se souvenir de moi",
+                    as: :boolean if devise_mapping.rememberable? %>
       </div>
 
 
 <br>
        <div class="form-actions">
-          <button class="btn-login" ><a  href="/matches">Log in</a></button>
-          <p style="text-align: center; padding-top: 10px; font-size: 10px;">-Or-</p>
+          <button class="btn-login" ><a  href="/matches">Se connecter</a></button>
+          <p style="text-align: center; padding-top: 10px; font-size: 15px;">-Ou-</p>
        </div>
       <div class="form-actions">
-          <button class="btn-signup" style="padding: 5px; margin-top: 15px;" ><a  href="/users/sign_up" style="color: white; ">Sign up</a></button>
+          <button class="btn-signup" style="padding: 5px; margin-top: 15px;" ><a  href="/users/sign_up" style="color: white; ">S'inscrire</a></button>
       </div>
 
 <% end %>
