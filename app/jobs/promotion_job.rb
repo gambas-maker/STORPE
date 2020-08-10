@@ -2,7 +2,7 @@ class PromotionJob < ApplicationJob
   queue_as :default
 
   def perform
-    Season.create(season_id: Season.last.id + 1)
+    Season.create(id: Season.last.id + 1)
     puts "New season is ready"
     @champ = Championship.where(name: "LDC")
     @championships = Championship.where(name: "CFA")
