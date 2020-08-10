@@ -9,7 +9,7 @@ class PromotionldcJob < ApplicationJob
     @championships.each do |championship|
       ranking = {}
       championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.exists? }.each { |hash| ranking[hash] = hash.number_of_points }
-      if championship.player_seasons.count >= 8
+      if ranking.count >= 8
         array = []
         @champion_bas.each do |championbas|
           championbas.player_seasons.count <= 16 ? array << championbas : array

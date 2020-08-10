@@ -86,18 +86,18 @@
         <% if  current_user.forecasts.where(confirmed: true).count == 0%>
           <h3 class="typo">0%</h3>
         <% else %>
-          <% ratio = current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100 %>
-          <h3 class="typo"><%= ratio.round %>%</h3>
+          <% ratio = current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f.round * 100 %>
+          <h3 class="typo"><%= ratio %>%</h3>
         <% end %>
       </div>
     </div>
 
-    <h3 class="stat typo m-auto mt-4 pt-4" >RATIO SEMAINE PRÉCÉDENTE</h3>
+    <h3 class="stat typo m-auto mt-4 pt-4" >SEMAINE PRÉCÉDENTE</h3>
     <svg class=" center-block mx-auto mt-4" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
     <div class="container mt-4" style=" padding: 0 30%;"  >
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-3">MATCHS</h3>
-        <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).count%>/50</h3>
+        <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: (Season.last.id - 1)).count%>/50</h3>
       </div>
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-3">RATIO</h3>
@@ -111,7 +111,7 @@
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-3">POINTS REMPORTÉS</h3>
         <% points = 0 %>
-        <% current_user.forecasts.where(season_id: Season.last.id - 1).each do |forecast| %>
+        <% current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).each do |forecast| %>
           <% if forecast.points_win.present? %>
           <% points += forecast.points_win %>
           <% end %>

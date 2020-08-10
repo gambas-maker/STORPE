@@ -2,7 +2,7 @@ class PromotionJob < ApplicationJob
   queue_as :default
 
   def perform
-    @season = Season.create!
+    Season.create(season_id: Season.last.id + 1)
     puts "New season is ready"
     @champ = Championship.where(name: "LDC")
     @championships = Championship.where(name: "CFA")
@@ -11,8 +11,6 @@ class PromotionJob < ApplicationJob
     @championships.each do |championship|
       ranking = {}
       championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.exists? }.each { |hash| ranking[hash] = hash.number_of_points }
-      puts ranking
-      puts championship.player_seasons.count
       if ranking.count >= 8
         array = []
         @champ.each do |champion|
