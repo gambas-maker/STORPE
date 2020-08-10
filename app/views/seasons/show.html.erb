@@ -145,10 +145,24 @@
               </div>
             </div>
             <div class="d-flex flex-column justify-content-center">
-              <p class="typopo text-center"><%= forecast.outcome %></p>
-              <div class="d-flex flex-row align-items-center col-4">
-
-              </div>
+              <% if  forecast.outcome == "NULL"%>
+                <p class="typopo text-center">Nul</p>
+              <% else %>
+                <p class="typopo text-center"><%= forecast.outcome %></p>
+              <% end %>
+              <% if  forecast.points_win.positive?%>
+                <p class="typopo text-center text-success">+<%= forecast.points_win %>pts</p>
+              <% elsif forecast.points_lose.negative?%>
+                <p class="typopo text-center text-danger"><%= forecast.points_lose %>pts</p>
+              <% else forecast.points_lose.zero? && forecast.points_lose.zero? %>
+                <% if forecast.outcome == "1" %>
+                  <p class="typopo text-success-center"><%= forecast.match.points_home.round %>pts</p>
+                <% elsif forecast.outcome == "2"%>
+                  <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
+                <% else forecast.outcome == "NULL"%>
+                  <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
+                <% end %>
+              <% end %>
             </div>
             <div class="d-flex flex-column align-items-center text-align-center col-4 ">
               <h3 class="typopo"><%= image_tag "#{forecast.match.team_away_logo_url}", width: 50 %></h3>

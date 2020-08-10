@@ -11,13 +11,11 @@ class CalculatepointsbasketJob < ApplicationJob
             forecast.update(points_win: match.points_home)
           elsif match.result_home < match.result_away && forecast.outcome == "2"
             forecast.update(points_win: match.points_away)
-          end
-          if match.result_home > match.result_away && forecast.outcome == "2"
+          elsif match.result_home > match.result_away && forecast.outcome == "2"
             forecast.update(points_lose: match.negative_points_away)
           else match.result_home < match.result_away && forecast.outcome == "1"
             forecast.update(points_lose: match.negative_points_home)
           end
-        else
         end
       end
     end
