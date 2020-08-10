@@ -23,12 +23,12 @@
 
 <br>
        <div class="form-actions">
-          <button class="btn-login" ><a  href="/matches">Se connecter</a></button>
+        <%= button_to "Se connecter", matches_url, :class => "btn-login", :method => :get %>
           <p style="text-align: center; padding-top: 10px; font-size: 15px;">-Ou-</p>
        </div>
-      <div class="form-actions">
-          <button class="btn-signup" style="padding: 5px; margin-top: 15px;" ><a  href="/users/sign_up" style="color: white; ">S'inscrire</a></button>
-      </div>
+        <div class="form-actions">
+        <%= button_to "S'inscrire", new_user_registration_path, :class => "btn-signup", :method => :get %>
+        </div>
 
 <% end %>
 
