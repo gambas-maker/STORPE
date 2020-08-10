@@ -25,8 +25,8 @@
           <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0%>
           <h3 class="typo">0%</h3>
           <% else %>
-          <% ratio = current_user.forecasts.select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100 %>
-          <h3 class="typo"><%= ratio.round %>%</h3>
+          <% ratio = current_user.forecasts.select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f.round * 100 %>
+          <h3 class="typo"><%= ratio %>%</h3>
           <% end %>
         </div>
         <div class="d-flex justify-content-between">
