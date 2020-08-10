@@ -13,7 +13,7 @@
         <textarea name="text" class="feedback-input" placeholder="Message"></textarea>
         <input type="submit" value="Envoyer" class="btn-login" />
       </form>
-      <%= button_to "Se déconnecter", destroy_user_session_path, :class => "btn-signup" %>
+      <%= link_to('Se déconnecter', destroy_user_session_path, :class => "btn-signup", method: :delete) %>
     </div>
   </div>
 
