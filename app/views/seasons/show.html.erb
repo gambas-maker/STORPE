@@ -129,7 +129,7 @@
         <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
       </div>
       <input type="hidden" id ="season_player" value="<%= @player %>">
-      <% current_user.forecasts.where(confirmed: true, season_id: Season.last.id).sort_by{|v| v.match.event_stamp}.each do |forecast| %>
+      <% current_user.forecasts.where(confirmed: true).sort_by{|v| v.match.event_stamp}.each do |forecast| %>
         <% if forecast.season_id == @season.id %>
           <div class="d-flex justify-content-center mb-4 mt-4">
 
