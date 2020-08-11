@@ -25,6 +25,7 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'excon'
 gem 'whenever', require: false
+gem "valid_email2"
 
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'

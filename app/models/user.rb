@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :player_seasons
   has_many :forecasts, through: :player_seasons
+  validates :email, 'valid_email_2/email': { mx: true }
 
   after_commit :async_update
   validates_uniqueness_of :pseudo
