@@ -1,9 +1,0 @@
-const modalPronos = () => {
-  if ('<%= current_user.forecasts.count%>' == 50){
-    $('exampleModal').show();
-  } else if ('<%= current_user.forecasts.count%>' < 50){
-    $('exampleModal').hide();
-  }
-}
-
-export{ modalPronos };

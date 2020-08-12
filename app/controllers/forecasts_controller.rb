@@ -28,7 +28,7 @@ class ForecastsController < ApplicationController
   end
 
   def store_outcome
-    @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids)
+    @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids, season_id: Season.last.id)
     id = params[:match]
     # match = Match.find(id)
     outcome = params[:result]
@@ -56,6 +56,7 @@ class ForecastsController < ApplicationController
         @forecast.destroy
       end
     else
+      return
     end
     render json: { status: @forecast }
   end
