@@ -1,4 +1,5 @@
 class ForecastsController < ApplicationController
+  respond_to :html
   def show
     @forecast = Forecast.find(match.id)
   end
@@ -56,7 +57,6 @@ class ForecastsController < ApplicationController
         @forecast.destroy
       end
     else
-      return
     end
     render json: { status: @forecast }
   end
