@@ -80,7 +80,7 @@ class BasketballTomorrow < ApplicationRecord
 
     request = Net::HTTP::Get.new(url)
     request["x-rapidapi-host"] = 'api-basketball.p.rapidapi.com'
-    request["x-rapidapi-key"] = 'b80a756af310bf59a5acbabb98107fe7'
+    request["x-rapidapi-key"] = ENV['X_RAPIDAPI_KEY']
 
     response = http.request(request)
     JSON.parse(response.body)
