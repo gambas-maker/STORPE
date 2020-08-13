@@ -3,31 +3,14 @@
     <h2 class="toptitle m-auto">MATCH</h2>
   </div>
   <div class="sticky" style="margin: 0 auto">
-    <div class="d-flex justify-content-center pt-4">
+    <div class="d-flex justify-content-center pt-3">
       <div class="d-flex justify-content-around mb-3" style="width: 375px;">
         <div>
-          <div class=" d-flex">
+          <div class=" d-flex pt-2">
             <h3 class="typo">Matchs pronostiqués</h3>
             <h3 class="pl-2 typos"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count %>/50</h3>
           </div>
-          <!-- <div class=" d-flex">
-            <h3 class="typo">Points potentiels</h3> -->
-            <%# total1 = 0 %>
-            <%# total2 = 0 %>
-            <%# total3 = 0 %>
-            <!-- <h3 class="pl-2 typos"> --><%# current_user.forecasts.where(confirmed: true).each do |forecast| %>
-              <%# if forecast.outcome == "1" %>
-              <%# total1 += forecast.match.points_home%>
-              <%# elsif forecast.outcome == "N" %>
-              <%# total2 += forecast.match.points_draw%>
-              <%# elsif forecast.outcome == "2" %>
-              <%# total3 += forecast.match.points_away%>
-              <%# end %>
-              <%# end %>
-              <%#= total = (total1 + total2 + total3)  %>
-            <!-- </h3> -->
-          <!-- </div> -->
-        </div>
+         </div>
         <div id = "panier">
          <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,19 +38,9 @@
       </div>
     </div>
   </div>
-  <% if current_user.forecasts.count > 50 %>
-  <% end %>
   <div class="d-flex justify-content-center">
     <div class="infobis">
       <div class="filterbar d-flex justify-content-around flex-row">
-        <!-- <div> -->
-          <%#=# form_tag matches_path, method: :get do %>
-          <%#=# select_tag :sport,
-          raw("<option class='dropdown-item' value=''>SPORT</option>
-            <option class='dropdown-item' value='Football'>Football</option>
-            <option class='dropdown-item' value='Basketball'>Basketball</option>"),
-            class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
-          <!-- </div> -->
           <div>
             <%= form_tag matches_path, method: :get do %>
             <%= select_tag :query,
@@ -86,21 +59,22 @@
             <div class="mt-1">
               <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
               <% end %>
-              <%# end %>
             </div>
           </div>
         </div>
       </div>
-
       <div class="d-flex justify-content-center">
         <div class="info">
+          <% if current_user.forecasts.where(season_id: Season.last.id, confirmed: true).count == 50 %>
+            <%= render 'shared/modal' %>
+          <% else %>
+          <% end %>
           <div class="d-flex justify-content-between flex-row m-3">
             <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
             <h3 class="typopo d-flex justify-content-center">PRONO</h3>
             <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
           </div>
           <input type="hidden" id ="season_player" value="<%= @player %>">
-
           <% @matches.each do |match| %>
           <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? %>
           <% if match.sport == "football" %>
@@ -193,7 +167,6 @@
           <% end %>
         </div>
       </div>
-      <svg class="center-block mx-auto mt-5" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
       <%=  render "shared/navbarbottom" %>
       <script type='text/javascript'>
         (function()
