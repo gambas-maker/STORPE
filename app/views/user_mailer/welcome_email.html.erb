@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style type="text/css">
+      .container{
+        background-color: #322958;
+        color: white;
+        font-family:'Montserrat', sans-serif;
+      }
+      .link_to {
+        text-decoration: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Bienvenue chez STORPE <%= @user.pseudo %> ⚽ 🏀!</h1>
+      <p>
+        Tu viens de nous rejoindre depuis peu, bravo à toi !
+        Maintenant montre au reste des STORPEURS que TU es le meilleur pronostiqueur !
+      </p>
+      <%= link_to "STORPE", "http://www.storpe.club", class: 'link_to' %>
+      <h2>Nous te rappelons les règles</h2>
+      <ul>
+        <ol>1 -</ol>
+        <ol>2 -</ol>
+        <ol>3 -</ol>
+      </ul>
+      <p>
+        Bon courage champion ! On se donne rendez-vous en haut du podium ou ... en 3e Div'.
+      </p>
+      <p>Encore merci de nous rejoindre on a hâte de suivre tes performances !</p>
+    </div>
+    <footer>
+      <%= image_tag 'logo.png' %>
+    </footer>
+  </body>
+</html>
