@@ -14,6 +14,6 @@ class User < ApplicationRecord
 
   def async_update
     ChampionshipJob.perform_now(self.id)
-    UserMailer.with(user: @user).welcome_email(self.id).deliver_now
+    # UserMailer.with(user: @user).welcome_email(self.id).deliver_now
   end
 end
