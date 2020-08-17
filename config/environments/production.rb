@@ -1,12 +1,20 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: 'www.storpe.club' }
+  config.action_mailer.default_url_options = { host: "storpe.club" }
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.delivery_method = :smtp
+  # Defaults to:
+  # config.action_mailer.sendmail_settings = {
+  #   location: '/usr/sbin/sendmail',
+  #   arguments: '-i'
+  # }
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_options = {from: 'contactstorpe@gmail.com'}
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   address:              'smtp.gmail.com',
   port:                 587,
+  domain:               'gmail.com',
   user_name:            ENV['MAILER_EMAIL'],
   password:             ENV['MAILER_PASSWORD'],
   authentication:       'plain',
