@@ -14,4 +14,5 @@ class User < ApplicationRecord
 
   def async_update
     ChampionshipJob.perform_now(self.id)
+  end
 end
