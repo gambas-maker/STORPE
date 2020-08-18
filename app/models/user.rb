@@ -19,7 +19,6 @@ class User < ApplicationRecord
   end
 
   def mailer
-    @user = User.last
-    UserMailer.welcome_email(@user).deliver_now
+    MailmarketJob.set(wait: 2.Day).perform_later(self.id)
   end
 end
