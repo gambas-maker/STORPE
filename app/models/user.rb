@@ -19,6 +19,6 @@ class User < ApplicationRecord
   end
 
   def mailer
-    MailmarketJob.set(wait: 2.Day).perform_later(self.id)
+    MailmarketJob.set(wait: 2.days).perform_later(self.id)
   end
 end
