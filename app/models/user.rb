@@ -10,9 +10,16 @@ class User < ApplicationRecord
   after_commit :async_update
   validates_uniqueness_of :pseudo
 
+  after_create :mailer
+
   private
 
   def async_update
     ChampionshipJob.perform_now(self.id)
+  end
+
+  def mailer
+    @user = User.last
+    UserMailer.welcome_email(@user).deliver_now
   end
 end
