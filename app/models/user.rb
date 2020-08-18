@@ -14,10 +14,5 @@ class User < ApplicationRecord
 
   def async_update
     ChampionshipJob.perform_now(self.id)
-    @user = User.last
-    if @user.save
-      UserMailer.welcome_email(@user).deliver_now
-    else
-    end
   end
 end
