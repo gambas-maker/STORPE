@@ -1,8 +1,22 @@
 // Specific CSS for your home-page
+.position-relative{
+  display: flex;
+  flex-direction: row;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+}
 .log {
   height: 100vh;
-
+  position: sticky;
+  top:0;
+  display: flex;
+  flex-direction: column;
+  background-color: #312947;
+  padding: 40px;
 }
+
 .presentation{
 color:white;
 font-family: "Montserrat";
@@ -24,6 +38,9 @@ font-weight: normal;
 
 @media (max-width: 960px){
   .presentation {
+    display: none;
+  }
+  .log{
     display: none;
   }
 }
