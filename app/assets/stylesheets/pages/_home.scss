@@ -1,11 +1,4 @@
 // Specific CSS for your home-page
-$breakpoint-tablet: 960px;
-@media (max-width: $breakpoint-tablet) {
-
-  .presentation{
-    color: red;
-  }
-}
 .presentation{
 color:white;
 font-family: "Montserrat";
@@ -17,6 +10,18 @@ margin-top: 1px;
 letter-spacing: 0.36px;
 line-height: 14px;
 font-weight: normal;
+}
+
+@media (min-width: 560px) {
+  #carouselExampleIndicators{
+    display: none;
+  }
+}
+
+@media (max-width: 960px){
+  .presentation {
+    display: none;
+  }
 }
 
 
