@@ -1,11 +1,10 @@
 // Specific CSS for your home-page
-
-@media (max-width: 960px){
+$breakpoint-tablet: 960px;
+@media (max-width: $breakpoint-tablet) {
 
   .presentation{
     color: red;
   }
-
 }
 .presentation{
 color:white;
