@@ -30,7 +30,8 @@
 .log {
   color: #FFFFFF;
   height: 100vh;
-  position: sticky;
+  position: absolute;
+  right: 1px;
   top:0;
   display: flex;
   flex-direction: column;
