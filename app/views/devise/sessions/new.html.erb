@@ -19,11 +19,11 @@
                     label: "Se souvenir de moi",
                     as: :boolean if devise_mapping.rememberable? %>
       </div>
-
+<%= link_to "Mot de passe oublié?", new_user_password_path %>
 
 <br>
        <div class="form-actions">
-        <%= button_to "Se connecter", matches_url, :class => "btn-login", :method => :get %>
+        <%= button_to "Se connecter", matches_url, :class => "btn-login mt-3", :method => :get %>
           <p style="text-align: center; padding-top: 10px; font-size: 15px;">-Ou-</p>
        </div>
         <div class="form-actions">

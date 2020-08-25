@@ -10,10 +10,15 @@ class User < ApplicationRecord
   after_commit :async_update
   validates_uniqueness_of :pseudo
 
+  after_create :mailer
+
   private
 
   def async_update
     ChampionshipJob.perform_now(self.id)
-    # UserMailer.with(user: @user).welcome_email(self.id).deliver_now
+  end
+
+  def mailer
+    MailmarketJob.set(wait: 2.days).perform_later(self.id)
   end
 end
