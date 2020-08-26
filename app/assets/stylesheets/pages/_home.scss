@@ -41,6 +41,7 @@
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  font-size: 13.5px;
  }
 
 .presentation{
@@ -56,7 +57,7 @@ line-height: 14px;
 font-weight: normal;
 }
 
-@media (min-width: 770px) {
+@media (min-width: 960px) {
   #carouselExampleIndicators{
     display: none;
   }
