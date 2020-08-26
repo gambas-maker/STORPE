@@ -20,8 +20,10 @@
   width: 100%;
 }
 .position{
-  display: flex;
-  flex-direction: row;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 1px;
 }
 .content{
   display: flex;
@@ -71,6 +73,9 @@ font-weight: normal;
   }
   .log{
     display: none;
+  }
+  .position{
+    display: flex;
   }
 }
 
