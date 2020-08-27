@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <script src="https://kit.fontawesome.com/1d1e187741.js" crossorigin="anonymous"></script>
     <style type="text/css">
       .container{
         background-color: #322958;
@@ -22,7 +23,7 @@
   </div>
 </div>
     <div class="container">
-      <h1>Bienvenue chez STORPE <%= @user.pseudo %> ⚽ 🏀!</h1>
+      <h1>Bienvenue chez STORPE <%=  %> ⚽ 🏀!</h1>
       <p>
         Tu viens de nous rejoindre depuis peu, bravo à toi !
         Maintenant montre au reste des STORPEURS que TU es le meilleur pronostiqueur !
@@ -39,8 +40,22 @@
       </p>
       <p>Encore merci de nous rejoindre on a hâte de suivre tes performances !</p>
     </div>
-    <footer>
-      <%= image_tag "logo.png" %>
-    </footer>
+
+
+
   </body>
+  <footer>
+    <div class="footer">
+      <div class="footer-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <div class="footer-copyright">
+        This footer is made with <i class="fas fa-heart"></i> at Le Wagon
+      </div>
+    </div>
+  </footer>
+
 </html>
