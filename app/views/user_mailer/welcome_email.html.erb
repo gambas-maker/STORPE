@@ -4,6 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
     <script src="https://kit.fontawesome.com/1d1e187741.js" crossorigin="anonymous"></script>
     <style type="text/css">
+      h1{
+        font-family:'Nunito', sans-serif;
+        margin: 0;
+        padding-bottom: 5px;
+      }
+      p{
+        font-family:'Montserrat', sans-serif;
+      }
       .container{
         background-color: #322958;
         color: white;
@@ -12,48 +20,121 @@
       .link_to {
         text-decoration: none !important;
       }
+      .footer a:hover {
+         opacity: 0.5;
+      }
+      .footer{
+        font-family: 'Montserrat', sans-serif;
+      }
+      .banner{
+        background-color: #322958;
+        padding: 20px;
+        text-align: center;
+      }
+      .card {
+        text-align: center;
+        text-decoration: none;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        background-color: #838383;
+        color: #FFFFFF;
+        background-image: url(https://res.cloudinary.com/dhu7op4vc/image/upload/v1598514437/r2Vv75_2x_uz4kwk.png);
+      }
+      .rejoins_1{
+        align-items:center;
+        background: #FBB03B;
+        border: 0.5px solid #FBB03B;
+        border-radius: 25px;
+        opacity: 1;
+        color: #FFFFFF;
+        width: 210px;
+        height: 40px;
+        text-decoration: none;
+        padding: 8px; margin-top: 5px;
+        font-family:'Montserrat', sans-serif;
+        font-size: 17px;
+        font-weight: bold;
+      }
+      .cartouche{
+        background-color: #322958;
+        padding-top: 5px;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        margin-top: 5px;
+        font-family:'Montserrat', sans-serif;
+        text-align: center;
+      }
+      .share{
+        background: #FBB03B;
+        border: 0.5px solid #FBB03B;
+        border-radius: 25px;
+        width: 110px;
+        height: 40px;
+        font-family:'Montserrat', sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      ol{
+        padding-left: 0;
+        margin: 8px;
+        font-weight: bold;
+      }
+      ul{
+        padding-left: 0;
+      }
+      h2{
+        margin-top:2px;
+        margin-bottom:4px;
+        margin-left: 7px;
+      }
     </style>
   </head>
   <body>
-    <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
-  <div class="container">
-    <h1>Le Wagon brings <strong>tech skills</strong> to <strong>creative people</strong>!</h1>
-    <p>Change your life and learn to code at one of our campuses around the world.</p>
-    <a class="btn btn-flat" href="#">Apply now</a>
-  </div>
-</div>
-    <div class="container">
-      <h1>Bienvenue chez STORPE <%=  %> ⚽ 🏀!</h1>
-      <p>
-        Tu viens de nous rejoindre depuis peu, bravo à toi !
-        Maintenant montre au reste des STORPEURS que TU es le meilleur pronostiqueur !
-      </p>
-      <%= link_to "STORPE", "http://www.storpe.club", class: 'link_to' %>
-      <h2>Nous te rappelons les règles</h2>
-      <ul>
-        <ol>1 -</ol>
-        <ol>2 -</ol>
-        <ol>3 -</ol>
-      </ul>
-      <p>
-        Bon courage champion ! On se donne rendez-vous en haut du podium ou ... en 3e Div'.
-      </p>
-      <p>Encore merci de nous rejoindre on a hâte de suivre tes performances !</p>
+    <div class="banner">
+      <%= cl_image_tag("https://res.cloudinary.com/dhu7op4vc/image/upload/v1598518816/Group_135_2x_eoeq1f.png", width: 250, crop: :fill) %>
     </div>
+    <div class="card">
+      <h1>Bienvenue <%= @user.pseudo %></h1>
+      <button class="rejoins_1">
+        <%= link_to "Jouer", "http://www.storpe.club", class: 'link_to' %>
+      </button>
 
-
-
+    </div>
+    <div class="cartouche">
+      <div class="text">
+        <h2>Les règles 📋</h2>
+          <ul>
+            <ol>1 - C'est gratuit</ol>
+            <ol>2 - Tu pronostics sur des matchs réels de foot et NBA</ol>
+            <ol>3 - Un championnat dure une semaine</ol>
+            <ol>4 - Selon ton classement, tu montes, tu descends ou tu te maintiens (une pensée pour le TFC 😢)</ol>
+          </ul>
+      </div>
+    </div>
+    <div class="cartouche">
+      <div class="text">
+        <h2>Invite tes potes 🤝</h2>
+          <ul>
+            <ol>1 - Pour leur montrer qui est le patron !</ol>
+            <ol>2 - Pour ne plus entendre "je te l'avais dit" !</ol>
+          </ul>
+      </div>
+        <button class="share">
+          <%= link_to "J'invite", "https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=http%3A%2F%2Fwww.storpe.club%2F&display=popup&ref=plugin&src=share_button", class: 'link_to' %>
+        </button>
+    </div>
   </body>
   <footer>
-    <div class="footer">
-      <div class="footer-links">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
+    <div style="display: flex; align-items: center; justify-content: center;height: 50px; padding: 0px 50px; background-color: #e4e3e3; color: #FFFFFF;">
+      <div class="footer">
+        <p>Le sport c'est ici 👉</p>
       </div>
-      <div class="footer-copyright">
-        This footer is made with <i class="fas fa-heart"></i> at Le Wagon
+      <div class="footer" style="display: flex; align-items: center;">
+        <a href="https://twitter.com/STORPE4" style="text-decoration: none; padding: 0px 10px;"><%= cl_image_tag("https://res.cloudinary.com/dhu7op4vc/image/upload/v1598515554/twitter_5_sldlhc.png", width: 20) %></a>
+        <a href="https://www.facebook.com/groups/storpe/" style="text-decoration: none; padding: 0px 10px;"><%= cl_image_tag("https://res.cloudinary.com/dhu7op4vc/image/upload/v1598515554/facebook_5_o9mw6w.png", width: 20) %></a>
+        <a href="https://www.instagram.com/storpe4/?hl=fr" style="text-decoration: none; padding: 0px 10px;"><%= cl_image_tag("https://res.cloudinary.com/dhu7op4vc/image/upload/v1598515554/instagram-sketched_alwmw7.png", width: 20) %></a>
       </div>
     </div>
   </footer>

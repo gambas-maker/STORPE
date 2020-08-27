@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
-  def welcome_email
-    # @user = user
-    mail(to: "clement.guibaud@storpe.com", subject: "Bienvenue chez STORPE  ⚽ 🏀!")
+  def welcome_email(user)
+    @user = user
+    mail(to: @user.email, subject: "Bienvenue chez STORPE #{@user.pseudo} ⚽ 🏀!")
   end
 end
