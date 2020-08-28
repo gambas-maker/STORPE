@@ -157,7 +157,6 @@
             Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
           </div>
         </div>
-
         <% end %>
       <% else %>
 
@@ -166,7 +165,7 @@
     <div class="d-flex justify-content-center">
       <footer class="footer-match">
         <div class="foot-phrase">
-          <p>Le sport c'est ici 👉</p>
+          <p>Le sport c'est ici aussi 👉</p>
         </div>
         <div class="footer-links" style="display: flex; align-items: center;">
           <a href="https://twitter.com/STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
@@ -177,21 +176,23 @@
     </div>
   </div>
 </div>
+</div>
+<%=  render "shared/navbarbottom" %>
 
 
-      <%=  render "shared/navbarbottom" %>
-      <script type='text/javascript'>
-        (function()
-        {
-          if( window.localStorage )
-          {
-            if( !localStorage.getItem('firstLoad') )
-            {
-              localStorage['firstLoad'] = true;
-              window.location.reload();
-            }
-            else
-              localStorage.removeItem('firstLoad');
-          }
-        })();
-      </script>
+
+<script type='text/javascript'>
+  (function()
+  {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+  })();
+</script>
