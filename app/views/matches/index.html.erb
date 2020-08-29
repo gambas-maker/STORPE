@@ -12,174 +12,187 @@
           </div>
          </div>
         <div id = "panier">
-         <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
-         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="float-right p-2">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-header">
-                <h2 class="stat m-auto ">Vous avez validé votre sélection!</h2>
-
-              </div>
-              <div class="modal-body" style="z-index: 100;">
-
-                <p class="typopo">Retrouve tes pronos' sur la page championnat !</p>
-              </div>
-              <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="rejoins typopo"><%= link_to 'Checker mes pronos', season_path(current_user)%></button>
+          <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="float-right p-2">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-header">
+                  <h2 class="stat m-auto ">Vous avez validé votre sélection!</h2>
+                </div>
+                <div class="modal-body" style="z-index: 100;">
+                  <p class="typopo">Retrouve tes pronos' sur la page championnat !</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button type="button" class="rejoins typopo"><%= link_to 'Checker mes pronos', season_path(current_user)%></button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="d-flex justify-content-center">
+      <div class="infobis">
+        <div class="filterbar d-flex justify-content-around flex-row">
+            <div>
+              <%= form_tag matches_path, method: :get do %>
+              <%= select_tag :query,
+              raw("<option class='dropdown-item' value=''>LIGUE</option>
+                <option class='dropdown-item' value=''>Tout</option>
+                <option class='dropdown-item' value='NBA'>NBA</option>
+                <option class='dropdown-item' value='UEFA Champions League'>Ligue des Champions</option>
+                <option class='dropdown-item' value='UEFA Europa League'>Ligue Europa</option>
+                <option class='dropdown-item' value='France'>Ligue 1</option>
+                <option class='dropdown-item' value='Germany'>Bundesliga</option>
+                <option class='dropdown-item' value='Spain'>Liga</option>
+                <option class='dropdown-item' value='Italy'>Serie A</option>
+                <option class='dropdown-item' value='England'>Premier league</option>"),
+                class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
+              </div>
+              <div class="mt-1">
+                <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
+                <% end %>
+              </div>
+            </div>
+    </div>
   </div>
   <div class="d-flex justify-content-center">
-    <div class="infobis">
-      <div class="filterbar d-flex justify-content-around flex-row">
-          <div>
-            <%= form_tag matches_path, method: :get do %>
-            <%= select_tag :query,
-            raw("<option class='dropdown-item' value=''>LIGUE</option>
-              <option class='dropdown-item' value=''>Tout</option>
-              <option class='dropdown-item' value='NBA'>NBA</option>
-              <option class='dropdown-item' value='UEFA Champions League'>Ligue des Champions</option>
-              <option class='dropdown-item' value='UEFA Europa League'>Ligue Europa</option>
-              <option class='dropdown-item' value='France'>Ligue 1</option>
-              <option class='dropdown-item' value='Germany'>Bundesliga</option>
-              <option class='dropdown-item' value='Spain'>Liga</option>
-              <option class='dropdown-item' value='Italy'>Serie A</option>
-              <option class='dropdown-item' value='England'>Premier league</option>"),
-              class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
-            </div>
-            <div class="mt-1">
-              <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
-              <% end %>
-            </div>
-          </div>
+    <div class="info">
+        <% if current_user.forecasts.where(season_id: Season.last.id, confirmed: true).count == 50 %>
+          <%= render 'shared/modal' %>
+        <% else %>
+        <% end %>
+        <div class="d-flex justify-content-between flex-row m-3">
+          <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
+          <h3 class="typopo d-flex justify-content-center">PRONO</h3>
+          <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
         </div>
-      </div>
-      <div class="d-flex justify-content-center">
-        <div class="info">
-          <% if current_user.forecasts.where(season_id: Season.last.id, confirmed: true).count == 50 %>
-            <%= render 'shared/modal' %>
-          <% else %>
-          <% end %>
-          <div class="d-flex justify-content-between flex-row m-3">
-            <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
-            <h3 class="typopo d-flex justify-content-center">PRONO</h3>
-            <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
-          </div>
-          <input type="hidden" id ="season_player" value="<%= @player %>">
-          <% @matches.each do |match| %>
+        <input type="hidden" id ="season_player" value="<%= @player %>">
+        <% @matches.each do |match| %>
           <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? %>
           <% if match.sport == "football" %>
-            <div class="d-flex justify-content-center mb-2 mt-2">
-              <h4 class="typopo"><%= match.league %></h4>
-            </div>
-            <div class="d-flex justify-content-center mb-2 mt-2">
-              <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
-              <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
-            </div>
-            <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
-              <div class="d-flex flex-column align-items-center col-4">
-                <div class="row">
-                  <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
-                </div>
-                <div class="row text-align-center">
-                  <h3 class="typopo"><%= match.team_home %></h3>
-                </div>
-              </div>
-              <div class="d-flex flex-column justify-content-center">
-                <p class="typopo text-center">VS</p>
-                <div class="d-flex flex-row align-items-center col-4">
-                  <div class="displaysquares" data-id="<%= match.id %>">
-                    <input type="checkbox" class="square" data-outcome="1"></input>
-                    <input type="checkbox" class="square" data-outcome="NULL"></input>
-                    <input type="checkbox" class="square" data-outcome="2"></input>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
-                <h3 class="typopo"><%= match.team_away  %></h3>
-              </div>
-            </div>
-            <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
-              <div>
-                Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
-              </div>
-              <div>
-                Pts : +<%= match.points_draw.to_i %> / <%= match.negative_points_draw %>
-              </div>
-              <div>
-                Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
-              </div>
-            </div>
-            <% else %>
-              <div class="d-flex justify-content-center mb-2 mt-2">
-                <h4 class="typopo"><%= match.league %></h4>
-              </div>
-              <div class="d-flex justify-content-center mb-2 mt-2">
-                <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
-                <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
-              </div>
-              <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
-                <div class="d-flex flex-column align-items-center col-4">
-                  <div class="row">
-                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
-                  </div>
-                  <div class="row text-align-center">
-                    <h3 class="typopo"><%= match.team_home %></h3>
-                  </div>
-                </div>
-                <div class="d-flex flex-column justify-content-center">
-                  <p class="typopo text-center">VS</p>
-                  <div class="d-flex flex-row align-items-center col-4">
-                    <div class="displaysquares" data-id="<%= match.id %>">
-                      <input type="checkbox" class="square" data-outcome="1"></input>
-                      <input type="checkbox" class="square" data-outcome="2"></input>
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
-                  <h3 class="typopo"><%= match.team_away  %></h3>
-                </div>
-              </div>
-              <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
-                <div>
-                  Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
-                </div>
-
-                <div>
-                  Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-
-          <% end %>
-          <% end %>
+        <div class="d-flex justify-content-center mb-2 mt-2">
+          <h4 class="typopo"><%= match.league %></h4>
         </div>
-      </div>
-      <%=  render "shared/navbarbottom" %>
-      <script type='text/javascript'>
-        (function()
-        {
-          if( window.localStorage )
-          {
-            if( !localStorage.getItem('firstLoad') )
-            {
-              localStorage['firstLoad'] = true;
-              window.location.reload();
-            }
-            else
-              localStorage.removeItem('firstLoad');
-          }
-        })();
-      </script>
+        <div class="d-flex justify-content-center mb-2 mt-2">
+          <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
+          <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
+        </div>
+        <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+          <div class="d-flex flex-column align-items-center col-4">
+            <div class="row">
+              <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+            </div>
+            <div class="row text-align-center">
+              <h3 class="typopo"><%= match.team_home %></h3>
+            </div>
+          </div>
+          <div class="d-flex flex-column justify-content-center">
+            <p class="typopo text-center">VS</p>
+            <div class="d-flex flex-row align-items-center col-4">
+              <div class="displaysquares" data-id="<%= match.id %>">
+                <input type="checkbox" class="square" data-outcome="1"></input>
+                <input type="checkbox" class="square" data-outcome="NULL"></input>
+                <input type="checkbox" class="square" data-outcome="2"></input>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+            <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+            <h3 class="typopo"><%= match.team_away  %></h3>
+          </div>
+        </div>
+        <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
+          <div>
+            Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
+          </div>
+          <div>
+            Pts : +<%= match.points_draw.to_i %> / <%= match.negative_points_draw %>
+          </div>
+          <div>
+            Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+          </div>
+        </div>
+        <% else %>
+        <div class="d-flex justify-content-center mb-2 mt-2">
+          <h4 class="typopo"><%= match.league %></h4>
+        </div>
+        <div class="d-flex justify-content-center mb-2 mt-2">
+          <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
+          <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
+        </div>
+        <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+          <div class="d-flex flex-column align-items-center col-4">
+            <div class="row">
+              <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+            </div>
+            <div class="row text-align-center">
+              <h3 class="typopo"><%= match.team_home %></h3>
+            </div>
+          </div>
+          <div class="d-flex flex-column justify-content-center">
+            <p class="typopo text-center">VS</p>
+            <div class="d-flex flex-row align-items-center col-4">
+              <div class="displaysquares" data-id="<%= match.id %>">
+                <input type="checkbox" class="square" data-outcome="1"></input>
+                <input type="checkbox" class="square" data-outcome="2"></input>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+            <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+            <h3 class="typopo"><%= match.team_away  %></h3>
+          </div>
+        </div>
+        <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
+          <div>
+            Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
+          </div>
+          <div>
+            Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+          </div>
+        </div>
+        <% end %>
+      <% else %>
+
+      <% end %>
+    <% end %>
+    <div class="d-flex justify-content-center">
+      <footer class="footer-match">
+        <div class="foot-phrase">
+          <p>Le sport c'est ici aussi 👉</p>
+        </div>
+        <div class="footer-links" style="display: flex; align-items: center;">
+          <a href="https://twitter.com/STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.facebook.com/groups/storpe/" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+          <a href="https://www.instagram.com/storpe4/?hl=fr" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+</div>
+<%=  render "shared/navbarbottom" %>
+
+
+
+<script type='text/javascript'>
+  (function()
+  {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+  })();
+</script>

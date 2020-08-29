@@ -1,6 +1,7 @@
 // Specific CSS for your home-page
 
 .nav1{
+  padding-bottom: 5px;
   height: 70px;
   width: 100%;
   align-items: center;
@@ -19,8 +20,10 @@
   width: 100%;
 }
 .position{
-  display: flex;
-  flex-direction: row;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 1px;
 }
 .content{
   display: flex;
@@ -29,13 +32,17 @@
 .log {
   color: #FFFFFF;
   height: 100vh;
-  position: sticky;
+  right: 1px;
   top:0;
   display: flex;
   flex-direction: column;
   background-color: #312947;
-  padding: 40px;
-}
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 13.5px;
+ }
 
 .presentation{
 color:white;
@@ -50,7 +57,7 @@ line-height: 14px;
 font-weight: normal;
 }
 
-@media (min-width: 560px) {
+@media (min-width: 960px) {
   #carouselExampleIndicators{
     display: none;
   }
@@ -69,8 +76,51 @@ font-weight: normal;
   .log{
     display: none;
   }
+  .position{
+    display: flex;
+  }
 }
 
+#footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  box-shadow: 0px -4px 0px rgba(35, 40, 49, 0.9);
+  align-items: baseline;
+  color: black;
+  background-color: #F4F4F4;
+}
+.footer-match{
+  display: flex;
+  width: 375px;
+  justify-content: center;
+  padding-top: 6px;
+  box-shadow: 0px -4px 0px rgba(35, 40, 49, 0.9);
+  align-items: baseline;
+  color: black;
+  background-color: #F4F4F4;
+}
+.footer-contact{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: baseline;
+  color: black;
+}
+.footer-links{
+  font-size: 22px;
+}
+
+.footer-links a{
+  color: rgba(0,0,0,0.3);
+}
+
+.footer-links a:hover{
+  color: #FBB03B;
+}
 
 hr.new1 {
   border-top: 1px solid white;

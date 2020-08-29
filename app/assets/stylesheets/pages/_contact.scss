@@ -1,16 +1,13 @@
-.nav {
-  height: 70px;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
 #contact {
   font-size: 18px;
   font-family: "Montserrat";
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
+}
+
+.footer-icones a:hover{
+  color: #FBB03B;
 }
 
 .feedback-input {

@@ -5,8 +5,8 @@ require 'json'
 
 class SportOddEnd
   BASE_URL = "https://v2.api-football.com/"
-  LEAGUE_IDS = [525, 524, 775, 891, 754, 530, 514]
-  # 525 = France, 524 = Angleterre, 775 = Espagne, 891 = Italie, 754 = Allemagne, 530 = Champions League, 514 = Europa League
+  LEAGUE_IDS = [2664, 2790, 775, 891, 754, 530, 514]
+  # 2664 = France, 2790 = Angleterre, 775 = Espagne, 891 = Italie, 2755 = Allemagne, 530 = Champions League, 514 = Europa League
 
   def self.matches_for_last_days
     LEAGUE_IDS.each do |league_id|
@@ -53,12 +53,18 @@ class SportOddEnd
 
   def self.get_odds_for_match(game)
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
-    match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["values"]
-    game.update(
-      points_home: get_odd(match_odds, "Home").to_f.round * 10,
-      points_draw: get_odd(match_odds, "Draw").to_f.round * 10,
-      points_away: get_odd(match_odds, "Away").to_f.round * 10
-    )
+    ok = call_api(end_point)["api"]["results"]
+    if ok == 1
+      answer = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["label_name"]
+      if answer == "Match Winner"
+        match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["values"]
+        game.update(
+          points_home: get_odd(match_odds, "Home").to_f.round * 10,
+          points_draw: get_odd(match_odds, "Draw").to_f.round * 10,
+          points_away: get_odd(match_odds, "Away").to_f.round * 10
+        )
+      end
+    end
   end
 
   def self.get_results_for_match(game)
