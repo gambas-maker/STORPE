@@ -53,14 +53,17 @@ class SportOdd
 
   def self.get_odds_for_match(game)
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
-    answer = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["label_name"]
-    if answer == "Match Winner"
-      match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["values"]
-      game.update(
-        points_home: get_odd(match_odds, "Home").to_f.round * 10,
-        points_draw: get_odd(match_odds, "Draw").to_f.round * 10,
-        points_away: get_odd(match_odds, "Away").to_f.round * 10
-      )
+    ok = call_api(end_point)["api"]["results"]
+    if ok == 1
+      answer = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["label_name"]
+      if answer == "Match Winner"
+        match_odds = call_api(end_point)["api"]["odds"][0]["bookmakers"][1]["bets"][0]["values"]
+        game.update(
+          points_home: get_odd(match_odds, "Home").to_f.round * 10,
+          points_draw: get_odd(match_odds, "Draw").to_f.round * 10,
+          points_away: get_odd(match_odds, "Away").to_f.round * 10
+        )
+      end
     end
   end
 
