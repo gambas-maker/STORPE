@@ -1,2 +1,0 @@
-class Blason < ApplicationRecord
-end
