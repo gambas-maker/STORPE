@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :player_seasons
   has_many :forecasts, through: :player_seasons
   validates :email, 'valid_email_2/email': { mx: true }
-
+  has_one_attached :blason
   after_commit :async_update
   validates_uniqueness_of :pseudo
 

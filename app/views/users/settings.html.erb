@@ -1,0 +1,9 @@
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= f.input :blason,
+        :collection, Blason.all.map {|blason| cl_image_tag blason.url},
+        as: :radio_buttons %>
+<% end %>
+
+<% @blason.each do |blason| %>
+<%= cl_image_tag blason.url %>
+<% end %>

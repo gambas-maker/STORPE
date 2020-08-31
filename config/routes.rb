@@ -10,7 +10,7 @@ end
     mount Sidekiq::Web => '/sidekiq'
   end
   get 'about', to: 'pages#about'
-  get 'settings', to: 'pages#settings'
+  get 'settings', to: 'users#settings'
   get 'contact', to: 'pages#contact'
   get 'store_outcome', to: 'forecasts#store_outcome', defaults: {format: :json}
   get 'confirm_pending', to: 'forecasts#confirm_pending', defaults: {format: :json}
