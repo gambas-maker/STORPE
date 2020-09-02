@@ -107,7 +107,11 @@
                     <% elsif playerseason.forecasts.exists? %>
                     <tr>
                       <th scope="row"><%= x += 1%></th>
-                      <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %><%=  playerseason.user.pseudo %></td>
+                      <% if playerseason.blason.present? %>
+                        <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %><%=  playerseason.user.pseudo %></td>
+                      <% else %>
+                        <td><%=  playerseason.user.pseudo %></td>
+                      <% end %>
                       <td><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count %></td>
                       <td><%=  valeur %></td>
                     </tr>
