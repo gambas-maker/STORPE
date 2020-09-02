@@ -1,0 +1,29 @@
+<div class="title">
+  <h1>Change ton emblème de pronostiqueur</h1>
+</div>
+<div class="main mt-5 mb-5" style="text-align: center;">
+<%= simple_form_for @playerseason, wrapper_mappings: {
+radio_buttons:   :custom_collection } do |f| %>
+  <%= f.input :blason,
+              label: "Ton emblème, ta carrière",
+              as: :radio_buttons, collection:
+              Blason.all.map{|blason| cl_image_tag blason.url},
+              wrapper: :custom_collection_inline %>
+  <%= f.submit "Changer", class: "rejoins_1" %>
+  </div>
+<% end %>
+
+<footer class="footer-contact">
+  <div class="foot-phrase" style="color: white; font-size: 20px;">
+    <p>Pour discuter sport 👉</p>
+  </div>
+  <div class="footer-icones" style="display: flex; align-items: center; font-size: 30px; margin-top: 20px;">
+    <a href="https://twitter.com/STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+    <a href="https://www.facebook.com/groups/storpe/" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+    <a href="https://www.instagram.com/storpe4/?hl=fr" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+
+<%= render "shared/navbarbottom" %>
+
+

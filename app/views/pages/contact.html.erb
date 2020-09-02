@@ -5,6 +5,22 @@
   <div class="main">
     <div class="contact mt-5 mb-5">
       <a class="typeform-share button mt-4" href="https://form.typeform.com/to/vJ9bp59Y" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:#FBB03B;color:white;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:25px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Contacte-nous 📩</a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+    </div>
+  </div>
+  <div class="test">
+    <div class="main">
+      <div class="contact mt-5 mb-3">
+        <%= link_to "Mes paramètres", edit_player_season_path(current_user.player_seasons[0].id), :class => "btn-login" %>
+      </div>
+    </div>
+    <div class="main">
+      <div class="contact mt-5 mb-5">
+        <%= link_to "Les règles du jeu", rules_path, :class => "btn-login" %>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="contact mt-4 mb-2">
       <%= link_to "Se déconnecter", destroy_user_session_path, :class => "btn btn-signup mt-4", method: :delete %>
     </div>
   </div>

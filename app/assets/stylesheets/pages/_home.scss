@@ -28,6 +28,8 @@
 .content{
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  height: 100vh;
 }
 .log {
   color: #FFFFFF;
@@ -82,7 +84,7 @@ font-weight: normal;
 }
 
 #footer{
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
   display: flex;

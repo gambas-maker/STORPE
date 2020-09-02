@@ -44,11 +44,12 @@ a{
   border: 0.5px solid #FFFFFF;
   border-radius: 25px;
   opacity: 1;
+  color: black;
   width: 100%;
   padding: 6px;
   margin-bottom: 20px;
   &:hover{
-    color:black;
+    color: #FBB03B;
   }
 }
 .form-control {

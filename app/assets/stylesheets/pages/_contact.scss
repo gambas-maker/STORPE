@@ -10,6 +10,11 @@
   color: #FBB03B;
 }
 
+.test{
+  display: flex;
+  flex-direction: row;
+}
+
 .feedback-input {
   color:white;
   font-weight:normal;
@@ -33,4 +38,5 @@ textarea {
 
 .contact {
   padding: 20px;
+  z-index: 200;
 }
