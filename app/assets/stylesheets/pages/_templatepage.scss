@@ -5,7 +5,6 @@
   background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/v1598515055/4siwGa_2x_defzzt.png');
   background-size: cover;
 }
-
 .topimagechampionship {
   mix-blend-mode: lighten;
   opacity: 1;
@@ -22,7 +21,14 @@
   background-size: cover;
 
 }
-
+.title{
+  margin-top: 10px;
+  text-align: center;
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 32px;
+}
 .toptitle {
   color: white;
   font-family: 'Montserrat';

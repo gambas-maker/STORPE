@@ -11,6 +11,6 @@ class PagesController < ApplicationController
   end
 
   def settings
-    @blason = Blason.all
+    @blasons = Blason.all
   end
 end
