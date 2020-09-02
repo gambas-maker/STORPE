@@ -7,7 +7,9 @@
     <div class="info  d-flex  flex-column">
       <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
         <div class="blason">
-          <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join("")%>
+          <% if  current_user.player_seasons[0].blason.present?%>
+            <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join("")%>
+          <% end %>
         </div>
         <div>
           <h3 class="typo"><%= current_user.pseudo %></h3>
@@ -94,14 +96,18 @@
                     <% if current_user.id == playerseason.user_id%>
                     <tr>
                       <th class="cla" scope="row"><%= x += 1%></th>
-                      <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason, width: "24px", height: "32px" %><%=  current_user.pseudo %></td>
+                      <% if  current_user.player_seasons[0].blason.present? %>
+                        <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %><%=  current_user.pseudo %></td>
+                        <% else %>
+                        <td class="cla" ><%=  current_user.pseudo %></td>
+                      <% end %>
                       <td class="cla" ><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative? }.count %></td>
                       <td class="cla" ><%=  valeur %></td>
                     </tr>
                     <% elsif playerseason.forecasts.exists? %>
                     <tr>
                       <th scope="row"><%= x += 1%></th>
-                      <td><%=  playerseason.user.pseudo %></td>
+                      <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %><%=  playerseason.user.pseudo %></td>
                       <td><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count %></td>
                       <td><%=  valeur %></td>
                     </tr>
