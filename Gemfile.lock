@@ -109,8 +109,25 @@ GEM
     ffi (1.13.0-java)
     ffi (1.13.0-x64-mingw32)
     ffi (1.13.0-x86-mingw32)
+    fog-aws (3.6.7)
+      fog-core (~> 2.1)
+      fog-json (~> 1.1)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-core (2.2.0)
+      builder
+      excon (~> 0.71)
+      formatador (~> 0.2)
+      mime-types
+    fog-json (1.2.0)
+      fog-core
+      multi_json (~> 1.10)
+    fog-xml (0.1.3)
+      fog-core
+      nokogiri (>= 1.5.11, < 2.0.0)
     font-awesome-sass (5.13.0)
       sassc (>= 1.11)
+    formatador (0.2.5)
     fugit (1.3.6)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.3)
@@ -121,6 +138,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
+    ipaddress (0.8.3)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     listen (3.2.1)
@@ -145,6 +163,7 @@ GEM
     msgpack (1.3.3-java)
     msgpack (1.3.3-x64-mingw32)
     msgpack (1.3.3-x86-mingw32)
+    multi_json (1.15.0)
     netrc (0.11.0)
     nio4r (2.5.2)
     nio4r (2.5.2-java)
@@ -280,6 +299,8 @@ GEM
     simple_scheduler (1.2.0)
       rails (>= 5.0)
       sidekiq (>= 5.0)
+    sitemap_generator (6.1.2)
+      builder (~> 3.0)
     spoon (0.0.6)
       ffi
     spring (2.1.0)
@@ -356,6 +377,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   excon
+  fog-aws
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.2)
@@ -372,6 +394,7 @@ DEPENDENCIES
   sidekiq-scheduler
   simple_form
   simple_scheduler
+  sitemap_generator
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
