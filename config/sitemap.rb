@@ -24,11 +24,6 @@ SitemapGenerator::Sitemap.create do
      add player_season_path(playerseason, locale: :fr)
      add edit_player_season_path(playerseason, locale: :fr)
     end
-    Page.find_each do |page|
-      add contact_path(page, locale: :fr)
-      add rules_path(page, locale: :fr)
-      add root_path(page, locale: :fr)
-    end
 
     add "fr/single-page"
     add "fr/starters-website"
