@@ -16,7 +16,7 @@ SitemapGenerator::Sitemap.sitemaps_host = "https://#{ENV["S3_BUCKET_NAME"]}.s3.a
 SitemapGenerator::Sitemap.create do
     Match.find_each do |match|
      add matches_path(match, locale: :fr)
-    end
+    endgit
     Season.find_each do |season|
      add season_path(season, locale: :fr)
     end
