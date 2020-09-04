@@ -5,8 +5,8 @@ require 'json'
 
 class SportOdd
   BASE_URL = "https://v2.api-football.com/"
-  LEAGUE_IDS = [2664, 2790, 2833, 891, 2755, 530, 514]
-  # 2664 = France, 2790 = Angleterre, 2833 = Espagne, 891 = Italie, 2755 = Allemagne, 530 = Champions League, 514 = Europa League
+  LEAGUE_IDS = [2664, 2790, 2833, 891, 2755, 530, 514, 1422]
+  # 2664 = France, 2790 = Angleterre, 2833 = Espagne, 891 = Italie, 2755 = Allemagne, 530 = Champions League, 514 = Europa League, 1422 = Nations League
 
   def self.matches_for_four_days
     LEAGUE_IDS.each do |league_id|

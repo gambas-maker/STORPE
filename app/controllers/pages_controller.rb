@@ -10,6 +10,9 @@ class PagesController < ApplicationController
   def contact
   end
 
+  def rules
+  end
+
   def settings
     @blasons = Blason.all
   end
