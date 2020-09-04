@@ -11,7 +11,7 @@ fog_region: ENV["S3_REGION"]
 )
 
 # The full path to your bucket
-SitemapGenerator::Sitemap.sitemaps_host = "https://#{'ENV["S3_BUCKET_NAME"]'}.s3.amazonaws.com"
+SitemapGenerator::Sitemap.sitemaps_host = "https://#{ENV["S3_BUCKET_NAME"]}.s3.amazonaws.com"
 # The paths that need to be included into the sitemap.
 SitemapGenerator::Sitemap.create do
     Match.find_each do |match|
