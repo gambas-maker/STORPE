@@ -6,9 +6,11 @@
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex  flex-column">
       <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
-        <%= cl_image_tag current_user.player_seasons[0].blason %>
-                <!-- <svg class="logoplayer mt-2" width="48.491" height="56.522" viewBox="0 0 48.491 56.522"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M3644.079,301.329V285.165a1.941,1.941,0,0,0-1.415-1.818l-22.225-8.082a1.725,1.725,0,0,0-1.414,0l-22.225,8.082a2.046,2.046,0,0,0-1.212,1.818v16.164c0,16.77,8.89,21.821,21.013,28.892l2.223,1.213a2.634,2.634,0,0,0,2.021,0l2.222-1.213C3635.189,323.149,3644.079,318.1,3644.079,301.329Zm-23.033,25.255-1.213.606V279.305l20.2,7.274v14.75C3640.038,315.673,3632.967,319.714,3621.046,326.584Z" transform="translate(-3595.588 -275.113)"/></svg> -->
-
+        <div class="blason">
+          <% if  current_user.player_seasons[0].blason.present?%>
+            <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join("")%>
+          <% end %>
+        </div>
         <div>
           <h3 class="typo"><%= current_user.pseudo %></h3>
           <h3 class="typo circle"></h3>
@@ -81,7 +83,6 @@
                   <th scope="col">POS</th>
                   <th scope="col">NOM</th>
                   <th scope="col">MATCHS</th>
-                  <th scope="col">RATIO</th>
                   <th scope="col">PTS</th>
                 </tr>
               </thead>
@@ -95,17 +96,23 @@
                     <% if current_user.id == playerseason.user_id%>
                     <tr>
                       <th class="cla" scope="row"><%= x += 1%></th>
-                      <td class="cla" ><%=  current_user.pseudo %></td>
+                      <% if  current_user.player_seasons[0].blason.present? %>
+                        <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %><%=  current_user.pseudo %></td>
+                        <% else %>
+                        <td class="cla" ><%=  current_user.pseudo %></td>
+                      <% end %>
                       <td class="cla" ><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative? }.count %></td>
-                      <td class="cla" ><%=  playerseason.ratio %></td>
                       <td class="cla" ><%=  valeur %></td>
                     </tr>
                     <% elsif playerseason.forecasts.exists? %>
                     <tr>
                       <th scope="row"><%= x += 1%></th>
-                      <td><%=  playerseason.user.pseudo %></td>
+                      <% if playerseason.blason.present? %>
+                        <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %><%=  playerseason.user.pseudo %></td>
+                      <% else %>
+                        <td><%=  playerseason.user.pseudo %></td>
+                      <% end %>
                       <td><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count %></td>
-                      <td><%=  playerseason.ratio %></td>
                       <td><%=  valeur %></td>
                     </tr>
                     <% else %>
@@ -191,4 +198,19 @@
   </div>
 
   <%=  render "shared/navbarbottom" %>
+  <script type='text/javascript'>
+  (function()
+  {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+  })();
+</script>
 </div>

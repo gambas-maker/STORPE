@@ -38,6 +38,8 @@ gem "simple_scheduler"
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
+gem "fog-aws"
+gem "sitemap_generator"
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'

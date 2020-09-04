@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_scope :user do
   get '/users/sign_out' => 'devise/sessions#destroy'
 end
+
   root to: 'pages#home'
 
   require "sidekiq/web"
@@ -15,6 +16,7 @@ end
   get 'contact', to: 'pages#contact'
   get 'store_outcome', to: 'forecasts#store_outcome', defaults: {format: :json}
   get 'confirm_pending', to: 'forecasts#confirm_pending', defaults: {format: :json}
+  get '/sitemap.xml.gz', to: redirect("https://s3-eu-west-3.amazonaws.com/storpesitemap/sitemap.xml.gz")
 
   resources :pages, only: [:show]
   resources :matches, only: [:index] do

@@ -4,6 +4,28 @@
     <title>STORPE</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="google-site-verification" content="KuFMLwbPn1_e0LJ6fzX4TNG998rUCo1pqr4JnbDqVaA" />
+    <!-- Hotjar Tracking Code for https://storpe.club -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1973670,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177219463-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-177219463-1');
+    </script>
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,6 +36,7 @@
   <body>
 
     <%= render 'shared/flashes' %>
+
     <%= yield %>
   </body>
 </html>
