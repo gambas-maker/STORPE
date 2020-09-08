@@ -18,9 +18,34 @@
 .carousel-control-next-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23FBB03B' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/%3e%3c/svg%3e");
 }
-.carousel-caption p{
+.carousel-caption{
   font-size: 15px;
-  color: black;
+  color: white;
+}
+
+.phone p, h2{
+ margin-top: 5px;
+}
+
+.phone p{
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom:1px;
+}
+.phone h2{
+  font-size: 24px;
+}
+.desktop p, h2 {
+margin-bottom: 10px;
+}
+.desktop p{
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.desktop h2{
+  font-size: 32px;
+  font-weight: bold;
 }
 .storpe{
   padding-top: 5px;

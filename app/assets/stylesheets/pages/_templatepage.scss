@@ -24,6 +24,7 @@
 
 .blason{
   margin-top: 13px;
+  margin-bottom: 10px;
 }
 .title{
   margin-top: 10px;
@@ -91,12 +92,20 @@
 
     /* Overrides the above styles on screens larger than 36em */
 
-
+.up{
+  text-align: center;
+}
 .typo {
   color: white;
   font-family: 'Montserrat';
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
+}
+
+.typoleague{
+  color: #FBB03B;
+  font-family: 'Montserrat';
+  font-size: 16px;
 }
 
 .typos {

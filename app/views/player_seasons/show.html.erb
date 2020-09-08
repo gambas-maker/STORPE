@@ -6,18 +6,17 @@
 <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex  flex-column">
       <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
-        <div class="blason">
-          <% if  current_user.player_seasons[0].blason.present?%>
-            <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "48px", height: "56px"%>
-          <% end %>
-        </div>
-        <div>
-          <h3 class="typo"><%= current_user.pseudo %></h3>
-          <h3 class="typo circle"></h3>
-          <h3 class="typo mt-2">Division: <%= @championship[0].name %></h3>
+        <div class="up">
+          <div class="blason">
+            <% if  current_user.player_seasons[0].blason.present?%>
+              <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "48px", height: "56px"%>
+            <% end %>
+          </div>
+          <h3 class="typo">Pseudo: <%= current_user.pseudo %></h3>
+          <h3 class="typoleague mt-2">Division: <%= @championship[0].name %></h3>
         </div>
       </div>
-      <svg class=" center-block mx-auto mt-1" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+      <!-- <svg class=" center-block mx-auto mt-1" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg> -->
       <div class="container mt-3" style=" padding: 0 20%;"  >
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">MATCHS</h3>
