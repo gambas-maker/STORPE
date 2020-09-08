@@ -7,12 +7,12 @@
       <div class="d-flex justify-content-around mb-3" style="width: 375px;">
         <div>
           <div class=" d-flex pt-2">
-            <h3 class="typo">Matchs pronostiqués</h3>
+            <h3 class="typos">Matchs pronostiqués</h3>
             <h3 class="pl-2 typos"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count %>/50</h3>
           </div>
          </div>
         <div id = "panier">
-          <button type="button" class="btn btn-outline-light typo" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
+          <button type="button" class="btn btn-outline-light typomatch" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
