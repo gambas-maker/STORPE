@@ -1,27 +1,48 @@
 <h1 class="title">Les règles du jeu</h1>
 
 <div class="container">
-  <ul>
-    <ol>Ton Championnat se déroule chaque semaine du Lundi au Dimanche.</ol>
-
-  </ul>
+  <ol>
+    <li>Ton <span style="font-weight: bold;">Championnat</span> se déroule chaque semaine du <span style="color:#FBB03B;">Lundi au Dimanche</span>.</li>
+    <li>Pour lancer ta participation au Championnat, il te suffit de placer un premier <span style="font-weight: bold;">pronostic</span>.</li>
+    <li>Pour cela, rend toi sur la page des <u><%= link_to "Matchs", matches_path%></u>. Pronostique un ou plusieurs matchs et assure-toi de les <span style="color:#FBB03B;">valider dans ton panier</span>. </li>
+    <li>Chaque Championnat te permet de pronostiquer jusqu’à <span style="color:red;">50 rencontres sportives !</span></li>
+    <li>Au cours de la semaine de jeu, rends-toi sur la page <u><%= link_to "Championnat", season_path(current_user.id)%></u> afin de garder un œil sur tes performances. Tu pourras visualiser ton classement et t’assurer que tes adversaires ne te devancent pas. </li>
+    <li>En fin de Championnat, ton <span style="color:#FBB03B;">classement</span> final te permet d’évoluer de Division :</li>
+      <ol>- Les 4 premiers du Championnat sont promus en Division supérieure.</ol>
+      <ol>- Les 4 derniers sont relégués en Division inférieure.</ol>
+      <ol>- Le reste des joueurs sont maintenus dans cette même Division.</ol>
+    <li>Le niveau des <span style="font-weight: bold;">championnats</span> est le suivant (du plus bas au plus haut): <span style="color:#FBB03B;">Amateur - Semi-Pro - Pro - Champion - Légende</span> (oui tu as encore un peu de chemin)<span style="font-weight: bold;"> pronostic</span>.</li>
+    <li>Tu ne peux pas <span style="font-weight: bold;">jouer</span> cette semaine ? Ne t’inquiète pas. Si tu ne <span style="font-weight: bold;">pronostiques</span> aucun match, tu n’es pas pris en compte dans le Championnat en cours. Tu gardes donc ta place dans la <span style="font-weight: bold;">Division</span> dans laquelle tu te trouves.</li>
+    <li>Tout au long de ta <span style="font-weight: bold;">carrière</span>, il te suffira de te rendre sur ton <u><%= link_to "Profil", player_season_path(current_user.id) %></u> afin d’avoir accès à l’ensemble de tes <span style="color:#FBB03B;">performances</span> depuis ton inscription.</li>
+  </ol>
 </div>
 
+<div class="container">
+  <h2>À venir</h2>
+  <p>Pronostiquer est avant tout un plaisir et un <span style="font-weight:bold; text-decoration: underline;">jeu</span>.</p>
+  <ol>
+    <li>Bientôt, tu auras la possibilité de remporter des <span style="color:#FBB03B;">Tokens</span> de jeu à la suite de ton Championnat. Cette monnaie virtuelle te permettra d’effectuer des achats dans la Boutique <span style="font-weight: bold;">STORPE</span> !</li>
+    <li>En échangeant tes Tokens dans la Boutique, tu pourras obtenir des <span style="color:#FBB03B;">boosts de performance</span> ! Ces jokers te permettront d’accélérer ton ascension vers la plus <span style="font-weight: bold;">haute Division</span> !</li>
+    <li>Tu aimerais prouver à tes amis que tu es <span style="color:#FBB03B;">meilleur</span> qu’eux ? Tu pourras bientôt les ajouter dans ta <span style="color:#FBB03B;">liste d’amis</span> afin qu’ils puissent suivre tes performances, et qui sait, un jour les retrouver dans ton <span style="color:#FBB03B;">Championnat</span> !</li>
+    <li>Enfin nous allons ajouter de nouvelles <span style="font-weight:bold;">divisions de niveaux</span> au fur et à mesure que la <span style="color:#FBB03B;">communauté grossit</span>. </li>
+  </ol>
 
+</div>
+
+<div class="main">
+  <a class="typeform-share button mt-4" href="https://form.typeform.com/to/vJ9bp59Y" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:#FBB03B;color:white;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:25px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Contacte-nous 📩</a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+</div>
+<p style="text-align: center; color: #FBB03B; font-size: 20px; margin-bottom: 0; margin-top: 3px;">- ou -</p>
 <footer class="footer-contact">
   <div class="foot-phrase" style="color: white; font-size: 20px;">
     <p>Échange avec nous 👉</p>
   </div>
-  <div class="footer-icones" style="display: flex; align-items: center; font-size: 30px; margin-top: 20px;">
+  <div class="footer-icones" style="display: flex; align-items: center; font-size: 30px; margin-bottom: 75px;">
     <a href="https://twitter.com/STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
     <a href="https://www.facebook.com/groups/storpe/" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
     <a href="https://www.instagram.com/storpe4/?hl=fr" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
   </div>
 </footer>
-  <p style="text-align: center; color: #FBB03B; font-size: 20px;">ou</p>
-<div class="main">
-  <a class="typeform-share button mt-4" href="https://form.typeform.com/to/vJ9bp59Y" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:#FBB03B;color:white;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:25px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Contacte-nous 📩</a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
-</div>
 
 
 <%= render "shared/navbarbottom" %>
