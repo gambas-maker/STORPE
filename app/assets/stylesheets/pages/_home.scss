@@ -106,7 +106,6 @@ font-weight: normal;
   justify-content: center;
   padding-top: 6px;
   box-shadow: 0px -4px 0px rgba(35, 40, 49, 0.9);
-  align-items: baseline;
   color: black;
   background-color: #F4F4F4;
 }
@@ -115,7 +114,6 @@ font-weight: normal;
   .phone{
     display: none;
   }
-
   .mainhome{
     display: none;
   }
@@ -147,6 +145,7 @@ font-weight: normal;
     display: none;
   }
 }
+
 
 .footer-match{
   display: flex;
