@@ -18,9 +18,35 @@
 .carousel-control-next-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23FBB03B' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/%3e%3c/svg%3e");
 }
-.carousel-caption p{
+.carousel-caption{
   font-size: 15px;
-  color: black;
+  color: white;
+}
+
+.phone p, h2{
+ margin-top: 5px;
+}
+
+.phone p{
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom:1px;
+}
+.phone h2{
+  font-size: 17px;
+  font-weight: bold;
+}
+.desktop p, h2 {
+margin-bottom: 10px;
+}
+.desktop p{
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.desktop h2{
+  font-size: 32px;
+  font-weight: bold;
 }
 .storpe{
   padding-top: 5px;
@@ -81,16 +107,15 @@ font-weight: normal;
   justify-content: center;
   padding-top: 6px;
   box-shadow: 0px -4px 0px rgba(35, 40, 49, 0.9);
-  align-items: baseline;
   color: black;
   background-color: #F4F4F4;
+  align-items: baseline;
 }
 
 @media (min-width: 960px) {
   .phone{
     display: none;
   }
-
   .mainhome{
     display: none;
   }
@@ -123,9 +148,10 @@ font-weight: normal;
   }
 }
 
+
 .footer-match{
   display: flex;
-  width: 375px;
+  width: 100%;
   justify-content: center;
   padding-top: 6px;
   box-shadow: 0px -4px 0px rgba(35, 40, 49, 0.9);

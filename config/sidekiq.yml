@@ -14,6 +14,6 @@
   ResultsJob:
     cron: '30 21 * * *'
   ResultsbasketJob:
-    cron: '0 23 * * *'
+    cron: '30 1 * * *'
   ResultsbaskettodayJob:
     cron: '30 4 * * *'

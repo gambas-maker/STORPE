@@ -21,9 +21,32 @@
   background-size: cover;
 
 }
+.container{
+  color: white;
+}
+.container ol{
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  background-color: #312947;
+  color: white;
+}
+
+.container li{
+  padding-top: 15px;
+  padding-left: 0px;
+  color: white;
+}
+
+.typomatch{
+  font-size: 12px;
+  font-weight: bold;
+}
 
 .blason{
   margin-top: 13px;
+  margin-bottom: 10px;
 }
 .title{
   margin-top: 10px;
@@ -62,7 +85,7 @@
   width: 375px;
   height: auto;
   background-color: rgba(255, 255, 255, 0.08);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   }
 
 .rank{
@@ -91,18 +114,26 @@
 
     /* Overrides the above styles on screens larger than 36em */
 
-
+.up{
+  text-align: center;
+}
 .typo {
   color: white;
   font-family: 'Montserrat';
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
+}
+
+.typoleague{
+  color: #FBB03B;
+  font-family: 'Montserrat';
+  font-size: 16px;
 }
 
 .typos {
   color: white;
   font-family: 'Montserrat';
-  font-size: 12px;
+  font-size: 14px;
   font-weight: lighter;
 }
 

@@ -6,18 +6,17 @@
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex  flex-column">
       <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
-        <div class="blason">
-          <% if  current_user.player_seasons[0].blason.present?%>
-            <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join("")%>
-          <% end %>
-        </div>
-        <div>
-          <h3 class="typo"><%= current_user.pseudo %></h3>
-          <h3 class="typo circle"></h3>
-          <h3 class="typo mt-2">Division: <%= @championship[0].name %></h3>
+        <div class="up">
+          <div class="blason">
+            <% if  current_user.player_seasons[0].blason.present?%>
+              <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join("")%>
+            <% end %>
+          </div>
+          <h3 class="typo">Pseudo: <%= current_user.pseudo %></h3>
+          <h3 class="typoleague mt-2">Division: <%= @championship[0].name %></h3>
         </div>
       </div>
-      <svg class=" center-block mx-auto mt-1" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+      <svg class=" center-block mx-auto mt-1" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
       <div class="container mt-3" style=" padding: 0 20%;"  >
         <div class="d-flex justify-content-between">
           <h3 class="typo mr-3">MATCHS</h3>
@@ -59,7 +58,7 @@
           <h3 class="typo"><%= pointsb %></h3>
         </div>
       </div>
-      <svg class=" center-block mx-auto mt-2" xmlns="http://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+      <svg class=" center-block mx-auto mt-2" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
       <div class="btn-ranking d-flex justify-content-center">
         <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-light btnbis typo">Voir le classement</button>
       </div>
@@ -188,9 +187,9 @@
             <p>Le sport c'est ici aussi 👉</p>
           </div>
           <div class="footer-links" style="display: flex; align-items: center;">
-            <a href="https://twitter.com/STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.facebook.com/groups/storpe/" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
-            <a href="https://www.instagram.com/storpe4/?hl=fr" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+            <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+            <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+            <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
           </div>
         </footer>
       </div>
