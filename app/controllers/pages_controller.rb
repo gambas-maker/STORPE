@@ -11,7 +11,6 @@ class PagesController < ApplicationController
   end
 
   def rules
-
   end
 
   def settings

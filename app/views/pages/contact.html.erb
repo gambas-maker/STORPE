@@ -1,20 +1,21 @@
 <div class="position-relative">
   <div class="d-flex justify-content-center pt-5 mb-3">
-    <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/v1598518816/Group_135_2x_eoeq1f.png", width: "250px"; %>
+    <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/v1598518816/Group_135_2x_eoeq1f.png", width: "290px"; %>
   </div>
   <div class="main">
-    <div class="contact mt-5 mb-5">
-      <a class="typeform-share button mt-4" href="https://form.typeform.com/to/vJ9bp59Y" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:#FBB03B;color:white;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:25px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Contacte-nous 📩</a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+    <div class="contact mt-5 mb-3">
+      <p style="text-align: center;">Une suggestion ?</p>
+      <a class="typeform-share button mt-4" href="https://form.typeform.com/to/vJ9bp59Y" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:white;color:#FBB03B;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:25px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Contacte-nous 📩</a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
     </div>
   </div>
   <div class="test">
-    <div class="main">
+    <!-- <div class="main">
       <div class="contact mt-5 mb-3">
         <%= link_to "Mes paramètres", edit_player_season_path(current_user.player_seasons[0].id), :class => "btn-login" %>
       </div>
-    </div>
+    </div> -->
     <div class="main">
-      <div class="contact mt-5 mb-5">
+      <div class="contact mt-5 mb-3">
         <%= link_to "Les règles du jeu", rules_path, :class => "btn-login" %>
       </div>
     </div>
@@ -25,13 +26,10 @@
     </div>
   </div>
   <footer class="footer-contact">
-    <div class="foot-phrase" style="color: white; font-size: 20px;">
-      <p>Pour discuter sport 👉</p>
-    </div>
     <div class="footer-icones" style="display: flex; align-items: center; font-size: 30px; margin-top: 20px;">
       <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
       <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
-      <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+      <!-- <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a> -->
     </div>
   </footer>
   <%= render "shared/navbarbottom" %>
