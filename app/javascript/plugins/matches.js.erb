@@ -1,0 +1,13 @@
+const calculate = () => {
+  document.querySelector(".info").addEventListener("change", function(e) {
+  const tgt = e.target;
+  if (tgt.classList.contains("square")) {
+    const parent = tgt.closest(".displaysquares");
+    var x = document.querySelectorAll(".square:checked").length; console.log(x);
+    document.querySelector(".plus").innerHTML += "+" x;
+    }
+  })
+}
+
+export { calculate };
+
