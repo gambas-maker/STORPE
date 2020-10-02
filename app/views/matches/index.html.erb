@@ -8,7 +8,8 @@
         <div>
           <div class=" d-flex pt-2">
             <h3 class="typos">Matchs pronostiqués</h3>
-            <h3 class="typos" style="font-weight: bold; padding-left: 5px;"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count %>/50</h3>
+            <h3 class="typos pts" style="font-weight: bold; padding-left: 5px;"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count %>/50   +</h3>
+            <h3 class="plus typopo" style="margin-bottom: 8px;"></h3>
           </div>
          </div>
         <div id = "panier">
@@ -96,9 +97,9 @@
             <p class="typopo text-center">VS</p>
             <div class="d-flex flex-row align-items-center col-4">
               <div class="displaysquares" data-id="<%= match.id %>">
-                <input type="checkbox" class="square" data-outcome="1"></input>
-                <input type="checkbox" class="square" data-outcome="NULL"></input>
-                <input type="checkbox" class="square" data-outcome="2"></input>
+                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
+                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
               </div>
             </div>
           </div>

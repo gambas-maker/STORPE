@@ -13,6 +13,7 @@
   background-size: cover;
 
 }
+
 .topimageprofile{
   mix-blend-mode: lighten;
   opacity: 1;
@@ -71,7 +72,7 @@
 
 .typopo{
   color:white;
-  font-size:14px;
+  font-size:12px;
   font-weight: 300;
   font-family: 'Montserrat';
   text-align: center;
@@ -144,7 +145,7 @@
 .typos {
   color: white;
   font-family: 'Montserrat';
-  font-size: 14px;
+  font-size: 12px;
   font-weight: lighter;
 }
 
@@ -169,6 +170,7 @@
 
 .table td {
   padding: 0.45rem;
+  vertical-align: 0;
 }
 
 th{
