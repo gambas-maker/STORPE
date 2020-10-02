@@ -156,7 +156,6 @@
                       <th scope="row"><%= x += 1%></th>
                       <% if playerseason.blason.present? %>
                         <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %></td>
-                        <td><%=  playerseason.user.pseudo %></td>
                       <% else %>
                       <td></td>
                       <% end %>
