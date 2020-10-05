@@ -40,6 +40,11 @@
   color: white;
 }
 
+.params{
+  position: absolute;
+  right: 0px;
+}
+
 .typomatch{
   font-size: 12px;
   font-weight: bold;
@@ -124,6 +129,7 @@
 
 .up{
   text-align: center;
+  position: relative;
 }
 .up p{
   color: white;

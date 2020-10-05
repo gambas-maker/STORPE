@@ -16,4 +16,11 @@ class PagesController < ApplicationController
   def settings
     @blasons = Blason.all
   end
+
+  def dashboard
+    @matches = Match.all
+    @forecasts = Forecast.where(season_id: Season.last.id, confirmed: true)
+    @users = User.all
+    @playerseasons = PlayerSeason.where(season_id: Season.last.id)
+  end
 end
