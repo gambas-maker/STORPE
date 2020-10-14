@@ -1,8 +1,8 @@
 :schedule:
   PromotionJob:
-    cron: '0 9 * * 1'
+    cron: '0 13 * * 1'
   FetchapiJob:
-    cron: '0 13 * * 1,3'
+    cron: '0 14 * * 1,3'
   FetchapibasketJob:
     cron: '0 12 * * 1'
   FetchapibaskettomorrowJob:
