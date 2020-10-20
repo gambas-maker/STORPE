@@ -22,7 +22,7 @@
 <div class="info" style="text-align: center;">
   <% chaud = [] %>
   <% @forecasts.sort_by{|points|points.points_win}.each do |forecast| %>
-      <% if forecast.match.event_stamp == Date.today.to_s %>
+      <% if forecast.match.event_stamp == Date.yesterday.to_s %>
         <% chaud.push(forecast) %>
       <% end %>
     <% end %>
