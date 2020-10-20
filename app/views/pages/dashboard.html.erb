@@ -29,7 +29,8 @@
     <% bon =  chaud.last(3) %>
     <% bon.each do |meilleur| %>
       <p>Pseudo : <%= meilleur.player_season.user.pseudo %></p>
-      <p>Nom : <%= meilleur.player_season.user.name %></p>
+      <p>Prénom : <%= meilleur.player_season.user.name %></p>
+      <p>Nom : <%=  meilleur.player_season.user.last_name %></p>
       <p>Plus gros points : <%= meilleur.points_win %></p>
       <br>
   <% end %>
