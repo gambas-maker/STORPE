@@ -25,8 +25,8 @@
     <% if forecast.match.event_stamp == Date.today.to_s %>
       <% chaud.push(forecast) %>
     <% end %>
-    <%# chaud.last(3) %>
-    <% chaud.last(3).each do |meilleur| %>
+    <% bon = chaud.last(3) %>
+    <% bon.each do |meilleur| %>
       <p>Pseudo : <%= meilleur.player_season.user.pseudo %></p>
       <p>Nom : <%= meilleur.player_season.user.name %></p>
       <p>Plus gros points : <%= meilleur.points_win %></p>
