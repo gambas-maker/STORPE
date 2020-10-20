@@ -3,13 +3,16 @@
 <%= link_to "Les matchs", matches_path %>
 
 <h2>Les meilleurs pronostiqueurs de la semaine</h2>
-<div class="info" style="text-align: center;">
-  <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
-    <p> Pseudo:<%= playerseason.user.pseudo %></p>
-    <p> Blason: <%= cl_image_tag playerseason.blason %> </p>
-    <p> Championnat: <%= playerseason.championship.name %> </p>
-    <p> Nombre de points: <%= playerseason.number_of_points %> </p>
-  <% end %>
+<div class="d-flex justify-content-center">
+  <div class="info" style="text-align: center;">
+    <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
+      <p> Pseudo:<%= playerseason.user.pseudo %></p>
+      <p> Blason: <%= cl_image_tag playerseason.blason %> </p>
+      <p> Championnat: <%= playerseason.championship.name %> </p>
+      <p> Nombre de points: <%= playerseason.number_of_points %> </p>
+      <br>
+    <% end %>
+  </div>
 </div>
 
 <!-- <h2>Les meilleurs pronostiqueurs du Jour</h2> -->
@@ -21,39 +24,44 @@
     <% chaud = [] %>
     <% if forecast.match.event_stamp == Date.today.to_s %>
       <% chaud.push(forecast) %>
-      <%= p chaud %>
     <% end %>
     <% chaud.last(3) %>
     <% chaud.each do |meilleur| %>
-      <%= meilleur.player_season %>
-      <%= meilleur.points_win %>
+      <p>Pseudo : <%= meilleur.player_season.user.pseudo %></p>
+      <p>Nom : <%= meilleur.player_season.user.name %></p>
+      <p>Plus gros points : <%= meilleur.points_win %></p>
+      <br>
     <% end %>
   <% end %>
 </div>
 
 <h2>Tendance des pronostiques sportifs</h2>
-<div class="info" style="text-align: center;">
-  <% @matches.where(event_stamp: Date.today.to_s).each do |match| %>
-    <p> Nombre de pronos <%= match.forecasts.count %> </p>
-    <p> Équipe à domicile <%= match.team_home %></p>
-    <p> Points équipe à domicile<%= match.points_home %></p>
-    <p> Équipe à l'extérieur<%= match.team_away %></p>
-    <p> Points équipe à l'extérieur<%= match.points_away %></p>
-    <p> Points du match nul<%= match.points_draw %></p>
-    <% compteur_1 = 0 %>
-    <% compteur_2 = 0 %>
-    <% compteur_nul = 0 %>
-    <% match.forecasts.each do |forecast| %>
-      <% if forecast.outcome == "1" %>
-        <% compteur_1 += 1 %>
-      <% elsif forecast.outcome == "2" %>
-        <% compteur_2 += 1 %>
-      <% elsif forecast.outcome == "NULL" %>
-        <% compteur_nul += 1 %>
+<div class="d-flex justify-content-center">
+  <div class="info" style="text-align: center;">
+    <% @matches.where(event_stamp: Date.today.to_s).each do |match| %>
+      <p> Nombre de pronos <%= match.forecasts.count %> </p>
+      <p> Équipe à domicile <%= match.team_home %></p>
+      <p> Points équipe à domicile<%= match.points_home %></p>
+      <p> Équipe à l'extérieur<%= match.team_away %></p>
+      <p> Points équipe à l'extérieur<%= match.points_away %></p>
+      <p> Points du match nul<%= match.points_draw %></p>
+      <% compteur_1 = 0 %>
+      <% compteur_2 = 0 %>
+      <% compteur_nul = 0 %>
+      <% match.forecasts.each do |forecast| %>
+        <% if forecast.outcome == "1" %>
+          <% compteur_1 += 1 %>
+        <% elsif forecast.outcome == "2" %>
+          <% compteur_2 += 1 %>
+        <% elsif forecast.outcome == "NULL" %>
+          <% compteur_nul += 1 %>
+        <% end %>
       <% end %>
+      <p>Nombre de pronostiques sur l'équipe à domicile<%= compteur_1 %></p>
+      <p>Nombre de pronostiques sur l'équipe à l'extérieur<%= compteur_2 %></p>
+      <p>Nombre de pronostiques sur le match nul<%= compteur_nul %></p>
+      <br>
+      <br>
     <% end %>
-    <p>Nombre de pronostiques sur l'équipe à domicile<%= compteur_1 %></p>
-    <p>Nombre de pronostiques sur l'équipe à l'extérieur<%= compteur_2 %></p>
-    <p>Nombre de pronostiques sur le match nul<%= compteur_nul %></p>
-  <% end %>
+  </div>
 </div>
