@@ -255,6 +255,10 @@
                   <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
                 <% end %>
               <% end %>
+              <% if forecast.match.result.present? %>
+                <p class="typopo text-success-center"> <%= forecast.match.result %></p>
+              <% else %>
+              <% end %>
             </div>
             <div class="d-flex flex-column align-items-center text-align-center col-4 ">
               <h3 class="typopo"><%= image_tag "#{forecast.match.team_away_logo_url}", width: 50 %></h3>
