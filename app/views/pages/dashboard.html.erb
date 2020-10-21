@@ -9,7 +9,7 @@
       <p> Pseudo:<%= playerseason.user.pseudo %></p>
       <p> Prénom : <%= playerseason.user.name %> </p>
       <p> Nom : <%= playerseason.user.last_name %> </p>
-      <p> Blason: <%= cl_image_tag playerseason.blason %> </p>
+      <p> Blason: <%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %> </p>
       <p> Championnat: <%= playerseason.championship.name %> </p>
       <p> Nombre de points: <%= playerseason.number_of_points %> </p>
       <br>
