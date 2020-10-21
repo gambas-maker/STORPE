@@ -7,6 +7,8 @@
   <div class="info" style="text-align: center;">
     <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
       <p> Pseudo:<%= playerseason.user.pseudo %></p>
+      <p> Prénom : <%= playerseason.user.name %> </p>
+      <p> Nom : <%= playerseason.user.last_name %> </p>
       <p> Blason: <%= cl_image_tag playerseason.blason %> </p>
       <p> Championnat: <%= playerseason.championship.name %> </p>
       <p> Nombre de points: <%= playerseason.number_of_points %> </p>
