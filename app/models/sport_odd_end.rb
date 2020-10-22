@@ -5,8 +5,8 @@ require 'json'
 
 class SportOddEnd
   BASE_URL = "https://v2.api-football.com/"
-  LEAGUE_IDS = [2664, 2790, 2833, 2857, 2755, 530, 514, 1422]
-  # 2664 = France, 2790 = Angleterre, 2833 = Espagne, 2857 = Italie, 2755 = Allemagne, 530 = Champions League, 514 = Europa League, 1422 = Nations League
+  LEAGUE_IDS = [2664, 2790, 2833, 2857, 2755, 2771, 2777, 1422]
+  # 2664 = France, 2790 = Angleterre, 2833 = Espagne, 2857 = Italie, 2755 = Allemagne, 2771 = Champions League, 2777 = Europa League, 1422 = Nations League
 
   def self.matches_for_last_days
     LEAGUE_IDS.each do |league_id|
@@ -27,7 +27,41 @@ class SportOddEnd
     end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}?timezone=Europe/Paris")
     matches = call_api(end_point)["api"]["fixtures"]
     sport = "football"
+    @rencontresto = Match.where(event_stamp: Date.today)
+    rencontresto = []
+    @rencontrestom = Match.where(event_stamp: Date.tomorrow)
+    rencontrestom = []
+    @rencontresaf = Match.where(event_stamp: 2.days.from_now)
+    rencontresaf = []
     matches.each do |match|
+      @rencontresto.each do |rencontre|
+        rencontresto << rencontre.fixture_id
+      end
+      @rencontrestom.each do |rencontretom|
+        rencontrestom << rencontretom.fixture_id
+      end
+      @rencontresaf.each do |rencontreaf|
+        rencontresaf << rencontreaf.fixture_id
+      end
+      if rencontresto.include?(match["fixture_id"])
+        @rencontresto.each do |rencontreto|
+          if rencontreto.points_home.nil? || rencontreto.points_away.nil?
+            get_odds_for_match(rencontreto)
+          end
+        end
+      elsif rencontrestom.include?(match["fixture_id"])
+        @rencontrestom.each do |rencontretom|
+          if rencontretom.points_home.nil? || rencontretom.points_away.nil?
+            get_odds_for_match(rencontretom)
+          end
+        end
+      elsif rencontresaf.include?(match["fixture_id"])
+        @rencontresaf.each do |rencontreaf|
+          if rencontreaf.points_home.nil? || rencontreaf.points_away.nil?
+            get_odds_for_match(rencontreaf)
+          end
+        end
+      else
       new_match = Match.create(
         team_home: match["homeTeam"]["team_name"],
         team_home_logo_url: match["homeTeam"]["logo"],
@@ -41,6 +75,7 @@ class SportOddEnd
         kick_off: DateTime.parse(match["event_date"])
       )
       get_odds_for_match(new_match)
+      end
     end
   end
 

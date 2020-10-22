@@ -56,7 +56,7 @@
           <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
             <h3 class="typopo">0%</h3>
           <% else %>
-            <% ratio = (current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count.to_f * 100).round %>
+            <% ratio = (current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
             <h3 class="typopo"><%= ratio %>%</h3>
           <% end %>
         </div>
@@ -146,6 +146,11 @@
                         <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
                         <td class="cla"><%= current_user.pseudo %> </td>
                       <% else %>
+                        <td>
+                          <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                            <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+                          <% end %>
+                        </td>
                         <td class="cla"><%=  current_user.pseudo %></td>
                       <% end %>
                       <td class="cla"><%=  playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative? }.count %></td>
@@ -154,11 +159,13 @@
                     <% elsif playerseason.forecasts.exists? %>
                     <tr>
                       <th scope="row"><%= x += 1%></th>
-                      <% if playerseason.blason.present? %>
-                        <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %></td>
-                        <td><%=  playerseason.user.pseudo %></td>
+                      <% if playerseason.blason == nil %>
+                        <td>
+                           <i class="fas fa-plus-circle" style="color: white;"></i>
+                        </td>
                       <% else %>
-                      <td></td>
+                        <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                        </td>
                       <% end %>
                         <div class="dropdown">
                            <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -168,7 +175,7 @@
                               <p class="dropdown-item font-weight-bold">Ratio</p>
                               <p class="dropdown-item font-weight-light">0%</p>
                             <% else %>
-                              <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count.to_f * 100).round %>
+                              <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
                               <p class="dropdown-item font-weight-bold">Ratio</p>
                               <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
                             <% end %>
@@ -247,6 +254,10 @@
                 <% else forecast.outcome == "NULL"%>
                   <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
                 <% end %>
+              <% end %>
+              <% if forecast.match.result.present? %>
+                <p class="typopo text-success-center"> <%= forecast.match.result %></p>
+              <% else %>
               <% end %>
             </div>
             <div class="d-flex flex-column align-items-center text-align-center col-4 ">

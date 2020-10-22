@@ -14,6 +14,7 @@ end
   get 'settings', to: 'pages#settings'
   get 'rules', to: 'pages#rules'
   get 'contact', to: 'pages#contact'
+  get 'dashboard', to: 'pages#dashboard'
   get 'store_outcome', to: 'forecasts#store_outcome', defaults: {format: :json}
   get 'confirm_pending', to: 'forecasts#confirm_pending', defaults: {format: :json}
   get '/sitemap.xml.gz', to: redirect("https://s3-eu-west-3.amazonaws.com/storpesitemap/sitemap.xml.gz")
