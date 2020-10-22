@@ -27,7 +27,41 @@ class SportOddEnd
     end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}?timezone=Europe/Paris")
     matches = call_api(end_point)["api"]["fixtures"]
     sport = "football"
+    @rencontresto = Match.where(event_stamp: Date.today)
+    rencontresto = []
+    @rencontrestom = Match.where(event_stamp: Date.tomorrow)
+    rencontrestom = []
+    @rencontresaf = Match.where(event_stamp: 2.days.from_now)
+    rencontresaf = []
     matches.each do |match|
+      @rencontresto.each do |rencontre|
+        rencontresto << rencontre.fixture_id
+      end
+      @rencontrestom.each do |rencontretom|
+        rencontrestom << rencontretom.fixture_id
+      end
+      @rencontresaf.each do |rencontreaf|
+        rencontresaf << rencontreaf.fixture_id
+      end
+      if rencontresto.include?(match["fixture_id"])
+        @rencontresto.each do |rencontreto|
+          if rencontreto.points_home.nil? || rencontreto.points_away.nil?
+            get_odds_for_match(rencontreto)
+          end
+        end
+      elsif rencontrestom.include?(match["fixture_id"])
+        @rencontrestom.each do |rencontretom|
+          if rencontretom.points_home.nil? || rencontretom.points_away.nil?
+            get_odds_for_match(rencontretom)
+          end
+        end
+      elsif rencontresaf.include?(match["fixture_id"])
+        @rencontresaf.each do |rencontreaf|
+          if rencontreaf.points_home.nil? || rencontreaf.points_away.nil?
+            get_odds_for_match(rencontreaf)
+          end
+        end
+      else
       new_match = Match.create(
         team_home: match["homeTeam"]["team_name"],
         team_home_logo_url: match["homeTeam"]["logo"],
@@ -41,6 +75,7 @@ class SportOddEnd
         kick_off: DateTime.parse(match["event_date"])
       )
       get_odds_for_match(new_match)
+      end
     end
   end
 

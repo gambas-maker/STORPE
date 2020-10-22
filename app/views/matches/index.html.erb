@@ -48,11 +48,11 @@
                 <option class='dropdown-item' value='NBA'>NBA</option>
                 <option class='dropdown-item' value='UEFA Champions League'>Ligue des Champions</option>
                 <option class='dropdown-item' value='UEFA Europa League'>Ligue Europa</option>
-                <option class='dropdown-item' value='France'>Ligue 1</option>
-                <option class='dropdown-item' value='Germany'>Bundesliga</option>
-                <option class='dropdown-item' value='Spain'>Liga</option>
-                <option class='dropdown-item' value='Italy'>Serie A</option>
-                <option class='dropdown-item' value='England'>Premier league</option>"),
+                <option class='dropdown-item' value='Ligue 1'>Ligue 1</option>
+                <option class='dropdown-item' value='Bundesliga 1'>Bundesliga</option>
+                <option class='dropdown-item' value='Primera Division'>Liga</option>
+                <option class='dropdown-item' value='Serie A'>Serie A</option>
+                <option class='dropdown-item' value='Premier League'>Premier league</option>"),
                 class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
               </div>
               <div class="mt-1">
@@ -75,7 +75,7 @@
         </div>
         <input type="hidden" id ="season_player" value="<%= @player %>">
         <% @matches.each do |match| %>
-          <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? && match.points_away.present? %>
+          <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? && match.points_away.present? && match.negative_points_home && match.negative_points_draw %>
             <% if match.sport == "football" %>
               <div class="d-flex justify-content-center mb-2 mt-2">
                 <h4 class="typopo"><%= match.league %></h4>

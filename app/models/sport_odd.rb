@@ -27,20 +27,44 @@ class SportOdd
     end_point = URI("#{BASE_URL}fixtures/league/#{league_id}/#{date}?timezone=Europe/Paris")
     matches = call_api(end_point)["api"]["fixtures"]
     sport = "football"
+    @rencontresto = Match.where(event_stamp: Date.today)
+    rencontresto = []
+    @rencontrestom = Match.where(event_stamp: Date.tomorrow)
+    rencontrestom = []
     matches.each do |match|
-      new_match = Match.create(
-        team_home: match["homeTeam"]["team_name"],
-        team_home_logo_url: match["homeTeam"]["logo"],
-        team_away: match["awayTeam"]["team_name"],
-        team_away_logo_url: match["awayTeam"]["logo"],
-        sport: sport,
-        fixture_id: match["fixture_id"],
-        country: match["league"]["country"],
-        league: match["league"]["name"],
-        event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
-        kick_off: DateTime.parse(match["event_date"])
-      )
-      get_odds_for_match(new_match)
+      @rencontresto.each do |rencontre|
+        rencontresto << rencontre.fixture_id
+      end
+      @rencontrestom.each do |rencontretom|
+        rencontrestom << rencontretom.fixture_id
+      end
+      if rencontresto.include?(match["fixture_id"])
+        @rencontresto.each do |rencontreto|
+          if rencontreto.points_home.nil? || rencontreto.points_away.nil?
+            get_odds_for_match(rencontreto)
+          end
+        end
+      elsif rencontrestom.include?(match["fixture_id"])
+        @rencontrestom.each do |rencontretom|
+          if rencontretom.points_home.nil? || rencontretom.points_away.nil?
+            get_odds_for_match(rencontretom)
+          end
+        end
+      else
+        new_match = Match.create(
+            team_home: match["homeTeam"]["team_name"],
+            team_home_logo_url: match["homeTeam"]["logo"],
+            team_away: match["awayTeam"]["team_name"],
+            team_away_logo_url: match["awayTeam"]["logo"],
+            sport: sport,
+            fixture_id: match["fixture_id"],
+            country: match["league"]["country"],
+            league: match["league"]["name"],
+            event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
+            kick_off: DateTime.parse(match["event_date"])
+          )
+        get_odds_for_match(new_match)
+      end
     end
   end
 
