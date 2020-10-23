@@ -192,14 +192,4 @@ class SportOdd
       end
     end
   end
-
-  def self.sort
-    date_array = []
-    @matches = Match.all
-    @matches.each do |m|
-      date_clean = m.kick_off.to_i
-      date_array << date_clean
-    end
-    date_array.sort
-  end
 end
