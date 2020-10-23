@@ -3,16 +3,16 @@
     cron: '0 13 * * 1'
   FetchapiJob:
     cron: '0 14 * * 1'
-  FetchapiJob:
-    cron: '30 5 * * 3'
+  FetchapionedayJob:
+    cron: '30 6 * * 3,6,7'
+  FetchapilastJob:
+    cron: '30 4 * * 2,4,5'
   FetchapibasketJob:
     cron: '0 12 * * 1'
   FetchapibaskettomorrowJob:
     cron: '0 13 * * 2,3,4,5,6'
   UpdatebasketpointsJob:
     cron: '0 14 * * 2,3,4,5,6'
-  FetchapilastJob:
-    cron: '30 5 * * 5'
   ResultsJob:
     cron: '30 21 * * *'
   ResultsbasketJob:
