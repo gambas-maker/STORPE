@@ -74,7 +74,7 @@
           <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
         </div>
         <input type="hidden" id ="season_player" value="<%= @player %>">
-        <% @matches.each do |match| %>
+        <% @matches.sort_by{|v| v.kick_off}.each do |match| %>
           <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? && match.points_away.present? && match.negative_points_home && match.negative_points_draw %>
             <% if match.sport == "football" %>
               <div class="d-flex justify-content-center mb-2 mt-2">
