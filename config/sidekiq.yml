@@ -3,11 +3,10 @@
     cron: '0 13 * * 1'
   FetchapiJob:
     cron: '0 14 * * 1'
-    cron: '30 5 * * 3'
-    cron: '30 12 * * 3'
+  FetchapionedayJob:
+    cron: '30 6 * * 3,6,7'
   FetchapilastJob:
-    cron: '30 6 * * 5'
-    cron: '30 11 * * 5'
+    cron: '30 4 * * 2,4,5'
   FetchapibasketJob:
     cron: '0 12 * * 1'
   FetchapibaskettomorrowJob:
