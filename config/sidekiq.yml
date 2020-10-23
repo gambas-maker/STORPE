@@ -3,13 +3,10 @@
     cron: '0 13 * * 1'
   FetchapiJob:
     cron: '0 14 * * 1'
-  FetchapiJob:
     cron: '30 5 * * 3'
-  FetchapiJob:
     cron: '30 12 * * 3'
   FetchapilastJob:
     cron: '30 6 * * 5'
-  FetchapilastJob:
     cron: '30 11 * * 5'
   FetchapibasketJob:
     cron: '0 12 * * 1'
