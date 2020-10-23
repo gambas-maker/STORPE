@@ -4,7 +4,7 @@
   FetchapiJob:
     cron: '0 14 * * 1'
   FetchapionedayJob:
-    cron: '30 6 * * 3,6,7'
+    cron: '30 4 * * 3,6,7'
   FetchapilastJob:
     cron: '30 4 * * 2,4,5'
   FetchapibasketJob:
