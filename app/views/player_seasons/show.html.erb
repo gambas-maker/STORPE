@@ -122,7 +122,7 @@
         <h3 class="typo mr-3">POINTS REMPORTÉS</h3>
         <% points = 0 %>
         <% current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).each do |forecast| %>
-          <% if forecast.points_win.present? %>
+          <% if forecast.points_win.positive? %>
           <% points += forecast.points_win %>
           <% end %>
         <% end %>
@@ -132,7 +132,7 @@
         <h3 class="typo mr-3">POINTS FOOTBALL</h3>
         <% pointsf = 0 %>
         <% current_user.forecasts.where(season_id: Season.last.id - 1).each do |forecast| %>
-          <% if forecast.match.sport == "football" && forecast.points_win.present? %>
+          <% if forecast.match.sport == "football" && forecast.points_win.positive? %>
             <% pointsf += forecast.points_win %>
           <% end %>
         <% end %>
@@ -142,7 +142,7 @@
         <h3 class="typo mr-3">POINTS BASKETBALL</h3>
         <% pointsb = 0 %>
         <% current_user.forecasts.where(season_id: Season.last.id - 1).each do |forecast| %>
-          <% if forecast.match.sport == "basketball" && forecast.points_win.present? %>
+          <% if forecast.match.sport == "basketball" && forecast.points_win.positive? %>
             <% pointsb += forecast.points_win %>
           <% end %>
         <% end %>
