@@ -31,7 +31,7 @@ class SportOddEnd
     rencontresto = []
     @rencontrestom = Match.where(event_stamp: Date.tomorrow)
     rencontrestom = []
-    @rencontresaf = Match.where(event_stamp: 2.days.from_now)
+    @rencontresaf = Match.where(event_stamp: Date.tomorrow + 1)
     rencontresaf = []
     matches.each do |match|
       @rencontresto.each do |rencontre|
