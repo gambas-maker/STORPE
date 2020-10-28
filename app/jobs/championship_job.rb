@@ -11,7 +11,7 @@ class ChampionshipJob < ApplicationJob
       @championships.each do |championship|
         count << championship.player_seasons.count
       end
-      array = count.reject { |number| number >= 20 }
+      array = count.reject { |number| number >= 30 }
       if array.empty?
         Championship.create(season_id: Season.last.id, name: "Amateur")
         PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: Championship.last.id, number_of_points: 0)
