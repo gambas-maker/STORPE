@@ -30,19 +30,19 @@ class PromotionldcJob < ApplicationJob
     # Montée en division Pro
     @championships.each do |championship|
       ranking2 = {}
-      championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.each { |hash| ranking[hash] = hash.number_of_points }
+      championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.each { |hash| ranking2[hash] = hash.number_of_points }
       if ranking2.count >= 8
         array2 = []
         @championshippro.each do |championshippro|
           championshippro.player_seasons.count <= 16 ? array2 << championshippro : array2
         end
-        array2.empty? ? ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: Championship.create!(name: "Pro", season_id: Season.last.id).id, season_id: Season.last.id) } : ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: array2.sample.id, season_id: Season.last.id) }
+        array2.empty? ? ranking2.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: Championship.create!(name: "Pro", season_id: Season.last.id).id, season_id: Season.last.id) } : ranking2.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: array2.sample.id, season_id: Season.last.id) }
       else
         array2 = []
         @championshippro.each do |championshippro|
           championshippro.player_seasons.count <= 16 ? array2 << championshippro : array2
         end
-        array2.empty? ? ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.create!(name: "Pro", season_id: Season.last.id).id, season_id: Season.last.id) } : ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array2.sample.id, season_id: Season.last.id) }
+        array2.empty? ? ranking2.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.create!(name: "Pro", season_id: Season.last.id).id, season_id: Season.last.id) } : ranking2.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array2.sample.id, season_id: Season.last.id) }
       end
     end
     # Si ajout d'un niveau deplacer ce job dans le job du prochain niveau et ici appeler le prochain niveau de promotion
