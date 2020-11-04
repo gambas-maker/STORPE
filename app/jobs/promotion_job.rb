@@ -16,13 +16,25 @@ class PromotionJob < ApplicationJob
         @champ.each do |champion|
           champion.player_seasons.count <= 16 ? array << champion : array
         end
-        array.empty? ? ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: Championship.create!(name: "Semi-pro", season_id: Season.last.id).id, season_id: Season.last.id) } : ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id) }
+        if array.empty?
+          Championship.create!(name: "Semi-pro", season_id: Season.last.id)
+          array << Championship.last
+          ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: Championship.where(name: "Semi-pro").last.id)}
+        else
+          ranking.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id)}
+        end
       else
         @champ.each do |champion|
           array = []
           champion.player_seasons.count <= 16 ? array << champion : array
         end
-        array.empty? ? ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.create!(name: "Semi-pro", season_id: Season.last.id).id, season_id: Season.last.id) } : ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id) }
+        if array.empty?
+          Championship.create!(name: "Semi-pro", season_id: Season.last.id)
+          array << Championship.last
+          ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.where(name: "Semi-pro").last.id)}
+        else
+          ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id)}
+        end
       end
     end
     PromotionldcJob.perform_now
