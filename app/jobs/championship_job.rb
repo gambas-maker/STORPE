@@ -14,14 +14,14 @@ class ChampionshipJob < ApplicationJob
         championship.player_seasons.each do |playerseason|
           if playerseason.forecasts.where(season_id: Season.last.id).exists?
             player << playerseason
-            if player.count < 20
-              puts player
-              hash[championship.id] = player.count
-              puts hash
-              array << championship
-              puts array
-            end
           end
+        end
+        if player.count < 20
+          puts player
+          hash[championship.id] = player.count
+          puts hash
+          array << championship
+          puts array
         end
       end
       if array.empty?
@@ -30,6 +30,6 @@ class ChampionshipJob < ApplicationJob
       else
         PlayerSeason.create!(user_id: @user.id, season_id: Season.last.id, championship_id: hash.max_by{ |k,v| v }.first, number_of_points: 0)
       end
-    end
   end
+end
 end
