@@ -8,7 +8,6 @@ class PromotionldcJob < ApplicationJob
     @championships = Championship.where(name: "Semi-pro")
     @championshippro = Championship.where(name: "Pro")
     @playerseasons = PlayerSeason.all
-    @forecasts = Forecast.where(season_id: Season.last.id - 1)
     # Descente en division Amateur
     @championships.each do |championship|
       ranking = {}
@@ -16,7 +15,7 @@ class PromotionldcJob < ApplicationJob
       if ranking.count >= 8
         array = []
         @champion_bas.each do |championbas|
-          championbas.player_seasons.count <= 30 ? array << championbas : array
+          championbas.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array << championbas : array
         end
         if array.empty?
           Championship.create(name: "Amateur", season_id: Season.last.id)
@@ -28,7 +27,7 @@ class PromotionldcJob < ApplicationJob
       else
         array = []
         @champion_bas.each do |championbas|
-          championbas.player_seasons.count <= 30 ? array << championbas : array
+          championbas.player_seasons.count <= 16 ? array << championbas : array
         end
         if array.empty?
           Championship.create(name: "Amateur", season_id: Season.last.id)
@@ -46,7 +45,7 @@ class PromotionldcJob < ApplicationJob
       if ranking2.count >= 8
         array2 = []
         @championshippro.each do |championshippro|
-          championshippro.player_seasons.count <= 16 ? array2 << championshippro : array2
+          championshippro.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array2 << championshippro : array2
         end
         if array2.empty?
           Championship.create(name: "Pro", season_id: Season.last.id)
@@ -58,7 +57,7 @@ class PromotionldcJob < ApplicationJob
       else
         array2 = []
         @championshippro.each do |championshippro|
-          championshippro.player_seasons.count <= 16 ? array2 << championshippro : array2
+          championshippro.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array2 << championshippro : array2
         end
         if array2.empty?
           Championship.create(name: "Pro", season_id: Season.last.id)

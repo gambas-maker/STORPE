@@ -12,7 +12,7 @@ class PromotionProJob < ApplicationJob
       if ranking3.count >= 8
         array3 = []
         @championshipsem.each do |championshipsem|
-          championshipsem.player_seasons.count <= 16 ? array3 << championshipsem : array3
+          championshipsem.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array3 << championshipsem : array3
         end
         if array3.empty?
           Championship.create(name: "Semi-pro", season_id: Season.last.id)
@@ -24,7 +24,7 @@ class PromotionProJob < ApplicationJob
       else
         array3 = []
         @championshipsem.each do |championshipsem|
-          championshipsem.player_seasons.count <= 16 ? array3 << championshipsem : array3
+          championshipsem.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array3 << championshipsem : array3
         end
         if array3.empty?
           Championship.create(name: "Semi-pro", season_id: Season.last.id)
