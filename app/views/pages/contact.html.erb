@@ -31,6 +31,33 @@
       <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
       <!-- <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a> -->
     </div>
+
+    <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v9.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="100665954734426"
+  theme_color="#31295B"
+  logged_in_greeting="Salut ! Comment puis-je t'aider ? "
+  logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
+      </div>
   </footer>
   <%= render "shared/navbarbottom" %>
   <script type='text/javascript'>
@@ -48,4 +75,5 @@
     }
   })();
 </script>
+
 </div>
