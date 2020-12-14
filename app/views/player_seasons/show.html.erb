@@ -107,7 +107,7 @@
     <div class="container mt-4" style=" padding: 0 30%;"  >
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-3">MATCHS</h3>
-        <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: (Season.last.id - 1)).count%>/50</h3>
+        <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: (Season.last.id - 1)).count%>/40</h3>
       </div>
       <div class="d-flex justify-content-between">
         <h3 class="typo mr-3">RATIO</h3>
