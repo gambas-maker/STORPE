@@ -30,12 +30,12 @@
       <div class="form-actions">
         <%= f.button :submit, "S'inscrire", class:"rejoins_1" %>
       </div>
-      <% unless current_user %>
-          <%= link_to "Continuer avec Facebook", user_facebook_omniauth_authorize_path %>
-        <% else %>
+      <%# unless current_user %>
+          <%#= link_to "Continuer avec Facebook", user_facebook_omniauth_authorize_path %>
+        <%# else %>
           <%#= current_user[:name] %>
           <%#= link_to "Logout", destroy_user_session_path, method: :delete %>
-        <% end %>
+        <%# end %>
         <p style="text-align: center; padding-top: 0px; font-size: 15px; margin-bottom: 0px;">- Ou -</p>
       <div class="form-actions">
       <button class="btn-login mb-0">

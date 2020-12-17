@@ -23,11 +23,11 @@
   <div class="main">
     <div class="contact mt-4 mb-2">
       <%= link_to "Se déconnecter", destroy_user_session_path, :class => "btn btn-signup mt-4", method: :delete %>
-      <% unless current_user %>
-        <%= link_to "Se connecter avec Facebook", user_facebook_omniauth_authorize_path, class: "fb-button" %>
-      <% else %>
-        <%= link_to "Se déconncter de Facebook", destroy_user_session_path, method: :delete %>
-    <% end %>
+      <%# unless current_user %>
+        <%#= link_to "Se connecter avec Facebook", user_facebook_omniauth_authorize_path, class: "fb-button" %>
+      <%# else %>
+        <%#= link_to "Se déconncter de Facebook", destroy_user_session_path, method: :delete %>
+    <%# end %>
     </div>
   </div>
   <footer class="footer-contact">
