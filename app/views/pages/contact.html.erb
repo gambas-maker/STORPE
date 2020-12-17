@@ -21,6 +21,7 @@
     </div>
   </div>
   <div class="main">
+
     <div class="contact mt-4 mb-2">
       <%= link_to "Se déconnecter", destroy_user_session_path, :class => "btn btn-signup mt-4", method: :delete %>
       <%# unless current_user %>
@@ -28,17 +29,17 @@
       <%# else %>
         <%#= link_to "Se déconncter de Facebook", destroy_user_session_path, method: :delete %>
     <%# end %>
+
     </div>
   </div>
+
   <footer class="footer-contact">
     <div class="footer-icones" style="display: flex; align-items: center; font-size: 30px; margin-top: 20px;">
       <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
       <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
-      <!-- <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a> -->
+      <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
     </div>
-
     <!-- Load Facebook SDK for JavaScript -->
-      <!-- Load Facebook SDK for JavaScript -->
       <div id="fb-root"></div>
       <script>
         window.fbAsyncInit = function() {
@@ -64,8 +65,12 @@
         logged_in_greeting="Salut ! Comment puis-je t'aider ? "
         logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
       </div>
+
   </footer>
+
+
   <%= render "shared/navbarbottom" %>
+  <p style="color: white; text-align: center;">Politique de Confidentialité <a href="file:///Users/clementguibaud/Downloads/1608204849_ZtrUC4kG9c_politique_de_confidentialite.pdf" style="color: #FBB03B">ici</a></p> .
   <script type='text/javascript'>
   (function()
   {
