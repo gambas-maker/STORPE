@@ -17,6 +17,9 @@ class PagesController < ApplicationController
     @blasons = Blason.all
   end
 
+  def confidentialite
+  end
+
   def dashboard
     @matches = Match.all
     @forecasts = Forecast.where(season_id: Season.last.id, confirmed: true)
