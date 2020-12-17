@@ -145,20 +145,18 @@
                 </div>
               </div>
             </div>
-          <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a> -->
         </div>
       </div>
     </div>
     <div class="mainhome pb-5">
       <%= link_to matches_path do %>
         <button class="rejoins_1" style="color: white;">Rejoins le championnat</button>
+      <% end %>
+      <% unless current_user %>
+        <%= link_to "Continuer avec Facebook", user_facebook_omniauth_authorize_path, class: "facebook" %>
+      <% else %>
+        <%#= current_user[:name] %>
+        <%#= link_to "Logout", destroy_user_session_path, method: :delete %>
       <% end %>
     </div>
     <div class="desktop">
@@ -206,4 +204,3 @@
 <%= render "shared/new" %>
 </div>
 
-<!-- 1039435053063312 -->
