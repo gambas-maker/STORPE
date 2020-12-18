@@ -23,7 +23,7 @@ class Basketballmatch < ApplicationRecord
   end
 
   def self.matches_for_day(league_id, date)
-    end_point = URI("#{BASE_URL}games?league=#{league_id}&season=2019-2020&date=#{date}&timezone=Europe/Paris")
+    end_point = URI("#{BASE_URL}games?league=#{league_id}&season=2020-2021&date=#{date}&timezone=Europe/Paris")
     matches = call_api(end_point)["response"]
     sport = "basketball"
     matches.each do |match|
