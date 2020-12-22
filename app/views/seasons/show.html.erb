@@ -134,6 +134,12 @@
               </thead>
               <% classement = {} %>
               <% x = 0 %>
+              <%# @championships.each do |championship| %>
+                <%# if championship.name == "Amateur" %>
+                <%# else championship.name == "Pro" %>
+                <%# else championship.name == "Semi-Pro" %>
+                <%# end %>
+              <%# end %>
               <% @playerseasons.each do |playerseason| %>
                 <% if playerseason.forecasts.where(season_id: Season.last.id).exists? %>
                   <% classement[playerseason] = playerseason.number_of_points %>
@@ -162,7 +168,8 @@
                       <td class="cla"><%=  valeur %></td>
                     </tr>
                     <% elsif playerseason.forecasts.exists? %>
-                    <tr>
+                    <%= x %>
+                    <tr class="monte">
                       <th scope="row"><%= x += 1%></th>
                       <% if playerseason.blason == nil %>
                         <td>
