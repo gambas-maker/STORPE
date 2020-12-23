@@ -196,7 +196,7 @@
                                 <% pointsba = 0 %>
                                 <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                   <% if forecast.match.sport == "basketball"%>
-                                    <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                   <% end %>
                                 <% end %>
                                 <p class="dropdown-item font-weight-bold">Points Basketball</p>
@@ -244,7 +244,7 @@
                               <% pointsba = 0 %>
                               <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                 <% if forecast.match.sport == "basketball"%>
-                                  <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                  <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                 <% end %>
                               <% end %>
                               <p class="dropdown-item font-weight-bold">Points Basketball</p>
@@ -312,7 +312,7 @@
                                 <% pointsba = 0 %>
                                 <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                   <% if forecast.match.sport == "basketball"%>
-                                    <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                   <% end %>
                                 <% end %>
                                 <p class="dropdown-item font-weight-bold">Points Basketball</p>
@@ -359,7 +359,7 @@
                                   <% pointsba = 0 %>
                                   <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                     <% if forecast.match.sport == "basketball"%>
-                                      <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                      <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                     <% end %>
                                   <% end %>
                                   <p class="dropdown-item font-weight-bold">Points Basketball</p>
@@ -407,7 +407,7 @@
                               <% pointsba = 0 %>
                               <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                 <% if forecast.match.sport == "basketball"%>
-                                  <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                  <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                 <% end %>
                               <% end %>
                               <p class="dropdown-item font-weight-bold">Points Basketball</p>
@@ -475,7 +475,7 @@
                                 <% pointsba = 0 %>
                                 <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                   <% if forecast.match.sport == "basketball"%>
-                                    <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                   <% end %>
                                 <% end %>
                                 <p class="dropdown-item font-weight-bold">Points Basketball</p>
@@ -522,7 +522,7 @@
                                   <% pointsba = 0 %>
                                   <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                     <% if forecast.match.sport == "basketball"%>
-                                      <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                      <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                     <% end %>
                                   <% end %>
                                   <p class="dropdown-item font-weight-bold">Points Basketball</p>
@@ -570,7 +570,7 @@
                               <% pointsba = 0 %>
                               <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
                                 <% if forecast.match.sport == "basketball"%>
-                                  <%= pointsba += (forecast.points_win + forecast.points_lose) %>
+                                  <% pointsba += (forecast.points_win + forecast.points_lose) %>
                                 <% end %>
                               <% end %>
                               <p class="dropdown-item font-weight-bold">Points Basketball</p>
