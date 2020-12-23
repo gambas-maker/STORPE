@@ -150,7 +150,7 @@
                   <tbody>
                     <% if current_user.id == playerseason.user_id%>
                     <tr>
-                      <th class="cla" scope="row"><%= x += 1%></th>
+                      <th class="cla" scope="row"><%= x += 1 %></th>
                       <% if  current_user.player_seasons[0].blason.present? %>
                         <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
                         <td class="cla"><%= current_user.pseudo %> </td>
@@ -168,9 +168,8 @@
                       <td class="cla"><%=  valeur %></td>
                     </tr>
                     <% elsif playerseason.forecasts.exists? %>
-                    <%= x %>
                     <tr class="monte">
-                      <th scope="row"><%= x += 1%></th>
+                      <th scope="row"><%= x += 1 %></th>
                       <% if playerseason.blason == nil %>
                         <td>
                            <i class="fas fa-plus-circle" style="color: white;"></i>
@@ -216,9 +215,9 @@
                       <td><%=  valeur %></td>
                     </tr>
                     <% else %>
-
-                  </tbody>
                     <% end %>
+                  </tbody>
+
               <% end %>
             </table>
           </div>
