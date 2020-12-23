@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
   get '/users/sign_out' => 'devise/sessions#destroy'
 end
@@ -15,6 +15,7 @@ end
   get 'rules', to: 'pages#rules'
   get 'contact', to: 'pages#contact'
   get 'dashboard', to: 'pages#dashboard'
+  get 'confidentialite', to: 'pages#confidentialite'
   get 'store_outcome', to: 'forecasts#store_outcome', defaults: {format: :json}
   get 'confirm_pending', to: 'forecasts#confirm_pending', defaults: {format: :json}
   get '/sitemap.xml.gz', to: redirect("https://s3-eu-west-3.amazonaws.com/storpesitemap/sitemap.xml.gz")

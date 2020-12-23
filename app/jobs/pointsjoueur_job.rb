@@ -3,7 +3,7 @@ class PointsjoueurJob < ApplicationJob
   def perform(user_id)
     @user = User.find(user_id)
     @playerseason = PlayerSeason.where(user_id: @user.id)
-    @forecasts = Forecast.where(player_season_id: @playerseason, season_id: Season.last.id)
+    @forecasts = Forecast.where(player_season_id: @playerseason, season_id: Season.last.id, confirmed: true)
     points = []
     @forecasts.each do |forecast|
       if forecast.points_win.positive?

@@ -71,6 +71,32 @@
           </a>
         </div>
       </div>
+      <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v9.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="100665954734426"
+        theme_color="#FBB03B"
+        logged_in_greeting="Salut ! Comment puis-je t'aider ? "
+        logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
+      </div>
     </div>
     <div class="phone">
         <div class="main">
@@ -119,20 +145,18 @@
                 </div>
               </div>
             </div>
-          <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a> -->
         </div>
       </div>
     </div>
     <div class="mainhome pb-5">
       <%= link_to matches_path do %>
         <button class="rejoins_1" style="color: white;">Rejoins le championnat</button>
+      <% end %>
+      <% unless current_user %>
+        <%= link_to "Continuer avec Facebook", user_facebook_omniauth_authorize_path, class: "facebook" %>
+      <%# else %>
+        <%#= current_user[:name] %>
+        <%#= link_to "Logout", destroy_user_session_path, method: :delete %>
       <% end %>
     </div>
     <div class="desktop">
@@ -145,10 +169,36 @@
         </div>
         <div class="footer-links" style="display: flex; align-items: center;">
           <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
-          <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
-          <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+          <a href="fb://group//?id=%@storpe" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+          <a href="instagram://user?username=storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
         </div>
       </footer>
+      <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v9.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="100665954734426"
+        theme_color="#FBB03B"
+        logged_in_greeting="Salut ! Comment puis-je t'aider ? "
+        logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
+      </div>
      </div>
   </div>
 <%= render "shared/new" %>

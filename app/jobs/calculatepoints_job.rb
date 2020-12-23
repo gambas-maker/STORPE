@@ -2,7 +2,7 @@ class CalculatepointsJob < ApplicationJob
   queue_as :default
   def perform
     @matches = Match.where(sport: "football", event_stamp: Date.today.to_s)
-    @forecasts = Forecast.where(season_id: Season.last.id)
+    @forecasts = Forecast.where(season_id: Season.last.id, confirmed: true)
     @matches.each do |match|
       match.forecasts.each do |forecast|
         if match.result.present?

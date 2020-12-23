@@ -23,7 +23,7 @@ class BasketballTomorrow < ApplicationRecord
   end
 
   def self.matches_for_day(league_id, date)
-    end_point = URI("#{BASE_URL}games?league=#{league_id}&season=2019-2020&date=#{date}&timezone=Europe/Paris")
+    end_point = URI("#{BASE_URL}games?league=#{league_id}&season=2020-2021&date=#{date}&timezone=Europe/Paris")
     matches = call_api(end_point)["response"]
     sport = "basketball"
     matches.each do |match|
@@ -50,7 +50,7 @@ class BasketballTomorrow < ApplicationRecord
   end
 
   def self.get_results_for_match(game)
-    end_point = URI("#{BASE_URL}games?id=#{game.fixture_id}&league=12&season=2019-2020&timezone=Europe/Paris")
+    end_point = URI("#{BASE_URL}games?id=#{game.fixture_id}&league=12&season=2020-2021&timezone=Europe/Paris")
     match_results = call_api(end_point)["response"][0]["scores"]
     game.update(
       result_home: match_results["home"]["total"],
@@ -59,7 +59,7 @@ class BasketballTomorrow < ApplicationRecord
   end
 
   def self.get_odds_for_match(game)
-    end_point = URI("#{BASE_URL}odds?league=12&season=2019-2020&game=#{game.fixture_id}")
+    end_point = URI("#{BASE_URL}odds?league=12&season=2020-2021&game=#{game.fixture_id}")
     result = call_api(end_point)["results"]
     if result.zero?
     else

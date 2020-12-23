@@ -35,7 +35,7 @@ class ForecastsController < ApplicationController
     outcome = params[:result]
     check = params[:box]
     player = current_user.player_season_ids
-    if @forecasts.count < 50
+    if @forecasts.count < 40
       if check == "true"
         @forecast = Forecast.where(match: id, player_season: player).first
         if @forecast.nil?
