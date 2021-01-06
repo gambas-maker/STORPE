@@ -39,6 +39,7 @@ class PlayermouvJob < ApplicationJob
       end
       moins.each do |key, value|
         if value < 21 && array.count.positive?
+          puts array.count
           x.times do
             array.first.update(championship_id: key.id)
             array.delete_at(0)
