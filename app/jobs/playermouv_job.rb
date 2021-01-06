@@ -9,8 +9,11 @@ class PlayermouvJob < ApplicationJob
     @amateurs.each do |amateur|
       champ = []
       amateur.player_seasons.each do |player|
-        if player.forecasts.last.season_id == Season.last.id
+        puts player.id
+        puts player.forecasts.last
+        if player.forecasts.exists? && player.forecasts.last.season_id == Season.last.id
           champ << player
+          puts champ
         end
       end
       if champ.count < 20
@@ -24,5 +27,8 @@ class PlayermouvJob < ApplicationJob
     puts egal
     puts moins
     puts plus
+  #   plus.each do |champ, number|
+  #     array =
+  #   end
   end
 end
