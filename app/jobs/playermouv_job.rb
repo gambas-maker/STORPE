@@ -9,7 +9,7 @@ class PlayermouvJob < ApplicationJob
     @amateurs.each do |amateur|
       champ = []
       amateur.player_seasons.each do |player|
-        if player.forecasts.last.id == Season.last.id
+        if player.forecasts.last.season_id == Season.last.id
           champ << player
         end
       end
