@@ -162,7 +162,7 @@
                           <td class="cla"><%= pronosm + pronosb %></td>
                           <td class="cla"><%=  valeur %></td>
                         </tr>
-                      <% elsif playerseason.forecasts.exists? && x == 0 || x == 2 || x == 3 || x == 4 || x == 5 %>
+                      <% elsif playerseason.forecasts.exists? && x == 0 || x == 2 || x == 3 || x == 4 || x == 5 || x == 1 %>
                         <tr class="monte">
                           <th scope="row"><%= x += 1 %></th>
                           <% if playerseason.blason == nil %>
@@ -258,7 +258,7 @@
                         <td><%=  valeur %></td>
                       </tr>
                     <% end %>
-                    <% elsif playerseason.championship.name == "Semi-Pro" %>
+                    <% elsif playerseason.championship.name == "Semi-pro" %>
                     <% if current_user.id == playerseason.user_id%>
                         <tr>
                           <th class="cla" scope="row"><%= x += 1 %></th>
@@ -278,7 +278,7 @@
                           <td class="cla"><%= pronosm + pronosb %></td>
                           <td class="cla"><%=  valeur %></td>
                         </tr>
-                      <% elsif playerseason.forecasts.exists? && x == 0 || x == 2 || x == 3 %>
+                      <% elsif playerseason.forecasts.exists? && x == 0 || x == 2 || x == 3 || x == 1 %>
                         <tr class="monte">
                           <th scope="row"><%= x += 1 %></th>
                           <% if playerseason.blason == nil %>
@@ -441,7 +441,7 @@
                           <td class="cla"><%= pronosm + pronosb %></td>
                           <td class="cla"><%=  valeur %></td>
                         </tr>
-                      <% elsif playerseason.forecasts.exists? && x == 0 || x == 2 || x == 3 %>
+                      <% elsif playerseason.forecasts.exists? && x == 0 || x == 2 || x == 3 || x == 1 %>
                         <tr class="monte">
                           <th scope="row"><%= x += 1 %></th>
                           <% if playerseason.blason == nil %>
