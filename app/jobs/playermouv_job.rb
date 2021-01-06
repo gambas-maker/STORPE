@@ -29,17 +29,23 @@ class PlayermouvJob < ApplicationJob
     puts plus
     plus.each do |champ, number|
       array = []
+      x = number - 20
+      puts x
       champ.player_seasons.each do |player|
         if player.forecasts.exists? && player.forecasts.last.season_id == Season.last.id
           array << player
         end
+        puts array
       end
       moins.each do |key, value|
         if value < 21 && array.count.positive?
-          array.first.update(championship_id: key.id)
-          array.delete_at(0)
-          moins[key] = value + 1
-          puts moins
+          x.times do
+            array.first.update(championship_id: key.id)
+            array.delete_at(0)
+            puts array
+            moins[key] = value + 1
+            puts moins
+          end
         end
       end
     end
