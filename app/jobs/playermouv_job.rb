@@ -32,7 +32,6 @@ class PlayermouvJob < ApplicationJob
         if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
           array << player
         end
-        puts array.count
       end
       moins.each do |key, value|
         # puts array.count
@@ -45,8 +44,7 @@ class PlayermouvJob < ApplicationJob
               # puts array.count
               array.first.update(championship_id: key.id)
               array.delete_at(0)
-              moins[key] = value + 1
-              puts value
+              puts moins[key] = value + 1
               # puts moins
             end
           end
