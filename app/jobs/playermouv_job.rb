@@ -34,16 +34,12 @@ class PlayermouvJob < ApplicationJob
       moins.each do |key, value|
         # puts array.count
         # puts moins.count
-        if value < 20
-          while array.count > 20
-            if value < 20
-              # puts array.count
-              array.first.update(championship_id: key.id)
-              array.delete_at(0)
-              puts moins[key] = value + 1
-              puts moins
-            end
-          end
+        while array.count > 20 && value < 20
+          # puts array.count
+          array.first.update(championship_id: key.id)
+          array.delete_at(0)
+          moins[key] = value + 1
+          puts moins
         end
       end
     end
