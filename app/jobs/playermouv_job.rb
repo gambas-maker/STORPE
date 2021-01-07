@@ -33,6 +33,7 @@ class PlayermouvJob < ApplicationJob
       end
       moins.each do |key, value|
         puts array.count
+        puts moins[key].count
         if value < 21 && array.count > 0
           while array.count > 0
             puts array.count
