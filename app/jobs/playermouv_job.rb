@@ -22,7 +22,7 @@ class PlayermouvJob < ApplicationJob
       end
     end
     puts egal
-    puts moins.count
+    puts moins
     puts plus
     plus.each do |champ, number|
       array = []
