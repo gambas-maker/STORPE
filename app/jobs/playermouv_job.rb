@@ -26,8 +26,6 @@ class PlayermouvJob < ApplicationJob
     puts plus
     plus.each do |champ, number|
       array = []
-      puts number
-      x = number - 20
       champ.player_seasons.each do |player|
         if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
           array << player
@@ -37,7 +35,7 @@ class PlayermouvJob < ApplicationJob
         # puts array.count
         # puts moins.count
         if value < 20
-          x.times do
+          while array.count > 20
             if value < 20
               # puts array.count
               array.first.update(championship_id: key.id)
@@ -49,6 +47,5 @@ class PlayermouvJob < ApplicationJob
         end
       end
     end
-
   end
 end
