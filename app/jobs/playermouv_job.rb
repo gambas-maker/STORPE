@@ -43,7 +43,8 @@ class PlayermouvJob < ApplicationJob
               array.first.update(championship_id: key.id)
               array.delete_at(0)
               moins[key] = value + 1
-              # puts moinse
+              puts value
+              # puts moins
             end
           end
         end
