@@ -36,7 +36,9 @@ class PlayermouvJob < ApplicationJob
       moins.each do |key, value|
         # puts array.count
         # puts moins.count
+        puts value
         if value < 20
+          puts value
           x.times do
             if value < 20
               # puts array.count
