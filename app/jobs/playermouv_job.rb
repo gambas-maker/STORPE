@@ -30,17 +30,18 @@ class PlayermouvJob < ApplicationJob
         if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
           array << player
         end
+        puts array.count
       end
       moins.each do |key, value|
-        puts array.count
-        puts moins.count
+        # puts array.count
+        # puts moins.count
         if value < 21 && array.count > 0
           while array.count > 0
-            puts array.count
+            # puts array.count
             array.first.update(championship_id: key.id)
             array.delete_at(0)
             moins[key] = value + 1
-            puts moins
+            # puts moins
           end
         else array.count == 0
         end
