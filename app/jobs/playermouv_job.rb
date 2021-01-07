@@ -39,9 +39,7 @@ class PlayermouvJob < ApplicationJob
           moins[key] += 1
         end
       end
-      puts egal
-      puts moins
-      puts plus
     end
+
   end
 end
