@@ -9,8 +9,6 @@ class PlayermouvJob < ApplicationJob
     @amateurs.each do |amateur|
       champ = []
       amateur.player_seasons.each do |player|
-        puts player.id
-        puts player.forecasts.last
         if player.forecasts.exists? && player.forecasts.last.season_id == Season.last.id
           champ << player
           puts champ
@@ -38,7 +36,7 @@ class PlayermouvJob < ApplicationJob
         puts array
       end
       moins.each do |key, value|
-        if value < 21 && array.count.positive?
+        if value < 21 && array.count > 0
           puts array.count
           x.times do
             array.first.update(championship_id: key.id)
@@ -50,5 +48,6 @@ class PlayermouvJob < ApplicationJob
         end
       end
     end
+
   end
 end
