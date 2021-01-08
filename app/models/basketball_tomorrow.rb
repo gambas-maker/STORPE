@@ -65,11 +65,12 @@ class BasketballTomorrow < ApplicationRecord
     else
       match_odds = call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["value"]
       if call_api(end_point)["response"][0]["bookmakers"][0]["name"] == "Bwin" && match_odds[1]["odd"].present?
-        if call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["id"] == 2 || call_api(end_point)["response"][0]["bookmakers"][0]["bets"][1]["id"] == 2 || call_api(end_point)["response"][0]["bookmakers"][0]["bets"][2]["id"] == 2
+        if call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["id"] == 2 || call_api(end_point)["response"][0]["bookmakers"][0]["bets"][1]["id"] == 2
           game.update(
             points_home: get_odd(match_odds, "Home").to_f * 10,
             points_away: get_odd(match_odds, "Away").to_f * 10
           )
+        else
         end
       else
       end
