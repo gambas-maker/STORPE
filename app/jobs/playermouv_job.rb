@@ -43,8 +43,8 @@ class PlayermouvJob < ApplicationJob
     moins.each do |key, value|
       if value == 20
         egal[key] = value
+        moins.reject { |k,v| v == 20 }
       elsif value == moins.max_by { |k,v| v }.second
-        moins.reject { |k,v| v > 19 }
       else
         key.player_seasons.each do |player|
           if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id && value < 20
