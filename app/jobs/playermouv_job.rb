@@ -42,12 +42,12 @@ class PlayermouvJob < ApplicationJob
     end
     moins.each do |key, value|
       if value == moins.max_by { |k,v| v }.second
-        moins.reject{|k,v| v > 19 }
+        moins.reject { |k,v| v > 19 }
         egal[key] = value
       else
         key.player_seasons.each do |player|
           if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id && value < 20
-            puts moins.max_by { |k,v| k }.id
+            puts moins.max_by { |k,v| puts k.id }
             player.update(championship_id: moins.max_by { |k,v| k.id })
             value += 1
             moins[key] += 1
