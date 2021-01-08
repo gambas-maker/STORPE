@@ -48,7 +48,7 @@ class PlayermouvJob < ApplicationJob
         key.player_seasons.each do |player|
           if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id && value < 20
             puts moins.max_by { |k,v| v }.first.id
-            player.update(championship_id: moins.max_by { |k,v| k.id })
+            player.update(championship_id: moins.max_by { |k,v| v }.first.id)
             value += 1
             moins[key] += 1
           end
