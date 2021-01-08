@@ -43,7 +43,7 @@ class PlayermouvJob < ApplicationJob
     moins.each do |key, value|
       if value == 20
         egal[key] = value
-        moins.reject { |k,v| v == 20 }
+        moins.delete(key)
       elsif value == moins.max_by { |k,v| v }.second
       else
         key.player_seasons.each do |player|
