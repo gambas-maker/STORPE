@@ -1,24 +1,24 @@
-class PlayermouvJob < ApplicationJob
+class PlayermouvsemiproJob < ApplicationJob
   queue_as :default
 
   def perform
     egal = {}
     moins = {}
     plus = {}
-    @amateurs = Championship.where(name: "Amateur")
-    @amateurs.each do |amateur|
+    @semis = Championship.where(name: "Semi-pro")
+    @semis.each do |semi|
       champ = []
-      amateur.player_seasons.each do |player|
+      semi.player_seasons.each do |player|
         if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
           champ << player
         end
       end
       if champ.count < 20
-        moins[amateur] = champ.count
+        moins[semi] = champ.count
       elsif champ.count > 20
-        plus[amateur] = champ.count
+        plus[semi] = champ.count
       else
-        egal[amateur] = champ.count
+        egal[semi] = champ.count
       end
     end
     plus.each do |champ, number|
@@ -53,6 +53,6 @@ class PlayermouvJob < ApplicationJob
         end
       end
     end
-    PlayermouvsemiproJob.perform_now
+    PlayermouvproJob.perform_now
   end
 end
