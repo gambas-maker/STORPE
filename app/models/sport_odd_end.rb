@@ -102,6 +102,21 @@ class SportOddEnd
       end
     end
   end
+  def self.get_odds_for_match_two_teams(game)
+    end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
+    ok = call_api(end_point)["api"]["results"]
+    if ok == 1
+      goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["label_name"]
+      if goals_two_teams == "Both Teams Score"
+        match_goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["values"]
+        game.update(
+          goals_two_teams_yes: get_odd(match_goals_two_teams, "Yes").to_f * 10,
+          goal_two_teams_no: get_odd(match_goals_two_teams, "No").to_f * 10
+        )
+      end
+    end
+    get_odds_for_match_over(game)
+  end
   def self.get_odds_for_match_over(game)
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
     ok = call_api(end_point)["api"]["results"]
@@ -117,21 +132,6 @@ class SportOddEnd
         )
       end
     end
-  end
-  def self.get_odds_for_match_two_teams(game)
-    end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
-    ok = call_api(end_point)["api"]["results"]
-    if ok == 1
-      goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["label_name"]
-      if goals_two_teams == "Both Teams Score"
-        match_goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["values"]
-        game.update(
-          goals_two_teams_yes: get_odd(match_goals_two_teams, "Yes").to_f * 10,
-          goal_two_teams_no: get_odd(match_goals_two_teams, "No").to_f * 10
-        )
-      end
-    end
-    get_odds_for_match_over(game)
   end
   def self.get_results_for_match(game)
     end_point = URI("#{BASE_URL}fixtures/id/#{game.fixture_id}?timezone=Europe/Paris")
