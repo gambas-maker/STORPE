@@ -76,7 +76,7 @@ class SportOddEnd
       )
       get_odds_for_match(new_match)
       get_odds_for_match_over(new_match)
-      # get_odds_for_match_two_teams(new_match)
+      get_odds_for_match_two_teams(new_match)
       end
     end
   end
