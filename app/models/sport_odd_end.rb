@@ -47,18 +47,21 @@ class SportOddEnd
         @rencontresto.each do |rencontreto|
           if rencontreto.points_home.nil? || rencontreto.points_away.nil?
             get_odds_for_match(rencontreto)
+            get_odds_for_match_over(newmatch)
           end
         end
       elsif rencontrestom.include?(match["fixture_id"])
         @rencontrestom.each do |rencontretom|
           if rencontretom.points_home.nil? || rencontretom.points_away.nil?
             get_odds_for_match(rencontretom)
+            get_odds_for_match_over(newmatch)
           end
         end
       elsif rencontresaf.include?(match["fixture_id"])
         @rencontresaf.each do |rencontreaf|
           if rencontreaf.points_home.nil? || rencontreaf.points_away.nil?
             get_odds_for_match(rencontreaf)
+            get_odds_for_match_over(newmatch)
           end
         end
       else
@@ -75,7 +78,6 @@ class SportOddEnd
         kick_off: DateTime.parse(match["event_date"])
       )
       get_odds_for_match(new_match)
-      get_odds_for_match_over(newmatch)
       get_odds_for_match_two_teams(new_match)
       end
     end
