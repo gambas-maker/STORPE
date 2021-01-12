@@ -103,12 +103,18 @@ class SportOddEnd
       if goals_over_under == "Goals Over/Under"
         match_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["values"]
         game.update(
-          over_05: get_odd(match_over_under, "").to_f * 10,
-          over_15: get_odd(match_over_under, "").to_f * 10,
-          under_05: get_odd(match_over_under, "").to_f * 10,
-          under_15: get_odd(match_over_under, "").to_f * 10,
-          goal_two_teams: get_odd(match_over_under, "").to_f * 10
+          over_05: get_odd(match_over_under, "Over 0.5").to_f * 10,
+          over_15: get_odd(match_over_under, "Over 1.5").to_f * 10,
+          under_05: get_odd(match_over_under, "Under 0.5").to_f * 10,
+          under_15: get_odd(match_over_under, "Under 1.5").to_f * 10
         )
+      end
+      goals_two_teams == call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["label_name"]
+      if goals_two_teams == "Both Teams Score"
+        match_goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["values"]
+        game.update(
+          goals_two_teams: get_odd(match_goals_two_teams, "Yes").to_f * 10,
+          )
       end
 
     end
