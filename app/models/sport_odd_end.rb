@@ -105,7 +105,7 @@ class SportOddEnd
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
     ok = call_api(end_point)["api"]["results"]
     if ok == 1
-      goals_over_under == call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["label_name"]
+      goals_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["label_name"]
       if goals_over_under == "Goals Over/Under"
         match_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["values"]
         game.update(
@@ -121,7 +121,7 @@ class SportOddEnd
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
     ok = call_api(end_point)["api"]["results"]
     if ok == 1
-      goals_two_teams == call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["label_name"]
+      goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["label_name"]
       if goals_two_teams == "Both Teams Score"
         match_goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["values"]
         game.update(
