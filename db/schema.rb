@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_145825) do
+ActiveRecord::Schema.define(version: 2021_01_12_172209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 2020_12_16_145825) do
     t.string "event_stamp"
     t.integer "result_home"
     t.integer "result_away"
+    t.string "buteur_1"
+    t.string "buteur_2"
+    t.string "buteur_3"
+    t.string "buteur_4"
+    t.string "over_05"
+    t.string "over_15"
+    t.string "under_05"
+    t.string "under_15"
+    t.string "goal_two_teams"
   end
 
   create_table "pages", force: :cascade do |t|
