@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_183002) do
+ActiveRecord::Schema.define(version: 2021_01_12_203411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,12 @@ ActiveRecord::Schema.define(version: 2021_01_12_183002) do
     t.float "under_15"
     t.float "goals_two_teams_yes"
     t.float "goal_two_teams_no"
+    t.integer "negative_goals_two_teams_yes"
+    t.integer "negative_goal_two_teams_no"
+    t.integer "negative_over0"
+    t.integer "negative_over15"
+    t.integer "negative_under05"
+    t.integer "negative_under15"
   end
 
   create_table "pages", force: :cascade do |t|
