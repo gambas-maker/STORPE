@@ -76,6 +76,7 @@ class SportOddEnd
         )
         get_odds_for_match(new_match)
         get_odds_for_match_two_teams(new_match)
+        get_odds_for_match_over(new_match)
       end
     end
   end
@@ -115,7 +116,6 @@ class SportOddEnd
         )
       end
     end
-    get_odds_for_match_over(game)
   end
   def self.get_odds_for_match_over(game)
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
