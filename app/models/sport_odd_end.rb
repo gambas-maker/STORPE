@@ -47,38 +47,35 @@ class SportOddEnd
         @rencontresto.each do |rencontreto|
           if rencontreto.points_home.nil? || rencontreto.points_away.nil?
             get_odds_for_match(rencontreto)
-            get_odds_for_match_over(newmatch)
           end
         end
       elsif rencontrestom.include?(match["fixture_id"])
         @rencontrestom.each do |rencontretom|
           if rencontretom.points_home.nil? || rencontretom.points_away.nil?
             get_odds_for_match(rencontretom)
-            get_odds_for_match_over(newmatch)
           end
         end
       elsif rencontresaf.include?(match["fixture_id"])
         @rencontresaf.each do |rencontreaf|
           if rencontreaf.points_home.nil? || rencontreaf.points_away.nil?
             get_odds_for_match(rencontreaf)
-            get_odds_for_match_over(newmatch)
           end
         end
       else
-      new_match = Match.create(
-        team_home: match["homeTeam"]["team_name"],
-        team_home_logo_url: match["homeTeam"]["logo"],
-        team_away: match["awayTeam"]["team_name"],
-        team_away_logo_url: match["awayTeam"]["logo"],
-        sport: sport,
-        fixture_id: match["fixture_id"],
-        country: match["league"]["country"],
-        league: match["league"]["name"],
-        event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
-        kick_off: DateTime.parse(match["event_date"])
-      )
-      get_odds_for_match(new_match)
-      get_odds_for_match_two_teams(new_match)
+        new_match = Match.create(
+          team_home: match["homeTeam"]["team_name"],
+          team_home_logo_url: match["homeTeam"]["logo"],
+          team_away: match["awayTeam"]["team_name"],
+          team_away_logo_url: match["awayTeam"]["logo"],
+          sport: sport,
+          fixture_id: match["fixture_id"],
+          country: match["league"]["country"],
+          league: match["league"]["name"],
+          event_stamp: DateTime.strptime(match["event_timestamp"].to_s, '%s').to_date,
+          kick_off: DateTime.parse(match["event_date"])
+        )
+        get_odds_for_match(new_match)
+        get_odds_for_match_two_teams(new_match)
       end
     end
   end
@@ -131,9 +128,10 @@ class SportOddEnd
         game.update(
           goals_two_teams_yes: get_odd(match_goals_two_teams, "Yes").to_f * 10,
           goal_two_teams_no: get_odd(match_goals_two_teams, "No").to_f * 10
-          )
+        )
       end
     end
+    get_odds_for_match_over(game)
   end
   def self.get_results_for_match(game)
     end_point = URI("#{BASE_URL}fixtures/id/#{game.fixture_id}?timezone=Europe/Paris")
