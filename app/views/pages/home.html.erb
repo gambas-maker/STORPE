@@ -152,12 +152,6 @@
       <%= link_to matches_path do %>
         <button class="rejoins_1" style="color: white;">Rejoins le championnat</button>
       <% end %>
-      <% unless current_user %>
-        <%= link_to "Continuer avec Facebook", user_facebook_omniauth_authorize_path, class: "facebook" %>
-      <%# else %>
-        <%#= current_user[:name] %>
-        <%#= link_to "Logout", destroy_user_session_path, method: :delete %>
-      <% end %>
     </div>
     <div class="desktop">
       <%= render "shared/footer" %>

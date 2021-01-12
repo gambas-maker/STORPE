@@ -26,7 +26,6 @@ gem 'redis', '~> 4.0'
 gem 'excon'
 gem 'whenever', require: false
 gem "valid_email2"
-gem 'omniauth-facebook'
 
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
