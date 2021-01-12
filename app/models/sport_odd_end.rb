@@ -99,6 +99,18 @@ class SportOddEnd
           points_away: get_odd(match_odds, "Away").to_f * 10
         )
       end
+      goals_over_under == call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["label_name"]
+      if goals_over_under == "Goals Over/Under"
+        match_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["values"]
+        game.update(
+          over_05: get_odd(match_over_under, "").to_f * 10,
+          over_15: get_odd(match_over_under, "").to_f * 10,
+          under_05: get_odd(match_over_under, "").to_f * 10,
+          under_15: get_odd(match_over_under, "").to_f * 10,
+          goal_two_teams: get_odd(match_over_under, "").to_f * 10
+        )
+      end
+
     end
   end
 
