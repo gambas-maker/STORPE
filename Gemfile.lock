@@ -133,7 +133,7 @@ GEM
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
     formatador (0.2.5)
-    fugit (1.4.1)
+    fugit (1.4.2)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
     globalid (0.4.2)
@@ -359,8 +359,6 @@ GEM
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.7.7)
-    unf_ext (0.0.7.7-x64-mingw32)
-    unf_ext (0.0.7.7-x86-mingw32)
     valid_email2 (3.5.0)
       activemodel (>= 3.2)
       mail (~> 2.5)
