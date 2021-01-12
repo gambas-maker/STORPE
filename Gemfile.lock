@@ -177,10 +177,9 @@ GEM
       racc (~> 1.4)
     nokogiri (1.11.1-x86-mingw32)
       racc (~> 1.4)
-    omniauth (2.0.0)
-      hashie (>= 3.4.6)
-      rack (>= 1.6.2, < 3)
-      rack-protection
+    omniauth (1.0.0.pr2)
+      hashie
+      rack
     orm_adapter (0.5.0)
     pg (1.2.3)
     pg (1.2.3-x64-mingw32)
@@ -206,8 +205,6 @@ GEM
     racc (1.5.2)
     racc (1.5.2-java)
     rack (2.2.3)
-    rack-protection (2.1.0)
-      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -339,6 +336,8 @@ GEM
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.7.7)
+    unf_ext (0.0.7.7-x64-mingw32)
+    unf_ext (0.0.7.7-x86-mingw32)
     valid_email2 (3.5.0)
       activemodel (>= 3.2)
       mail (~> 2.5)
@@ -388,7 +387,7 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  omniauth
+  omniauth (= 1.0.0.pr2)
   pg (>= 0.18, < 2.0)
   pry-byebug
   pry-rails
