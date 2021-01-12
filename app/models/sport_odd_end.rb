@@ -120,6 +120,7 @@ class SportOddEnd
   def self.get_odds_for_match_over(game)
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
     ok = call_api(end_point)["api"]["results"]
+    puts "hello"
     if ok == 1
       goals_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["label_name"]
       if goals_over_under == "Goals Over/Under"
@@ -235,4 +236,3 @@ class SportOddEnd
     end
   end
 end
-
