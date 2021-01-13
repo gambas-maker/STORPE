@@ -12,6 +12,11 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.displaycolumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .active {
   background-color: #FFFFFF;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_203411) do
+ActiveRecord::Schema.define(version: 2021_01_13_155635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,18 +104,22 @@ ActiveRecord::Schema.define(version: 2021_01_12_203411) do
     t.float "buteur_2"
     t.float "buteur_3"
     t.float "buteur_4"
-    t.float "over_05"
-    t.float "over_15"
-    t.float "under_05"
-    t.float "under_15"
-    t.float "goals_two_teams_yes"
+    t.float "over_25"
+    t.float "under_25"
+    t.float "goal_two_teams_yes"
     t.float "goal_two_teams_no"
-    t.integer "negative_goals_two_teams_yes"
+    t.integer "negative_goal_two_teams_yes"
     t.integer "negative_goal_two_teams_no"
-    t.integer "negative_over0"
-    t.integer "negative_over15"
-    t.integer "negative_under05"
-    t.integer "negative_under15"
+    t.integer "negative_over25"
+    t.integer "negative_under25"
+    t.integer "negative_points_buteur1"
+    t.integer "negative_points_buteur2"
+    t.integer "negative_points_buteur3"
+    t.integer "negative_points_buteur4"
+    t.string "nom_buteur_1"
+    t.string "nom_buteur_2"
+    t.string "nom_buteur_3"
+    t.string "nom_buteur_4"
   end
 
   create_table "pages", force: :cascade do |t|

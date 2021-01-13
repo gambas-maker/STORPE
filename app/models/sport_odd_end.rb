@@ -15,10 +15,8 @@ class SportOddEnd
     points_home_negative_points
     points_draw_negative_points
     points_away_negative_points
-    points_over05_neg_points
-    points_over15_neg_points
-    points_under05_neg_points
-    points_under15_neg_points
+    points_over25_neg_points
+    points_under25_neg_points
     points_goals_two_teams_yes_neg_points
     points_goals_two_teams_no_neg_points
   end
@@ -117,7 +115,7 @@ class SportOddEnd
       if goals_two_teams == "Both Teams Score"
         match_goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["values"]
         game.update(
-          goals_two_teams_yes: get_odd(match_goals_two_teams, "Yes").to_f * 10,
+          goal_two_teams_yes: get_odd(match_goals_two_teams, "Yes").to_f * 10,
           goal_two_teams_no: get_odd(match_goals_two_teams, "No").to_f * 10
         )
       end
@@ -132,10 +130,8 @@ class SportOddEnd
       if goals_over_under == "Goals Over/Under"
         match_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["values"]
         game.update(
-          over_05: get_odd(match_over_under, "Over 0.5").to_f * 10,
-          over_15: get_odd(match_over_under, "Over 1.5").to_f * 10,
-          under_05: get_odd(match_over_under, "Under 0.5").to_f * 10,
-          under_15: get_odd(match_over_under, "Under 1.5").to_f * 10
+          over_25: get_odd(match_over_under, "Over 2.5").to_f * 10,
+          under_25: get_odd(match_over_under, "Under 2.5").to_f * 10
         )
       end
     end
@@ -241,106 +237,54 @@ class SportOddEnd
       end
     end
   end
-  def self.points_over05_neg_points
+  def self.points_over25_neg_points
     @matches = Match.where(sport: "football")
     @matches.each do |game|
-      if game.over_05.present?
-        if game.over_05 < 11
-          game.update(negative_over0: -15)
-        elsif game.over_05 >= 11 && game.over_05 < 13
-          game.update(negative_over0: -11)
-        elsif game.over_05 >= 13 && game.over_05 < 15
-          game.update(negative_over0: -10)
-        elsif game.over_05 >= 15 && game.over_05 < 16
-          game.update(negative_over0: -9)
-        elsif game.over_05 >= 16 && game.over_05 < 18
-          game.update(negative_over0: -8)
-        elsif game.over_05 >= 18 && game.over_05 < 20
-          game.update(negative_over0: -7)
-        elsif game.over_05 >= 20 && game.over_05 < 22.5
-          game.update(negative_over0: -7)
-        elsif game.over_05 >= 22.5 && game.over_05 < 25
-          game.update(negative_over0: -6)
-        elsif game.over_05 > 25
-          game.update(negative_over0: -5)
+      if game.over_25.present?
+        if game.over_25 < 11
+          game.update(negative_over25: -15)
+        elsif game.over_25 >= 11 && game.over_15 < 13
+          game.update(negative_over25: -11)
+        elsif game.over_25 >= 13 && game.over_25 < 15
+          game.update(negative_over25: -10)
+        elsif game.over_25 >= 15 && game.over_25 < 16
+          game.update(negative_over25: -9)
+        elsif game.over_25 >= 16 && game.over_25 < 18
+          game.update(negative_over25: -8)
+        elsif game.over_25 >= 18 && game.over_25 < 20
+          game.update(negative_over25: -7)
+        elsif game.over_25 >= 20 && game.over_25 < 22.5
+          game.update(negative_over25: -7)
+        elsif game.over_25 >= 22.5 && game.over_25 < 25
+          game.update(negative_over25: -6)
+        elsif game.over_25 > 25
+          game.update(negative_over25: -5)
         end
       end
     end
   end
-  def self.points_over15_neg_points
+  def self.points_under25_neg_points
     @matches = Match.where(sport: "football")
     @matches.each do |game|
-      if game.over_15.present?
-        if game.over_15 < 11
-          game.update(negative_over15: -15)
-        elsif game.over_15 >= 11 && game.over_15 < 13
-          game.update(negative_over15: -11)
-        elsif game.over_15 >= 13 && game.over_15 < 15
-          game.update(negative_over15: -10)
-        elsif game.over_15 >= 15 && game.over_15 < 16
-          game.update(negative_over15: -9)
-        elsif game.over_15 >= 16 && game.over_15 < 18
-          game.update(negative_over15: -8)
-        elsif game.over_15 >= 18 && game.over_15 < 20
-          game.update(negative_over15: -7)
-        elsif game.over_15 >= 20 && game.over_15 < 22.5
-          game.update(negative_over15: -7)
-        elsif game.over_15 >= 22.5 && game.over_15 < 25
-          game.update(negative_over15: -6)
-        elsif game.over_15 > 25
-          game.update(negative_over15: -5)
-        end
-      end
-    end
-  end
-  def self.points_under05_neg_points
-    @matches = Match.where(sport: "football")
-    @matches.each do |game|
-      if game.under_05.present?
-        if game.under_05 < 11
-          game.update(negative_under05: -15)
-        elsif game.under_05 >= 11 && game.under_05 < 13
-          game.update(negative_under05: -11)
-        elsif game.under_05 >= 13 && game.under_05 < 15
-          game.update(negative_under05: -10)
-        elsif game.under_05 >= 15 && game.under_05 < 16
-          game.update(negative_under05: -9)
-        elsif game.under_05 >= 16 && game.under_05 < 18
-          game.update(negative_under05: -8)
-        elsif game.under_05 >= 18 && game.under_05 < 20
-          game.update(negative_under05: -7)
-        elsif game.under_05 >= 20 && game.under_05 < 22.5
-          game.update(negative_under05: -7)
-        elsif game.under_05 >= 22.5 && game.under_05 < 25
-          game.update(negative_under05: -6)
-        elsif game.under_05 > 25
-          game.update(negative_under05: -5)
-        end
-      end
-    end
-  end
-  def self.points_under15_neg_points
-    @matches = Match.where(sport: "football")
-    @matches.each do |game|
-      if game.under_15.present?
-        if game.under_15 < 11
-          game.update(negative_under15: -15)
-        elsif game.under_15 >= 11 && game.under_15 < 13
-          game.update(negative_under15: -11)
-        elsif game.under_15 >= 13 && game.under_15 < 15
-          game.update(negative_under15: -10)
-        elsif game.under_15 >= 15 && game.under_15 < 16
-          game.update(negative_under15: -9)
-        elsif game.under_15 >= 16 && game.under_15 < 18
-          game.update(negative_under15: -8)
-        elsif game.under_15 >= 18 && game.under_15 < 20
-          game.update(negative_under15: -7)
-        elsif game.under_15 >= 20 && game.under_15 < 22.5
-          game.update(negative_under15: -7)
-        elsif game.under_15 >= 22.5 && game.under_15 < 25
-          game.update(negative_under15: -6)
-        elsif game.under_15 > 25
-          game.update(negative_under15: -5)
+      if game.under_25.present?
+        if game.under_25 < 11
+          game.update(negative_under25: -15)
+        elsif game.under_25 >= 11 && game.under_25 < 13
+          game.update(negative_under25: -11)
+        elsif game.under_25 >= 13 && game.under_25 < 15
+          game.update(negative_under25: -10)
+        elsif game.under_25 >= 15 && game.under_25 < 16
+          game.update(negative_under25: -9)
+        elsif game.under_25 >= 16 && game.under_25 < 18
+          game.update(negative_under25: -8)
+        elsif game.under_25 >= 18 && game.under_25 < 20
+          game.update(negative_under25: -7)
+        elsif game.under_25 >= 20 && game.under_25 < 22.5
+          game.update(negative_under25: -7)
+        elsif game.under_25 >= 22.5 && game.under_25 < 25
+          game.update(negative_under25: -6)
+        elsif game.under_25 > 25
+          game.update(negative_under25: -5)
         end
       end
     end
@@ -349,24 +293,24 @@ class SportOddEnd
     @matches = Match.where(sport: "football")
     @matches.each do |game|
       if game.goals_two_teams_yes.present?
-        if game.goals_two_teams_yes < 11
-          game.update(negative_goals_two_teams_yes: -15)
-        elsif game.goals_two_teams_yes >= 11 && game.goals_two_teams_yes < 13
-          game.update(negative_goals_two_teams_yes: -11)
-        elsif game.goals_two_teams_yes >= 13 && game.goals_two_teams_yes < 15
-          game.update(negative_goals_two_teams_yes: -10)
-        elsif game.goals_two_teams_yes >= 15 && game.goals_two_teams_yes < 16
-          game.update(negative_goals_two_teams_yes: -9)
-        elsif game.goals_two_teams_yes >= 16 && game.goals_two_teams_yes < 18
-          game.update(negative_goals_two_teams_yes: -8)
-        elsif game.goals_two_teams_yes >= 18 && game.goals_two_teams_yes < 20
-          game.update(negative_goals_two_teams_yes: -7)
-        elsif game.goals_two_teams_yes >= 20 && game.goals_two_teams_yes < 22.5
-          game.update(negative_goals_two_teams_yes: -7)
-        elsif game.goals_two_teams_yes >= 22.5 && game.goals_two_teams_yes < 25
-          game.update(negative_goals_two_teams_yes: -6)
-        elsif game.goals_two_teams_yes > 25
-          game.update(negative_goals_two_teams_yes: -5)
+        if game.goal_two_teams_yes < 11
+          game.update(negative_goal_two_teams_yes: -15)
+        elsif game.goal_two_teams_yes >= 11 && game.goal_two_teams_yes < 13
+          game.update(negative_goal_two_teams_yes: -11)
+        elsif game.goal_two_teams_yes >= 13 && game.goal_two_teams_yes < 15
+          game.update(negative_goal_two_teams_yes: -10)
+        elsif game.goal_two_teams_yes >= 15 && game.goal_two_teams_yes < 16
+          game.update(negative_goal_two_teams_yes: -9)
+        elsif game.goal_two_teams_yes >= 16 && game.goal_two_teams_yes < 18
+          game.update(negative_goal_two_teams_yes: -8)
+        elsif game.goal_two_teams_yes >= 18 && game.goal_two_teams_yes < 20
+          game.update(negative_goal_two_teams_yes: -7)
+        elsif game.goal_two_teams_yes >= 20 && game.goal_two_teams_yes < 22.5
+          game.update(negative_goal_two_teams_yes: -7)
+        elsif game.goal_two_teams_yes >= 22.5 && game.goal_two_teams_yes < 25
+          game.update(negative_goal_two_teams_yes: -6)
+        elsif game.goal_two_teams_yes > 25
+          game.update(negative_goal_two_teams_yes: -5)
         end
       end
     end
