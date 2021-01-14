@@ -48,6 +48,8 @@ class ForecastsController < ApplicationController
           @forecast.season_id = Season.last.id
           @forecast.confirmed = false
           @forecast.save!
+        elsif @forecast.present?
+          @forecast = Forecast.create(match: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false)
         else
           @forecast.outcome = outcome
           @forecast.save
