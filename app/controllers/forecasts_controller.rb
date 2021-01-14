@@ -56,7 +56,7 @@ class ForecastsController < ApplicationController
         end
       else check == "false"
         @forecast = Forecast.where(match: id, player_season: player, confirmed: false)
-        @forecast.destroy
+        @forecast.destroy_all
       end
     else
     end
