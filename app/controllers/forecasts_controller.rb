@@ -37,34 +37,23 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecasts.each do |forecast|
-          if forecast.where(match_id: id).outcome == "1" || "NULL" || "2"
-            forecast.update(outcome: outcome)
-          elsif forecast.where(match_id: id).outcome == "1" || "NULL" || "2"
-            forecast.update(outcome: outcome)
-          elsif forecast.where(match_id: id).outcome == "7" || "8"
-            forecast.update(outcome: outcome)
-          elsif forecast.where(match_id: id).outcome == "9" || "10"
-            forecast.update(outcome: outcome)
-          else
-            Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
-          end
+        @forecast = Forecast.where(match: id, player_season: player).first
+        if @forecast.nil?
+          @forecast = Forecast.new
+          @forecast.outcome = outcome
+          @forecast.match_id = id
+          @forecast.points_win = 0
+          @forecast.points_lose = 0
+          @forecast.player_season_id = player[0]
+          @forecast.season_id = Season.last.id
+          @forecast.confirmed = false
+          @forecast.save!
+        elsif @forecast.present?
+          @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
+        else
+          @forecast.outcome = outcome
+          @forecast.save
         end
-        # @forecast = Forecast.where(match_id: id, player_season_id: player[0])
-        # if @forecast.nil?
-        #   @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
-        # elsif @forecast.outcome == "1" || "NULL" || "2"
-        #   @forecast.update(outcome: outcome)
-        # elsif forecast.outcome == "7" || "8"
-        #   @forecast.update(outcome: outcome)
-        # elsif forecast.outcome == "9" || "10"
-        #   @forecast.update(outcome: outcome)
-        # # elsif
-        # #   @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
-        # else
-        #   @forecast.outcome = outcome
-        #   @forecast.save
-        # end
       else check == "false"
         @forecast = Forecast.where(match: id, player_season: player, confirmed: false)
         @forecast.destroy_all
