@@ -38,13 +38,13 @@ class ForecastsController < ApplicationController
     if @forecasts.count < 40
       if check == "true"
         @forecasts.each do |forecast|
-          if forecast.outcome == "1" || "NULL" || "2"
+          if forecast.where(match_id: id).outcome == "1" || "NULL" || "2"
             forecast.update(outcome: outcome)
-          elsif forecast.outcome == "1" || "NULL" || "2"
+          elsif forecast.where(match_id: id).outcome == "1" || "NULL" || "2"
             forecast.update(outcome: outcome)
-          elsif forecast.outcome == "7" || "8"
+          elsif forecast.where(match_id: id).outcome == "7" || "8"
             forecast.update(outcome: outcome)
-          elsif forecast.outcome == "9" || "10"
+          elsif forecast.where(match_id: id).outcome == "9" || "10"
             forecast.update(outcome: outcome)
           else
             Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
