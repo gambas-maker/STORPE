@@ -623,6 +623,14 @@
             <div class="d-flex flex-column justify-content-center">
               <% if  forecast.outcome == "NULL"%>
                 <p class="typopo text-center">Nul</p>
+              <% elsif forecast.outcome == "7" %>
+                <p class="typopo text-center">But pour les 2 équipes OUI</p>
+              <% elsif forecast.outcome == "8" %>
+                <p class="typopo text-center">But pour les 2 équipes NON</p>
+              <% elsif forecast.outcome == "9" %>
+                <p class="typopo text-center">Moins de 2.5 buts dans le match</p>
+              <% elsif forecast.outcome == "10" %>
+                <p class="typopo text-center">Plus de 2.5 buts dans le match</p>
               <% else %>
                 <p class="typopo text-center"><%= forecast.outcome %></p>
               <% end %>
@@ -637,6 +645,12 @@
                   <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
                 <% elsif forecast.outcome == "7" %>
                   <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_yes.round %>pts</p>
+                <% elsif forecast.outcome == "8" %>
+                  <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_no.round %>pts</p>
+                <% elsif forecast.outcome == "9" %>
+                  <p class="typopo text-success-center"><%= forecast.match.under_25.round %>pts</p>
+                <% elsif forecast.outcome == "10" %>
+                  <p class="typopo text-success-center"><%= forecast.match.over_25.round %>pts</p>
                 <% else forecast.outcome == "NULL"%>
                   <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
                 <% end %>
