@@ -17,7 +17,7 @@ class SportOddEnd
     points_away_negative_points
     points_over25_neg_points
     points_under25_neg_points
-    points_goals_two_teams_yes_neg_points
+    points_goal_two_teams_yes_neg_points
     points_goals_two_teams_no_neg_points
   end
 
@@ -292,10 +292,10 @@ class SportOddEnd
       end
     end
   end
-  def self.points_goals_two_teams_yes_neg_points
+  def self.points_goal_two_teams_yes_neg_points
     @matches = Match.where(sport: "football")
     @matches.each do |game|
-      if game.goals_two_teams_yes.present?
+      if game.goal_two_teams_yes.present?
         if game.goal_two_teams_yes < 11
           game.update(negative_goal_two_teams_yes: -15)
         elsif game.goal_two_teams_yes >= 11 && game.goal_two_teams_yes < 13
