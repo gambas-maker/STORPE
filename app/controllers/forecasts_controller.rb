@@ -49,13 +49,13 @@ class ForecastsController < ApplicationController
           @forecast.confirmed = false
           @forecast.save!
         elsif @forecast.present?
-          @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false)
+          @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
         else
           @forecast.outcome = outcome
           @forecast.save
         end
       else check == "false"
-        @forecast = Forecast.where(match: id, player_season: player).first
+        @forecast = Forecast.where(match: id, player_season: player, confirmed: false)
         @forecast.destroy
       end
     else
