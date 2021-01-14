@@ -114,10 +114,13 @@ class SportOddEnd
       goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["label_name"]
       if goals_two_teams == "Both Teams Score"
         match_goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["values"]
-        game.update(
-          goal_two_teams_yes: get_odd(match_goals_two_teams, "Yes").to_f * 10,
-          goal_two_teams_no: get_odd(match_goals_two_teams, "No").to_f * 10
-        )
+        if match_goals_two_teams == nil
+        else
+          game.update(
+            goal_two_teams_yes: get_odd(match_goals_two_teams, "Yes").to_f * 10,
+            goal_two_teams_no: get_odd(match_goals_two_teams, "No").to_f * 10
+          )
+        end
       end
     end
   end
