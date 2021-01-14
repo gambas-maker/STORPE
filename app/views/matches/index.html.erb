@@ -81,8 +81,8 @@
           <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? && match.points_away.present? && match.negative_points_home %>
             <% if match.sport == "football" %>
             <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
-                Launch demo modal
+              <button type="button" class="d-flex justify-content-end btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
+                Plus de pronos
               </button>
             <!-- Modal -->
               <div class="modal fade" id="exampleModalCenter-<%=match.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
