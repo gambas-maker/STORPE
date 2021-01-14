@@ -121,26 +121,34 @@
                               <div>
                                 Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
                               </div>
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="3"></input>
+                              <div data-id="<%= match.id %>">
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="3"></input>
+                              </div>
                             </div>
                             <div class="d-flex flex-row">
                               <p><%= match.nom_buteur_2 %>lkh</p>
                               <div>
                                 Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
                               </div>
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="4"></input>
+                              <div data-id="<%= match.id %>">
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="4"></input>
+                              </div>
                             </div>
                           </div>
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="5"></input>
+                              <div data-id="<%= match.id %>">
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="5"></input>
+                              </div>
                               <div>
                                 Pts :  +<%= match.buteur_3.to_i %>/ <%= match.negative_points_buteur3.to_i %>
                               </div>
                               <p><%= match.nom_buteur_3 %>lkh</p>
                             </div>
                             <div class="d-flex flex-row">
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="6"></input>
+                              <div data-id="<%= match.id %>">
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="6"></input>
+                              </div>
                               <div>
                                 Pts :  +<%= match.buteur_4.to_i %>/ <%= match.negative_points_buteur4.to_i %>
                               </div>
@@ -158,8 +166,10 @@
                               <div class="typopo">
                                 Pts :  +<%= match.goal_two_teams_yes.to_i %>/ <%= match.negative_goal_two_teams_yes.to_i %>
                               </div>
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="7"></input>
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="8"></input>
+                              <div data-id="<%= match.id %>">
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="7"></input>
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="8"></input>
+                              </div>
                               <div class="typopo">
                                 Pts :  +<%= match.goal_two_teams_no.to_i %>/ <%= match.negative_goal_two_teams_no.to_i %>
                               </div>
@@ -180,8 +190,10 @@
                               <div class="typopo">
                                 Pts :  +<%= match.under_25.to_i %>/ <%= match.negative_under25.to_i %>
                               </div>
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="9"></input>
-                              <input type="checkbox" class="square" onclick="updateCount()" data-outcome="10"></input>
+                              <div data-id="<%= match.id %>">
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="9"></input>
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="10"></input>
+                              </div>
                               <div class="typopo">
                                 Pts :  +<%= match.over_25.to_i %>/ <%= match.negative_over25.to_i %>
                               </div>
