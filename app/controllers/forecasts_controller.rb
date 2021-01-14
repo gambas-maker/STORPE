@@ -39,23 +39,12 @@ class ForecastsController < ApplicationController
       if check == "true"
         @forecast = Forecast.where(match_id: id, player_season_id: player)
         if @forecast.nil?
-          @forecast = Forecast.new
-          @forecast.outcome = outcome
-          @forecast.match_id = id
-          @forecast.points_win = 0
-          @forecast.points_lose = 0
-          @forecast.player_season_id = player[0]
-          @forecast.season_id = Season.last.id
-          @forecast.confirmed = false
-          @forecast.save!
-        elsif @forecast.present? && @forecast.outcome == "1" || "NULL" || "2"
           @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
+        elsif @forecast.outcome == "1" || "NULL" || "2"
           @forecast.update(outcome: outcome)
-        elsif @forecast.present? && forecast.outcome == "7" || "8"
-          @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
+        elsif forecast.outcome == "7" || "8"
           @forecast.update(outcome: outcome)
-        elsif @forecast.present? && forecast.outcome == "9" || "10"
-          @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
+        elsif forecast.outcome == "9" || "10"
           @forecast.update(outcome: outcome)
         # elsif
         #   @forecast = Forecast.create(match_id: id, player_season_id: player[0], points_lose: 0, points_win: 0, season_id: Season.last.id, confirmed: false, outcome: outcome)
