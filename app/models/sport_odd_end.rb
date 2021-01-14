@@ -246,7 +246,7 @@ class SportOddEnd
       if game.over_25.present?
         if game.over_25 < 11
           game.update(negative_over25: -15)
-        elsif game.over_25 >= 11 && game.over_15 < 13
+        elsif game.over_25 >= 11 && game.over_25 < 13
           game.update(negative_over25: -11)
         elsif game.over_25 >= 13 && game.over_25 < 15
           game.update(negative_over25: -10)
