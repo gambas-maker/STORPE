@@ -99,6 +99,8 @@
               <% pointp += forecast.match.points_away.round %>
             <% elsif forecast.outcome == "NULL" %>
               <% pointp += forecast.match.points_draw.round %>
+            <% elsif forecast.outcome == "7" %>
+              <% pointp += forecast.match.goal_two_teams_yes.round %>
             <% end %>
           <% end %>
           <h3 class="typo"><%= pointp %></h3>
