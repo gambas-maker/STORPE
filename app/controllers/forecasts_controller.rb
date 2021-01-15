@@ -159,7 +159,7 @@ class ForecastsController < ApplicationController
           @forecaststriker1.save!
         end
       else check == "false"
-        @forecaststriker1 = Forecast.where(match: id, player_season: player).first
+        @forecaststriker1 = Forecast.where(match: id, player_season: player).last
         @forecaststriker1.destroy
       end
     else
