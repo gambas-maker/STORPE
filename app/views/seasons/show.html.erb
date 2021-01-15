@@ -643,6 +643,10 @@
                   <p class="typopo text-success-center"><%= forecast.match.points_home.round %>pts</p>
                 <% elsif forecast.outcome == "2"%>
                   <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
+                <% elsif forecast.outcome == "3" %>
+                  <p class="typopo text-success-center"><%= forecast.match.nom_buteur_3.round %>pts</p>
+                <% elsif forecast.outcome == "4" %>
+                  <p class="typopo text-success-center"><%= forecast.match.nom_buteur_4.round %>pts</p>
                 <% elsif forecast.outcome == "7" %>
                   <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_yes.round %>pts</p>
                 <% elsif forecast.outcome == "8" %>
