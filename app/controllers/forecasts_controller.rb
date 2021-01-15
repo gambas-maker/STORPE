@@ -148,7 +148,15 @@ class ForecastsController < ApplicationController
           @forecaststriker1.confirmed = false
           @forecaststriker1.save!
         else
-          Forecast.create(match_id: id, player_season_id: player[0], outcome: outcome, confirmed: false, season_id: Season.last.id, points_win: 0, points_lose: 0)
+          @forecaststriker1 = Forecast.new
+          @forecaststriker1.outcome = outcome
+          @forecaststriker1.match_id = id
+          @forecaststriker1.points_win = 0
+          @forecaststriker1.points_lose = 0
+          @forecaststriker1.player_season_id = player[0]
+          @forecaststriker1.season_id = Season.last.id
+          @forecaststriker1.confirmed = false
+          @forecaststriker1.save!
         end
       else check == "false"
         @forecaststriker1 = Forecast.where(match: id, player_season: player).first
