@@ -24,8 +24,9 @@ require("channels")
 
 // External imports
 import "bootstrap";
-import {selectOutcome,validePanier, calculate} from "../plugins/select_outcome";
+import {selectOutcome, selectOutcomeOver, validePanier, calculate} from "../plugins/select_outcome";
 selectOutcome();
+selectOutcomeOver();
 validePanier();
 calculate();
 document.addEventListener('turbolinks:load', () => {
