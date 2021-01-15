@@ -39,7 +39,7 @@ class ForecastsController < ApplicationController
       if check == "true"
         @forecastunderover = Forecast.where(match: id, player_season: player, outcome: "7" || "8").first
         @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "9" || "10").first
-        @forecast = Forecast.where(match_id: id, player_season_id: player).first
+        @forecast = Forecast.where(match: id, player_season: player).first
         if @forecast.nil?
           @forecast = Forecast.new
           @forecast.outcome = outcome
