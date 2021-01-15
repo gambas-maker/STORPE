@@ -37,8 +37,30 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecast = Forecast.where(match: id, player_season: player).first
+        @forecastunderover = Forecast.where(match: id, player_season: player, outcome: "7" || "8").first
+        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "9" || "10").first
+        @forecast = Forecast.where(match: id, player_season: player, outcome: "1" || "NULL" || "2").first
         if @forecast.nil?
+          @forecast = Forecast.new
+          @forecast.outcome = outcome
+          @forecast.match_id = id
+          @forecast.points_win = 0
+          @forecast.points_lose = 0
+          @forecast.player_season_id = player[0]
+          @forecast.season_id = Season.last.id
+          @forecast.confirmed = false
+          @forecast.save!
+        elsif @forecastb2e.nil?
+          @forecast = Forecast.new
+          @forecast.outcome = outcome
+          @forecast.match_id = id
+          @forecast.points_win = 0
+          @forecast.points_lose = 0
+          @forecast.player_season_id = player[0]
+          @forecast.season_id = Season.last.id
+          @forecast.confirmed = false
+          @forecast.save!
+        elsif @forecastunderover.nil?
           @forecast = Forecast.new
           @forecast.outcome = outcome
           @forecast.match_id = id
