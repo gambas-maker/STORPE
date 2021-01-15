@@ -20,7 +20,6 @@ end
   get 'store_outcome_b2e', to: 'forecasts#store_outcome_b2e', defaults: {format: :json}
   get 'store_outcome_under', to: 'forecasts#store_outcome_under', defaults: {format: :json}
   get 'store_outcome_striker1', to: 'forecasts#store_outcome_striker1', defaults: {format: :json}
-  get 'store_outcome_striker2', to: 'forecasts#store_outcome_striker2', defaults: {format: :json}
   get 'confirm_pending', to: 'forecasts#confirm_pending', defaults: {format: :json}
   get '/sitemap.xml.gz', to: redirect("https://s3-eu-west-3.amazonaws.com/storpesitemap/sitemap.xml.gz")
 

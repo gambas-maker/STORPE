@@ -90,29 +90,6 @@ const selectOutcomeStriker1 = () => {
   });
 }
 
-const selectOutcomeStriker2 = () => {
-  const selects = document.querySelectorAll(".square_striker2");
-  selects.forEach((outcome)=>{
-    outcome.addEventListener("click",(event) => {
-  $('input[type="checkbox"]').on('change', function() {
-   $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
-});
-      const result = event.currentTarget.dataset.outcome;
-      console.log(result);
-      const id = event.currentTarget.parentNode.dataset.id;
-      console.log(id);
-      const box = event.currentTarget.checked;
-      console.log(box);
-      const url = 'store_outcome_striker2?result='+result+'&match='+id+'&box='+box
-      fetch(url)
-        .then(response => response.json())
-        .then((data) => {
-      console.log(data);
-      });
-    });
-  });
-}
-
 const validePanier = () => {
   const panier = document.getElementById('panier');
   panier.addEventListener("click", (event) =>{
