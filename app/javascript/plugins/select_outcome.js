@@ -114,6 +114,6 @@ const calculate = () => {
   })
 }
 
-export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, selectOutcomeStriker2, validePanier, calculate};
+export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate};
 
 
