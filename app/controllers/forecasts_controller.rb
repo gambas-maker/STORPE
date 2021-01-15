@@ -148,7 +148,7 @@ class ForecastsController < ApplicationController
           @forecaststriker1.confirmed = false
           @forecaststriker1.save!
         else
-          Forecast.create(match_id: id, player_season_id: player, outcome: outcome)
+          Forecast.create(match_id: id, player_season_id: player[0], outcome: outcome)
         end
       else check == "false"
         @forecaststriker1 = Forecast.where(match: id, player_season: player).first
