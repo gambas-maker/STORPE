@@ -70,7 +70,7 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: outcome).first
+        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "7" || "8").first
         if @forecastb2e.nil?
           @forecastb2e = Forecast.new
           @forecastb2e.outcome = outcome
