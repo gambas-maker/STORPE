@@ -53,7 +53,7 @@ class ForecastsController < ApplicationController
           @forecast.save
         end
       else check == "false"
-        @forecast = Forecast.where(match: id, player_season: player, confirmed: false)
+         @forecast = Forecast.where(match: id, player_season: player).first
         @forecast.destroy_all
       end
     else
