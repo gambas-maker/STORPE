@@ -21,8 +21,8 @@ const selectOutcome = () => {
   });
 }
 
-const selectOutcomeOver = () => {
-  const selects = document.querySelectorAll(".square_over");
+const selectOutcomeBe = () => {
+  const selects = document.querySelectorAll(".square_b2e");
   selects.forEach((outcome)=>{
     outcome.addEventListener("click",(event) => {
   $('input[type="checkbox"]').on('change', function() {
@@ -34,7 +34,7 @@ const selectOutcomeOver = () => {
       console.log(id);
       const box = event.currentTarget.checked;
       console.log(box);
-      const url = 'store_outcome_over?result='+result+'&match='+id+'&box='+box
+      const url = 'store_outcome_b2e?result='+result+'&match='+id+'&box='+box
       fetch(url)
         .then(response => response.json())
         .then((data) => {
@@ -68,6 +68,6 @@ const calculate = () => {
   })
 }
 
-export { selectOutcome, selectOutcomeOver, validePanier, calculate};
+export { selectOutcome, selectOutcomeBe, validePanier, calculate};
 
 

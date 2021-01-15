@@ -61,7 +61,7 @@ class ForecastsController < ApplicationController
     render json: { status: @forecast }
   end
 
-  def store_outcome_over
+  def store_outcome_b2e
     @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids, season_id: Season.last.id)
     id = params[:match]
     # match = Match.find(id)
