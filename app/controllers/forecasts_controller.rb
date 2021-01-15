@@ -50,7 +50,11 @@ class ForecastsController < ApplicationController
           @forecast.season_id = Season.last.id
           @forecast.confirmed = false
           @forecast.save!
-        elsif @forecastb2e.nil?
+        else
+          @forecast.outcome = outcome
+          @forecast.save
+        end
+        if @forecastb2e.nil?
           @forecast = Forecast.new
           @forecast.outcome = outcome
           @forecast.match_id = id
@@ -60,7 +64,11 @@ class ForecastsController < ApplicationController
           @forecast.season_id = Season.last.id
           @forecast.confirmed = false
           @forecast.save!
-        elsif @forecastunderover.nil?
+        else
+          @forecast.outcome = outcome
+          @forecast.save
+        end
+        if @forecastunderover.nil?
           @forecast = Forecast.new
           @forecast.outcome = outcome
           @forecast.match_id = id
