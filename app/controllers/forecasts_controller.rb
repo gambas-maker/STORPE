@@ -127,6 +127,36 @@ class ForecastsController < ApplicationController
     render json: { status: @forecast }
   end
 
+  def store_outcome_striker
+    @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids, season_id: Season.last.id)
+    id = params[:match]
+    # match = Match.find(id)
+    outcome = params[:result]
+    check = params[:box]
+    player = current_user.player_season_ids
+    if @forecasts.count < 40
+      if check == "true"
+        @forecaststriker = Forecast.where(match: id, player_season: player, outcome: "3" || "4" || "5" || "6").first
+        if @forecaststriker.nil?
+          @forecaststriker = Forecast.new
+          @forecaststriker.outcome = outcome
+          @forecaststriker.match_id = id
+          @forecaststriker.points_win = 0
+          @forecaststriker.points_lose = 0
+          @forecaststriker.player_season_id = player[0]
+          @forecaststriker.season_id = Season.last.id
+          @forecaststriker.confirmed = false
+          @forecaststriker.save!
+        end
+      else check == "false"
+        @forecaststriker = Forecast.where(match: id, player_season: player).first
+        @forecaststriker.destroy
+      end
+    else
+    end
+    render json: { status: @forecast }
+  end
+
   def confirm_pending
     player = PlayerSeason.find(current_user.player_season_ids)
     @forecasts = Forecast.where(confirmed: false, player_season: player)
