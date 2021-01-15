@@ -623,6 +623,10 @@
             <div class="d-flex flex-column justify-content-center">
               <% if  forecast.outcome == "NULL"%>
                 <p class="typopo text-center">Nul</p>
+              <% elsif forecast.outcome == "3" %>
+                <p class="typopo text-center"><%= forecast.match.nom_buteur_3 %></p>
+              <% elsif forecast.outcome == "4" %>
+                <p class="typopo text-center"><%= forecast.match.nom_buteur_4 %></p>
               <% elsif forecast.outcome == "7" %>
                 <p class="typopo text-center">But pour les 2 équipes OUI</p>
               <% elsif forecast.outcome == "8" %>
@@ -644,9 +648,9 @@
                 <% elsif forecast.outcome == "2"%>
                   <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
                 <% elsif forecast.outcome == "3" %>
-                  <p class="typopo text-success-center"><%= forecast.match.nom_buteur_3.round %>pts</p>
+                  <p class="typopo text-success-center"><%= forecast.match.buteur_3.round %>pts</p>
                 <% elsif forecast.outcome == "4" %>
-                  <p class="typopo text-success-center"><%= forecast.match.nom_buteur_4.round %>pts</p>
+                  <p class="typopo text-success-center"><%= forecast.match.buteur_4.round %>pts</p>
                 <% elsif forecast.outcome == "7" %>
                   <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_yes.round %>pts</p>
                 <% elsif forecast.outcome == "8" %>
