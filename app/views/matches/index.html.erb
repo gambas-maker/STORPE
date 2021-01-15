@@ -125,6 +125,7 @@
                               </div>
                               <div data-id="<%= match.id %>">
                                 <input type="checkbox" class="square" onclick="updateCount()" data-outcome="3"></input>
+                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="4"></input>
                               </div>
                             </div>
                             <div class="d-flex flex-row">
@@ -132,29 +133,6 @@
                               <div>
                                 Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
                               </div>
-                              <div data-id="<%= match.id %>">
-                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="4"></input>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="d-flex flex-column" data-id="<%= match.id %>">
-                            <div class="d-flex flex-row">
-                              <div data-id="<%= match.id %>">
-                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="5"></input>
-                              </div>
-                              <div>
-                                Pts :  +<%= match.buteur_3.to_i %>/ <%= match.negative_points_buteur3.to_i %>
-                              </div>
-                              <p><%= match.nom_buteur_3 %>lkh</p>
-                            </div>
-                            <div class="d-flex flex-row">
-                              <div data-id="<%= match.id %>">
-                                <input type="checkbox" class="square" onclick="updateCount()" data-outcome="6"></input>
-                              </div>
-                              <div>
-                                Pts :  +<%= match.buteur_4.to_i %>/ <%= match.negative_points_buteur4.to_i %>
-                              </div>
-                              <p><%= match.nom_buteur_4 %>lkh</p>
                             </div>
                           </div>
                         </div>
