@@ -130,12 +130,15 @@ class SportOddEnd
     puts "hello"
     if ok == 1
       goals_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["label_name"]
-      if goals_over_under == "Goals Over/Under"
-        match_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["values"]
-        game.update(
-          over_25: get_odd(match_over_under, "Over 2.5").to_f * 10,
-          under_25: get_odd(match_over_under, "Under 2.5").to_f * 10
-        )
+      if goals_over_under.nil?
+      else
+        if goals_over_under == "Goals Over/Under"
+          match_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["values"]
+          game.update(
+            over_25: get_odd(match_over_under, "Over 2.5").to_f * 10,
+            under_25: get_odd(match_over_under, "Under 2.5").to_f * 10
+          )
+        end
       end
     end
   end
