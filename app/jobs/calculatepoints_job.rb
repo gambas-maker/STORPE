@@ -1,7 +1,7 @@
 class CalculatepointsJob < ApplicationJob
   queue_as :default
   def perform
-    @matches = Match.where(sport: "football", event_stamp: Date.yesterday.to_s)
+    @matches = Match.where(sport: "football", event_stamp: Date.today.to_s)
     @forecasts = Forecast.where(season_id: Season.last.id, confirmed: true)
     @matches.each do |match|
       match.forecasts.each do |forecast|
@@ -32,13 +32,13 @@ class CalculatepointsJob < ApplicationJob
             forecast.update(points_lose: match.negative_goal_two_teams_no)
           elsif forecast.outcome == "8" && match.result[0].to_i == 0 || match.result[2].to_i == 0
             forecast.update(points_win: match.goal_two_teams_no)
-          elsif match.result[0].to_i + match.result[2].to_i > 2 && forecast.outcome == "9"
+          elsif forecast.outcome == "9" && match.result[0].to_i + match.result[2].to_i > 2
             forecast.update(points_lose: match.negative_under25)
-          elsif match.result[0].to_i + match.result[2].to_i < 3 && forecast.outcome == "9"
+          elsif forecast.outcome == "9" && match.result[0].to_i + match.result[2].to_i < 3
             forecast.update(points_win: match.under25)
-          elsif match.result[0].to_i + match.result[2].to_i > 2 && forecast.outcome == "10"
+          elsif forecast.outcome == "10" && match.result[0].to_i + match.result[2].to_i > 2
             forecast.update(points_win: match.over_25)
-          elsif match.result[0].to_i + match.result[2].to_i < 3 && forecast.outcome == "10"
+          elsif forecast.outcome == "10" && match.result[0].to_i + match.result[2].to_i < 3
             forecast.update(points_lose: match.negative_over25)
           end
         end
