@@ -156,7 +156,7 @@
                               <div class="typopo">
                                 Pts :  +<%= match.goal_two_teams_yes.to_i %>/ <%= match.negative_goal_two_teams_yes.to_i %>
                               </div>
-                              <% if match.forecasts.where(match_id: match.id, season_id: Season.last.id, player_season_id: current_user.player_seasons[0], outcome: "7") && match.forecasts.where(match_id: match.id, season_id: Season.last.id, player_season_id: current_user.player_seasons[0], outcome: "8") %>
+                              <% if match.forecasts.where(match_id: match.id, outcome: "7") && match.forecasts.where(match_id: match.id, outcome: "8") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="7"></input>
