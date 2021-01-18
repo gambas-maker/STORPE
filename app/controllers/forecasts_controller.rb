@@ -53,8 +53,114 @@ class ForecastsController < ApplicationController
           @forecast.save
         end
       else check == "false"
-        @forecast = Forecast.where(match: id, player_season: player).first
+         @forecast = Forecast.where(match: id, player_season: player).first
         @forecast.destroy
+      end
+    else
+    end
+    render json: { status: @forecast }
+  end
+
+  def store_outcome_b2e
+    @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids, season_id: Season.last.id)
+    id = params[:match]
+    # match = Match.find(id)
+    outcome = params[:result]
+    check = params[:box]
+    player = current_user.player_season_ids
+    if @forecasts.count < 40
+      if check == "true"
+        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "7" || "8").first
+        if @forecastb2e.nil?
+          @forecastb2e = Forecast.new
+          @forecastb2e.outcome = outcome
+          @forecastb2e.match_id = id
+          @forecastb2e.points_win = 0
+          @forecastb2e.points_lose = 0
+          @forecastb2e.player_season_id = player[0]
+          @forecastb2e.season_id = Season.last.id
+          @forecastb2e.confirmed = false
+          @forecastb2e.save!
+        else
+          @forecastb2e.outcome = outcome
+          @forecastb2e.save
+        end
+      else check == "false"
+        @forecastb2e = Forecast.where(match: id, player_season: player).first
+        @forecastb2e.destroy
+      end
+    else
+    end
+    render json: { status: @forecast }
+  end
+
+  def store_outcome_under
+    @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids, season_id: Season.last.id)
+    id = params[:match]
+    # match = Match.find(id)
+    outcome = params[:result]
+    check = params[:box]
+    player = current_user.player_season_ids
+    if @forecasts.count < 40
+      if check == "true"
+        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "9" || "10").first
+        if @forecastb2e.nil?
+          @forecastb2e = Forecast.new
+          @forecastb2e.outcome = outcome
+          @forecastb2e.match_id = id
+          @forecastb2e.points_win = 0
+          @forecastb2e.points_lose = 0
+          @forecastb2e.player_season_id = player[0]
+          @forecastb2e.season_id = Season.last.id
+          @forecastb2e.confirmed = false
+          @forecastb2e.save!
+        else
+          @forecastb2e.outcome = outcome
+          @forecastb2e.save
+        end
+      else check == "false"
+        @forecastb2e = Forecast.where(match: id, player_season: player).first
+        @forecastb2e.destroy
+      end
+    else
+    end
+    render json: { status: @forecast }
+  end
+
+  def store_outcome_striker1
+    @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids, season_id: Season.last.id)
+    id = params[:match]
+    # match = Match.find(id)
+    outcome = params[:result]
+    check = params[:box]
+    player = current_user.player_season_ids
+    if @forecasts.count < 40
+      if check == "true"
+        @forecaststriker1 = Forecast.where(match: id, player_season: player, outcome: "3" || "4")
+        if @forecaststriker1.nil?
+          @forecaststriker1 = Forecast.new
+          @forecaststriker1.outcome = outcome
+          @forecaststriker1.match_id = id
+          @forecaststriker1.points_win = 0
+          @forecaststriker1.points_lose = 0
+          @forecaststriker1.player_season_id = player[0]
+          @forecaststriker1.season_id = Season.last.id
+          @forecaststriker1.confirmed = false
+          @forecaststriker1.save!
+        else
+          @forecaststriker1 = Forecast.new
+          @forecaststriker1.outcome = outcome
+          @forecaststriker1.match_id = id
+          @forecaststriker1.points_win = 0
+          @forecaststriker1.points_lose = 0
+          @forecaststriker1.player_season_id = player[0]
+          @forecaststriker1.season_id = Season.last.id
+          @forecaststriker1.confirmed = false
+          @forecaststriker1.save!
+        end
+      else check == "false"
+        @forecaststriker1 = Forecast.where(match: id, player_season: player, outcome: outcome)
+        @forecaststriker1.destroy_all
       end
     else
     end

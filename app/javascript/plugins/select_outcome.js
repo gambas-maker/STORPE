@@ -21,6 +21,75 @@ const selectOutcome = () => {
   });
 }
 
+const selectOutcomeBe = () => {
+  const selects = document.querySelectorAll(".square_b2e");
+  selects.forEach((outcome)=>{
+    outcome.addEventListener("click",(event) => {
+  $('input[type="checkbox"]').on('change', function() {
+   $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
+});
+      const result = event.currentTarget.dataset.outcome;
+      console.log(result);
+      const id = event.currentTarget.parentNode.dataset.id;
+      console.log(id);
+      const box = event.currentTarget.checked;
+      console.log(box);
+      const url = 'store_outcome_b2e?result='+result+'&match='+id+'&box='+box
+      fetch(url)
+        .then(response => response.json())
+        .then((data) => {
+      console.log(data);
+      });
+    });
+  });
+}
+
+const selectOutcomeUnder = () => {
+  const selects = document.querySelectorAll(".square_under");
+  selects.forEach((outcome)=>{
+    outcome.addEventListener("click",(event) => {
+  $('input[type="checkbox"]').on('change', function() {
+   $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
+});
+      const result = event.currentTarget.dataset.outcome;
+      console.log(result);
+      const id = event.currentTarget.parentNode.dataset.id;
+      console.log(id);
+      const box = event.currentTarget.checked;
+      console.log(box);
+      const url = 'store_outcome_under?result='+result+'&match='+id+'&box='+box
+      fetch(url)
+        .then(response => response.json())
+        .then((data) => {
+      console.log(data);
+      });
+    });
+  });
+}
+
+const selectOutcomeStriker1 = () => {
+  const selects = document.querySelectorAll(".square_striker1");
+  selects.forEach((outcome)=>{
+    outcome.addEventListener("click",(event) => {
+  $('input[type="checkbox"]').on('change', function() {
+   $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
+});
+      const result = event.currentTarget.dataset.outcome;
+      console.log(result);
+      const id = event.currentTarget.parentNode.dataset.id;
+      console.log(id);
+      const box = event.currentTarget.checked;
+      console.log(box);
+      const url = 'store_outcome_striker1?result='+result+'&match='+id+'&box='+box
+      fetch(url)
+        .then(response => response.json())
+        .then((data) => {
+      console.log(data);
+      });
+    });
+  });
+}
+
 const validePanier = () => {
   const panier = document.getElementById('panier');
   panier.addEventListener("click", (event) =>{
@@ -45,6 +114,6 @@ const calculate = () => {
   })
 }
 
-export { selectOutcome, validePanier, calculate};
+export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate};
 
 
