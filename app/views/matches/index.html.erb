@@ -123,7 +123,7 @@
                               <div>
                                 Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
                               </div>
-                              <% if match.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "3") %>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
@@ -133,7 +133,7 @@
                           </div>
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
-                              <% if match.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "4") %>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "4") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
@@ -156,7 +156,7 @@
                               <div class="typopo pr-2">
                                 Pts :  +<%= match.goal_two_teams_yes.to_i %>/ <%= match.negative_goal_two_teams_yes.to_i %>
                               </div>
-                              <% if match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "7") || match.forecasts.find_by(match_id: match.id, confirmed:true, outcome: "8") %>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "7") || current_user.forecasts.find_by(match_id: match.id, confirmed:true, outcome: "8") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="7"></input>
@@ -183,7 +183,7 @@
                               <div class="typopo pr-1">
                                 Pts :  +<%= match.under_25.to_i %>/ <%= match.negative_under25.to_i %>
                               </div>
-                              <% if match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "9") || match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "10") %>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "9") || current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "10") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="9"></input>
@@ -221,7 +221,7 @@
                 <div class="d-flex flex-column justify-content-center">
                   <p class="typopo text-center">VS</p>
                   <div class="d-flex flex-row align-items-center col-4">
-                     <% if match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "1") || match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "NULL") || match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "2") %>
+                     <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "1") || current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "NULL") || current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "2") %>
                       <% else %>
                         <div class="displaysquares" data-id="<%= match.id %>">
                           <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
