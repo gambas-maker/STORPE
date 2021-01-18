@@ -78,8 +78,130 @@
         </div>
         <input type="hidden" id ="season_player" value="<%= @player %>">
         <% @matches.sort_by{|v| v.kick_off}.each do |match| %>
-          <% if Time.parse(match.kick_off) > Time.now && current_user.forecasts.find_by(match_id: match.id, confirmed: true).nil? && match.points_home.present? && match.points_away.present? && match.negative_points_home %>
+          <% if Time.parse(match.kick_off) > Time.now && match.points_home.present? && match.points_away.present? && match.negative_points_home %>
             <% if match.sport == "football" %>
+            <!-- Button trigger modal -->
+              <div class="d-flex justify-content-end mr-1">
+                <button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
+                  Plus de pronos
+                </button>
+              </div>
+            <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter-<%=match.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Buffet à volonté</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="prono d-flex flex-row justify-content-around mb-4 mt-4">
+                        <div class="d-flex flex-column align-items-center col-4">
+                          <div class="row">
+                            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+                          </div>
+                          <div class="row text-align-center">
+                            <h3 class="tit"><%= match.team_home %></h3>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <p class="typopo text-center">VS</p>
+                        </div>
+                        <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+                          <h3 class="tit"><%= match.team_away  %></h3>
+                        </div>
+                      </div>
+                      <% if match.buteur_1.present? %>
+                        <p class="typopo text-center">Buteurs</p>
+                        <div class="d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p><%= match.nom_buteur_1 %></p>
+                              <div>
+                                Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
+                              </div>
+                              <% if match.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "3") %>
+                              <% else %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
+                                </div>
+                              <% end %>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <% if match.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "4") %>
+                              <% else %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
+                                </div>
+                              <% end %>
+                              <div>
+                                Pts :  +<%= match.buteur_3.to_i %>/ <%= match.negative_points_buteur3.to_i %>
+                              </div>
+                              <p><%= match.nom_buteur_3 %></p>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                      <% if match.goal_two_teams_yes.present? %>
+                        <p class="typo text-center">But pour les 2 équipes</p>
+                        <div class="prono d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p class="tit pr-3">OUI</p>
+                              <div class="typopo">
+                                Pts :  +<%= match.goal_two_teams_yes.to_i %>/ <%= match.negative_goal_two_teams_yes.to_i %>
+                              </div>
+                              <% if match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "7") || match.forecasts.find_by(match_id: match.id, confirmed:true, outcome: "8") %>
+                              <% else %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="7"></input>
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="8"></input>
+                                </div>
+                              <% end %>
+                              <div class="typopo">
+                                Pts :  +<%= match.goal_two_teams_no.to_i %>/ <%= match.negative_goal_two_teams_no.to_i %>
+                              </div>
+                              <p class="tit pl-3">NON</p>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+
+                          </div>
+                        </div>
+                      <% end %>
+                      <% if match.under_25.present? %>
+                        <p class="typo text-center">Nombre de buts</p>
+                        <div class="d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p class="tit pr-3">Moins de 2.5 buts</p>
+                              <div class="typopo">
+                                Pts :  +<%= match.under_25.to_i %>/ <%= match.negative_under25.to_i %>
+                              </div>
+                              <% if match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "9") || match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "10") %>
+                              <% else %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="9"></input>
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="10"></input>
+                                </div>
+                              <% end %>
+                              <div class="typopo">
+                                Pts :  +<%= match.over_25.to_i %>/ <%= match.negative_over25.to_i %>
+                              </div>
+                              <p class="tit pr-3">Plus de 2.5 buts</p>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="d-flex justify-content-center mb-2 mt-2">
                 <h4 class="typopo"><%= match.league %></h4>
               </div>
@@ -99,11 +221,14 @@
                 <div class="d-flex flex-column justify-content-center">
                   <p class="typopo text-center">VS</p>
                   <div class="d-flex flex-row align-items-center col-4">
-                    <div class="displaysquares" data-id="<%= match.id %>">
-                      <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
-                      <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
-                      <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
-                    </div>
+                     <% if match.forecasts.find_by(match_id: match.id, outcome: "1") || match.forecasts.find_by(match_id: match.id, outcome: "NULL") || match.forecasts.find_by(match_id: match.id, outcome: "2") %>
+                      <% else %>
+                        <div class="displaysquares" data-id="<%= match.id %>">
+                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
+                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
+                        </div>
+                      <% end %>
                   </div>
                 </div>
                 <div class="d-flex flex-column align-items-center text-align-center col-4 ">

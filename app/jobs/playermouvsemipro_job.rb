@@ -9,7 +9,8 @@ class PlayermouvsemiproJob < ApplicationJob
     @semis.each do |semi|
       champ = []
       semi.player_seasons.each do |player|
-        if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
+        if player.forecasts.where(confirmed: true).last == nil
+        else player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
           champ << player
         end
       end
@@ -24,7 +25,8 @@ class PlayermouvsemiproJob < ApplicationJob
     pluss.each do |champ, number|
       array = []
       champ.player_seasons.each do |player|
-        if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
+        if player.forecasts.where(confirmed: true).last == nil
+        else player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
           array << player
         end
       end
@@ -44,7 +46,8 @@ class PlayermouvsemiproJob < ApplicationJob
       elsif value == moinss.max_by { |k,v| v }.second
       else
         key.player_seasons.each do |player|
-          if player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id && value < 20
+          if player.forecasts.where(confirmed: true).last == nil
+          else player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id && value < 20
             puts moinss.max_by { |k,v| v }.first.id
             player.update(championship_id: moinss.max_by { |k,v| v }.first.id)
             value += 1
