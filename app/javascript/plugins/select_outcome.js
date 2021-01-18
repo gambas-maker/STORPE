@@ -114,17 +114,6 @@ const calculate = () => {
   })
 }
 
-const calculateUnder = () => {
-  document.querySelector(".info").addEventListener("change", function(e) {
-  const tgt = e.target;
-  if (tgt.classList.contains("square_under")) {
-    const parent = tgt.closest(".under");
-    var x = document.querySelectorAll(".square_under:checked").length; console.log(x);
-    document.querySelector(".plus").innerHTML += "+" x;
-    }
-  })
-}
-
-export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate, calculateUnder};
+export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate};
 
 
