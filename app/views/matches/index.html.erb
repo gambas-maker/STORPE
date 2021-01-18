@@ -180,7 +180,7 @@
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
                               <p class="tit pr-1">- de 2.5 buts</p>
-                              <div class="typopo pl-1 pr-1">
+                              <div class="typopo pr-1">
                                 Pts :  +<%= match.under_25.to_i %>/ <%= match.negative_under25.to_i %>
                               </div>
                               <% if match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "9") || match.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "10") %>
