@@ -156,7 +156,7 @@
                               <div class="typopo">
                                 Pts :  +<%= match.goal_two_teams_yes.to_i %>/ <%= match.negative_goal_two_teams_yes.to_i %>
                               </div>
-                              <% if match.forecasts.find_by(match_id: match.id, outcome: "7" || "8") %>
+                              <% if match.forecasts.where(match_id: match.id, outcome: "7" || "8") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="7"></input>
@@ -183,7 +183,7 @@
                               <div class="typopo">
                                 Pts :  +<%= match.under_25.to_i %>/ <%= match.negative_under25.to_i %>
                               </div>
-                              <% if match.forecasts.find_by(match_id: match.id, outcome: "9" || "10") %>
+                              <% if match.forecasts.where(match_id: match.id, outcome: "9" || "10") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="9"></input>
@@ -221,7 +221,7 @@
                 <div class="d-flex flex-column justify-content-center">
                   <p class="typopo text-center">VS</p>
                   <div class="d-flex flex-row align-items-center col-4">
-                     <% if match.forecasts.find_by(match_id: match.id, outcome: "1" || "NULL" || "2") %>
+                     <% if match.forecasts.where(match_id: match.id, outcome: "1" || "NULL" || "2") %>
                       <% else %>
                         <div class="displaysquares" data-id="<%= match.id %>">
                           <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
