@@ -5,14 +5,20 @@ const calculate = () => {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
     document.querySelector(".plus").innerHTML += "+" x;
-  else (tgt.classList.contains("square_under")) {
+    }
+  })
+}
+
+const calculateUnder = () => {
+  document.querySelector(".info").addEventListener("change", function(e) {
+  const tgt = e.target;
+  if (tgt.classList.contains("square_under")) {
     const parent = tgt.closest(".under");
     var x = document.querySelectorAll(".square_under:checked").length; console.log(x);
     document.querySelector(".plus").innerHTML += "+" x;
     }
-  }
   })
 }
 
-export { calculate };
+export { calculate, calculateUnder };
 
