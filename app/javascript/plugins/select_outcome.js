@@ -109,7 +109,7 @@ const calculate = () => {
   if (tgt.classList.contains("square")) {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
-    document.querySelector(".plus").innerHTML = x + y;
+    document.querySelector(".plus").innerHTML = x;
     }
   })
 }
