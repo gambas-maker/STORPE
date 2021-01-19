@@ -120,7 +120,7 @@
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
                               <p class="tit pr-3"><%= match.nom_buteur_1 %></p>
-                              <div class="typopo pr-2">
+                              <div class="typopo pr-1">
                                 Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
                               </div>
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "3") %>
@@ -139,7 +139,7 @@
                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
                                 </div>
                               <% end %>
-                              <div class="typopo pl-2">
+                              <div class="typopo pl-1">
                                 Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
                               </div>
                               <p class="tit pl-3"><%= match.nom_buteur_2 %></p>
