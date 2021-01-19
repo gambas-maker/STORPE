@@ -109,7 +109,7 @@ const calculate = () => {
   if (tgt.classList.contains("square")) {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
-    document.querySelector(".plus").innerHTML = x;
+    document.querySelector(".plus").innerHTML = x + y;
     }
   })
 }
@@ -119,8 +119,8 @@ const calculateButs = () => {
   const tgt = e.target;
   if (tgt.classList.contains("square_b2e")) {
     const parent = tgt.closest(".b2e");
-    var x = document.querySelectorAll(".square_b2e:checked").length; console.log(x);
-    document.querySelector(".plus").innerHTML = x;
+    var y = document.querySelectorAll(".square_b2e:checked").length; console.log(x);
+    document.querySelector(".plus").innerHTML = y + x;
     }
   })
 }
