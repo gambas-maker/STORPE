@@ -24,14 +24,14 @@ require("channels")
 
 // External imports
 import "bootstrap";
-import {selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate, calculateButs} from "../plugins/select_outcome";
+import {selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate} from "../plugins/select_outcome";
 selectOutcome();
 selectOutcomeBe();
 selectOutcomeUnder();
 selectOutcomeStriker1();
 validePanier();
 calculate();
-calculateButs();
+// calculateButs();
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
