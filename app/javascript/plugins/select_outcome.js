@@ -114,6 +114,17 @@ const calculate = () => {
   })
 }
 
-export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate};
+const calculateButs = () => {
+  document.querySelector(".info").addEventListener("change", function(e) {
+  const tgt = e.target;
+  if (tgt.classList.contains("square_b2e")) {
+    const parent = tgt.closest(".b2e");
+    var x = document.querySelectorAll(".square_b2e:checked").length; console.log(x);
+    document.querySelector(".plus").innerHTML = x;
+    }
+  })
+}
+
+export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate, calculateButs};
 
 
