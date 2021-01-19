@@ -106,8 +106,8 @@ const validePanier = () => {
 const calculate = () => {
   document.querySelector(".info").addEventListener("change", function(e) {
   const tgt = e.target;
-  let x = 0;
-  let y = 0;
+  var x =  document.querySelectorAll(".square:checked");
+  var y = document.querySelectorAll(".square_b2e:checked");
   if (tgt.classList.contains("square")) {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
