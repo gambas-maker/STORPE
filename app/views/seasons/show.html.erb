@@ -636,9 +636,9 @@
               <% if  forecast.outcome == "NULL"%>
                 <p class="typopo text-center">Nul</p>
               <% elsif forecast.outcome == "3" %>
-                <p class="typopo text-center">Buteur<%= forecast.match.nom_buteur_1 %></p>
+                <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_1 %></p>
               <% elsif forecast.outcome == "4" %>
-                <p class="typopo text-center">Buteur<%= forecast.match.nom_buteur_2 %></p>
+                <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_2 %></p>
               <% elsif forecast.outcome == "7" %>
                 <p class="typopo text-center">But pour les 2 équipes OUI</p>
               <% elsif forecast.outcome == "8" %>
