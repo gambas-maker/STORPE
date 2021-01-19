@@ -111,8 +111,8 @@ const calculate = () => {
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
     document.querySelector(".plus").innerHTML = x;
     const pat = tgt.closest(".b2e");
-    document.querySelector(".plus").innerHTML = y + x ;
     var y = document.querySelectorAll(".square_b2e:checked").length; console.log(y);
+    document.querySelector(".plus").innerHTML = y + x ;
     }
   })
 }
