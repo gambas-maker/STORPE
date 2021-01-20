@@ -111,9 +111,9 @@ const calculate = () => {
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
     document.querySelector(".plus").innerHTML = x;
   } else (tgt.classList.contains("square_b2e")) {
-    const parent = tgt.closest("b2e");
-    var x = document.querySelectorAll(".square_b2e:checked").length; console.log(x);
-    document.querySelector(".plus").innerHTML = x;
+    const parent = tgt.closest(".b2e");
+    var y = document.querySelectorAll(".square_b2e:checked").length; console.log(x);
+    document.querySelector(".plus").innerHTML = y;
     }
   })
 }
