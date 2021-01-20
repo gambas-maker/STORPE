@@ -29,6 +29,10 @@
   align-items: center;
 }
 
+.nul{
+  background-color: white;
+}
+
 .card-product{
   background-color: white;
 }
@@ -110,12 +114,6 @@
   height: auto;
   background-color: rgba(255, 255, 255, 0.08);
   margin-bottom: 10px;
-}
-
-.resume {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .rank{
