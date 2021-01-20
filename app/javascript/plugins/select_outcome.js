@@ -106,13 +106,46 @@ const validePanier = () => {
 const calculate = () => {
   document.querySelector(".info").addEventListener("change", function(e) {
   const tgt = e.target;
+  var x = document.querySelectorAll(".square:checked").length;
+  var y = document.querySelectorAll(".square_b2e:checked").length;
+  var w = document.querySelectorAll(".square_under:checked").length;
+  var u = document.querySelectorAll(".square_striker2:checked").length;
+  var v = document.querySelectorAll(".square_striker1:checked").length;
+  let z = x + y + w + v + u
   if (tgt.classList.contains("square")) {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
-    document.querySelector(".plus").innerHTML = x;
+    document.querySelector(".plus").innerHTML = z;
+  } else if (tgt.classList.contains("square_b2e")) {
+    const parent = tgt.closest(".b2e");
+    var y = document.querySelectorAll(".square_b2e:checked").length; console.log(y);
+    document.querySelector(".plus").innerHTML = z;
+    } else if (tgt.classList.contains("square_striker1")) {
+    const parent = tgt.closest(".striker1");
+    var v = document.querySelectorAll(".square_striker1:checked").length; console.log(v);
+    document.querySelector(".plus").innerHTML = z;
+    } else if (tgt.classList.contains("square_striker2")) {
+    const parent = tgt.closest(".striker2");
+    var u = document.querySelectorAll(".square_striker2:checked").length; console.log(u);
+    document.querySelector(".plus").innerHTML = z;
+    } else {
+      const parent = tgt.closest(".under");
+      var w = document.querySelectorAll(".square_under:checked").length; console.log(w);
+      document.querySelector(".plus").innerHTML = z;
     }
   })
 }
+
+// const calculateButs = () => {
+//   document.querySelector(".info").addEventListener("change", function(e) {
+//   const tgt = e.target;
+//   if (tgt.classList.contains("square_b2e")) {
+//     const parent = tgt.closest(".b2e");
+//     var y = document.querySelectorAll(".square_b2e:checked").length; console.log(y);
+//     document.querySelector(".plus").innerHTML = y ;
+//     }
+//   })
+// }
 
 export { selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate};
 

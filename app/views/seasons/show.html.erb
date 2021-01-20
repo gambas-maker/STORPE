@@ -99,6 +99,18 @@
               <% pointp += forecast.match.points_away.round %>
             <% elsif forecast.outcome == "NULL" %>
               <% pointp += forecast.match.points_draw.round %>
+            <% elsif forecast.outcome == "3" %>
+              <% pointp += forecast.match.buteur_1.round %>
+            <% elsif forecast.outcome == "4" %>
+              <% pointp += forecast.match.buteur_2.round %>
+            <% elsif forecast.outcome == "7" %>
+              <% pointp += forecast.match.goal_two_teams_yes.round %>
+            <% elsif forecast.outcome == "8" %>
+              <% pointp += forecast.match.goal_two_teams_no.round %>
+            <% elsif forecast.outcome == "9" %>
+              <% pointp += forecast.match.under_25.round %>
+              <% elsif forecast.outcome == "10" %>
+              <% pointp += forecast.match.over_25.round %>
             <% end %>
           <% end %>
           <h3 class="typo"><%= pointp %></h3>
@@ -624,9 +636,9 @@
               <% if  forecast.outcome == "NULL"%>
                 <p class="typopo text-center">Nul</p>
               <% elsif forecast.outcome == "3" %>
-                <p class="typopo text-center"><%= forecast.match.nom_buteur_3 %></p>
+                <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_1 %></p>
               <% elsif forecast.outcome == "4" %>
-                <p class="typopo text-center"><%= forecast.match.nom_buteur_4 %></p>
+                <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_2 %></p>
               <% elsif forecast.outcome == "7" %>
                 <p class="typopo text-center">But pour les 2 équipes OUI</p>
               <% elsif forecast.outcome == "8" %>
@@ -648,9 +660,9 @@
                 <% elsif forecast.outcome == "2"%>
                   <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
                 <% elsif forecast.outcome == "3" %>
-                  <p class="typopo text-success-center"><%= forecast.match.buteur_3.round %>pts</p>
+                  <p class="typopo text-success-center"><%= forecast.match.buteur_1.round %>pts</p>
                 <% elsif forecast.outcome == "4" %>
-                  <p class="typopo text-success-center"><%= forecast.match.buteur_4.round %>pts</p>
+                  <p class="typopo text-success-center"><%= forecast.match.buteur_2.round %>pts</p>
                 <% elsif forecast.outcome == "7" %>
                   <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_yes.round %>pts</p>
                 <% elsif forecast.outcome == "8" %>

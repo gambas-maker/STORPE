@@ -35,7 +35,7 @@ class CalculatepointsJob < ApplicationJob
           elsif forecast.outcome == "9" && match.result[0].to_i + match.result[2].to_i > 2
             forecast.update(points_lose: match.negative_under25)
           elsif forecast.outcome == "9" && match.result[0].to_i + match.result[2].to_i < 3
-            forecast.update(points_win: match.under25)
+            forecast.update(points_win: match.under_25)
           elsif forecast.outcome == "10" && match.result[0].to_i + match.result[2].to_i > 2
             forecast.update(points_win: match.over_25)
           elsif forecast.outcome == "10" && match.result[0].to_i + match.result[2].to_i < 3
