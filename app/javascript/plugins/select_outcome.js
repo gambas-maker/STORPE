@@ -114,7 +114,7 @@ const calculate = () => {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
     document.querySelector(".plus").innerHTML = z;
-  } else if {
+  } else if (tgt.classList.contains("square_b2e")) {
     const parent = tgt.closest(".b2e");
     var y = document.querySelectorAll(".square_b2e:checked").length; console.log(y);
     document.querySelector(".plus").innerHTML = z;
