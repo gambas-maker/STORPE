@@ -112,7 +112,7 @@ const calculate = () => {
     document.querySelector(".plus").innerHTML = x;
   } else (tgt.classList.contains("square_b2e")) {
     const parent = tgt.closest(".b2e");
-    var y = document.querySelectorAll(".square_b2e:checked").length; console.log(x);
+    var y = document.querySelectorAll(".square_b2e:checked").length; console.log(y);
     document.querySelector(".plus").innerHTML = y;
     }
   })
