@@ -108,15 +108,20 @@ const calculate = () => {
   const tgt = e.target;
   var x = document.querySelectorAll(".square:checked").length;
   var y = document.querySelectorAll(".square_b2e:checked").length;
-  let z = x + y
+  var w = document.querySelectorAll(".square_under:checked").length;
+  let z = x + y + w
   if (tgt.classList.contains("square")) {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
     document.querySelector(".plus").innerHTML = z;
-  } else {
+  } else if {
     const parent = tgt.closest(".b2e");
     var y = document.querySelectorAll(".square_b2e:checked").length; console.log(y);
     document.querySelector(".plus").innerHTML = z;
+    } else {
+      const parent = tgt.closest(".under");
+      var w = document.querySelectorAll(".square_under:checked").length; console.log(w);
+      document.querySelector(".plus").innerHTML = z;
     }
   })
 }
