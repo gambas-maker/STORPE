@@ -189,22 +189,17 @@
 </script>
 </div>
 
-<div class="resume">
-    <div class="card-product">
-      <img src="" />
-      <div class="card-product-infos">
-        <h2>Product name</h2>
-      <p>Product description with <strong>relevant info</strong> only.</p>
+<div class="d-flex flex-column align-items-center">
+  <% @seasons.each do |season| %>
+    <div class="d-flex flex-row mb-2">
+      <img src="https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,e_grayscale,w_114/v1611160691/md-mahdi-lQpFRPrepQ8-unsplash_bws06r.jpg" class="ml-1 rounded"/>
+      <div class="bg-indigo ml-1">
+        <h3>Nombre de points</h3>
+        <%=  %>
       </div>
     </div>
-    <div class="card-product">
-      <img src="" />
-      <div class="card-product-infos">
-        <h2>Product name</h2>
-      <p>Product description with <strong>relevant info</strong> only.</p>
-      </div>
-    </div>
-  </div>
+  <% end %>
+</div>
 
 <footer class="footer-match">
   <div class="foot-phrase">
