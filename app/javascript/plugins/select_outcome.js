@@ -106,16 +106,16 @@ const validePanier = () => {
 const calculate = () => {
   document.querySelector(".info").addEventListener("change", function(e) {
   const tgt = e.target;
-  let z = 0
+  var x = document.querySelectorAll(".square:checked").length;
+  var y = document.querySelectorAll(".square_b2e:checked").length;
+  let z = x + y
   if (tgt.classList.contains("square")) {
     const parent = tgt.closest(".displaysquares");
     var x = document.querySelectorAll(".square:checked").length; console.log(x);
-    z += x
     document.querySelector(".plus").innerHTML = z;
   } else {
     const parent = tgt.closest(".b2e");
     var y = document.querySelectorAll(".square_b2e:checked").length; console.log(y);
-    z += y
     document.querySelector(".plus").innerHTML = z;
     }
   })
