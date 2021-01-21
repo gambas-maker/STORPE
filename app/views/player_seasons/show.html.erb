@@ -74,121 +74,12 @@
         </div>
       </div>
       <svg class=" center-block mx-auto mt-2" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
-      <div class="btn-ranking d-flex justify-content-center">
-        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-light btnbis typo">Voir mes statistiques</button>
-      </div>
-  </div>
-</div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-    <div class="d-flex flex-column m-auto mt-4 pb-5">
-     <h2 class="stat m-auto ">MES STATISTIQUES </h2>
-    <svg class=" center-block mx-auto mt-4" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
-    <div class="container mt-4" style=" padding: 0 30%;"  >
-      <div class="d-flex justify-content-between">
-        <h3 class="typo mr-3">MATCHS</h3>
-        <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: (Season.last.id - 1)).count%>/40</h3>
-      </div>
-      <div class="d-flex justify-content-between">
-        <h3 class="typo mr-3">RATIO</h3>
-        <% if  current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).count == 0%>
-          <h3 class="typo">0%</h3>
-        <% else %>
-          <% ratio = current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100 %>
-          <h3 class="typo"><%= ratio.round %>%</h3>
-        <% end %>
-      </div>
-      <div class="d-flex justify-content-between">
-        <h3 class="typo mr-3">POINTS REMPORTÉS</h3>
-        <% points = 0 %>
-        <% current_user.forecasts.where(confirmed: true, season_id: Season.last.id - 1).each do |forecast| %>
-          <% if forecast.points_win.positive? %>
-          <% points += forecast.points_win %>
-          <% end %>
-        <% end %>
-        <h3 class="typo"><%= points %></h3>
-      </div>
-      <div class="d-flex justify-content-between">
-        <h3 class="typo mr-3">POINTS FOOTBALL</h3>
-        <% pointsf = 0 %>
-        <% current_user.forecasts.where(season_id: Season.last.id - 1).each do |forecast| %>
-          <% if forecast.match.sport == "football" && forecast.points_win.positive? %>
-            <% pointsf += forecast.points_win %>
-          <% end %>
-        <% end %>
-        <h3 class="typo"><%= pointsf %></h3>
-      </div>
-      <div class="d-flex justify-content-between">
-        <h3 class="typo mr-3">POINTS BASKETBALL</h3>
-        <% pointsb = 0 %>
-        <% current_user.forecasts.where(season_id: Season.last.id - 1).each do |forecast| %>
-          <% if forecast.match.sport == "basketball" && forecast.points_win.positive? %>
-            <% pointsb += forecast.points_win %>
-          <% end %>
-        <% end %>
-        <h3 class="typo"><%= pointsb %></h3>
-      </div>
-    </div>
-    <svg class=" center-block mx-auto mt-4" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
-  </div>
-      </div>
-    </div>
   </div>
 </div>
    <%=  render "shared/navbarbottom" %>
-   <!-- Load Facebook SDK for JavaScript -->
-      <div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v9.0'
-          });
-        };
 
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- Your Chat Plugin code -->
-      <div class="fb-customerchat"
-        attribution=setup_tool
-        page_id="100665954734426"
-        theme_color="#FBB03B"
-        logged_in_greeting="Salut ! Comment puis-je t'aider ? "
-        logged_out_greeting="Salut ! Comment puis-je t'aider ? ">omo
-      </div>
-   <script type='text/javascript'>
-  (function()
-  {
-    if( window.localStorage )
-    {
-      if( !localStorage.getItem('firstLoad') )
-      {
-        localStorage['firstLoad'] = true;
-        window.location.reload();
-      }
-      else
-        localStorage.removeItem('firstLoad');
-    }
-  })();
-</script>
-</div>
-
-<h2 class="typo d-flex justify-content-center">Tous mes Championnats</h2>
 <div class="d-flex flex-column align-items-center">
+  <h2 class="typo d-flex justify-content-center">Tous mes Championnats</h2>
   <% @seasons.each do |season| %>
     <!-- Button trigger modal -->
     <% if  current_user.forecasts.find_by(season_id: season.id) == nil %>
@@ -199,7 +90,7 @@
             <%= season.start_date[8...10] %> - <%= season.end_date[8...10] %>/<%= season.end_date[5...7]%>/<%= season.end_date[0...4]%>
           </div>
           <div>
-            Nombre de points : <%= current_user.forecasts.where(season_id: season.id).sum{|p| p.points_win + p.points_lose}%>
+            Nombre de points : <%= current_user.forecasts.where(season_id: season.id).sum(:points_win)%>
           </div>
         </div>
       </button>
@@ -209,7 +100,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header sticky">
-            <h2 class="tit text-center">MA SAISON</h2>
+            <h2 class="tit text-center">MES PRONOSTICS</h2>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -255,15 +146,8 @@
               <h3 class="typopo"><%= pointsb %></h3>
             </div>
           </div>
-          <nav>
-            <div class="nav nav-tabs" id="nav-tab">
-              <a class="nav-item nav-link active" id="nav-pronos-tab" data-toggle="tab" href="#nav-pronos" role="tab" aria-controls="nav-pronos">Pronostics</a>
-              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" >Classement</a>
-            </div>
-          </nav>
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active bg-transparent" id="nav-pronos" role="tabpanel" aria-labelledby="nav-pronos-tab">
-              <div class="d-flex justify-content-between flex-row m-3">
+          <div class="modal-body">
+              <div class="d-flex justify-content-between flex-row m-3 border-bottom">
                 <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
                 <h3 class="typopo d-flex justify-content-center">PRONO</h3>
                 <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
@@ -330,103 +214,9 @@
                   <h3 class="typopo"><%= image_tag "#{forecast.match.team_away_logo_url}", width: 50 %></h3>
                   <h3 class="typopo"><%= forecast.match.team_away %></h3>
                 </div>
+
               </div>
             <% end %>
-            </div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-              <div class="d-flex flex-column m-auto mt-4">
-                <table class="table table-borderless mb-4">
-                  <thead>
-                    <tr>
-                      <th scope="col">POS</th>
-                      <th scope="col">EMBLÈME</th>
-                      <th scope="col">NOM</th>
-                      <th scope="col">MATCHS</th>
-                      <th scope="col">PTS</th>
-                    </tr>
-                  </thead>
-                  <% classement = {} %>
-                  <% x = 0 %>
-                  <% @playerseasons.each do |playerseason| %>
-                    <% if playerseason.forecasts.where(season_id: season.id).exists? %>
-                      <% classement[playerseason] = playerseason.number_of_points %>
-                    <% else %>
-                    <% end %>
-                  <% end %>
-                  <% classement.to_a.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
-                    <tbody>
-                      <% if current_user.id == playerseason.user_id%>
-                        <tr>
-                          <th class="cla" scope="row"><%= x += 1 %></th>
-                          <% if  current_user.player_seasons[0].blason.present? %>
-                            <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
-                            <td class="cla"><%= current_user.pseudo %> </td>
-                          <% else %>
-                            <td>
-                              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
-                                <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
-                              <% end %>
-                            </td>
-                            <td class="cla"><%=  current_user.pseudo %></td>
-                          <% end %>
-                          <%  pronosb = playerseason.forecasts.where(season_id: season.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosm = playerseason.forecasts.where(season_id: season.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosm + pronosb %></td>
-                          <td class="cla"><%=  valeur %></td>
-                        </tr>
-                      <% else playerseason.forecasts.exists? %>
-                        <tr>
-                          <th scope="row"><%= x += 1 %></th>
-                          <% if playerseason.blason == nil %>
-                            <td>
-                               <i class="fas fa-plus-circle" style="color: white;"></i>
-                            </td>
-                          <% else %>
-                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                            </td>
-                          <% end %>
-                            <div class="dropdown">
-                               <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <%=  playerseason.user.pseudo %>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <% if  playerseason.forecasts.where(confirmed: true, season_id: season.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: season.id).select{|v| v.points_win.positive?}.count == 0%>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light">0%</p>
-                                <% else %>
-                                  <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: season.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: season.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                <% end %>
-                                <% pointsf = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:season.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "football" %>
-                                    <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Football</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                <% pointsba = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:season.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "basketball"%>
-                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                              </div>
-                              </td>
-                            </div>
-                          <%  pronosg = playerseason.forecasts.where(season_id: season.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosn = playerseason.forecasts.where(season_id: season.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosg + pronosn %></td>
-                          <td><%=  valeur %></td>
-
-                      <% end %>
-                    </tbody>
-                  <% end %>
-                </table>
-              </div>
-            </div>
           </div>
         </div>
       </div>
