@@ -94,7 +94,7 @@
               <p>Début du Championnat <%= season %> </p>
             </div>
             <div>
-              Nombre de points : <%= current_user.forecasts.where(season_id: value).sum(:points_win)%>
+              Nombre de points : <%= current_user.forecasts.where(season_id: value).sum{|p| p.points_win + p.points_lose}%>
             </div>
           </div>
         </button>
