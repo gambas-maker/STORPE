@@ -234,7 +234,7 @@
                           </td>
                         <% end %>
                           <div class="dropdown">
-                             <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <%=  playerseason.user.pseudo %>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
