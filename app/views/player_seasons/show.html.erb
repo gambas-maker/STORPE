@@ -82,7 +82,7 @@
   <h2 class="typo d-flex justify-content-center">Tous mes Championnats</h2>
   <% @seasons.each do |season| %>
     <!-- Button trigger modal -->
-    <% if  current_user.forecasts.where(season_id: season.id) == nil || current_user.forecasts.where(season_id: Season.last.id)%>
+    <% if  current_user.forecasts.where(season_id: season.id) == nil %>
     <% else %>
       <button type="button" class="info typopo btn btn-light mb-5" data-toggle="modal" data-target="#seasonModalCenter-<%=season.id%>" data-whatever="@seasons">
         <div class="d-flex flex-column">
