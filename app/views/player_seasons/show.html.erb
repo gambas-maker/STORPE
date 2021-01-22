@@ -84,9 +84,8 @@
   <% @seasons.each do |seaso| %>
     <!-- Button trigger modal -->
       <% seasons[seaso.start_date] = seaso.id %>
-      <% seasons.sort_by{|k,v| k.to_date}.reverse %>
     <% end %>
-    <% seasons.each do |season, value| %>
+    <% seasons.sort_by{|k,v| k.to_date}.reverse.each do |season, value| %>
       <% if  current_user.forecasts.where(season_id: value) == nil %>
       <% else %>
         <button type="button" class="info typopo btn btn-light mb-5" data-toggle="modal" data-target="#seasonModalCenter-<%=value%>" data-whatever="@seasons">
