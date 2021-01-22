@@ -26,12 +26,20 @@ class CalculatepointsJob < ApplicationJob
             forecast.update(points_lose: match.negative_points_home)
           elsif forecast.outcome == "7" && match.result[0].to_i > 0 && match.result[2].to_i > 0
             forecast.update(points_win: match.goal_two_teams_yes)
-          elsif forecast.outcome == "7" && match.result[0].to_i < 1 || match.result[2].to_i < 1
+          elsif forecast.outcome == "7" && match.result[0].to_i == 0 && match.result[2].to_i > 0
             forecast.update(points_lose: match.negative_goal_two_teams_yes)
+          elsif forecast.outcome == "7" && match.result[0].to_i > 0 && match.result[2].to_i == 0
+            forecast.update(points_lose: match.negative_goal_two_teams_yes)
+          elsif forecast.outcome == "7" && match.result[0].to_i == 0 && match.result[2].to_i == 0
+            forecast.update(points_lose: match.negative_goal_two_teams_yes)
+          elsif forecast.outcome == "8" && match.result[0].to_i == 0 && match.result[2].to_i > 0
+            forecast.update(points_win: match.goal_two_teams_no)
+          elsif forecast.outcome == "8" && match.result[0].to_i == 0 && match.result[2].to_i == 0
+            forecast.update(points_win: match.goal_two_teams_no)
+          elsif forecast.outcome == "8" && match.result[0].to_i > 0 && match.result[2].to_i == 0
+            forecast.update(points_win: match.goal_two_teams_no)
           elsif forecast.outcome == "8" && match.result[0].to_i > 0 && match.result[2].to_i > 0
             forecast.update(points_lose: match.negative_goal_two_teams_no)
-          elsif forecast.outcome == "8" && match.result[0].to_i == 0 || match.result[2].to_i == 0
-            forecast.update(points_win: match.goal_two_teams_no)
           elsif forecast.outcome == "9" && match.result[0].to_i + match.result[2].to_i > 2
             forecast.update(points_lose: match.negative_under25)
           elsif forecast.outcome == "9" && match.result[0].to_i + match.result[2].to_i < 3

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_155635) do
+ActiveRecord::Schema.define(version: 2021_01_21_093723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 2021_01_13_155635) do
   end
 
   create_table "seasons", force: :cascade do |t|
-    t.integer "start_date"
-    t.integer "end_date"
+    t.string "start_date"
+    t.string "end_date"
     t.string "division"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
