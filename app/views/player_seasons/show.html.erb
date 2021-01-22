@@ -80,147 +80,152 @@
 
 <div class="d-flex flex-column align-items-center">
   <h2 class="typo d-flex justify-content-center">Tous mes Championnats</h2>
-  <% @seasons.each do |season| %>
+  <% seasons = {} %>
+  <% @seasons.each do |seaso| %>
     <!-- Button trigger modal -->
-    <% if  current_user.forecasts.where(season_id: season.id) == nil %>
-    <% else %>
-      <button type="button" class="info typopo btn btn-light mb-5" data-toggle="modal" data-target="#seasonModalCenter-<%=season.id%>" data-whatever="@seasons">
-        <div class="d-flex flex-column">
-          <div>
-            <%= season.start_date[8...10] %> - <%= season.end_date[8...10] %>/<%= season.end_date[5...7]%>/<%= season.end_date[0...4]%>
-          </div>
-          <div>
-            Nombre de points : <%= current_user.forecasts.where(season_id: season.id).sum(:points_win)%>
-          </div>
-        </div>
-      </button>
+      <% seasons[seaso.start_date] = seaso.id %>
+      <% seasons.sort_by{|k,v| k.to_date}.reverse %>
     <% end %>
+    <% seasons.each do |season, value| %>
+      <% if  current_user.forecasts.where(season_id: value) == nil %>
+      <% else %>
+        <button type="button" class="info typopo btn btn-light mb-5" data-toggle="modal" data-target="#seasonModalCenter-<%=value%>" data-whatever="@seasons">
+          <div class="d-flex flex-column">
+            <div>
+              <p>Début du Championnat <%= season %> </p>
+            </div>
+            <div>
+              Nombre de points : <%= current_user.forecasts.where(season_id: value).sum(:points_win)%>
+            </div>
+          </div>
+        </button>
+      <% end %>
     <!-- Modal -->
-  <div class="modal fade" id="seasonModalCenter-<%=season.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header sticky">
-            <h2 class="tit text-center">MES PRONOSTICS</h2>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="info container mt-3 py-2" style=" padding: 0 20%;" >
-            <div class="d-flex justify-content-between">
-              <h3 class="typo mr-3">MATCHS</h3>
-              <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: season.id).count %>/40</h3>
+    <div class="modal fade" id="seasonModalCenter-<%=value%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header sticky">
+              <h2 class="tit text-center">MES PRONOSTICS</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="d-flex justify-content-between">
-              <h3 class="typopo mr-3">RATIO</h3>
-              <% if  current_user.forecasts.where(confirmed: true, season_id: season.id).count == 0 || current_user.forecasts.where(confirmed: true, season_id: season.id).select{|v| v.points_win.positive?}.count == 0%>
-                <h3 class="typopo">0%</h3>
-              <% else %>
-                <% ratio = (current_user.forecasts.where(confirmed: true, season_id: season.id).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: season.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                <h3 class="typopo"><%= ratio %>%</h3>
-              <% end %>
-            </div>
-            <div class="d-flex justify-content-between">
-              <h3 class="typopo mr-3">POINTS REMPORTÉS</h3>
-              <h3 class="typopo"><%= current_user.forecasts.where(season_id: season.id).sum(:points_win) %></h3>
-            </div>
-            <div class="d-flex justify-content-between">
-              <h3 class="typopo mr-3">POINTS FOOTBALL</h3>
-              <% points = 0 %>
-              <% current_user.forecasts.where(confirmed:true, season_id: season.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                <% if forecast.match.sport == "football" %>
-                  <% points += (forecast.points_win + forecast.points_lose) %>
-                <% else %>
-                <% end %>
-              <% end %>
-              <h3 class="typopo"><%= points %></h3>
-            </div>
-            <div class="d-flex justify-content-between">
-              <h3 class="typopo mr-3">POINTS BASKETBALL</h3>
-              <% pointsb = 0 %>
-              <% current_user.forecasts.where(confirmed:true, season_id: season.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                <% if forecast.match.sport == "basketball" %>
-                  <% pointsb += (forecast.points_win + forecast.points_lose) %>
-                <% else %>
-                <% end %>
-              <% end %>
-              <h3 class="typopo"><%= pointsb %></h3>
-            </div>
-          </div>
-          <div class="modal-body">
-              <div class="d-flex justify-content-between flex-row m-3 border-bottom">
-                <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
-                <h3 class="typopo d-flex justify-content-center">PRONO</h3>
-                <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
+            <div class="info container mt-3 py-2" style=" padding: 0 20%;" >
+              <div class="d-flex justify-content-between">
+                <h3 class="typo mr-3">MATCHS</h3>
+                <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: value).count %>/40</h3>
               </div>
-            <% current_user.forecasts.where(confirmed: true, season_id: season.id).sort_by{|v| v.match.kick_off}.each do |forecast| %>
-              <div class="d-flex flex-row justify-content-around mb-4 mt-4" >
-                <div class="d-flex flex-column align-items-center col-4">
-                  <div class="row">
-                    <h3 class="typopo"><%= image_tag "#{forecast.match.team_home_logo_url}", width: 50 %></h3>
-                  </div>
-                  <div class="row text-align-center">
-                    <h3 class="typopo"><%= forecast.match.team_home %></h3>
-                  </div>
-                </div>
-                <div class="d-flex flex-column justify-content-center">
-                  <% if  forecast.outcome == "NULL"%>
-                    <p class="typopo text-center">Nul</p>
-                  <% elsif forecast.outcome == "3" %>
-                    <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_1 %></p>
-                  <% elsif forecast.outcome == "4" %>
-                    <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_2 %></p>
-                  <% elsif forecast.outcome == "7" %>
-                    <p class="typopo text-center">But pour les 2 équipes OUI</p>
-                  <% elsif forecast.outcome == "8" %>
-                    <p class="typopo text-center">But pour les 2 équipes NON</p>
-                  <% elsif forecast.outcome == "9" %>
-                    <p class="typopo text-center">Moins de 2.5 buts dans le match</p>
-                  <% elsif forecast.outcome == "10" %>
-                    <p class="typopo text-center">Plus de 2.5 buts dans le match</p>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">RATIO</h3>
+                <% if  current_user.forecasts.where(confirmed: true, season_id: value).count == 0 || current_user.forecasts.where(confirmed: true, season_id: value).select{|v| v.points_win.positive?}.count == 0%>
+                  <h3 class="typopo">0%</h3>
+                <% else %>
+                  <% ratio = (current_user.forecasts.where(confirmed: true, season_id: value).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: value).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
+                  <h3 class="typopo"><%= ratio %>%</h3>
+                <% end %>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">POINTS REMPORTÉS</h3>
+                <h3 class="typopo"><%= current_user.forecasts.where(season_id: value).sum(:points_win) %></h3>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">POINTS FOOTBALL</h3>
+                <% points = 0 %>
+                <% current_user.forecasts.where(confirmed:true, season_id: value).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+                  <% if forecast.match.sport == "football" %>
+                    <% points += (forecast.points_win + forecast.points_lose) %>
                   <% else %>
-                    <p class="typopo text-center"><%= forecast.outcome %></p>
                   <% end %>
-                  <% if  forecast.points_win.positive?%>
-                    <p class="typopo text-center text-success">+<%= forecast.points_win %>pts</p>
-                  <% elsif forecast.points_lose.negative?%>
-                    <p class="typopo text-center text-danger"><%= forecast.points_lose %>pts</p>
-                  <% else forecast.points_lose.zero? && forecast.points_lose.zero? %>
-                    <% if forecast.outcome == "1" %>
-                      <p class="typopo text-success-center"><%= forecast.match.points_home.round %>pts</p>
-                    <% elsif forecast.outcome == "2"%>
-                      <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
+                <% end %>
+                <h3 class="typopo"><%= points %></h3>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">POINTS BASKETBALL</h3>
+                <% pointsb = 0 %>
+                <% current_user.forecasts.where(confirmed:true, season_id: value).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+                  <% if forecast.match.sport == "basketball" %>
+                    <% pointsb += (forecast.points_win + forecast.points_lose) %>
+                  <% else %>
+                  <% end %>
+                <% end %>
+                <h3 class="typopo"><%= pointsb %></h3>
+              </div>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-between flex-row m-3 border-bottom">
+                  <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
+                  <h3 class="typopo d-flex justify-content-center">PRONO</h3>
+                  <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
+                </div>
+              <% current_user.forecasts.where(confirmed: true, season_id: value).sort_by{|v| v.match.kick_off}.each do |forecast| %>
+                <div class="d-flex flex-row justify-content-around mb-4 mt-4" >
+                  <div class="d-flex flex-column align-items-center col-4">
+                    <div class="row">
+                      <h3 class="typopo"><%= image_tag "#{forecast.match.team_home_logo_url}", width: 50 %></h3>
+                    </div>
+                    <div class="row text-align-center">
+                      <h3 class="typopo"><%= forecast.match.team_home %></h3>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center">
+                    <% if  forecast.outcome == "NULL"%>
+                      <p class="typopo text-center">Nul</p>
                     <% elsif forecast.outcome == "3" %>
-                      <p class="typopo text-success-center"><%= forecast.match.buteur_1.round %>pts</p>
+                      <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_1 %></p>
                     <% elsif forecast.outcome == "4" %>
-                      <p class="typopo text-success-center"><%= forecast.match.buteur_2.round %>pts</p>
+                      <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_2 %></p>
                     <% elsif forecast.outcome == "7" %>
-                      <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_yes.round %>pts</p>
+                      <p class="typopo text-center">But pour les 2 équipes OUI</p>
                     <% elsif forecast.outcome == "8" %>
-                      <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_no.round %>pts</p>
+                      <p class="typopo text-center">But pour les 2 équipes NON</p>
                     <% elsif forecast.outcome == "9" %>
-                      <p class="typopo text-success-center"><%= forecast.match.under_25.round %>pts</p>
+                      <p class="typopo text-center">Moins de 2.5 buts dans le match</p>
                     <% elsif forecast.outcome == "10" %>
-                      <p class="typopo text-success-center"><%= forecast.match.over_25.round %>pts</p>
-                    <% else forecast.outcome == "NULL"%>
-                      <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
+                      <p class="typopo text-center">Plus de 2.5 buts dans le match</p>
+                    <% else %>
+                      <p class="typopo text-center"><%= forecast.outcome %></p>
                     <% end %>
-                  <% end %>
-                  <% if forecast.match.result.present? %>
-                    <p class="typopo text-success-center"> <%= forecast.match.result %></p>
-                  <% else %>
-                  <% end %>
-                </div>
-                <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                  <h3 class="typopo"><%= image_tag "#{forecast.match.team_away_logo_url}", width: 50 %></h3>
-                  <h3 class="typopo"><%= forecast.match.team_away %></h3>
-                </div>
+                    <% if  forecast.points_win.positive?%>
+                      <p class="typopo text-center text-success">+<%= forecast.points_win %>pts</p>
+                    <% elsif forecast.points_lose.negative?%>
+                      <p class="typopo text-center text-danger"><%= forecast.points_lose %>pts</p>
+                    <% else forecast.points_lose.zero? && forecast.points_lose.zero? %>
+                      <% if forecast.outcome == "1" %>
+                        <p class="typopo text-success-center"><%= forecast.match.points_home.round %>pts</p>
+                      <% elsif forecast.outcome == "2"%>
+                        <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
+                      <% elsif forecast.outcome == "3" %>
+                        <p class="typopo text-success-center"><%= forecast.match.buteur_1.round %>pts</p>
+                      <% elsif forecast.outcome == "4" %>
+                        <p class="typopo text-success-center"><%= forecast.match.buteur_2.round %>pts</p>
+                      <% elsif forecast.outcome == "7" %>
+                        <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_yes.round %>pts</p>
+                      <% elsif forecast.outcome == "8" %>
+                        <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_no.round %>pts</p>
+                      <% elsif forecast.outcome == "9" %>
+                        <p class="typopo text-success-center"><%= forecast.match.under_25.round %>pts</p>
+                      <% elsif forecast.outcome == "10" %>
+                        <p class="typopo text-success-center"><%= forecast.match.over_25.round %>pts</p>
+                      <% else forecast.outcome == "NULL"%>
+                        <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
+                      <% end %>
+                    <% end %>
+                    <% if forecast.match.result.present? %>
+                      <p class="typopo text-success-center"> <%= forecast.match.result %></p>
+                    <% else %>
+                    <% end %>
+                  </div>
+                  <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                    <h3 class="typopo"><%= image_tag "#{forecast.match.team_away_logo_url}", width: 50 %></h3>
+                    <h3 class="typopo"><%= forecast.match.team_away %></h3>
+                  </div>
 
-              </div>
-            <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   <% end %>
 </div>
 <footer class="footer-match">
