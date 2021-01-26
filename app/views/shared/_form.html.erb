@@ -1,5 +1,5 @@
 <%= simple_form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
-  <div class="row">
+  <div class="d-flex justify-content-center">
     <div class="col-xs-12">
       <div class="form-group">
         <p>
@@ -29,7 +29,8 @@
         </div>
         <div class="col-sm-6">
           <p>
-            <%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
+            <%= f.text_area :text, rows: 5, cols: 25, :class => "tinymce" %>
+            <%= tinymce %>
           </p>
         </div>
         <p>
@@ -37,6 +38,4 @@
         </p>
    </div>
   </div>
-  <%= tinymce_assets %>
-<script type="text/javascript" src="/assets/tinymce.js">
 <% end %>
