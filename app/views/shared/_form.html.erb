@@ -27,7 +27,7 @@
             <%= f.label :text %><br>
           </p>
           <p>
-            <%= f.text_area :text, as: :ckeditor, input_html: { ckeditor: { toolbar: 'mini' } } %>
+            <%= f.cktext_area :text, ckeditor: {toolbar: 'mini'} %>
           </p>
         </div>
         <p>
