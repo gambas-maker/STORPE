@@ -15,4 +15,6 @@
     <p>
       <%= f.submit %>
     </p>
+
+    <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>

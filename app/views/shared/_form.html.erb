@@ -1,17 +1,41 @@
-<%= form_for @article do |f| %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-   </p>
-   <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-   </p>
-   <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-   </p>
-    <p>
-      <%= f.submit %>
-    </p>
+<%= form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <p>
+          <%= f.label :title %>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p>
+          <%= f.text_field :title, placeholder: "Titre", autofocus: true %>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <p>
+            <%= f.label :description %><br>
+          </p>
+        </div>
+        <div class="col-sm-6">
+          <p>
+            <%= f.text_area :description, placeholder: "Description SEO", autofocus: true %>
+          </p>
+        </div>
+        <div class="form-group">
+          <p>
+            <%= f.label :text %><br>
+          </p>
+        </div>
+        <div class="col-sm-6">
+          <p>
+            <%= f.text_area :text %>
+          </p>
+        </div>
+        <p>
+          <%= f.submit %>
+        </p>
+    </div>
+   </div>
+  </div>
 <% end %>
