@@ -1,4 +1,6 @@
 <h1>Listing all articles</h1>
+
+<%= will_paginate @articles %>
 <table>
  <tr>
   <th>Title</th>
@@ -13,9 +15,5 @@
  </tr>
  <% end %>
 </table>
-
-<div align="center">
- <%= will_paginate %>
-</div>
 
 <%=  render "shared/navbarbottom" %>
