@@ -6,6 +6,7 @@
  </tr>
  <% @articles.each do |article| %>
  <tr>
+  <td><%= cl_image_tag article.photo.key, height: 300, width: 400, crop: :fill %> </td>
   <td><%= article.title %></td>
   <td><%= article.description %></td>
   <td><%= link_to 'Show', article_path(article) %></td>
