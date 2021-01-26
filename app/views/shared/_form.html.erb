@@ -29,7 +29,7 @@
         </div>
         <div class="col-sm-6">
           <p>
-            <%= f.text_area :text %>
+            <%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
           </p>
         </div>
         <p>
@@ -37,4 +37,6 @@
         </p>
    </div>
   </div>
+  <%= tinymce_assets %>
+<script type="text/javascript" src="/assets/tinymce.js">
 <% end %>
