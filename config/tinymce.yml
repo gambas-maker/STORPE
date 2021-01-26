@@ -1,5 +1,7 @@
+width: 600
+height: 200
 toolbar:
-  - styleselect | bold italic | undo redo
+  - styleselect | bold italic | undo redo,
   - image | link
 plugins:
   - image
