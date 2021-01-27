@@ -7,7 +7,7 @@
     <div class="card-body text-dark">
       <h3 class="card-title"> Week-end: <%= @article.description %> </h3>
     </div>
-    <%= @article.body %>
+    <%= sanitize @article.body %>
   </div>
 </div>
 <div class="d-flex flex-row justify-content-center my-3">
