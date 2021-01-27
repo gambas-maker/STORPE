@@ -1,4 +1,4 @@
-<%= simple_form_for @article do |f| %>
+<%= form_with(model: @article) do |f| %>
   <div class="d-flex justify-content-center">
     <div class="col-xs-12">
       <div class="form-group">
@@ -16,7 +16,7 @@
             <%= f.label :description %><br>
           </p>
         </div>
-        <%= f.input :photo, as: :file %>
+        <%#= f.input :photo, as: :file %>
         <div class="col-sm-6">
           <p>
             <%= f.text_area :description, placeholder: "Description SEO", autofocus: true %>
@@ -30,6 +30,7 @@
         <div class="col-sm-6">
           <p>
             <%= f.rich_text_area :content %>
+            <%= @article.content %>
           </p>
         </div>
         <p>
