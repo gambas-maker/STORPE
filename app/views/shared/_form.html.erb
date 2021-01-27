@@ -1,4 +1,4 @@
-<%= form_with(model: @article) do |f| %>
+<%= form_for @article do |f| %>
   <div class="d-flex justify-content-center">
     <div class="col-xs-12">
       <div class="form-group">
@@ -27,15 +27,13 @@
             <%= f.label :text %><br>
           </p>
         </div>
-        <div class="col-sm-6">
           <p>
-            <%= f.rich_text_area :content %>
-            <%= @article.content %>
+            <%= f.label :comment %>
+            <%= f.rich_text_area :text, height: "300px" %>
           </p>
-        </div>
-        <p>
+   </div>
+   <p>
           <%= f.submit %>
         </p>
-   </div>
   </div>
 <% end %>

@@ -17,6 +17,10 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+//= require actiontext
+require("trix")
+require("@rails/actiontext")
+
 
 // ----------------------------------------------------
 // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
@@ -37,6 +41,3 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
 });
-
-require("trix")
-require("@rails/actiontext")
