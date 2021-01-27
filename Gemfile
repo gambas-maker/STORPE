@@ -27,6 +27,8 @@ gem 'excon'
 gem 'whenever', require: false
 gem "valid_email2"
 gem 'omniauth', '1.0.0.pr2'
+gem 'will_paginate', '3.1.7'
+gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
