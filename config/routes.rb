@@ -24,6 +24,7 @@ end
   get '/sitemap.xml.gz', to: redirect("https://s3-eu-west-3.amazonaws.com/storpesitemap/sitemap.xml.gz")
 
   resources :pages, only: [:show]
+  resources :articles
   resources :matches, only: [:index] do
     resources :forecasts, only: [:new, :create, :show, :confirm_pending]
   end

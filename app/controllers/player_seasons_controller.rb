@@ -1,9 +1,7 @@
 class PlayerSeasonsController < ApplicationController
   def show
-    @forecasts = Forecast.where(confirmed: true)
     @championship = Championship.where(id: current_user.player_seasons[0].championship.id)
     @seasons = Season.all
-    @playerseasons = PlayerSeason.all
   end
 
   def edit

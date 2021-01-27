@@ -1,0 +1,36 @@
+
+<div class="topimagegazette w-100 d-flex mb-3">
+  <h2 class="toptitle m-auto">Liste des pronostics</h2>
+</div>
+<%= will_paginate @articles %>
+<div class="d-flex justify-content-center">
+  <div class="card" style="width: 18rem;">
+    <% @articles.each do |article| %>
+      <%= cl_image_tag article.photo.key, class: "card-img-top" %>
+      <div class="card-body">
+        <h5 class="card-title"><%= article.title %> </h5>
+        <p class="card-text"><%= article.description %> </p>
+        <%= link_to 'Lire', article_path(article), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="d-flex flex-row justify-content-center my-3">
+  <div class="d-flex justify-content-center mx-2">
+    <%= link_to 'Les matchs', matches_path, class: "d-flex justify-content-center btn btn-warning" %>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= link_to 'Jouer à STORPE', new_user_registration_path, class: "d-flex justify-content-center btn btn-success" %>
+  </div>
+</div>
+<%= will_paginate @articles %>
+<%=  render "shared/navbarbottom" %>
+<div class="d-flex justify-content-center">
+  <footer class="footer-match">
+    <div class="footer-links" style="display: flex; align-items: center;">
+      <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+      <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+      <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+</div>

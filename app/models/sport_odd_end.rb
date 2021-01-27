@@ -183,7 +183,7 @@ class SportOddEnd
           game.update(negative_points_home: -7)
         elsif game.points_home >= 22.5 && game.points_home < 25
           game.update(negative_points_home: -6)
-        elsif game.points_home > 25
+        elsif game.points_home >= 25
           game.update(negative_points_home: -5)
         end
       end
@@ -210,7 +210,7 @@ class SportOddEnd
           game.update(negative_points_draw: -7)
         elsif game.points_draw >= 22.5 && game.points_draw < 25
           game.update(negative_points_draw: -6)
-        elsif game.points_draw > 25
+        elsif game.points_draw >= 25
           game.update(negative_points_draw: -5)
         end
       end
@@ -237,7 +237,7 @@ class SportOddEnd
           game.update(negative_points_away: -7)
         elsif game.points_away >= 22.5 && game.points_away < 25
           game.update(negative_points_away: -6)
-        elsif game.points_away > 25
+        elsif game.points_away >= 25
           game.update(negative_points_away: -5)
         end
       end
@@ -263,7 +263,7 @@ class SportOddEnd
           game.update(negative_over25: -7)
         elsif game.over_25 >= 22.5 && game.over_25 < 25
           game.update(negative_over25: -6)
-        elsif game.over_25 > 25
+        elsif game.over_25 >= 25
           game.update(negative_over25: -5)
         end
       end
@@ -289,7 +289,7 @@ class SportOddEnd
           game.update(negative_under25: -7)
         elsif game.under_25 >= 22.5 && game.under_25 < 25
           game.update(negative_under25: -6)
-        elsif game.under_25 > 25
+        elsif game.under_25 >= 25
           game.update(negative_under25: -5)
         end
       end
@@ -315,7 +315,7 @@ class SportOddEnd
           game.update(negative_goal_two_teams_yes: -7)
         elsif game.goal_two_teams_yes >= 22.5 && game.goal_two_teams_yes < 25
           game.update(negative_goal_two_teams_yes: -6)
-        elsif game.goal_two_teams_yes > 25
+        elsif game.goal_two_teams_yes >= 25
           game.update(negative_goal_two_teams_yes: -5)
         end
       end
@@ -341,7 +341,7 @@ class SportOddEnd
           game.update(negative_goal_two_teams_no: -7)
         elsif game.goal_two_teams_no >= 22.5 && game.goal_two_teams_no < 25
           game.update(negative_goal_two_teams_no: -6)
-        elsif game.goal_two_teams_no > 25
+        elsif game.goal_two_teams_no >= 25
           game.update(negative_goal_two_teams_no: -5)
         end
       end
