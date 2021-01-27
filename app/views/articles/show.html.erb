@@ -5,6 +5,9 @@
   <div class="d-flex flex-column bg-white">
     <div class="card-header"><%= @article.title %></div>
     <div class="card-body text-dark">
+      <div style="width: 10px; height: 20px">
+        <%= cl_image_tag @article.photo.key %>
+      </div>
       <h3 class="card-title"> Week-end: <%= @article.description %> </h3>
     </div>
     <%= sanitize @article.body %>
