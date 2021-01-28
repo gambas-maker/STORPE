@@ -3,10 +3,6 @@
     <div class="main-image">
       <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/v1601458862/testlandingstrong-ombre_qfovua.png", :width=>"100%" %>
     </div>
-    <div class="desktop">
-    </div>
-    <div class="phone">
-    </div>
     <!-- <hr class="new1"> -->
     <div class="video">
         <div class="main">
@@ -97,6 +93,7 @@
         logged_in_greeting="Salut ! Comment puis-je t'aider ? "
         logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
       </div>
+      <%= render "shared/footer" %>
     </div>
     <div class="phone">
         <div class="main">
@@ -147,16 +144,11 @@
             </div>
         </div>
       </div>
-    </div>
-    <div class="mainhome pb-5">
+      <div class="mainhome pb-5">
       <%= link_to matches_path do %>
         <button class="rejoins_1" style="color: white;">Rejoins le championnat</button>
       <% end %>
     </div>
-    <div class="desktop">
-      <%= render "shared/footer" %>
-    </div>
-    <div class="phone">
       <footer class="footer-match">
         <div class="foot-phrase">
           <p>Le sport c'est ici aussi 👉</p>
@@ -193,7 +185,7 @@
         logged_in_greeting="Salut ! Comment puis-je t'aider ? "
         logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
       </div>
-     </div>
+    </div>
   </div>
 <%= render "shared/new" %>
 </div>
