@@ -19,19 +19,42 @@
                     label: "Se souvenir de moi",
                     as: :boolean if devise_mapping.rememberable? %>
       </div>
-<%= link_to "Mot de passe oublié?", new_user_password_path %>
+      <%= link_to "Mot de passe oublié?", new_user_password_path %>
 
-<br>
-       <div class="form-actions">
+        <br>
+      <div class="form-actions">
         <%= button_to "Se connecter", matches_url, :class => "btn-login mt-3", :method => :get %>
           <p style="text-align: center; padding-top: 10px; font-size: 15px;">-Ou-</p>
-       </div>
-        <div class="form-actions">
+      </div>
+      <div class="form-actions">
         <%= button_to "S'inscrire", new_user_registration_path, :class => "btn-signup", :method => :get %>
-        </div>
-
-<% end %>
-
-
+      </div>
+    <% end %>
+  </div>
 </div>
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v9.0'
+    });
+  };
+
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="100665954734426"
+  theme_color="#FBB03B"
+  logged_in_greeting="Salut ! Comment puis-je t'aider ? "
+  logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
 </div>

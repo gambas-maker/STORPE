@@ -3,43 +3,63 @@
 </div>
 
 <div class="main p-2">
-
   <div class="login">
-
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name,
-                required: true,
-                autofocus: true,
-                input_html: {autocomplete: "Prénom : Roberto"} %>
-  <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "Email" }%>
-  <%= f.input :pseudo,
-                required: true,
-                autofocus: true,
-                hint: "12 caractères maximum l'ami",
-                input_html: {autocomplete: "Pseudo"} %>
-    <%= f.input :password,
-                required: true,
-                input_html: { autocomplete: "nouveau mot de passe" } %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+      <div class="form-inputs">
+        <%= f.input :name,
+                    required: true,
+                    autofocus: true,
+                    input_html: {autocomplete: "Prénom : Roberto"} %>
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "Email" }%>
+        <%= f.input :pseudo,
+                    required: true,
+                    autofocus: true,
+                    hint: "12 caractères maximum l'ami",
+                    input_html: {autocomplete: "Pseudo"} %>
+        <%= f.input :password,
+                    required: true,
+                    input_html: { autocomplete: "nouveau mot de passe" } %>
       </div>
-        <p style="margin-bottom: 0px;">En cliquant sur "S'inscrire", j'accepte les Termes et Conditions d'utilisation de STORPE.</p>
-      <br>
-
       <div class="form-actions" href="/matches">
         <%= f.button :submit, "S'inscrire", class:"rejoins_1" %>
       </div>
-        <p style="text-align: center; padding-top: 5px; font-size: 15px;">-Ou-</p>
+          <p style="text-align: center; padding-top: 5px; font-size: 15px;">-Ou-</p>
       <div class="form-actions">
-      <button class="btn-login">
-        <a  href="/matches" class="color">Se connecter</a>
-      </button>
-    </div>
+        <button class="btn-login">
+          <a  href="/matches" class="color">Se connecter</a>
+        </button>
+      </div>
     <% end %>
   </div>
+</div>
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v9.0'
+    });
+  };
+
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="100665954734426"
+  theme_color="#FBB03B"
+  logged_in_greeting="Salut ! Comment puis-je t'aider ? "
+  logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
 </div>
 
