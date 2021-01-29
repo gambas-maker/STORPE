@@ -147,7 +147,7 @@
               <% classement = {} %>
               <% x = 0 %>
               <% @playerseasons.each do |playerseason| %>
-                <% if playerseason.forecasts.where(season_id: Season.last.id).exists? %>
+                <% if playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? %>
                   <% classement[playerseason] = playerseason.number_of_points %>
                 <% else %>
                 <% end %>
