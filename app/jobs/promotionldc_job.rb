@@ -7,7 +7,6 @@ class PromotionldcJob < ApplicationJob
     @champion_bas = Championship.where(name: "Amateur")
     @championships = Championship.where(name: "Semi-pro")
     @championshippro = Championship.where(name: "Pro")
-    @playerseasons = PlayerSeason.all
     # Descente en division Amateur
     @championships.each do |championship|
       ranking = {}
@@ -68,7 +67,6 @@ class PromotionldcJob < ApplicationJob
         end
       end
     end
-
     PromotionProJob.perform_now
   end
 end

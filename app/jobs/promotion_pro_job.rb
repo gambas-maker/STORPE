@@ -4,7 +4,7 @@ class PromotionProJob < ApplicationJob
   def perform
     @championshippros = Championship.where(name: "Pro")
     @championshipsem = Championship.where(name: "Semi-pro")
-    @playerseasons = PlayerSeason.all
+    @championshipchams = Championship.where(name: "Champion")
     # Descente en division Semi-pro
     @championshippros.each do |championshippro|
       ranking3 = {}
@@ -35,6 +35,36 @@ class PromotionProJob < ApplicationJob
         end
       end
     end
-    SeasonJob.perform_now
+    # Montée en division Champion
+      @championshippros.each do |championshippro|
+        ranking5 = {}
+        championshippro.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.each { |hash| ranking5[hash] = hash.number_of_points }
+        if ranking5.count >= 8
+          array5 = []
+          @championshipchams.each do |championshipcham|
+            championshipcham.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array5 << championshippro : array5
+          end
+          if array5.empty?
+            Championship.create(name: "Champion", season_id: Season.last.id)
+            array5 << Championship.last
+            ranking5.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: Championship.where(name: "Champion").last.id)}
+          else
+            ranking5.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: array5.sample.id, season_id: Season.last.id) }
+          end
+        else
+          array5 = []
+          @championshipchams.each do |championshipcham|
+            championshipcham.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array5 << championshippro : array5
+          end
+          if array5.empty?
+            Championship.create(name: "Champion", season_id: Season.last.id)
+            array5 << Championship.last
+            ranking5.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.where(name: "Champion").last.id)}
+          else
+            ranking5.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array5.sample.id, season_id: Season.last.id) }
+          end
+        end
+      end
+    PromotionChampionJob.perform_now
   end
 end
