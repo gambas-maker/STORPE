@@ -21,7 +21,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @matches = Match..select { |v| v.event_stamp == Date.today.to_s }
+    @matches = Match.select { |v| v.event_stamp == Date.today.to_s }
     @forecasts = Forecast.where(season_id: Season.last.id, confirmed: true)
     @users = User.all
     @playerseasons = PlayerSeason.where(season_id: Season.last.id)
