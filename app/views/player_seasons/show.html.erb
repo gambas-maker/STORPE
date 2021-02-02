@@ -168,6 +168,10 @@
                   <div class="d-flex flex-column justify-content-center">
                     <% if  forecast.outcome == "NULL"%>
                       <p class="typopo text-center">Nul</p>
+                    <% elsif forecast.match.sport == "basketball" && forecast.outcome == "3" %>
+                      <p class="typopo text-center">20 points ou plus <%= forecast.match.nom_buteur_1 %></p>
+                    <% elsif forecast.match.sport == "basketball" && forecast.outcome == "4" %>
+                      <p class="typopo text-center">20 points ou plus <%= forecast.match.nom_buteur_2 %></p>
                     <% elsif forecast.outcome == "3" %>
                       <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_1 %></p>
                     <% elsif forecast.outcome == "4" %>
@@ -180,8 +184,10 @@
                       <p class="typopo text-center">Moins de 2.5 buts dans le match</p>
                     <% elsif forecast.outcome == "10" %>
                       <p class="typopo text-center">Plus de 2.5 buts dans le match</p>
-                    <% else %>
-                      <p class="typopo text-center"><%= forecast.outcome %></p>
+                    <% elsif forecast.outcome == "1" %>
+                      <p class="typopo text-center">Vainqueur <%= forecast.match.team_home %></p>
+                    <% elsif forecast.outcome == "2" %>
+                      <p class="typopo text-center">Vainqueur <%= forecast.match.team_away %></p>
                     <% end %>
                     <% if  forecast.points_win.positive?%>
                       <p class="typopo text-center text-success">+<%= forecast.points_win %>pts</p>
@@ -209,7 +215,9 @@
                       <% end %>
                     <% end %>
                     <% if forecast.match.result.present? %>
-                      <p class="typopo text-success-center"> <%= forecast.match.result %></p>
+                      <p class="typopo text-success-center">Score final : <%= forecast.match.result %></p>
+                    <% elsif forecast.match.result_home.present? && forecast.match.result_away.present? %>
+                      <p class="typopo text-success-center">Score final : <%= forecast.match.result_home %> - <%= forecast.match.result_away %></p>
                     <% else %>
                     <% end %>
                   </div>
