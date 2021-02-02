@@ -1,48 +1,53 @@
-<h1>Les statistiques STORPE</h1>
-
-<%= link_to "Les matchs", matches_path %>
-
-<h2>Les meilleurs pronostiqueurs de la semaine</h2>
-<div class="d-flex justify-content-center">
-  <div class="info" style="text-align: center;">
-    <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
-      <p> Pseudo:<%= playerseason.user.pseudo %></p>
-      <p> Prénom : <%= playerseason.user.name %> </p>
-      <p> Nom : <%= playerseason.user.last_name %> </p>
-      <p> Blason:
-        <% if playerseason.blason.present? %>
-          <%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-        <% else %>
+<div class="position-relative">
+  <div class="topimagedashboard w-100 d-flex mb-3">
+    <h2 class="toptitle m-auto">TABLEAU DE BORD</h2>
+  </div>
+  <div class="d-flex justify-content-center mt-2 mb-2">
+    <div class="info  d-flex flex-column">
+      <h2 class="tit m-auto pb-4 pt-4">TOP 3 de la semaine</h2>
+      <% arraytop = [] %>
+      <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
+        <% arraytop = [] %>
+        <% arraytop << playerseason %>
+      <% end %>
+      <% x = 0 %>
+      <% arraytop.each do |player| %>
+        <p><%= x += 1 %></p>
+        <p> Pseudo:<%= player.user.pseudo %></p>
+        <p> Blason:
+          <% if player.blason.present? %>
+            <%= cl_image_tag player.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+          <% else %>
+          <% end %>
+        </p>
+        <p> Championnat: <%= player.championship.name %> </p>
+        <p> Nombre de points: <%= player.number_of_points %> </p>
+        <br>
+      <% end %>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-2 mb-2">
+    <div class="info  d-flex  flex-column">
+      <h2 class="tit m-auto pb-4 pt-4">Les plus grosses perf' de la journée</h2>
+      <% chaud = [] %>
+      <% @forecasts.sort_by{|points|points.points_win}.each do |forecast| %>
+        <% if forecast.match.event_stamp == Date.yesterday.to_s %>
+          <% chaud.push(forecast) %>
         <% end %>
-      </p>
-      <p> Championnat: <%= playerseason.championship.name %> </p>
-      <p> Nombre de points: <%= playerseason.number_of_points %> </p>
-      <br>
-    <% end %>
+      <% end %>
+      <% bon =  chaud.last(3) %>
+      <% bon.each do |meilleur| %>
+        <p>Pseudo : <%= meilleur.player_season.user.pseudo %></p>
+        <p>Prénom : <%= meilleur.player_season.user.name %></p>
+        <p>Nom : <%=  meilleur.player_season.user.last_name %></p>
+        <p>Match : <%= meilleur.match_id %> </p>
+        <p>Plus gros points : <%= meilleur.points_win %></p>
+        <br>
+      <% end %>
+    </div>
   </div>
 </div>
 
-<!-- <h2>Les meilleurs pronostiqueurs du Jour</h2> -->
-<%# @playerseasons.where().sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
-
-<h2>Plus gros pronostiques réussis</h2>
-<div class="info" style="text-align: center;">
-  <% chaud = [] %>
-  <% @forecasts.sort_by{|points|points.points_win}.each do |forecast| %>
-      <% if forecast.match.event_stamp == Date.yesterday.to_s %>
-        <% chaud.push(forecast) %>
-      <% end %>
-    <% end %>
-    <% bon =  chaud.last(3) %>
-    <% bon.each do |meilleur| %>
-      <p>Pseudo : <%= meilleur.player_season.user.pseudo %></p>
-      <p>Prénom : <%= meilleur.player_season.user.name %></p>
-      <p>Nom : <%=  meilleur.player_season.user.last_name %></p>
-      <p>Match : <%= meilleur.match_id %> </p>
-      <p>Plus gros points : <%= meilleur.points_win %></p>
-      <br>
-  <% end %>
-</div>
 
 <h2>Tendance des pronostiques sportifs</h2>
 <div class="d-flex justify-content-center">
@@ -77,3 +82,4 @@
     <% end %>
   </div>
 </div>
+<%=  render "shared/navbarbottom" %>

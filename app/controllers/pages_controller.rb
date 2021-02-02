@@ -23,7 +23,6 @@ class PagesController < ApplicationController
   def dashboard
     @matches = Match.select { |v| v.event_stamp == Date.today.to_s }
     @forecasts = Forecast.where(season_id: Season.last.id, confirmed: true)
-    @users = User.all
-    @playerseasons = PlayerSeason.where(season_id: Season.last.id)
+    @playerseasons = PlayerSeason.select { |k| k.number_of_points > 0 }
   end
 end
