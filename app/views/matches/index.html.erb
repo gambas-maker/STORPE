@@ -126,7 +126,7 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"> - </input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3">- </input>
                                 </div>
                               <% end %>
                             </div>
@@ -295,7 +295,7 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"> - </input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3">- </input>
                                 </div>
                               <% end %>
                             </div>
