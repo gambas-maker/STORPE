@@ -119,14 +119,14 @@
                         <div class="prono d-flex flex-row justify-content-center">
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
-                              <p class="tit pr-3"><%= match.nom_buteur_1 %> /</p>
+                              <p class="tit pr-3"><%= match.nom_buteur_1 %></p>
                               <div class="typopo pr-1">
                                 Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
                               </div>
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"> - </input>
                                 </div>
                               <% end %>
                             </div>
@@ -136,13 +136,13 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
                               <% else %>
                                 <div class="striker1" data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
+                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"> </input>
                                 </div>
                               <% end %>
                               <div class="typopo pl-1">
                                 Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
                               </div>
-                              <p class="tit pl-3"> <%= match.nom_buteur_2 %></p>
+                              <p class="tit pl-3"><%= match.nom_buteur_2 %></p>
                             </div>
                           </div>
                         </div>
@@ -288,14 +288,14 @@
                         <div class="prono d-flex flex-row justify-content-center">
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
-                              <p class="tit pr-3"><%= match.nom_buteur_1 %> /</p>
+                              <p class="tit pr-3"><%= match.nom_buteur_1 %></p>
                               <div class="typopo pr-1">
                                 Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
                               </div>
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"> - </input>
                                 </div>
                               <% end %>
                             </div>
@@ -305,13 +305,13 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
                               <% else %>
                                 <div class="striker1" data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"> </input>
                                 </div>
                               <% end %>
                               <div class="typopo pl-1">
                                 Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
                               </div>
-                              <p class="tit pl-3"> <%= match.nom_buteur_2 %></p>
+                              <p class="tit pl-3"><%= match.nom_buteur_2 %></p>
                             </div>
                           </div>
                         </div>
