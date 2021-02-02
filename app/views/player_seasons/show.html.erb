@@ -169,9 +169,9 @@
                     <% if  forecast.outcome == "NULL"%>
                       <p class="typopo text-center">Nul</p>
                     <% elsif forecast.match.sport == "basketball" && forecast.outcome == "3" %>
-                      <p class="typopo text-center">20 points ou plus <%= forecast.match.nom_buteur_1 %></p>
+                      <p class="typopo text-center">25 points ou plus <%= forecast.match.nom_buteur_1 %></p>
                     <% elsif forecast.match.sport == "basketball" && forecast.outcome == "4" %>
-                      <p class="typopo text-center">20 points ou plus <%= forecast.match.nom_buteur_2 %></p>
+                      <p class="typopo text-center">25 points ou plus <%= forecast.match.nom_buteur_2 %></p>
                     <% elsif forecast.outcome == "3" %>
                       <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_1 %></p>
                     <% elsif forecast.outcome == "4" %>
