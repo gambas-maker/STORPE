@@ -1,14 +1,5 @@
 class ForecastsController < ApplicationController
   respond_to :html
-  def show
-    @forecast = Forecast.find(match.id)
-  end
-
-  def new
-    @m = Match.find(params[:match_id])
-    @forecast = Forecast.new
-  end
-
   def create
     @m = Match.find(params[:match_id])
     @forecast = Forecast.new(forecast_params)

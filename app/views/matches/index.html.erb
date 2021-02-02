@@ -100,7 +100,7 @@
                       <div class="prono d-flex flex-row justify-content-around mb-4 mt-4">
                         <div class="d-flex flex-column align-items-center col-4">
                           <div class="row">
-                            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+                            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
                           </div>
                           <div class="row text-align-center">
                             <h3 class="tit"><%= match.team_home %></h3>
@@ -110,7 +110,7 @@
                           <p class="typopo text-center">VS</p>
                         </div>
                         <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+                          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
                           <h3 class="tit"><%= match.team_away  %></h3>
                         </div>
                       </div>
@@ -123,7 +123,7 @@
                               <div class="typopo pr-1">
                                 Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
                               </div>
-                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "3") %>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
@@ -133,7 +133,7 @@
                           </div>
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
-                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: false, outcome: "4") %>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
                               <% else %>
                                 <div class="striker1" data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
@@ -212,7 +212,7 @@
               <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
                 <div class="d-flex flex-column align-items-center col-4">
                   <div class="row">
-                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
                   </div>
                   <div class="row text-align-center">
                     <h3 class="tit"><%= match.team_home %></h3>
@@ -232,7 +232,7 @@
                   </div>
                 </div>
                 <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
                   <h3 class="tit"><%= match.team_away  %></h3>
                 </div>
               </div>
@@ -248,6 +248,80 @@
                 </div>
               </div>
             <% else %>
+            <!-- Button trigger modal -->
+            <% if match.buteur_1.present? %>
+              <div class="d-flex justify-content-end mr-1">
+                <button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
+                  Plus de pronos
+                </button>
+              </div>
+            <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter-<%=match.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-center" id="exampleModalCenterTitle">Buffet à volonté</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="prono d-flex flex-row justify-content-around mb-4 mt-4">
+                        <div class="d-flex flex-column align-items-center col-4">
+                          <div class="row">
+                            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+                          </div>
+                          <div class="row text-align-center">
+                            <h3 class="tit"><%= match.team_home %></h3>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <p class="typopo text-center">VS</p>
+                        </div>
+                        <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+                          <h3 class="tit"><%= match.team_away  %></h3>
+                        </div>
+                      </div>
+                      <% if match.buteur_1.present? %>
+                        <p class="typo text-center">20 points ou plus</p>
+                        <div class="prono d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p class="tit pr-3"><%= match.nom_buteur_1 %></p>
+                              <div class="typopo pr-1">
+                                Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
+                              </div>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
+                              <% else %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
+                                </div>
+                              <% end %>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
+                              <% else %>
+                                <div class="striker1" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
+                                </div>
+                              <% end %>
+                              <div class="typopo pl-1">
+                                Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
+                              </div>
+                              <p class="tit pl-3"><%= match.nom_buteur_2 %></p>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+            <% end %>
               <div class="d-flex justify-content-center mb-2 mt-2">
                 <h4 class="typopo"><%= match.league %></h4>
               </div>
@@ -295,7 +369,7 @@
         <div class="footer-links" style="display: flex; align-items: center;">
           <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
           <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
-<!--           <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a> -->
+          <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
         </div>
       </footer>
     </div>
@@ -304,9 +378,6 @@
 </div>
 
 <%=  render "shared/navbarbottom" %>
-
-
-
 
 <script type='text/javascript'>
   (function()
@@ -323,3 +394,14 @@
     }
   })();
 </script>
+<!-- One Signal Code -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "71fa6b4f-43e7-460d-84ad-80bb84467b01",
+        });
+      });
+    </script>
+    <!-- END One Signal Code -->

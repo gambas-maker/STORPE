@@ -1,76 +1,11 @@
 <div class="position">
   <div class="content">
     <div class="main-image">
-      <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/v1601458862/testlandingstrong-ombre_qfovua.png", :width=>"100%" %>
+      <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/v1601458862/testlandingstrong-ombre_qfovua.png", :width=>"100%", :alt=>"Bannière STORPE" %>
     </div>
+    <hr class="new2">
     <div class="desktop">
-    </div>
-    <div class="phone">
-    </div>
-    <!-- <hr class="new1"> -->
-    <div class="video">
-        <div class="main">
-          <iframe width="800" height="450" src="https://www.youtube.com/embed/SQEhcNc440c?&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-top: 25px;"></iframe>
-        </div>
-      </div>
-      <hr class="new2">
-      <div class="desktop">
-        <div class="main">
-          <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
-            <ol class="carousel-indicators bg-none">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item bg-transparent active">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_600/v1601456890/Caroussel-1-Lundi_Dimanche_zdi3wh.png", :alt=>"Championnat du Lundi au Dimanche"%>
-                <div class="carousel-caption">
-                 <h2 style="color:#FBB03B;">Rejoins un Championnat</h2>
-                  <p>Chaque semaine <span style="color:#FBB03B;">défie tes adversaires</span>. Prouve-leur que tu es le meilleur <strong>pronostiqueur</strong> sportif.</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_600/v1603196555/Caroussel-1-sports_q6bwjh.png", :alt=>"Matchs de Football et NBA" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;">Au menu: Football et Basketball</h2>
-                  <p>Pronostique correctement les <span style="color:#FBB03B;font-weight: bold;">vainqueurs de matchs</span> afin de remporter un maximum de points.</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_600/v1603196297/Caroussel-1-Lundi_Dimanche_g5gpp3.png", :alt=>"Explication du système de points" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;" >Des points à la hauteur de tes performances</h2>
-                  <p><span style="color: #a1c226;">Gagne</span> des points qui prennent en compte la difficulté de ton pronostic. <span style="color: #c4070e;">Perds</span> des points en cas de pronostic incorrect.</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_600/v1603196980/Caroussel-1-Monte%CC%81e_descente_jr86ds.png", :alt=>"Évolue de division chaque semaine" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;">Évolue de Division à la fin du Championnat</h2>
-                  <p>Classe-toi parmi les meilleurs pour connaître la <span style="color: #FBB03B;">promotion</span>. Attention même les plus vaillants ont connu la <span style="color:#FBB03B;">relégation</span> #TFC</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_600/v1601457979/Caroussel-1-stats_pmki2j.png", :alt=>"Analyse tes statistiques de pronostiqueur" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;">Des statistiques de ta carrière de pronostiqueur</h2>
-                  <p><span style="color:#FBB03B;">Analyse tes statistiques</span> et détermine les sports qui te font gagner le plus de points pour vaincre tes adversaires.</p>
-                </div>
-              </div>
-            </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
+      <%= render "shared/desktop" %>
       <!-- Load Facebook SDK for JavaScript -->
       <div id="fb-root"></div>
       <script>
@@ -97,66 +32,10 @@
         logged_in_greeting="Salut ! Comment puis-je t'aider ? "
         logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
       </div>
-    </div>
-    <div class="phone">
-        <div class="main">
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators bg-none">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item bg-transparent active">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_335/v1601456890/Caroussel-1-Lundi_Dimanche_zdi3wh.png", :alt=>"Championnat du Lundi au Dimanche" %>
-                <div class="carousel-caption">
-                 <h2 style="color:#FBB03B;" >Rejoins un Championnat</h2>
-                  <p>Chaque semaine <span style="color:#FBB03B;">défie tes adversaires</span>. Prouve-leur que tu es le meilleur <strong>pronostiqueur</strong> sportif.</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_335/v1603196555/Caroussel-1-sports_q6bwjh.png", :alt=>"Matchs de Football et NBA" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;" >Au menu: Football et Basketball</h2>
-                  <p>Pronostique correctement les <span style="color:#FBB03B; font-weight: bold;">vainqueurs de matchs</span> afin de remporter un maximum de points.</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_335/v1603196297/Caroussel-1-Lundi_Dimanche_g5gpp3.png", :alt=>"Explication du système de points" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;">Des points à la hauteur de tes performances</h2>
-                  <p><span style="color: #a1c226;">Gagne</span> des points pondérés.<br> <span style="color: #c4070e;">Perds</span> des points en cas de pronostics incorrects.</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_335/v1603196980/Caroussel-1-Monte%CC%81e_descente_jr86ds.png", :alt=>"Évolue de division chaque semaine" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;">Évolue de Division à la fin du Championnat</h2>
-                  <p>Classe-toi parmi les meilleurs pour connaître la <span style="color:#FBB03B;">promotion</span>. Attention à la relégation #TFC</p>
-                </div>
-              </div>
-              <div class="carousel-item bg-transparent">
-                <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_335/v1601457979/Caroussel-1-stats_pmki2j.png", :alt=>"Analyse tes statistiques de pronostiqueur" %>
-                <div class="carousel-caption">
-                  <h2 style="color:#FBB03B;">Tes stats en carrière</h2>
-                  <p><span style="color:#FBB03B;">Analyse tes statistiques</span> et détermine les sports qui te font gagner le plus de points pour vaincre tes adversaires.</p>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="mainhome pb-5">
-      <%= link_to matches_path do %>
-        <button class="rejoins_1" style="color: white;">Rejoins le championnat</button>
-      <% end %>
-    </div>
-    <div class="desktop">
       <%= render "shared/footer" %>
     </div>
     <div class="phone">
+      <%= render "shared/phone" %>
       <footer class="footer-match">
         <div class="foot-phrase">
           <p>Le sport c'est ici aussi 👉</p>
@@ -167,33 +46,7 @@
           <a href="instagram://user?username=storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
         </div>
       </footer>
-      <!-- Load Facebook SDK for JavaScript -->
-      <div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v9.0'
-          });
-        };
-
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- Your Chat Plugin code -->
-      <div class="fb-customerchat"
-        attribution=setup_tool
-        page_id="100665954734426"
-        theme_color="#FBB03B"
-        logged_in_greeting="Salut ! Comment puis-je t'aider ? "
-        logged_out_greeting="Salut ! Comment puis-je t'aider ? ">
-      </div>
-     </div>
+    </div>
   </div>
 <%= render "shared/new" %>
 </div>

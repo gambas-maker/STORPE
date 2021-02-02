@@ -47,7 +47,7 @@
 <h2>Tendance des pronostiques sportifs</h2>
 <div class="d-flex justify-content-center">
   <div class="info" style="text-align: center;">
-    <% @matches.where(event_stamp: Date.today.to_s).each do |match| %>
+    <% @matches.each do |match| %>
       <p> Nombre de pronos <%= match.forecasts.count %> </p>
       <p> Équipe à domicile <%= match.team_home %></p>
       <p> Points équipe à domicile<%= match.points_home %></p>
