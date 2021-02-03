@@ -94,24 +94,24 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "9").first || Forecast.where(match: id, player_season: player, outcome: "10").first
-        if @forecastb2e.nil?
-          @forecastb2e = Forecast.new
-          @forecastb2e.outcome = outcome
-          @forecastb2e.match_id = id
-          @forecastb2e.points_win = 0
-          @forecastb2e.points_lose = 0
-          @forecastb2e.player_season_id = player[0]
-          @forecastb2e.season_id = Season.last.id
-          @forecastb2e.confirmed = false
-          @forecastb2e.save!
+        @forecastunder = Forecast.where(match: id, player_season: player, outcome: "9").first || Forecast.where(match: id, player_season: player, outcome: "10").first
+        if @forecastunder.nil?
+          @forecastunder = Forecast.new
+          @forecastunder.outcome = outcome
+          @forecastunder.match_id = id
+          @forecastunder.points_win = 0
+          @forecastunder.points_lose = 0
+          @forecastunder.player_season_id = player[0]
+          @forecastunder.season_id = Season.last.id
+          @forecastunder.confirmed = false
+          @forecastunder.save!
         else
-          @forecastb2e.outcome = outcome
-          @forecastb2e.save
+          @forecastunder.outcome = outcome
+          @forecastunder.save
         end
       else check == "false"
-        @forecastb2e = Forecast.where(match: id, player_season: player).first
-        @forecastb2e.destroy
+        @forecastunder = Forecast.where(match: id, player_season: player).first
+        @forecastunder.destroy
       end
     else
     end
