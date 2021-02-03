@@ -1,10 +1,10 @@
 <div class="position-relative">
-  <div class="topimagegazette w-100 d-flex mb-3">
+  <div class="topimagechampionship w-100 d-flex mb-3">
     <h2 class="toptitle m-auto">TABLEAU DE BORD</h2>
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex flex-column">
-      <h2 class="prono tit m-auto pb-4 pt-4">TOP 3 de la semaine</h2>
+      <h2 class="prono typo m-auto pb-4 pt-4">TOP 3 de la semaine</h2>
       <% arraytop = [] %>
       <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
         <% arraytop = [] %>
@@ -37,7 +37,7 @@
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex  flex-column">
-      <h2 class="prono tit m-auto pb-4 pt-4">TOP 3 pronos d'hier</h2>
+      <h2 class="prono typo m-auto pb-4 pt-4">TOP 3 pronos d'hier</h2>
       <% chaud = [] %>
       <% @forecasts.sort_by{|points|points.points_win }.each do |forecast| %>
         <% if forecast.match.event_stamp == Date.yesterday.to_s && forecast.points_win.positive? %>
@@ -102,7 +102,7 @@
 
 <div class="d-flex justify-content-center mt-2 mb-2">
   <div class="info  d-flex  flex-column">
-    <h2 class="prono tit m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
+    <h2 class="prono typo m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
     <% @matches.each do |match| %>
       <% un = 0 %>
       <% deux = 0 %>
@@ -149,12 +149,12 @@
           <% if all == 0 %>
           <% else %>
             <% if match.sport == "football" %>
-              <p><%= match.team_home  %> <%= un %>%</p>
-              <p>Nul <%= trois %>%</p>
-              <p><%= match.team_away  %> <%= deux %>%</p>
+              <p><%= match.team_home  %> <%= un/all %>%</p>
+              <p>Nul <%= trois/all %>%</p>
+              <p><%= match.team_away  %> <%= deux/all %>%</p>
             <% else %>
-                <p><%= match.team_home  %> <%= un %>%</p>
-                <p><%= match.team_away  %> <%= deux %>%</p>
+                <p><%= match.team_home  %> <%= un/all %>%</p>
+                <p><%= match.team_away  %> <%= deux/all %>%</p>
             <% end %>
           <% end %>
         </div>
