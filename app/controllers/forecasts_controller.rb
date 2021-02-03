@@ -44,7 +44,7 @@ class ForecastsController < ApplicationController
           @forecast.save
         end
       else check == "false"
-         @forecast = Forecast.where(match: id, player_season: player).first
+         @forecast = Forecast.where(match: id, player_season: player, outcome: "1").first || Forecast.where(match: id, player_season: player, outcome: "NULL").first || Forecast.where(match: id, player_season: player, outcome: "2").first
         @forecast.destroy
       end
     else
@@ -77,7 +77,7 @@ class ForecastsController < ApplicationController
           @forecastb2e.save
         end
       else check == "false"
-        @forecastb2e = Forecast.where(match: id, player_season: player).first
+        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "7").first || Forecast.where(match: id, player_season: player, outcome: "8").first
         @forecastb2e.destroy
       end
     else
@@ -110,7 +110,7 @@ class ForecastsController < ApplicationController
           @forecastunder.save
         end
       else check == "false"
-        @forecastunder = Forecast.where(match: id, player_season: player).first
+        @forecastunder = Forecast.where(match: id, player_season: player, outcome: "9").first || Forecast.where(match: id, player_season: player, outcome: "10").first
         @forecastunder.destroy
       end
     else
