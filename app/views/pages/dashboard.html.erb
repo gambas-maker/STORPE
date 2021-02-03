@@ -28,7 +28,7 @@
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex  flex-column">
-      <h2 class="tit m-auto pb-4 pt-4">Les plus grosses perf' de la journée</h2>
+      <h2 class="tit m-auto pb-4 pt-4">Les plus gros pronos d'hier</h2>
       <% chaud = [] %>
       <% @forecasts.sort_by{|points|points.points_win}.each do |forecast| %>
         <% if forecast.match.event_stamp == Date.yesterday.to_s %>
@@ -48,38 +48,84 @@
   </div>
 </div>
 
-
-<h2>Tendance des pronostiques sportifs</h2>
-<div class="d-flex justify-content-center">
-  <div class="info" style="text-align: center;">
+<div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <h2 class="tit m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
     <% @matches.each do |match| %>
-      <p> Nombre de pronos <%= match.forecasts.count %> </p>
-      <p> Équipe à domicile <%= match.team_home %></p>
-      <p> Points équipe à domicile<%= match.points_home %></p>
-      <p> Points Négatifs Dom <%= match.negative_points_home %></p>
-      <p> Équipe à l'extérieur<%= match.team_away %></p>
-      <p> Points Négatifs Ext <%= match.negative_points_away %> </p>
-      <p> Points équipe à l'extérieur<%= match.points_away %></p>
-      <p> Points du match nul<%= match.points_draw %></p>
-      <p>Points Négatifs Nul <%= match.negative_points_draw %> </p>
+    <% un = 0 %>
+    <% deux = 0 %>
+    <% trois = 0 %>
+    <% all = 0 %>
+      <% un = match.forecasts.where(outcome: "1").count %>
+      <% deux = match.forecasts.where(outcome: "2").count %>
+      <% trois = match.forecasts.where(outcome: "NULL").count %>
+      <% all = un + deux + trois %>
+      <p> Nombre de pronos <%= all %> </p>
+      <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+        <div class="d-flex flex-column align-items-center col-4">
+          <div class="row">
+            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+          </div>
+          <div class="row text-align-center">
+            <h3 class="typopo"><%= match.team_home %></h3>
+          </div>
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+          <p class="typopo text-center">VS</p>
+        </div>
+        <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+          <h3 class="typopo"><%= match.team_away  %></h3>
+        </div>
+      </div>
+      <div class="typopo d-flex flex-row my-3 justify-content-between mx-5">
+        <div>
+          Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
+        </div>
+        <% if match.sport == "football" %>
+          <div>
+            Pts : +<%= match.points_draw.to_i %> /<%= match.negative_points_draw %>
+          </div>
+        <% else %>
+        <% end %>
+        <div>
+          Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+        </div>
+      </div>
+      <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
       <% compteur_1 = 0 %>
       <% compteur_2 = 0 %>
       <% compteur_nul = 0 %>
-      <% match.forecasts.each do |forecast| %>
-        <% if forecast.outcome == "1" %>
-          <% compteur_1 += 1 %>
-        <% elsif forecast.outcome == "2" %>
-          <% compteur_2 += 1 %>
-        <% elsif forecast.outcome == "NULL" %>
-          <% compteur_nul += 1 %>
+      <% if all == 0 %>
+      <% else %>
+        <% match.forecasts.each do |forecast| %>
+          <% if match.sport == "basketball" %>
+           <% if forecast.outcome == "1" %>
+              <% compteur_1 += 1 %>
+            <% else forecast.outcome == "2" %>
+              <% compteur_2 += 1 %>
+            <% end %>
+          <% else %>
+            <% if forecast.outcome == "1" %>
+              <% compteur_1 += 1 %>
+            <% elsif forecast.outcome == "2" %>
+              <% compteur_2 += 1 %>
+            <% elsif forecast.outcome == "NULL" %>
+              <% compteur_nul += 1 %>
+            <% end %>
+          <% end %>
         <% end %>
+        <% if match.sport == "football" %>
+          <p><%= match.team_home  %> <%= (compteur_1/match.forecasts.count)*100 %></p>
+          <p><%= match.team_away  %> <%= (compteur_2/match.forecasts.count)*100 %></p>
+          <p>Nul <%= (compteur_nul/match.forecasts.count)*100 %></p>
+        <% else %>
+            <p><%= match.team_home  %> <%= (compteur_1/match.forecasts.count)*100 %></p>
+            <p><%= match.team_away  %> <%= (compteur_2/match.forecasts.count)*100 %></p>
       <% end %>
-      <p>Nombre de pronostiques sur l'équipe à domicile<%= compteur_1 %></p>
-      <p>Nombre de pronostiques sur l'équipe à l'extérieur<%= compteur_2 %></p>
-      <p>Nombre de pronostiques sur le match nul<%= compteur_nul %></p>
-      <br>
-      <br>
-    <% end %>
+      <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 <%=  render "shared/navbarbottom" %>

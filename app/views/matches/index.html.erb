@@ -202,6 +202,7 @@
                   </div>
                 </div>
               </div>
+              <!-- End Modal -->
               <div class="d-flex justify-content-center mb-2 mt-2">
                 <h4 class="typopo"><%= match.league %></h4>
               </div>
@@ -332,7 +333,7 @@
               <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
                 <div class="d-flex flex-column align-items-center col-4">
                   <div class="row">
-                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
                   </div>
                   <div class="row text-align-center">
                     <h3 class="typopo"><%= match.team_home %></h3>
@@ -348,7 +349,7 @@
                   </div>
                 </div>
                 <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
                   <h3 class="typopo"><%= match.team_away  %></h3>
                 </div>
               </div>
