@@ -28,7 +28,7 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecast = Forecast.where.last(match: id, player_season: player, outcome: "1" || "2" || "NULL")
+        @forecast = Forecast.where(match: id, player_season: player, outcome: "1" || "2" || "NULL")
         if @forecast.nil?
           @forecast = Forecast.new
           @forecast.outcome = outcome
