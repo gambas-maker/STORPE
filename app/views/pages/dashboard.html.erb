@@ -4,45 +4,78 @@
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex flex-column">
-      <h2 class="tit m-auto pb-4 pt-4">TOP 3 de la semaine</h2>
+      <h2 class="prono tit m-auto pb-4 pt-4">TOP 3 de la semaine</h2>
       <% arraytop = [] %>
-      <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
+      <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(10).each do |playerseason| %>
         <% arraytop = [] %>
         <% arraytop << playerseason %>
       <% end %>
       <% x = 0 %>
       <% arraytop.each do |player| %>
-        <p><%= x += 1 %></p>
-        <p> Pseudo:<%= player.user.pseudo %></p>
-        <p> Blason:
+      <div class="d-flex flex-row justify-content-center">
+        <% if x == 0  %>
+          <p class="typo" style="color: #fecd1a;"><%= x += 1 %>er</p>
+        <% else x > 0 %>
+          <p class="typo" style="color: #bbbbbb;"><%= x += 1 %>ème</p>
+        <% end %>
+      </div>
+      <div class="text-center">
+        <p>
           <% if player.blason.present? %>
-            <%= cl_image_tag player.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+            <%= cl_image_tag player.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "47px", height: "52px" %>
           <% else %>
+            <i class="fas fa-plus-circle" style="color: white;"></i>
           <% end %>
         </p>
-        <p> Championnat: <%= player.championship.name %> </p>
-        <p> Nombre de points: <%= player.number_of_points %> </p>
+      </div>
+        <p class="typo text-center"><%= player.user.pseudo %></p>
+        <p class="typopo"><%= player.number_of_points %> points</p>
+        <p class="prono typopo"> Division : <%= player.championship.name %> </p>
         <br>
       <% end %>
     </div>
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex  flex-column">
-      <h2 class="tit m-auto pb-4 pt-4">Les plus gros pronos d'hier</h2>
+      <h2 class="prono tit m-auto pb-4 pt-4">TOP 3 pronos d'hier</h2>
       <% chaud = [] %>
-      <% @forecasts.sort_by{|points|points.points_win}.each do |forecast| %>
-        <% if forecast.match.event_stamp == Date.yesterday.to_s %>
+      <% @forecasts.sort_by{|points|points.points_win }.each do |forecast| %>
+        <% if forecast.match.event_stamp == Date.yesterday.to_s && forecast.points_win.positive? %>
           <% chaud.push(forecast) %>
         <% end %>
       <% end %>
       <% bon =  chaud.last(3) %>
-      <% bon.each do |meilleur| %>
-        <p>Pseudo : <%= meilleur.player_season.user.pseudo %></p>
-        <p>Prénom : <%= meilleur.player_season.user.name %></p>
-        <p>Nom : <%=  meilleur.player_season.user.last_name %></p>
-        <p>Match : <%= meilleur.match_id %> </p>
-        <p>Plus gros points : <%= meilleur.points_win %></p>
-        <br>
+      <% if chaud.empty? %>
+       <p class="typo text-center">Ils arrivent t'inquiète</p>
+       <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/OSuaE6AknuRc7syZXp" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/will-smith-moviepass-empty-room-OSuaE6AknuRc7syZXp">via GIPHY</a></p>
+      <% else %>
+        <% bon.each do |meilleur| %>
+          <p class="typo text-center">Pseudo : <%= meilleur.player_season.user.pseudo %></p>
+          <div class="d-flex flex-row justify-content-around mt-2">
+            <div class="d-flex flex-column align-items-center col-4">
+              <div>
+                <p><%= cl_image_tag Match.where(id: meilleur.match_id).first.team_home_logo_url, width: 50, alt: "Équipe à domicile" %></p>
+              </div>
+              <div class="row text-align-center">
+                <h3 class="typopo"><%= Match.where(id: meilleur.match_id).first.team_home %></h3>
+              </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center">
+              <p class="typopo text-center">VS</p>
+            </div>
+            <div class="d-flex flex-column align-items-center col-4">
+              <div>
+                <p><%= cl_image_tag Match.where(id: meilleur.match_id).first.team_away_logo_url, width: 50, alt: "Équipe à extérieur" %></p>
+              </div>
+              <div class="row text-align-center">
+                <h3 class="typopo"><%= Match.where(id: meilleur.match_id).first.team_away %></h3>
+              </div>
+            </div>
+          </div>
+          <div class="prono typo text-center">
+            <p>Plus gros points : <%= meilleur.points_win %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -50,18 +83,18 @@
 
 <div class="d-flex justify-content-center mt-2 mb-2">
   <div class="info  d-flex  flex-column">
-    <h2 class="tit m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
+    <h2 class="prono tit m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
     <% @matches.each do |match| %>
-    <% un = 0 %>
-    <% deux = 0 %>
-    <% trois = 0 %>
-    <% all = 0 %>
+      <% un = 0 %>
+      <% deux = 0 %>
+      <% trois = 0 %>
+      <% all = 0 %>
       <% un = match.forecasts.where(outcome: "1").count %>
       <% deux = match.forecasts.where(outcome: "2").count %>
       <% trois = match.forecasts.where(outcome: "NULL").count %>
       <% all = un + deux + trois %>
-      <p> Nombre de pronos <%= all %> </p>
-      <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+      <p class="typo text-center"> Nombre de pronos <%= all %> </p>
+      <div class="d-flex flex-row justify-content-around mt-2" data-id="<%= match.id %>">
         <div class="d-flex flex-column align-items-center col-4">
           <div class="row">
             <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
@@ -78,54 +111,56 @@
           <h3 class="typopo"><%= match.team_away  %></h3>
         </div>
       </div>
-      <div class="typopo d-flex flex-row my-3 justify-content-between mx-5">
-        <div>
-          Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
-        </div>
-        <% if match.sport == "football" %>
+      <div class="prono typopo d-flex flex-column my-1 justify-content-between mx-5">
+        <div class="d-flex flex-row my-3 justify-content-between">
           <div>
-            Pts : +<%= match.points_draw.to_i %> /<%= match.negative_points_draw %>
+            Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
           </div>
-        <% else %>
-        <% end %>
-        <div>
-          Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
-        </div>
-      </div>
-      <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
-      <% compteur_1 = 0 %>
-      <% compteur_2 = 0 %>
-      <% compteur_nul = 0 %>
-      <% if all == 0 %>
-      <% else %>
-        <% match.forecasts.each do |forecast| %>
-          <% if match.sport == "basketball" %>
-           <% if forecast.outcome == "1" %>
-              <% compteur_1 += 1 %>
-            <% else forecast.outcome == "2" %>
-              <% compteur_2 += 1 %>
-            <% end %>
+          <% if match.sport == "football" %>
+            <div>
+              Pts : +<%= match.points_draw.to_i %> /<%= match.negative_points_draw %>
+            </div>
           <% else %>
-            <% if forecast.outcome == "1" %>
-              <% compteur_1 += 1 %>
-            <% elsif forecast.outcome == "2" %>
-              <% compteur_2 += 1 %>
-            <% elsif forecast.outcome == "NULL" %>
-              <% compteur_nul += 1 %>
+          <% end %>
+          <div>
+            Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+          </div>
+        </div>
+        <% compteur_1 = 0 %>
+        <% compteur_2 = 0 %>
+        <% compteur_nul = 0 %>
+        <div class="d-flex flex-row my-3 justify-content-between">
+          <% if all == 0 %>
+          <% else %>
+            <% match.forecasts.each do |forecast| %>
+              <% if match.sport == "basketball" %>
+                <% if forecast.outcome == "1" %>
+                  <% compteur_1 += 1 %>
+                <% else forecast.outcome == "2" %>
+                  <% compteur_2 += 1 %>
+                <% end %>
+              <% else %>
+                 <% if forecast.outcome == "1" %>
+                   <% compteur_1 += 1 %>
+                 <% elsif forecast.outcome == "2" %>
+                   <% compteur_2 += 1 %>
+                 <% elsif forecast.outcome == "NULL" %>
+                   <% compteur_nul += 1 %>
+                 <% end %>
+              <% end %>
+            <% end %>
+            <% if match.sport == "football" %>
+              <p><%= match.team_home  %> <%= compteur_1/all*100 %>%</p>
+              <p>Nul <%= compteur_nul/all * 100 %>%</p>
+              <p><%= match.team_away  %> <%= compteur_2/all*100 %>%</p>
+            <% else %>
+                <p><%= match.team_home  %> <%= compteur_1/all*100 %>%</p>
+                <p><%= match.team_away  %> <%= compteur_2/all*100 %>%</p>
             <% end %>
           <% end %>
-        <% end %>
-        <% if match.sport == "football" %>
-          <p><%= match.team_home  %> <%= (compteur_1/match.forecasts.count)*100 %></p>
-          <p><%= match.team_away  %> <%= (compteur_2/match.forecasts.count)*100 %></p>
-          <p>Nul <%= (compteur_nul/match.forecasts.count)*100 %></p>
-        <% else %>
-            <p><%= match.team_home  %> <%= (compteur_1/match.forecasts.count)*100 %></p>
-            <p><%= match.team_away  %> <%= (compteur_2/match.forecasts.count)*100 %></p>
-      <% end %>
-      <% end %>
-      <% end %>
-    </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 <%=  render "shared/navbarbottom" %>
