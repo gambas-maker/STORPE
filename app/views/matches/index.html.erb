@@ -126,7 +126,7 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3">- </input>
                                 </div>
                               <% end %>
                             </div>
@@ -136,7 +136,7 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
                               <% else %>
                                 <div class="striker1" data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
+                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"> </input>
                                 </div>
                               <% end %>
                               <div class="typopo pl-1">
@@ -202,6 +202,7 @@
                   </div>
                 </div>
               </div>
+              <!-- End Modal -->
               <div class="d-flex justify-content-center mb-2 mt-2">
                 <h4 class="typopo"><%= match.league %></h4>
               </div>
@@ -284,7 +285,7 @@
                         </div>
                       </div>
                       <% if match.buteur_1.present? %>
-                        <p class="typo text-center">20 points ou plus</p>
+                        <p class="typo text-center">25 points ou plus</p>
                         <div class="prono d-flex flex-row justify-content-center">
                           <div class="d-flex flex-column" data-id="<%= match.id %>">
                             <div class="d-flex flex-row">
@@ -295,7 +296,7 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
                               <% else %>
                                 <div data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3"></input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3">- </input>
                                 </div>
                               <% end %>
                             </div>
@@ -305,7 +306,7 @@
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
                               <% else %>
                                 <div class="striker1" data-id="<%= match.id %>">
-                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"></input>
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"> </input>
                                 </div>
                               <% end %>
                               <div class="typopo pl-1">
@@ -332,7 +333,7 @@
               <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
                 <div class="d-flex flex-column align-items-center col-4">
                   <div class="row">
-                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50 %></h3>
+                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
                   </div>
                   <div class="row text-align-center">
                     <h3 class="typopo"><%= match.team_home %></h3>
@@ -348,7 +349,7 @@
                   </div>
                 </div>
                 <div class="d-flex flex-column align-items-center text-align-center col-4 ">
-                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50 %></h3>
+                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
                   <h3 class="typopo"><%= match.team_away  %></h3>
                 </div>
               </div>
