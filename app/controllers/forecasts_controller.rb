@@ -61,7 +61,7 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "7" || "8").first
+        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "7").first || Forecast.where(match: id, player_season: player, outcome: "8").first
         if @forecastb2e.nil?
           @forecastb2e = Forecast.new
           @forecastb2e.outcome = outcome
@@ -94,7 +94,7 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "9" || "10").first
+        @forecastb2e = Forecast.where(match: id, player_season: player, outcome: "9").first || Forecast.where(match: id, player_season: player, outcome: "10").first
         if @forecastb2e.nil?
           @forecastb2e = Forecast.new
           @forecastb2e.outcome = outcome
