@@ -28,7 +28,7 @@ class ForecastsController < ApplicationController
     player = current_user.player_season_ids
     if @forecasts.count < 40
       if check == "true"
-        @forecast = Forecast.where(match: id, player_season: player).first
+        @forecast = Forecast.where(match: id, player_season: player, outcome: "1" || "2" || "NULL").first
         if @forecast.nil?
           @forecast = Forecast.new
           @forecast.outcome = outcome
@@ -82,7 +82,7 @@ class ForecastsController < ApplicationController
       end
     else
     end
-    render json: { status: @forecast }
+   render json: { status: @forecast }
   end
 
   def store_outcome_under
