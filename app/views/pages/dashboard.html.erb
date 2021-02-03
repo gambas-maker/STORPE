@@ -1,5 +1,5 @@
 <div class="position-relative">
-  <div class="topimagedashboard w-100 d-flex mb-3">
+  <div class="topimageprofile w-100 d-flex mb-3">
     <h2 class="toptitle m-auto">TABLEAU DE BORD</h2>
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
@@ -72,7 +72,7 @@
               </div>
             </div>
           </div>
-          <div class="prono typo text-center">
+          <div class="prono typopo text-center">
             <p><%= meilleur.points_win %> points</p>
             <% if meilleur.outcome == "1" %>
               <p>avec Vainqueur <%= Match.where(id: meilleur.match_id).first.team_home %> </p>
@@ -149,12 +149,12 @@
           <% if all == 0 %>
           <% else %>
             <% if match.sport == "football" %>
-              <p><%= match.team_home  %> <%= un/all * 100 %>%</p>
-              <p>Nul <%= trois/all * 100 %>%</p>
-              <p><%= match.team_away  %> <%= deux/all * 100 %>%</p>
+              <p><%= match.team_home  %> <%= un / all * 100 %>%</p>
+              <p>Nul <%= trois / all * 100 %>%</p>
+              <p><%= match.team_away  %> <%= deux / all * 100 %>%</p>
             <% else %>
-                <p><%= match.team_home  %> <%= un/all * 100 %>%</p>
-                <p><%= match.team_away  %> <%= deux/all * 100 %>%</p>
+                <p><%= match.team_home  %> <%= un / all * 100 %>%</p>
+                <p><%= match.team_away  %> <%= deux / all * 100 %>%</p>
             <% end %>
           <% end %>
         </div>
