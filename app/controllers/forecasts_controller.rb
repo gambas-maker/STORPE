@@ -27,6 +27,7 @@ class ForecastsController < ApplicationController
     outcome = params[:result]
     check = params[:box]
     player = current_user.player_season_ids
+    puts @playerseason[0].season_id
     if @playerseason[0].season_id == Season.last.id
       if @forecasts.count < 40
         if check == "true"
