@@ -7,7 +7,6 @@
       <h2 class="prono typo m-auto pb-4 pt-4">TOP 3 de la semaine</h2>
       <% arraytop = [] %>
       <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
-        <% arraytop = [] %>
         <% arraytop << playerseason %>
       <% end %>
       <% x = 0 %>
@@ -15,8 +14,10 @@
       <div class="d-flex flex-row justify-content-center">
         <% if x == 0  %>
           <p class="typo" style="color: #fecd1a;"><%= x += 1 %>er</p>
-        <% else %>
-          <p class="typo" style="color: #bbbbbb;"><%= x += 1 %>ème</p>
+        <% elsif x == 1 %>
+          <p class="typo" style="color: #dddddd;"><%= x += 1 %>ème</p>
+        <% elsif x == 2 %>
+          <p class="typo" style="color: #f05454;"><%= x += 1 %>ème</p>
         <% end %>
       </div>
       <div class="text-center">
