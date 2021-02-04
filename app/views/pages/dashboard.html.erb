@@ -105,10 +105,6 @@
     <h2 class="prono typo m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
     <!-- Football -->
     <% @matchestoday.each do |match| %>
-      <% un = 0 %>
-      <% deux = 0 %>
-      <% trois = 0 %>
-      <% all = 0 %>
       <% un = match.forecasts.where(outcome: "1").count %>
       <% deux = match.forecasts.where(outcome: "2").count %>
       <% trois = match.forecasts.where(outcome: "NULL").count %>
@@ -164,14 +160,9 @@
     <% end %>
     <!-- Basket -->
     <% @matchesbasketoday.each do |match| %>
-      <% un = 0 %>
-      <% deux = 0 %>
-      <% trois = 0 %>
-      <% all = 0 %>
       <% un = match.forecasts.where(outcome: "1").count %>
       <% deux = match.forecasts.where(outcome: "2").count %>
-      <% trois = match.forecasts.where(outcome: "NULL").count %>
-      <% all = un + deux + trois %>
+      <% all = un + deux %>
       <div class="d-flex justify-content-center mb-2 mt-2">
         <h4 class="typopo"><%= match.league %></h4>
       </div>
