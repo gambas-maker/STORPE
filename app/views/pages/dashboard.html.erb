@@ -103,7 +103,8 @@
 <div class="d-flex justify-content-center mt-2 mb-2">
   <div class="info  d-flex  flex-column">
     <h2 class="prono typo m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
-    <% @matches.each do |match| %>
+    <!-- Football -->
+    <% @matchestoday.each do |match| %>
       <% un = 0 %>
       <% deux = 0 %>
       <% trois = 0 %>
@@ -147,18 +148,64 @@
         <div class="d-flex flex-row my-3 justify-content-between">
           <% if all == 0 %>
           <% else %>
-            <% if match.sport == "football" %>
-              <p class="typo"><%= match.team_home  %> <%= (un * 100/all) %>%</p>
-              <p class="typo">Nul <%= (trois * 100/all) %>%</p>
-              <p class="typo"><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
-            <% else %>
-                <p class="typo"><%= match.team_home  %> <%= (un * 100/all) %>%</p>
-                <p class="typo"><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
-            <% end %>
+            <p class="typo"><%= match.team_home  %> <%= (un * 100/all) %>%</p>
+            <p class="typo">Nul <%= (trois * 100/all) %>%</p>
+            <p class="typo"><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
           <% end %>
         </div>
       </div>
     <% end %>
-   </div>
+    <!-- Basket -->
+    <% @matchesbasketoday.each do |match| %>
+      <% un = 0 %>
+      <% deux = 0 %>
+      <% trois = 0 %>
+      <% all = 0 %>
+      <% un = match.forecasts.where(outcome: "1").count %>
+      <% deux = match.forecasts.where(outcome: "2").count %>
+      <% trois = match.forecasts.where(outcome: "NULL").count %>
+      <% all = un + deux + trois %>
+      <div class="d-flex flex-row justify-content-around mt-2" data-id="<%= match.id %>">
+        <div class="d-flex flex-column align-items-center col-4">
+          <div class="row">
+            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+          </div>
+          <div class="row text-align-center">
+            <h3 class="typopo"><%= match.team_home %></h3>
+          </div>
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+          <p class="typopo text-center">VS</p>
+        </div>
+        <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+          <h3 class="typopo"><%= match.team_away  %></h3>
+        </div>
+      </div>
+      <div class="prono typopo d-flex flex-column my-1 justify-content-between mx-5">
+        <div class="d-flex flex-row my-3 justify-content-between">
+          <div>
+            Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
+          </div>
+          <% if match.sport == "football" %>
+            <div>
+              Pts : +<%= match.points_draw.to_i %> /<%= match.negative_points_draw %>
+            </div>
+          <% else %>
+          <% end %>
+          <div>
+            Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+          </div>
+        </div>
+        <div class="d-flex flex-row my-3 justify-content-between">
+          <% if all == 0 %>
+          <% else %>
+            <p class="typo"><%= match.team_home  %> <%= (un * 100/all) %>%</p>
+            <p class="typo"><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 <%=  render "shared/navbarbottom" %>
