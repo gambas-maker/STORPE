@@ -18,9 +18,9 @@ class PromotionJob < ApplicationJob
         if array.empty?
           Championship.create!(name: "Semi-pro", season_id: Season.last.id)
           array << Championship.last
-          ranking.sort_by { |k, v| v }.reverse.first(6).each { |k, v| puts k.update(championship_id: Championship.where(name: "Semi-pro").last.id)}
+          ranking.sort_by { |k, v| v }.reverse.first(8).each { |k, v| puts k.update(championship_id: Championship.where(name: "Semi-pro").last.id)}
         else
-          ranking.sort_by { |k, v| v }.reverse.first(6).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id)}
+          ranking.sort_by { |k, v| v }.reverse.first(8).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id)}
         end
       else
         array = []
