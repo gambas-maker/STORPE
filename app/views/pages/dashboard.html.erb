@@ -12,11 +12,11 @@
       <% x = 0 %>
       <% arraytop.each do |player| %>
       <div class="d-flex flex-row justify-content-center">
-        <% if x == 0  %>
+        <% if x == 2  %>
           <p class="typo" style="color: #fecd1a;"><%= x += 1 %>er</p>
         <% elsif x == 1 %>
           <p class="typo" style="color: #dddddd;"><%= x += 1 %>ème</p>
-        <% elsif x == 2 %>
+        <% elsif x == 0 %>
           <p class="typo" style="color: #f05454;"><%= x += 1 %>ème</p>
         <% end %>
       </div>
