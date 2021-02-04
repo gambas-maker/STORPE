@@ -20,34 +20,62 @@ class ForecastsController < ApplicationController
   end
 
   def store_outcome
+    @playerseason = PlayerSeason.where(user_id: current_user.id)
     @forecasts = Forecast.where(player_season_id: current_user.player_seasons.ids, season_id: Season.last.id)
     id = params[:match]
     # match = Match.find(id)
     outcome = params[:result]
     check = params[:box]
     player = current_user.player_season_ids
-    if @forecasts.count < 40
-      if check == "true"
-        @forecast = Forecast.where(match: id, player_season: player, outcome: "1").first || Forecast.where(match: id, player_season: player, outcome: "NULL").first || Forecast.where(match: id, player_season: player, outcome: "2").first
-        if @forecast.nil?
-          @forecast = Forecast.new
-          @forecast.outcome = outcome
-          @forecast.match_id = id
-          @forecast.points_win = 0
-          @forecast.points_lose = 0
-          @forecast.player_season_id = player[0]
-          @forecast.season_id = Season.last.id
-          @forecast.confirmed = false
-          @forecast.save!
-        else
-          @forecast.outcome = outcome
-          @forecast.save
+    if @playerseason[0].season_id == Season.last.id
+      if @forecasts.count < 40
+        if check == "true"
+          @forecast = Forecast.where(match: id, player_season: player, outcome: "1").first || Forecast.where(match: id, player_season: player, outcome: "NULL").first || Forecast.where(match: id, player_season: player, outcome: "2").first
+          if @forecast.nil?
+            @forecast = Forecast.new
+            @forecast.outcome = outcome
+            @forecast.match_id = id
+            @forecast.points_win = 0
+            @forecast.points_lose = 0
+            @forecast.player_season_id = player[0]
+            @forecast.season_id = Season.last.id
+            @forecast.confirmed = false
+            @forecast.save!
+          else
+            @forecast.outcome = outcome
+            @forecast.save
+          end
+        else check == "false"
+           @forecast = Forecast.where(match: id, player_season: player, outcome: "1").first || Forecast.where(match: id, player_season: player, outcome: "NULL").first || Forecast.where(match: id, player_season: player, outcome: "2").first
+          @forecast.destroy
         end
-      else check == "false"
-         @forecast = Forecast.where(match: id, player_season: player, outcome: "1").first || Forecast.where(match: id, player_season: player, outcome: "NULL").first || Forecast.where(match: id, player_season: player, outcome: "2").first
-        @forecast.destroy
+      else
       end
     else
+      @playerseason.update(season_id: Season.last.id)
+      if @forecasts.count < 40
+        if check == "true"
+          @forecast = Forecast.where(match: id, player_season: player, outcome: "1").first || Forecast.where(match: id, player_season: player, outcome: "NULL").first || Forecast.where(match: id, player_season: player, outcome: "2").first
+          if @forecast.nil?
+            @forecast = Forecast.new
+            @forecast.outcome = outcome
+            @forecast.match_id = id
+            @forecast.points_win = 0
+            @forecast.points_lose = 0
+            @forecast.player_season_id = player[0]
+            @forecast.season_id = Season.last.id
+            @forecast.confirmed = false
+            @forecast.save!
+          else
+            @forecast.outcome = outcome
+            @forecast.save
+          end
+        else check == "false"
+           @forecast = Forecast.where(match: id, player_season: player, outcome: "1").first || Forecast.where(match: id, player_season: player, outcome: "NULL").first || Forecast.where(match: id, player_season: player, outcome: "2").first
+          @forecast.destroy
+        end
+      else
+      end
     end
     render json: { status: @forecast }
   end
