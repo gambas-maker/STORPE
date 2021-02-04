@@ -148,12 +148,12 @@
           <% if all == 0 %>
           <% else %>
             <% if match.sport == "football" %>
-              <p><%= match.team_home  %> <%= (un * 100/all) %>%</p>
-              <p>Nul <%= (trois * 100/all) %>%</p>
-              <p><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
+              <p class="typo"><%= match.team_home  %> <%= (un * 100/all) %>%</p>
+              <p class="typo">Nul <%= (trois * 100/all) %>%</p>
+              <p class="typo"><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
             <% else %>
-                <p><%= match.team_home  %> <%= (un * 100/all) %>%</p>
-                <p><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
+                <p class="typo"><%= match.team_home  %> <%= (un * 100/all) %>%</p>
+                <p class="typo"><%= match.team_away  %> <%= (deux * 100/all) %>%</p>
             <% end %>
           <% end %>
         </div>
