@@ -174,7 +174,7 @@
                           <td class="cla"><%= pronosm + pronosb %></td>
                           <td class="cla"><%=  valeur %></td>
                         </tr>
-                      <% elsif playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? && x == 0 || x == 2 || x == 3 || x == 4 || x == 5 || x == 1 %>
+                      <% elsif playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? && x == 0 || x == 2 || x == 3 || x == 4 || x == 5 || x == 1 || x == 6 || x == 7 %>
                         <tr class="monte">
                           <th scope="row"><%= x += 1 %></th>
                           <% if playerseason.blason == nil %>
@@ -290,7 +290,7 @@
                             <td class="cla"><%= pronosm + pronosb %></td>
                             <td class="cla"><%=  valeur %></td>
                           </tr>
-                      <% elsif playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? && x == 0 || x == 2 || x == 3 || x == 1 %>
+                      <% elsif playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? && x == 0 || x == 2 || x == 3 || x == 1 || x == 4 || x == 5 %>
                           <tr class="monte">
                             <th scope="row"><%= x += 1 %></th>
                             <% if playerseason.blason == nil %>
