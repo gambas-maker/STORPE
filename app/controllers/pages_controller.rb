@@ -25,7 +25,8 @@ class PagesController < ApplicationController
     @matchestomorrow = Match.where(event_stamp: Date.tomorrow.to_s, sport: "football")
     @matchesdayafter = Match.where(event_stamp: (Date.tomorrow+1).to_s, sport: "football")
     @matchesbasketoday = Match.where(event_stamp: Date.tomorrow.to_s, sport: "basketball")
-    @matches = Match.where(event_stamp: Date.yesterday.to_s)
+    @matches = Match.where(event_stamp: Date.yesterday.to_s, sport: "football")
+    @matchesbasket = Match.where(event_stamp: Date.today.to_s, sport: "basketball")
     @playerseasons = PlayerSeason.where(season_id: Season.last.id)
   end
 end
