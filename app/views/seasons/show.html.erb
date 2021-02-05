@@ -147,10 +147,7 @@
               <% classement = {} %>
               <% x = 0 %>
               <% @playerseasons.each do |playerseason| %>
-                <% if playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? %>
-                  <% classement[playerseason] = playerseason.number_of_points %>
-                <% else %>
-                <% end %>
+                <% classement[playerseason] = playerseason.number_of_points %>
               <% end %>
                 <% classement.to_a.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
                   <tbody>
