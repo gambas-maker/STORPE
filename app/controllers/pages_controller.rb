@@ -21,9 +21,11 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @matchestoday = Match.where(event_stamp: (Date.today.to_s)..((Date.tomorrow+1).to_s), sport: "football")
+    @matchestoday = Match.where(event_stamp: Date.today.to_s, sport: "football")
+    @matchestomorrow = Match.where(event_stamp: Date.tomorrow.to_s, sport: "football")
+    @matchesdayafter = Match.where(event_stamp: (Date.tomorrow+1).to_s, sport: "football")
     @matchesbasketoday = Match.where(event_stamp: Date.tomorrow.to_s, sport: "basketball")
-    @forecasts = Forecast.where(season_id: Season.last.id, confirmed: true)
+    @matches = Match.where(event_stamp: Date.yesterday.to_s)
     @playerseasons = PlayerSeason.where(season_id: Season.last.id)
   end
 end
