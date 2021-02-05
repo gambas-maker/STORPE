@@ -9,8 +9,7 @@ class PlayermouvJob < ApplicationJob
     @amateurs.each do |amateur|
       champ = []
       amateur.player_seasons.each do |player|
-        if player.forecasts.where(confirmed: true).last == nil
-        else player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
+        if player.season_id == Season.last.id
           champ << player
         end
       end
@@ -25,8 +24,7 @@ class PlayermouvJob < ApplicationJob
     plus.each do |champ, number|
       array = []
       champ.player_seasons.each do |player|
-        if player.forecasts.where(confirmed: true).last == nil
-        else player.forecasts.exists? && player.forecasts.where(confirmed: true).last.season_id == Season.last.id
+        if player.season_id == Season.last.id
           array << player
         end
       end
