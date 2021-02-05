@@ -1,4 +1,4 @@
- class SeasonsController < ApplicationController
+class SeasonsController < ApplicationController
   def show
     @playerseason = PlayerSeason.where(user_id: current_user.id)
     @championship = Championship.where(id: current_user.player_seasons[0].championship.id)

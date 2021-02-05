@@ -8,32 +8,20 @@ class PromotionJob < ApplicationJob
     @championships = Championship.where(name: "Amateur")
     @championships.each do |championship|
       ranking = {}
-      championship.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.each { |hash| ranking[hash] = hash.number_of_points }
+      championship.player_seasons.where(season_id: Season.last.id - 1).each { |hash| ranking[hash] = hash.number_of_points }
       puts ranking
       if ranking.count >= 8
         array = []
         @champ.each do |champion|
-          champion.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array << champion : array
+          array << champion
         end
-        if array.empty?
-          Championship.create!(name: "Semi-pro", season_id: Season.last.id)
-          array << Championship.last
-          ranking.sort_by { |k, v| v }.reverse.first(8).each { |k, v| puts k.update(championship_id: Championship.where(name: "Semi-pro").last.id)}
-        else
-          ranking.sort_by { |k, v| v }.reverse.first(8).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id)}
-        end
+        ranking.sort_by { |k, v| v }.reverse.first(8).each { |k, v| puts k.update(championship_id: array.first.id)}
       else
         array = []
         @champ.each do |champion|
-          champion.player_seasons.where(season_id: Season.last.id - 1).select { |i| i.forecasts.where(season_id: Season.last.id - 1).exists? }.count <= 16 ? array << champion : array
+          array << champion
         end
-        if array.empty?
-          Championship.create!(name: "Semi-pro", season_id: Season.last.id)
-          array << Championship.last
-          ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: Championship.where(name: "Semi-pro").last.id)}
-        else
-          ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array.sample.id, season_id: Season.last.id)}
-        end
+        ranking.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: array.first.id)}
       end
     end
     PromotionldcJob.perform_now
