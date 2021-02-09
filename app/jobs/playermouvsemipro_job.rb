@@ -10,7 +10,7 @@ class PlayermouvsemiproJob < ApplicationJob
       champ = []
       semi.player_seasons.each do |player|
         if player.season_id == Season.last.id
-          array << player
+          champ << player
         end
       end
       if champ.count < 20
