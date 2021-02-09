@@ -105,7 +105,7 @@
   <div class="info  d-flex  flex-column">
     <h2 class="prono typo m-auto pb-4 pt-4">Tendances des pronostics sportifs</h2>
     <!-- Football -->
-    <% @matchestoday.each do |match| %>
+    <% @matchestoday.sort_by{|v| v.kick_off}.each do |match| %>
       <% un = match.forecasts.where(outcome: "1").count %>
       <% deux = match.forecasts.where(outcome: "2").count %>
       <% trois = match.forecasts.where(outcome: "NULL").count %>
@@ -160,7 +160,7 @@
       </div>
     <% end %>
     <!-- Basket -->
-    <% @matchesbasketoday.each do |match| %>
+    <% @matchesbasketoday.sort_by{|v| v.kick_off}.each do |match| %>
       <% un = match.forecasts.where(outcome: "1").count %>
       <% deux = match.forecasts.where(outcome: "2").count %>
       <% all = un + deux %>
