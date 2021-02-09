@@ -286,7 +286,7 @@
                             <td class="cla"><%= pronosm + pronosb %></td>
                             <td class="cla"><%=  valeur %></td>
                           </tr>
-                      <% elsif classement.keys.first(6).include?(playerseason) %>
+                      <% elsif classement.sort_by{|k,v|v}.reverse.first(6).to_h.include?(playerseason) %>
                           <tr class="monte">
                             <th scope="row"><%= x += 1 %></th>
                             <% if playerseason.blason == nil %>
@@ -333,7 +333,7 @@
                             <td class="cla"><%= pronosg + pronosn %></td>
                             <td><%=  valeur %></td>
                           </tr>
-                      <% elsif classement.keys.last(4).include?(playerseason) %>
+                      <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
                             <tr class="descente">
                               <th scope="row"><%= x += 1 %></th>
                               <% if playerseason.blason == nil %>
@@ -448,7 +448,7 @@
                             <td class="cla"><%= pronosm + pronosb %></td>
                             <td class="cla"><%=  valeur %></td>
                           </tr>
-                      <% elsif classement.keys.first(4).include?(playerseason) %>
+                      <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
                           <tr class="monte">
                             <th scope="row"><%= x += 1 %></th>
                             <% if playerseason.blason == nil %>
@@ -495,7 +495,7 @@
                             <td class="cla"><%= pronosg + pronosn %></td>
                             <td><%=  valeur %></td>
                           </tr>
-                      <% elsif classement.keys.last(4).include?(playerseason) %>
+                      <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
                             <tr class="descente">
                               <th scope="row"><%= x += 1 %></th>
                               <% if playerseason.blason == nil %>
@@ -610,7 +610,7 @@
                           <td class="cla"><%= pronosm + pronosb %></td>
                           <td class="cla"><%=  valeur %></td>
                         </tr>
-                      <% elsif classement.keys.first(4).include?(playerseason) %>
+                      <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
                         <tr class="monte">
                           <th scope="row"><%= x += 1 %></th>
                           <% if playerseason.blason == nil %>
@@ -657,7 +657,7 @@
                           <td class="cla"><%= pronosg + pronosn %></td>
                           <td><%=  valeur %></td>
                         </tr>
-                      <% elsif classement.keys.last(4).include?(playerseason) %>
+                      <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
                           <tr class="descente">
                             <th scope="row"><%= x += 1 %></th>
                             <% if playerseason.blason == nil %>
