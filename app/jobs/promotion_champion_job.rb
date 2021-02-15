@@ -7,7 +7,7 @@ class PromotionChampionJob < ApplicationJob
     @championshipchams.each do |championshipcham|
       ranking4 = {}
       championshipcham.player_seasons.where(season_id: Season.last.id - 1).each { |hash| ranking4[hash] = hash.number_of_points }
-      if ranking4.count >= 8
+      if ranking4.count > 8
         ranking4.sort_by { |k, v| v }.reverse.last(4).each { |k, v| puts k.update(championship_id: 61) }
       else
         ranking4.sort_by { |k, v| v }.reverse.last(2).each { |k, v| puts k.update(championship_id: 61) }
