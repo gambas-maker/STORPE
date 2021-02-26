@@ -8,7 +8,9 @@
     <li>Chaque Championnat te permet de pronostiquer jusqu’à <span style="color:red;">40 rencontres sportives !</span></li>
     <li>Au cours de la semaine de jeu, rends-toi sur la page <u><%= link_to "Championnat", season_path(current_user.id)%></u> afin de garder un œil sur tes performances. Tu pourras visualiser ton classement et t’assurer que tes adversaires ne te devancent pas. </li>
     <li>En fin de Championnat, ton <span style="color:#FBB03B;">classement</span> final te permet d’évoluer de Division :</li>
-      <ol>- Les 4 premiers du Championnat sont promus en Division supérieure.</ol>
+      <ol>- Les 8 premiers du Championnat Amateur sont promus en Division Semi-Pro.</ol>
+      <ol>- Les 6 premiers du Championnat Semi-Pro sont promus en Division Pro.</ol>
+      <ol>- Les 4 premiers du Championnat Pro sont promus en Division Champion.</ol>
       <ol>- Les 4 derniers sont relégués en Division inférieure.</ol>
       <ol>- Le reste des joueurs sont maintenus dans cette même Division.</ol>
     <li>Le niveau des <span style="font-weight: bold;">championnats</span> est le suivant (du plus bas au plus haut): <span style="color:#FBB03B;">Amateur - Semi-Pro - Pro - Champion - Légende</span> (oui tu as encore un peu de chemin).</li>
