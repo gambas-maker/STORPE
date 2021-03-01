@@ -29,7 +29,7 @@ class PagesController < ApplicationController
     @matchesbasket = Match.where(event_stamp: Date.today.to_s, sport: "basketball")
     @championshippro = Championship.where(name: "Pro")
     @championshipchamp = Championship.where(name: "Champion")
-    @championshipsemi = Championship.where(name: "Semi-Pro")
+    @championshipsemi = Championship.where(name: "Semi-pro")
     @championshipama = Championship.where(name: "Amateur")
     #@playerseasons = PlayerSeason.where(season_id: Season.last.id)
     #@playerschamp = PlayerSeason.where(season_id: Season.last.id, championship_id: 255)
