@@ -40,33 +40,36 @@
     <div class="d-flex justify-content-center">
       <div class="infobis">
         <div class="filterbar d-flex justify-content-around flex-row">
-            <div>
-              <%= form_tag matches_path, method: :get do %>
-              <%= select_tag :query,
-              raw("<option class='dropdown-item' value=''>COMPÉTITION</option>
-                <option class='dropdown-item' value=''>Tout</option>
-                <option class='dropdown-item' value='NBA'>NBA</option>
-                <option class='dropdown-item' value='World Cup'>Coupe du Monde</option>
-                <option class='dropdown-item' value='UEFA Champions League'>Ligue des Champions</option>
-                <option class='dropdown-item' value='UEFA Europa League'>Ligue Europa</option>
-                <option class='dropdown-item' value='UEFA Nations League'>Ligue des Nations</option>
-                <option class='dropdown-item' value='Africa Cup of Nations - Qualification'>CAN</option>
-                <option class='dropdown-item' value='Ligue 1'>Ligue 1</option>
-                <option class='dropdown-item' value='Bundesliga 1'>Bundesliga</option>
-                <option class='dropdown-item' value='Primera Division'>Liga</option>
-                <option class='dropdown-item' value='Serie A'>Serie A</option>
-                <option class='dropdown-item' value='Premier League'>Premier league</option>"),
-                class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
-              </div>
-              <div class="mt-1">
-                <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
-                <% end %>
-              </div>
-            </div>
+          <div>
+            <%= form_tag matches_path, method: :get do %>
+            <%= select_tag :query,
+            raw("<option class='dropdown-item' value=''>COMPÉTITION</option>
+              <option class='dropdown-item' value=''>Tout</option>
+              <option class='dropdown-item' value='NBA'>NBA</option>
+              <option class='dropdown-item' value='World Cup'>Coupe du Monde</option>
+              <option class='dropdown-item' value='UEFA Champions League'>Ligue des Champions</option>
+              <option class='dropdown-item' value='UEFA Europa League'>Ligue Europa</option>
+              <option class='dropdown-item' value='UEFA Nations League'>Ligue des Nations</option>
+              <option class='dropdown-item' value='Africa Cup of Nations - Qualification'>CAN</option>
+              <option class='dropdown-item' value='Ligue 1'>Ligue 1</option>
+              <option class='dropdown-item' value='Bundesliga 1'>Bundesliga</option>
+              <option class='dropdown-item' value='Primera Division'>Liga</option>
+              <option class='dropdown-item' value='Serie A'>Serie A</option>
+              <option class='dropdown-item' value='Premier League'>Premier league</option>"),
+              class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
+          </div>
+            <div class="mt-1">
+              <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
+            <% end %>
+        </div>
+      </div>
     </div>
   </div>
   <div class="d-flex justify-content-center">
     <div class="info">
+      <div class="d-flex justify-content-center">
+        <%= link_to 'Les récompenses', dashboard_path, class: "d-flex justify-content-center btn btn-success" %>
+      </div>
         <% if current_user.forecasts.where(season_id: Season.last.id, confirmed: true).count == 40 %>
           <%= render 'shared/modal' %>
         <% else %>
