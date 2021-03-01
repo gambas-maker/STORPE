@@ -18,61 +18,294 @@
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex flex-column">
       <h2 class="prono typo m-auto pb-4 pt-4">Niveau Champion</h2>
+      <div class="btn-ranking d-flex justify-content-center">
+        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-light btnbis typo">Voir le podium</button>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header sticky pt-5">
+          <h5 class="modal-title" id="exampleModalLabel">Trio</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-column m-auto mt-4">
+            <table class="table table-borderless mb-4">
+              <thead>
+                <tr>
+                  <th scope="col">POS</th>
+                  <th scope="col">EMBLÈME</th>
+                  <th scope="col">NOM</th>
+                  <th scope="col">Pronos</th>
+                  <th scope="col">PTS</th>
+                </tr>
+              </thead>
+              <% classementchamp = {} %>
+              <% x = 0 %>
+              <% @playerschamp.each do |champ| %>
+                <% classementchamp[champ] = champ.number_of_points %>
+              <% end %>
+              <% classementchamp.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
+              <tbody>
+                <tr>
+                  <th scope="row"><%= x += 1 %></th>
+                  <% if playerseason.blason == nil %>
+                    <td>
+                      <i class="fas fa-plus-circle" style="color: white;"></i>
+                    </td>
+                  <% else %>
+                    <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                    </td>
+                  <% end %>
+                    <td>
+                      <%=  playerseason.user.pseudo %>
+                    </td>
+                  <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                  <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                  <td class="cla"><%= pronosg + pronosn %></td>
+                  <td><%=  valeur %></td>
+                </tr>
+              </tbody>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
 
     </div>
   </div>
-  <div class="d-flex justify-content-center mt-2 mb-2">
-    <div class="info  d-flex flex-column">
-      <h2 class="prono typo m-auto pb-4 pt-4">Niveau Pro</h2>
 
+    <div class="d-flex justify-content-center mt-2 mb-2">
+      <div class="info  d-flex flex-column">
+        <h2 class="prono typo m-auto pb-4 pt-4">Niveau Pro</h2>
+        <div class="btn-ranking d-flex justify-content-center">
+          <button data-toggle="modal" data-target="#exampleModal1" type="button" class="btn btn-outline-light btnbis typo">Voir le podium</button>
+        </div>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header sticky pt-5">
+          <h5 class="modal-title" id="exampleModalLabel">Trio</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <div class="d-flex flex-column m-auto mt-4">
+              <table class="table table-borderless mb-4">
+                <thead>
+                  <tr>
+                    <th scope="col">POS</th>
+                    <th scope="col">EMBLÈME</th>
+                    <th scope="col">NOM</th>
+                    <th scope="col">Pronos</th>
+                    <th scope="col">PTS</th>
+                  </tr>
+                </thead>
+                    <% classementpro = {} %>
+                    <% x = 0 %>
+                    <% @playerspro.each do |pro| %>
+                      <% classementpro[pro] = pro.number_of_points %>
+                    <% end %>
+                    <% classementpro.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
+                      <tbody>
+                        <tr>
+                          <th scope="row"><%= x += 1 %></th>
+                          <% if playerseason.blason == nil %>
+                            <td>
+                                <i class="fas fa-plus-circle" style="color: white;"></i>
+                            </td>
+                          <% else %>
+                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                            </td>
+                          <% end %>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
+                              </td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
+                          <td><%=  valeur %></td>
+                        </tr>
+                      </tbody>
+                    <% end %>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex flex-column">
       <h2 class="prono typo m-auto pb-4 pt-4">Niveau Semi-Pro</h2>
-
+      <div class="btn-ranking d-flex justify-content-center">
+        <button data-toggle="modal" data-target="#exampleModal2" type="button" class="btn btn-outline-light btnbis typo">Voir le podium</button>
+      </div>
+      <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header sticky pt-5">
+              <h5 class="modal-title" id="exampleModalLabel">Trio</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              <div class="modal-body">
+                <div class="d-flex flex-column m-auto mt-4">
+                  <table class="table table-borderless mb-4">
+                    <thead>
+                      <tr>
+                        <th scope="col">POS</th>
+                        <th scope="col">EMBLÈME</th>
+                        <th scope="col">NOM</th>
+                        <th scope="col">Pronos</th>
+                        <th scope="col">PTS</th>
+                      </tr>
+                    </thead>
+                    <% classementsemi = {} %>
+                    <% x = 0 %>
+                    <% @playerssemi.each do |semi| %>
+                      <% classementsemi[semi] = semi.number_of_points %>
+                    <% end %>
+                    <% classementsemi.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
+                      <tbody>
+                        <tr>
+                          <th scope="row"><%= x += 1 %></th>
+                          <% if playerseason.blason == nil %>
+                            <td>
+                                <i class="fas fa-plus-circle" style="color: white;"></i>
+                            </td>
+                          <% else %>
+                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                            </td>
+                          <% end %>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
+                              </td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
+                          <td><%=  valeur %></td>
+                        </tr>
+                      </tbody>
+                    <% end %>
+                  </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex flex-column">
       <h2 class="prono typo m-auto pb-4 pt-4">Niveau Amateur</h2>
-
+      <div class="btn-ranking d-flex justify-content-center">
+        <button data-toggle="modal" data-target="#exampleModal3" type="button" class="btn btn-outline-light btnbis typo">Voir le podium</button>
+      </div>
+      <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header sticky pt-5">
+              <h5 class="modal-title" id="exampleModalLabel">Trio</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="d-flex flex-column m-auto mt-4">
+                <table class="table table-borderless mb-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">POS</th>
+                      <th scope="col">EMBLÈME</th>
+                      <th scope="col">NOM</th>
+                      <th scope="col">Pronos</th>
+                      <th scope="col">PTS</th>
+                    </tr>
+                  </thead>
+                  <% classementama = {} %>
+                  <% x = 0 %>
+                  <% @playersama.each do |ama| %>
+                    <% classementama[ama] = ama.number_of_points %>
+                  <% end %>
+                  <% classementama.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><%= x += 1 %></th>
+                        <% if playerseason.blason == nil %>
+                          <td>
+                            <i class="fas fa-plus-circle" style="color: white;"></i>
+                          </td>
+                        <% else %>
+                          <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                          </td>
+                        <% end %>
+                          <td>
+                            <%=  playerseason.user.pseudo %>
+                          </td>
+                        <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                        <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                        <td class="cla"><%= pronosg + pronosn %></td>
+                        <td><%=  valeur %></td>
+                      </tr>
+                    </tbody>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center mt-2 mb-2">
+
+
+  <!--TOP 3 semaine -->
+  <!-- <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex flex-column">
       <h2 class="prono typo m-auto pb-4 pt-4">TOP 3 de la semaine</h2>
-      <% arraytop = [] %>
-      <% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
-        <% arraytop << playerseason %>
-      <% end %>
-      <% x = 0 %>
-      <% arraytop.reverse.each do |player| %>
+      <#% arraytop = [] %>
+      <#% @playerseasons.sort_by{ |playerseason| playerseason.number_of_points}.last(3).each do |playerseason| %>
+        <#% arraytop << playerseason %>
+      <#% end %>
+      <#% x = 0 %>
+      <#% arraytop.reverse.each do |player| %>
       <div class="d-flex flex-row justify-content-center">
-        <% if x == 0  %>
-          <p class="typo" style="color: #fecd1a;"><%= x += 1 %>er</p>
-        <% elsif x == 1 %>
-          <p class="typo" style="color: #dddddd;"><%= x += 1 %>ème</p>
-        <% elsif x == 2 %>
-          <p class="typo" style="color: #f05454;"><%= x += 1 %>ème</p>
-        <% end %>
+        <#% if x == 0  %>
+          <p class="typo" style="color: #fecd1a;"><#%= x += 1 %>er</p>
+        <#% elsif x == 1 %>
+          <p class="typo" style="color: #dddddd;"><#%= x += 1 %>ème</p>
+        <#% elsif x == 2 %>
+          <p class="typo" style="color: #f05454;"><#%= x += 1 %>ème</p>
+        <#% end %>
       </div>
       <div class="text-center">
         <p>
-          <% if player.blason.present? %>
-            <%= cl_image_tag player.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "47px", height: "52px" %>
-          <% else %>
+          <#% if player.blason.present? %>
+            <#%= cl_image_tag player.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "47px", height: "52px" %>
+          <#% else %>
             <i class="fas fa-plus-circle" style="color: white;"></i>
-          <% end %>
+          <#% end %>
         </p>
       </div>
-        <p class="typo text-center"><%= player.user.pseudo %></p>
-        <p class="typopo"><%= player.number_of_points %> points</p>
-        <p class="prono typopo"> Division : <%= player.championship.name %> </p>
+        <p class="typo text-center"><#%= player.user.pseudo %></p>
+        <p class="typopo"><#%= player.number_of_points %> points</p>
+        <p class="prono typopo"> Division : <#%= player.championship.name %> </p>
         <br>
-      <% end %>
+      <#% end %>
     </div>
-  </div>
+  </div> -->
   <div class="d-flex justify-content-center mt-2 mb-2">
     <div class="info  d-flex  flex-column">
       <h2 class="prono typo m-auto pb-4 pt-4">TOP 3 pronos d'hier</h2>
