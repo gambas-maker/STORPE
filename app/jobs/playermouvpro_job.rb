@@ -37,5 +37,6 @@ class PlayermouvproJob < ApplicationJob
         end
       end
     end
+    PlayermouvchampionJob.perform_now
   end
 end
