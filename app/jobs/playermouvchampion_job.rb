@@ -2,38 +2,38 @@ class PlayermouvchampionJob < ApplicationJob
   queue_as :default
 
   def perform
-    egalp = {}
-    moinsp = {}
-    plusp = {}
+    egalc = {}
+    moinsc = {}
+    plusc = {}
     @champions = Championship.where(name: "Champion")
     @champions.each do |champion|
       champ = []
-      pro.player_seasons.each do |player|
+      champion.player_seasons.each do |player|
         if player.season_id == Season.last.id
           champ << player
         end
       end
       if champ.count < 20
-        moinsp[pro] = champ.count
+        moinsc[champion] = champ.count
       elsif champ.count > 20
-        plusp[pro] = champ.count
+        plusc[champion] = champ.count
       else
-        egalp[pro] = champ.count
+        egalc[champion] = champ.count
       end
     end
-    plusp.each do |champ, number|
+    plusc.each do |champ, number|
       array = []
       champ.player_seasons.each do |player|
         if player.season_id == Season.last.id
           array << player
         end
       end
-      moinsp.each do |key, value|
+      moinsc.each do |key, value|
         while array.count > 20 && value < 20
           array.first.update(championship_id: key.id)
           array.delete_at(0)
           value += 1
-          moinsp[key] += 1
+          moinsc[key] += 1
         end
       end
     end
