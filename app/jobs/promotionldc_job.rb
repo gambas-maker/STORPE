@@ -4,27 +4,29 @@ class PromotionldcJob < ApplicationJob
 # ATTENTION : Si ajoute un nouveau niveau, il faudra penser a ceux qui montent et ceux qui descendent de cette meme division (Semi-pro)
 # Si ajout d'un niveau deplacer ce job dans le job du prochain niveau et ici appeler le prochain niveau de promotion
   def perform
-    @championships = Championship.where(name: "Semi-pro")
+    @championshipsemi = Championship.where(name: "Semi-pro")
+    rankingdescama = {}
+    rankingmontpro = {}
     # Descente en division Amateur
-    @championships.each do |championship|
+    @championshipsemi.each do |championshipsemi|
       ranking = {}
-      championship.player_seasons.where(season_id: Season.last.id - 1).each { |hash| ranking[hash] = hash.number_of_points }
+      championshipsemi.player_seasons.where(season_id: Season.last.id - 1).each { |hash| ranking[hash] = hash.number_of_points }
       if ranking.count > 8
-        ranking.sort_by { |k, v| v }.reverse.last(4).each { |k, v| puts k.update(championship_id: 11) }
+        ranking.sort_by { |k, v| v }.reverse.last(4).each { |hash| rankingdescama[hash] = hash.championship_id }
       else
-        ranking.sort_by { |k, v| v }.reverse.last(2).each { |k, v| puts k.update(championship_id: 11) }
+        ranking.sort_by { |k, v| v }.reverse.last(2).each { |hash| rankingdescama[hash] = hash.championship_id }
       end
     end
     # Montée en division Pro
-    @championships.each do |championship|
+    @championshipsemi.each do |championshipsemi|
       ranking2 = {}
-      championship.player_seasons.where(season_id: Season.last.id - 1).each { |hash| ranking2[hash] = hash.number_of_points }
+      championshipsemi.player_seasons.where(season_id: Season.last.id - 1).each { |hash| ranking2[hash] = hash.number_of_points }
       if ranking2.count > 8
-        ranking2.sort_by { |k, v| v }.reverse.first(6).each { |k, v| puts k.update(championship_id: 61) }
+        ranking2.sort_by { |k, v| v }.reverse.first(6).each { |hash| rankingmontpro[hash] = hash.championship_id }
       else
-        ranking2.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: 61) }
+        ranking2.sort_by { |k, v| v }.reverse.first(2).each { |hash| rankingmontpro[hash] = hash.championship_id }
       end
     end
-    PromotionProJob.perform_now
+    #PromotionProJob.perform_now
   end
 end
