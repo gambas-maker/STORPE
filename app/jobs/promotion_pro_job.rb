@@ -18,9 +18,9 @@
         ranking5 = {}
         championshippro.player_seasons.where(season_id: Season.last.id - 1).each { |hash| ranking5[hash] = hash.number_of_points }
         if ranking5.count > 8
-          ranking5.sort_by { |k, v| v }.reverse.last(4).each { |k, v| puts k.update(championship_id: 255, season_id: Season.last.id - 2, number_of_points: 0) }
+          ranking5.sort_by { |k, v| v }.reverse.first(4).each { |k, v| puts k.update(championship_id: 255, season_id: Season.last.id - 2, number_of_points: 0) }
         else
-          ranking5.sort_by { |k, v| v }.reverse.last(2).each { |k, v| puts k.update(championship_id: 255, season_id: Season.last.id - 2, number_of_points: 0) }
+          ranking5.sort_by { |k, v| v }.reverse.first(2).each { |k, v| puts k.update(championship_id: 255, season_id: Season.last.id - 2, number_of_points: 0) }
         end
       end
     PromotionChampionJob.perform_now
