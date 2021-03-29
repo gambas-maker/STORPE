@@ -5,7 +5,7 @@ require 'json'
 
 class SportOdd
   BASE_URL = "https://v2.api-football.com/"
-  LEAGUE_IDS = [2664, 2790, 2833, 2857, 2755, 2771, 2777, 1422, 925, 1073, 1252, 3079]
+  LEAGUE_IDS = [2664, 2790, 2833, 2857, 2755, 2771, 2777, 1422, 925, 1073, 1252, 3079, 3026]
   # 2664 = France, 2790 = Angleterre, 2833 = Espagne, 2857 = Italie, 2755 = Allemagne, 2771 = Champions League, 2777 = Europa League, 1422 = Nations League, Bottola Pro = 925, CAN = 1073, World Cup South-Am-Qualif = 1252, World Cup - Qualification Europe = 3079, Women LDC = 3026
 
   def self.matches_for_four_days
@@ -104,7 +104,7 @@ class SportOdd
     end_point = URI("#{BASE_URL}odds/fixture/#{game.fixture_id}")
     ok = call_api(end_point)["api"]["results"]
     if ok == 1
-      goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["label_name"]
+      goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][0]["label_name"]
       if goals_two_teams == "Both Teams Score"
         match_goals_two_teams = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][7]["values"]
         if match_goals_two_teams == nil
@@ -122,7 +122,7 @@ class SportOdd
     ok = call_api(end_point)["api"]["results"]
     puts "hello"
     if ok == 1
-      goals_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][3]["label_name"]
+      goals_over_under = call_api(end_point)["api"]["odds"][0]["bookmakers"][0]["bets"][0]["label_name"]
       if goals_over_under.nil?
       else
         if goals_over_under == "Goals Over/Under"
