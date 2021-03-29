@@ -10,7 +10,7 @@
       if ranking3.count > 8
         ranking3.sort_by { |k, v| v }.reverse.last(4).each { |k, v| puts k.update(championship_id: 4, season_id: Season.last.id - 2, number_of_points: 0) }
       else
-        rranking3.sort_by { |k, v| v }.reverse.last(2).each { |k, v| puts k.update(championship_id: 4, season_id: Season.last.id - 2, number_of_points: 0) }
+        ranking3.sort_by { |k, v| v }.reverse.last(2).each { |k, v| puts k.update(championship_id: 4, season_id: Season.last.id - 2, number_of_points: 0) }
       end
     end
     # Montée en division Champion
