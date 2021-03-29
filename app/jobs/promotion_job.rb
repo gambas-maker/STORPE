@@ -4,7 +4,7 @@ class PromotionJob < ApplicationJob
   def perform
     Season.create(id: Season.last.id + 1, start_date: Date.today.to_s, end_date: (Date.today + 6).to_s)
     puts "New season is ready"
-
+    @championshipama = Championship.where(name: "Amateur")
     # Montée en Semi-Pro
     @championshipama.each do |championshipama|
       ranking = {}
