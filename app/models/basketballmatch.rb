@@ -54,7 +54,7 @@ class Basketballmatch < ApplicationRecord
     result = call_api(end_point)["results"]
     if result.zero?
     else
-      match_odds = call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["value"]
+      match_odds = call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["values"]
       if call_api(end_point)["response"][0]["bookmakers"][0]["name"] == "Bwin" && call_api(end_point)["response"][0]["bookmakers"][0]["bets"][0]["id"] == 1
         game.update(
           points_home: get_odd(match_odds, "Home").to_f * 10,
