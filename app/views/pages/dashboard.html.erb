@@ -45,10 +45,10 @@
               <% classementchamp = {} %>
               <% x = 0 %>
               <% @championshipchamp.each do |champ| %>
-                  <% champ.player_seasons.each do |player| %>
-                    <% if player.season_id == Season.last.id %>
+                  <% champ.player_seasons.where(season_id: Season.last.id).each do |player| %>
+                    <%# if player.season_id == Season.last.id %>
                       <% classementchamp[player] = player.number_of_points %>
-                    <% end %>
+                    <%# end %>
                   <% end %>
                 <% end %>
               <% classementchamp.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
@@ -115,10 +115,10 @@
                     <% classementpro = {} %>
                     <% x = 0 %>
                     <% @championshippro.each do |pro| %>
-                      <% pro.player_seasons.each do |player| %>
-                        <% if player.season_id == Season.last.id %>
+                      <% pro.player_seasons.where(season_id: Season.last.id).each do |player| %>
+                        <%# if player.season_id == Season.last.id %>
                           <% classementpro[player] = player.number_of_points %>
-                        <% end %>
+                        <%# end %>
                       <% end %>
                     <% end %>
                     <% classementpro.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
@@ -181,10 +181,10 @@
                     <% classementsemi = {} %>
                     <% x = 0 %>
                     <% @championshipsemi.each do |semi| %>
-                      <% semi.player_seasons.each do |player| %>
-                        <% if player.season_id == Season.last.id %>
+                      <% semi.player_seasons.where(season_id: Season.last.id).each do |player| %>
+                        <%# if player.season_id == Season.last.id %>
                           <% classementsemi[player] = player.number_of_points %>
-                        <% end %>
+                        <%# end %>
                       <% end %>
                     <% end %>
                     <% classementsemi.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
@@ -249,10 +249,10 @@
                   <% classementama = {} %>
                   <% x = 0 %>
                   <% @championshipama.each do |ama| %>
-                      <% ama.player_seasons.each do |player| %>
-                        <% if player.season_id == Season.last.id %>
+                      <% ama.player_seasons.where(season_id: Season.last.id).each do |player| %>
+                        <%# if player.season_id == Season.last.id %>
                           <% classementama[player] = player.number_of_points %>
-                        <% end %>
+                        <%# end %>
                       <% end %>
                     <% end %>
                   <% classementama.to_a.sort_by {|k,v| v}.reverse.first(3).each do |playerseason, valeur| %>
