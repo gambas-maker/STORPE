@@ -84,11 +84,13 @@
           <% if Time.parse(match.kick_off) > Time.now && match.points_home.present? && match.points_away.present? && match.negative_points_home %>
             <% if match.sport == "football" %>
             <!-- Button trigger modal -->
-              <div class="d-flex justify-content-end mr-1">
-                <button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
-                  Plus de pronos
-                </button>
-              </div>
+              <% if match.goal_two_teams_yes.present? %>
+                <div class="d-flex justify-content-end mr-1">
+                  <button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
+                    Plus de pronos
+                  </button>
+                </div>
+              <% end %>
             <!-- Modal -->
               <div class="modal fade" id="exampleModalCenter-<%=match.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
