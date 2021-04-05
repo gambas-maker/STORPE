@@ -1,10 +1,10 @@
 class FriendsController < ApplicationController
   def index
-          @user = current_user
-          @friends = @user.friends
-          @requests = @user.requested_friends
-          @pending = @user.pending_friends
-    end
+    @user = current_user
+    @friends = @user.friends
+    @requests = @user.requested_friends
+    @pending = @user.pending_friends
+  end
 
     def create
           @user = current_user
