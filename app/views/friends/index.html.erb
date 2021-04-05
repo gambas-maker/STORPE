@@ -2,91 +2,261 @@
   <div class="topimagechampionship w-100 d-flex mb-3">
     <h2 class="toptitle m-auto">MES AMIS</h2>
   </div>
-</div>
-<main class="ui two column doubling stackable grid container">
-    <section class="column">
-        <div class="ui teal segment">
-            <% if @user.friend_requests? %>
-                <div class="ui vertical clearing segment">
-                    <header class="ui basic segment">
-                        <h3 class="ui header">Friend Requests:</h3>
-                    </header>
-                    <% @requests.each do |friend| %>
-                        <section class="ui basic segment">
-
-                            <span class="ui green header">
-                                <%= friend.name%>
-                            </span>
-                            <div class="ui basic segment">
-                                <%= form_tag ({controller: 'friends', action: 'add', method: 'post', id: friend.id}) do %>
-                                    <input class="ui basic tiny left floated positive button" type=submit value='Accept'>
-                                    <% end %>
-                                        <%= form_tag ({controller: 'friends', action: 'reject', method: 'post', id: friend.id}) do %>
-                                            <input class="ui basic tiny right floated negative button" type=submit value='Politely Refuse'>
-                                            <% end %>
-                            </div>
-                        </section>
-                        <% end %>
+  <div class="d-flex justify-content-center mt-2 mb-2">
+    <div class="info  d-flex  flex-column">
+      <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
+        <div class="up">
+          <div class="params">
+            <%= link_to contact_path do  %>
+              <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_32/v1601900588/PARAMETERS_mksd9n.png" %>
+            <% end %>
+          </div>
+          <div class="blason">
+            <% if  current_user.player_seasons[0].blason.present?%>
+              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join("")%>
+              <% end %>
+            <% else %>
+              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <h3 class="typo">Pseudo: <%= current_user.pseudo %></h3>
+          <div class="btn-ranking d-flex justify-content-center">
+            <h3 class="typoleague mt-2" data-toggle="modal" data-target="#champModal" type="button">Division: <%= @championship[0].name %></h3>
+          </div>
+          <div class="modal fade" id="champModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Championnat</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                <% end %>
-                    <% if @user.requested_friends? %>
-                        <div class="ui vertical segment">
-                            <header class="ui basic segment">
-                                <h3 class="ui header">Pending:</h3>
-                            </header>
-                            <% @pending.each do |friend| %>
-                                <section class="ui basic segment">
-
-                                    <span class="ui yellow header">
-                                        <%= friend.name%>
-                                    </span>
-                                </section>
-                                <% end %>
-                        </div>
-                        <% end %>
-                            <header class="ui basic segment">
-                                <h3 class="ui header">Your Friends:</h3>
-                            </header>
-                            <div class="ui vertical segment">
-                                <% if @user.friends? %>
-                                    <% @friends.each do |friend| %>
-                                        <section class="ui basic segment">
-
-                                            <span class="ui header">
-                                                <%= link_to  friend.name, user_path(friend) %>
-                                            </span>
-                                        </section>
-                                        <% end %>
-                                            <% end %>
-                            </div>
-        </div>
-    </section>
-    <section class="column">
-        <section class="ui basic segment">
-            <header class="ui basic segment">
-                <h3 class="ui header">Find Friends</h3>
-            </header>
-            <div class="ui basic segment">
-                <%= form_tag ({controller: 'friends', action: 'search'}) do %>
-                    <div class="ui input">
-                        <input type="text" name="search" id="search">
-                    </div>
-                    <input class="ui mini basic button" type="submit" name="commit" value="Search" data-disable-with="Search">
-                    <% end %>
+                <div class="modal-body">
+                  <div class="d-flex flex-column m-auto mt-4 text-white">
+                    <p>Légende</p>
+                    <p>Champion</p>
+                    <p>Pro</p>
+                    <p>Semi-Pro</p>
+                    <p>Amateur</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <% @user.not_friends.sample(5).each do |user| %>
-                <section class="ui basic segment">
-                    <span class="ui header">
-                    <%= link_to user.pseudo %>
+          </div>
+        </div>
+      </div>
+      <svg class=" center-block mx-auto mt-1" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+      <table class="table table-borderless mb-4">
+        <thead>
+          <tr>
+            <th scope="col">PSEUDO</th>
+            <th scope="col">CHAMPIONNAT</th>
+            <th scope="col">PRONOS</th>
+            <th scope="col">PTS</th>
+          </tr>
+        </thead>
+        <% @user.friends.each do |friend| %>
+          <tbody>
+            <tr>
+              <td><%= friend.pseudo %></td>
+              <td><%= friend.player_seasons[0].championship.name %></td>
+              <td><%= friend.forecasts.where(season_id: Season.last.id).count %></td>
+              <td><%= friend.player_seasons[0].number_of_points %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+      <div class="btn-ranking d-flex justify-content-center">
+        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-light btnbis typo">Voir le classement</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <%= link_to 'Ma carrière', player_seasons_path, class: "d-flex justify-content-center btn btn-success" %>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header sticky pt-5">
+              <h5 class="modal-title" id="exampleModalLabel">CLASSEMENT</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="d-flex flex-column m-auto mt-4">
+                <table class="table table-borderless mb-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">POS</th>
+                      <th scope="col">PSEUDO</th>
+                      <th scope="col">CHAMPIONNAT</th>
+                      <th scope="col">PRONOS</th>
+                      <th scope="col">PTS</th>
+                    </tr>
+                  </thead>
+                  <% classementchamp = {} %>
+                  <% classementpro = {} %>
+                  <% classementsemi = {} %>
+                  <% classementama = {} %>
+                  <% x = 0 %>
+                  <% @friends.each do |friend| %>
+                    <% if friend.player_seasons[0].championship.name == "Champion" %>
+                      <% classementchamp[friend] = friend.player_seasons[0].number_of_points %>
+                    <% elsif friend.player_seasons[0].championship.name == "Pro" %>
+                      <% classementpro[friend] = friend.player_seasons[0].number_of_points %>
+                    <% elsif friend.player_seasons[0].championship.name == "Semi-pro" %>
+                      <% classementsemi[friend] = friend.player_seasons[0].number_of_points %>
+                    <% else friend.player_seasons[0].championship.name == "Amateur" %>
+                      <% classementama[friend] = friend.player_seasons[0].number_of_points %>
+                    <% end %>
+                  <% end %>
+                  <tbody>
+                     <tr>
+                      <td class="cla">0</td>
+                      <td class="cla"><%= current_user.pseudo %></td>
+                      <td class="cla"><%= current_user.player_seasons[0].championship.name %></td>
+                      <td class="cla"><%= current_user.player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
+                      <td class="cla"><%= current_user.player_seasons[0].number_of_points %></td>
+                    </tr>
+                    <% classementchamp.to_a.sort_by{|k,v| v}.each do |player| %>
+                    <tr>
+                      <td><%= x += 1 %></td>
+                      <td><%= player[0].pseudo %></td>
+                      <td><%= player[0].player_seasons[0].championship.name %></td>
+                      <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
+                      <td><%= player[0].player_seasons[0].number_of_points %></td>
+                    </tr>
+                    <% end %>
+                    <% classementpro.to_a.sort_by{|k,v| v}.each do |player| %>
+                    <tr>
+                      <td><%= x += 1 %></td>
+                      <td><%= player[0].pseudo %></td>
+                      <td><%= player[0].player_seasons[0].championship.name %></td>
+                      <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
+                      <td><%= player[0].player_seasons[0].number_of_points %></td>
+                    </tr>
+                    <% end %>
+                    <% classementsemi.to_a.sort_by{|k,v| v}.each do |player| %>
+                    <tr>
+                      <td><%= x += 1 %></td>
+                      <td><%= player[0].pseudo %></td>
+                      <td><%= player[0].player_seasons[0].championship.name %></td>
+                      <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
+                      <td><%= player[0].player_seasons[0].number_of_points %></td>
+                    </tr>
+                    <% end %>
+                    <% classementama.to_a.sort_by{|k,v| v}.each do |player| %>
+                    <tr>
+                      <td><%= x += 1 %></td>
+                      <td><%= player[0].pseudo %></td>
+                      <td><%= player[0].player_seasons[0].championship.name %></td>
+                      <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
+                      <td><%= player[0].player_seasons[0].number_of_points %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <header class="ui basic segment">
+      <h3 class="typo text-center mt-2">Ajoutes tes amis 👇</h3>
+    </header>
+    <div class="ui basic segment">
+      <%= form_tag ({controller: 'friends', action: 'search'}) do %>
+        <div class="text-center mt-2">
+          <input type="align-items-center mt-2" name="search" id="search">
+        </div>
+        <input class="btn btn-light mt-3" type="submit" name="commit" value="Chercher" data-disable-with="Search">
+      <% end %>
+    </div>
+  </div>
+</div>
+ <div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
+      <% if @user.friend_requests? %>
+        <div class="d-flex justify-content-center mt-2 mb-2">
+          <div class="info  d-flex  flex-column">
+            <header class="ui basic segment">
+              <h3 class="typo text-center mt-2">Requêtes d'amis:</h3>
+            </header>
+            <% @requests.each do |friend| %>
+              <section class="ui basic segment">
+                <span class="ui green header">
+                  <p class="typopo"> Pseudo: <%= friend.pseudo%></p>
+                  <p class="typopo"> Championnat: <%= friend.player_seasons[0].championship.name%></p>
+                  <p class="typopo"> Nombre de points: <%= friend.player_seasons[0].number_of_points%></p>
                 </span>
-                    <div class="ui basic segment">
-                        <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: user.id}) do %>
-                            <input class="ui basic button" type=submit value='Add Friend'>
-                            <% end %>
-                    </div>
-                </section>
-                <% end %>
-        </section>
-    </section>
-</main>
+                <div class="ui basic segment">
+                  <%= form_tag ({controller: 'friends', action: 'add', method: 'post', id: friend.id}) do %>
+                    <input class="btn btn-light mt-2" type=submit value='Accepter'>
+                  <% end %>
+                  <%= form_tag ({controller: 'friends', action: 'reject', method: 'post', id: friend.id}) do %>
+                    <input class="btn btn-danger text-center mt-3" type=submit value='Refuser'>
+                  <% end %>
+                </div>
+              </section>
+            <% end %>
+      <% else %>
+      <div class="d-flex justify-content-center mt-2 mb-2">
+        <div class="info  d-flex  flex-column">
+          <header class="ui basic segment">
+            <h3 class="typo text-center mt-2">Requêtes d'amis:</h3>
+          </header>
+          <p class="typopo mt-4">Tu n'as pas encore reçu de demandes 🤷‍♂️</p>
+        </div>
+      </div>
+      <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <% if @user.requested_friends? %>
+      <div class="ui vertical segment">
+          <header class="ui basic segment">
+            <h3 class="typo text-center mt-2">Demandes en attentes:</h3>
+          </header>
+          <% @pending.each do |friend| %>
+            <section class="ui basic segment">
+              <span class="ui yellow header">
+                <p class="typoleague text-center"><%= friend.pseudo%> ne t'a pas encore accepté ...</p>
+              </span>
+            </section>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <h3 class="typo text-center mt-2">Tu connais peut-être</h3>
+    <% @user.not_friends.sample(5).each do |user| %>
+      <section class="ui basic segment">
+        <span class="ui header">
+          <p class="typopo mt-3"> Pseudo: <%= user.pseudo %></p>
+
+        </span>
+        <div class="text-center">
+          <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: user.id}) do %>
+            <input class="ui basic button" type=submit value='Ajoutez'>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+</div>
+
 <%=  render "shared/navbarbottom" %>

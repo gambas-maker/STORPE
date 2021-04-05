@@ -1,1 +1,49 @@
+<div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <% if @results == [] %>
+      <main class="ui raised very padded text container segment">
+        <header class="ui basic segment">
+          <h3 class="ui header">Search Results: </h3>
+          <p>No Results Found</p>
+        </header>
+      </main>
+    <% else %>
+      <main class="ui teal raised very padded text container segment">
+        <header class="ui basic segment">
+          <h3 class="typo text-center mt-2">Résultats:</h3>
+        </header>
+        <% @results.each do |user| %>
+          <% if user.name != current_user.name %>
+            <div class="ui vertical clearing segment">
+              <span class="ui header">
+                <p class="typopo"> Pseudo: <%= user.pseudo %></p>
+                <p class="typopo"> Championnat: <%= user.player_seasons[0].championship.name %></p>
+                <p class="typopo"> Nombre de points: <%= user.player_seasons[0].number_of_points %></p>
+              </span>
+            <% if current_user.not_friends.include?(user) %>
+              <div class="ui basic segment">
+                <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: user.id}) do %>
+                  <input class="btn btn-light mt-3" type=submit value='Ajouter'>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+            </div>
+        </main>
+      <% end %>
+    <div class="ui basic raised text container segment">
+      <a class="typopo mt-2" href="/friends">Retour</a>
+    </div>
+    <div class="d-flex justify-content-center">
+      <footer class="footer-match">
+        <div class="footer-links" style="display: flex; align-items: center;">
+          <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+          <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+          <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
 <%=  render "shared/navbarbottom" %>

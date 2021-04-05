@@ -4,6 +4,7 @@ class FriendsController < ApplicationController
     @friends = @user.friends
     @requests = @user.requested_friends
     @pending = @user.pending_friends
+    @championship = Championship.all
   end
 
   def create
@@ -38,12 +39,12 @@ class FriendsController < ApplicationController
       redirect_to user_path(friend)
     end
 
-    def search
-      @search = params[:search].downcase
-      @results = User.all.select do |user|
-          user.name.downcase.include?(@search)
-      end
+  def search
+    @search = params[:search].downcase
+    @results = User.all.select do |user|
+      user.pseudo.downcase.include?(@search)
     end
+  end
 
     def show
 
