@@ -224,39 +224,37 @@
 </div>
 <div class="d-flex justify-content-center mt-2 mb-2">
   <div class="info  d-flex  flex-column">
-    <% if @user.requested_friends? %>
-      <div class="ui vertical segment">
-          <header class="ui basic segment">
-            <h3 class="typo text-center mt-2">Demandes en attentes:</h3>
-          </header>
-          <% @pending.each do |friend| %>
-            <section class="ui basic segment">
-              <span class="ui yellow header">
-                <p class="typoleague text-center"><%= friend.pseudo%> ne t'a pas encore accepté ...</p>
-              </span>
-            </section>
-          <% end %>
-      </div>
-    <% end %>
+    <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
+      <% if @user.requested_friends? %>
+        <div class="ui vertical segment">
+            <header class="ui basic segment">
+              <h3 class="typo text-center mt-2">Demandes en attentes:</h3>
+            </header>
+            <% @pending.each do |friend| %>
+              <section class="ui basic segment">
+                <span class="ui yellow header">
+                  <p class="typoleague text-center"><%= friend.pseudo%> ne t'a pas encore accepté ...</p>
+                </span>
+              </section>
+            <% end %>
+        </div>
+        <% else %>
+        <header class="ui basic segment">
+          <h3 class="typo text-center mt-2">Demandes en attentes:</h3>
+          <p class="typopo mt-4">Ils ne t'ont pas encore répondu 🤷‍♂️</p>
+        </header>
+      <% end %>
+    </div>
   </div>
 </div>
-<div class="d-flex justify-content-center mt-2 mb-2">
-  <div class="info  d-flex  flex-column">
-    <h3 class="typo text-center mt-2">Tu connais peut-être</h3>
-    <% @user.not_friends.sample(5).each do |user| %>
-      <section class="ui basic segment">
-        <span class="ui header">
-          <p class="typopo mt-3"> Pseudo: <%= user.pseudo %></p>
-
-        </span>
-        <div class="text-center">
-          <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: user.id}) do %>
-            <input class="ui basic button" type=submit value='Ajoutez'>
-          <% end %>
-        </div>
-      </section>
-    <% end %>
-  </div>
+<div class="d-flex justify-content-center">
+  <footer class="footer-match">
+    <div class="footer-links" style="display: flex; align-items: center;">
+      <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+      <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+      <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
 </div>
 
 <%=  render "shared/navbarbottom" %>

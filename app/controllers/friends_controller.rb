@@ -40,7 +40,7 @@ class FriendsController < ApplicationController
     end
 
   def search
-    @search = params[:search].downcase
+    @search = params[:search]
     @results = User.where(pseudo: @search)
     # @results = User.all.select do |user|
     #   user.pseudo.downcase.include?(@search)
