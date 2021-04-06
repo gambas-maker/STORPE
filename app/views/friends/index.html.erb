@@ -24,7 +24,7 @@
           </div>
           <h3 class="typo">Pseudo: <%= current_user.pseudo %></h3>
           <div class="btn-ranking d-flex justify-content-center">
-            <h3 class="typoleague mt-2" data-toggle="modal" data-target="#champModal" type="button">Division: <%= @championship[0].name %></h3>
+            <h3 class="typoleague mt-2" data-toggle="modal" data-target="#champModal" type="button">Division: <%= current_user.player_seasons[0].championship.name %></h3>
           </div>
           <div class="modal fade" id="champModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -258,3 +258,4 @@
 </div>
 
 <%=  render "shared/navbarbottom" %>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fa03faa8c2147b7"></script>
