@@ -1,10 +1,9 @@
 <div class="d-flex justify-content-center mt-2 mb-2">
   <div class="info  d-flex  flex-column">
-    <% if @results == [] %>
+    <% if @results == nil %>
       <main class="ui raised very padded text container segment">
         <header class="ui basic segment">
           <h3 class="ui header">Résultat: </h3>
-          <%#= @search %>
           <p>Attention à l'ortographe, car on a pas trouvé ton pote 👀</p>
         </header>
       </main>
@@ -13,24 +12,21 @@
         <header class="ui basic segment">
           <h3 class="typo text-center mt-2">Résultats:</h3>
         </header>
-          <% if @results[0].pseudo != current_user.pseudo %>
-            <div class="ui vertical clearing segment">
-              <span class="ui header">
-                <p class="typopo"> Pseudo: <%= @results[0].pseudo %></p>
-                <p class="typopo"> Championnat: <%= @results[0].player_seasons[0].championship.name %></p>
-                <p class="typopo"> Nombre de points: <%= @results[0].player_seasons[0].number_of_points %></p>
-              </span>
-            <% if current_user.not_friends.include?(@results[0]) %>
-              <div class="ui basic segment">
-                <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: @results[0].id}) do %>
-                  <input class="btn btn-light mt-3" type=submit value='Ajouter'>
-                <% end %>
-              </div>
+        <div class="ui vertical clearing segment">
+          <span class="ui header">
+            <p class="typopo"> Pseudo: <%= @results.pseudo %></p>
+            <p class="typopo"> Championnat: <%= @results.player_seasons[0].championship.name %></p>
+            <p class="typopo"> Nombre de points: <%= @results.player_seasons[0].number_of_points %></p>
+          </span>
+          <div class="ui basic segment">
+            <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: @results.id}) do %>
+              <input class="btn btn-light mt-3" type=submit value='Ajouter'>
             <% end %>
-          <% end %>
-            </div>
-        </main>
+          </div>
       <% end %>
+        </div>
+      </main>
+
     <div class="ui basic raised text container segment">
       <a class="typopo mt-2" href="/friends">Retour</a>
     </div>
