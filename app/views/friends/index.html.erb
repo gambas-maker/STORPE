@@ -59,15 +59,21 @@
             <th scope="col">PTS</th>
           </tr>
         </thead>
-        <% @user.friends.each do |friend| %>
+        <% if current_user.friends == [] %>
           <tbody>
-            <tr>
-              <td><%= friend.pseudo %></td>
-              <td><%= friend.player_seasons[0].championship.name %></td>
-              <td><%= friend.forecasts.where(season_id: Season.last.id).count %></td>
-              <td><%= friend.player_seasons[0].number_of_points %></td>
-            </tr>
+            <p class="typopo text-center">C'est le moment d'ajouter tes potes 🚀</p>
           </tbody>
+        <% else %>
+          <% @user.friends.each do |friend| %>
+            <tbody>
+              <tr>
+                <td><%= friend.pseudo %></td>
+                <td><%= friend.player_seasons[0].championship.name %></td>
+                <td><%= friend.forecasts.where(season_id: Season.last.id).count %></td>
+                <td><%= friend.player_seasons[0].number_of_points %></td>
+              </tr>
+            </tbody>
+          <% end %>
         <% end %>
       </table>
       <div class="btn-ranking d-flex justify-content-center">
