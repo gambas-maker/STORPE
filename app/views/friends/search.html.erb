@@ -3,8 +3,9 @@
     <% if @results == [] %>
       <main class="ui raised very padded text container segment">
         <header class="ui basic segment">
-          <h3 class="ui header">Search Results: </h3>
-          <p>No Results Found</p>
+          <h3 class="ui header">Résultat: </h3>
+          <%#= @search %>
+          <p>Attention à l'ortographe, car on a pas trouvé ton pote 👀</p>
         </header>
       </main>
     <% else %>
@@ -12,23 +13,21 @@
         <header class="ui basic segment">
           <h3 class="typo text-center mt-2">Résultats:</h3>
         </header>
-        <% @results.each do |user| %>
-          <% if user.name != current_user.name %>
+          <% if @results.pseudo != current_user.pseudo %>
             <div class="ui vertical clearing segment">
               <span class="ui header">
-                <p class="typopo"> Pseudo: <%= user.pseudo %></p>
-                <p class="typopo"> Championnat: <%= user.player_seasons[0].championship.name %></p>
-                <p class="typopo"> Nombre de points: <%= user.player_seasons[0].number_of_points %></p>
+                <p class="typopo"> Pseudo: <%= @results.pseudo %></p>
+                <p class="typopo"> Championnat: <%= @results.player_seasons[0].championship.name %></p>
+                <p class="typopo"> Nombre de points: <%= @results.player_seasons[0].number_of_points %></p>
               </span>
-            <% if current_user.not_friends.include?(user) %>
+            <% if current_user.not_friends.include?(@results) %>
               <div class="ui basic segment">
-                <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: user.id}) do %>
+                <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: @results.id}) do %>
                   <input class="btn btn-light mt-3" type=submit value='Ajouter'>
                 <% end %>
               </div>
             <% end %>
           <% end %>
-        <% end %>
             </div>
         </main>
       <% end %>
