@@ -11,7 +11,7 @@
             <h3 class="typos pts" style="font-weight: bold; padding-left: 5px;"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count %>/40   +</h3>
             <h3 class="plus typopo" style="margin-bottom: 8px;"></h3>
           </div>
-         </div>
+        </div>
         <div id = "panier">
           <button type="button" class="btn btn-outline-light typomatch" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
