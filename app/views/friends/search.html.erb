@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <% if @results == nil %>
+      <main class="ui raised very padded text container segment">
+        <header class="ui basic segment">
+          <h3 class="ui header">Résultat: </h3>
+          <p>Attention à l'ortographe, car on a pas trouvé ton pote 👀</p>
+        </header>
+      </main>
+    <% else %>
+      <main class="ui teal raised very padded text container segment">
+        <header class="ui basic segment">
+          <h3 class="typo text-center mt-2">Résultats:</h3>
+        </header>
+        <div class="ui vertical clearing segment">
+          <span class="ui header">
+            <p class="typopo"> Pseudo: <%= @results.pseudo %></p>
+            <p class="typopo"> Championnat: <%= @results.player_seasons[0].championship.name %></p>
+            <p class="typopo"> Nombre de points: <%= @results.player_seasons[0].number_of_points %></p>
+          </span>
+          <div class="ui basic segment">
+            <%= form_tag ({controller: 'friends', action: 'create', method: 'post', id: @results.id}) do %>
+              <input class="btn btn-light mt-3" type=submit value='Ajouter'>
+            <% end %>
+          </div>
+      <% end %>
+        </div>
+      </main>
+
+    <div class="ui basic raised text container segment">
+      <a class="typopo mt-2" href="/friends">Retour</a>
+    </div>
+    <div class="d-flex justify-content-center">
+      <footer class="footer-match">
+        <div class="footer-links" style="display: flex; align-items: center;">
+          <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+          <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+          <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<%=  render "shared/navbarbottom" %>
