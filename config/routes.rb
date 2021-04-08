@@ -34,9 +34,7 @@ end
     resources :forecasts, only: [:new, :create, :show, :confirm_pending]
   end
   resources :forecasts, only: [:destroy]
-  resources :seasons, only: [:show, :edit] do
-    resources :forecasts, only: [:edit, :update]
-  end
+  resources :seasons, only: [:show]
   resources :player_seasons
   resources :friends, only: [:index, :create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

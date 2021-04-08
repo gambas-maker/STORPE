@@ -129,6 +129,7 @@
                                 Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
                               </div>
                               <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
+
                               <% else %>
                                 <div data-id="<%= match.id %>">
                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3">- </input>
@@ -227,14 +228,25 @@
                 <div class="d-flex flex-column justify-content-center">
                   <p class="typopo text-center">VS</p>
                   <div class="d-flex flex-row align-items-center col-4">
-                     <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "1") || current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "NULL") || current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "2") %>
-                      <% else %>
-                        <div class="displaysquares" data-id="<%= match.id %>">
+                    <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "1") %>
+                       <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1" checked="true"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
+                      </div>
+                    <% elsif current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "NULL") %>
+                      <div class="displaysquares" data-id="<%= match.id %>">
                           <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
-                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL" checked="true"></input>
                           <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
                         </div>
-                      <% end %>
+                    <% else current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "2")%>
+                      <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2" checked="true"></input>
+                      </div>
+                    <% end %>
                   </div>
                 </div>
                 <div class="d-flex flex-column align-items-center text-align-center col-4 ">
