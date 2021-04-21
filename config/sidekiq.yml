@@ -14,7 +14,7 @@
   UpdatebasketpointsJob:
     cron: '0 13 * * 2,3,4,5,6'
   ResultsJob:
-    cron: '20 21 * * *'
+    cron: '50 21 * * *'
   ResultsYesterdayJob:
     cron: '30 22 * * *'
   ResultsbasketJob:
