@@ -192,7 +192,7 @@
           <div class="col-8" data-controller="search">
             <!-- <form action="#" class="form"> -->
               <%= form_tag ({controller: 'friends', action: 'search'}) do %>
-                <input class="form-control" id="search-input" name="search" type="text" placeholder='Son doux pseudo' data-algolia-id = "<%= ENV["ALGOLIASEARCH_APPLICATION_ID"] %>" data-algolia-search-key = "<%= ENV["ALGOLIASEARCH_API_KEY"] %>" data-search-target="searchBar"/>
+                <input class="form-control" id="search-input" name="search" type="text" placeholder='Son doux pseudo' data-algolia-id = "<%= ENV["ALGOLIASEARCH_APPLICATION_ID"] %>" data-algolia-search-key = "<%= ENV["ALGOLIASEARCH_API_KEY_SEARCH"] %>" data-search-target="searchBar"/>
                 <input class="btn btn-light mt-3" type="submit" name="commit" value="Chercher" data-disable-with="Search">
               <% end %>
             <!-- </form> -->
