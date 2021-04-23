@@ -12,6 +12,11 @@ class User < ApplicationRecord
   has_friendship
 
   after_create :mailer
+  include AlgoliaSearch
+
+  algoliasearch do
+    attributes :name, :pseudo
+  end
 
   def friends?
     self.friends
