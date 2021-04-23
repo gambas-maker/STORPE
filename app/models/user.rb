@@ -10,13 +10,13 @@ class User < ApplicationRecord
   after_commit :async_update
   validates_uniqueness_of :pseudo
   has_friendship
-
-  after_create :mailer
   include AlgoliaSearch
 
   algoliasearch do
     attributes :name, :pseudo
   end
+
+  after_create :mailer
 
   def friends?
     self.friends
