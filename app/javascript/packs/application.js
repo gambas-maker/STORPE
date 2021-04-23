@@ -30,6 +30,7 @@ require("@rails/actiontext")
 // External imports
 import "bootstrap";
 import {selectOutcome, selectOutcomeBe, selectOutcomeUnder, selectOutcomeStriker1, validePanier, calculate} from "../plugins/select_outcome";
+import "controllers";
 selectOutcome();
 selectOutcomeBe();
 selectOutcomeUnder();
