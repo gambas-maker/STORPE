@@ -27,7 +27,7 @@ export default class extends Controller {
     autocomplete('#search-input', { hint: true }, [
       {
         // Change hitsPerPage as needed
-        source: newHitsSource(index, { hitsPerPage: 10 }),
+        source: newHitsSource(index, { hitsPerPage: 5 }),
         displayKey: 'pseudo',
         templates: {
           suggestion: function(suggestion) {
