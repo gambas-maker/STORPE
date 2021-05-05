@@ -9,7 +9,7 @@ en:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Please review the problems below:"
+      default_message: "Attention tu as fait une erreur !"
     # Examples
     labels:
       defaults:
@@ -22,7 +22,7 @@ en:
     hints:
       defaults:
         username: 'User name to sign in.'
-        password: 'No special characters, please.'
+        password: 'Pas de caractères spéciaux.'
     include_blanks:
       defaults:
         age: 'Rather not say'
