@@ -408,7 +408,7 @@ DEPENDENCIES
   has_friendship
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  omniauth (= 1.0.0.pr2)
+  omniauth
   pg (>= 0.18, < 2.0)
   pry-byebug
   pry-rails
