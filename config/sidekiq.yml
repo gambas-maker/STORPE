@@ -18,7 +18,7 @@
   ResultsYesterdayJob:
     cron: '30 22 * * *'
   ResultsbasketJob:
-    cron: '0 5 * * *'
+    cron: '0 6 * * *'
   ResultsbaskettodayJob:
     cron: '30 6 * * *'
   PlayermouvJob:
