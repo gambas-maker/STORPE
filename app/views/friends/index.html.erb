@@ -103,22 +103,24 @@
                       <th scope="col">PTS</th>
                     </tr>
                   </thead>
-                  <% classementchamp = {} %>
-                  <% classementpro = {} %>
-                  <% classementsemi = {} %>
-                  <% classementama = {} %>
+                  <% classement = {} %>
+                  <%# classementpro = {} %>
+                  <%# classementsemi = {} %>
+                  <%# classementama = {} %>
                   <% x = 0 %>
                   <% @friends.each do |friend| %>
-                    <% if friend.player_seasons[0].championship.name == "Champion" %>
-                      <% classementchamp[friend] = friend.player_seasons[0].number_of_points %>
-                    <% elsif friend.player_seasons[0].championship.name == "Pro" %>
-                      <% classementpro[friend] = friend.player_seasons[0].number_of_points %>
-                    <% elsif friend.player_seasons[0].championship.name == "Semi-pro" %>
-                      <% classementsemi[friend] = friend.player_seasons[0].number_of_points %>
-                    <% else friend.player_seasons[0].championship.name == "Amateur" %>
-                      <% classementama[friend] = friend.player_seasons[0].number_of_points %>
-                    <% end %>
+                    <% classement[friend] = friend.player_seasons[0].number_of_points %>
                   <% end %>
+                    <%# if friend.player_seasons[0].championship.name == "Champion" %>
+                      <%# classementchamp[friend] = friend.player_seasons[0].number_of_points %>
+                    <%# elsif friend.player_seasons[0].championship.name == "Pro" %>
+                      <%# classementpro[friend] = friend.player_seasons[0].number_of_points %>
+                    <%# elsif friend.player_seasons[0].championship.name == "Semi-pro" %>
+                      <%# classementsemi[friend] = friend.player_seasons[0].number_of_points %>
+                    <%# else friend.player_seasons[0].championship.name == "Amateur" %>
+                      <%# classementama[friend] = friend.player_seasons[0].number_of_points %>
+                    <%# end %>
+                  <%# end %>
                   <tbody>
                     <tr>
                       <td class="cla">0</td>
@@ -127,7 +129,7 @@
                       <td class="cla"><%= current_user.player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
                       <td class="cla"><%= current_user.player_seasons[0].number_of_points %></td>
                     </tr>
-                    <% classementchamp.to_a.sort_by{|k,v| v}.each do |player| %>
+                    <% classement.to_a.sort_by{|k,v| v}.each do |player| %>
                       <tr>
                         <td scope="row"><%= x += 1 %></td>
                         <td><%= player[0].pseudo %></td>
@@ -136,33 +138,33 @@
                         <td><%= player[0].player_seasons[0].number_of_points %></td>
                       </tr>
                     <% end %>
-                    <% classementpro.to_a.sort_by{|k,v| v}.each do |player| %>
-                      <tr>
-                        <td scope="row"><%= x += 1 %></td>
-                        <td><%= player[0].pseudo %></td>
-                        <td><%= player[0].player_seasons[0].championship.name %></td>
-                        <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
-                        <td><%= player[0].player_seasons[0].number_of_points %></td>
-                      </tr>
-                    <% end %>
-                    <% classementsemi.to_a.sort_by{|k,v| v}.each do |player| %>
-                      <tr>
-                        <td scope="row"><%= x += 1 %></td>
-                        <td><%= player[0].pseudo %></td>
-                        <td><%= player[0].player_seasons[0].championship.name %></td>
-                        <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
-                        <td><%= player[0].player_seasons[0].number_of_points %></td>
-                      </tr>
-                    <% end %>
-                    <% classementama.to_a.sort_by{|k,v| v}.each do |player| %>
-                      <tr>
-                        <td scope="row"><%= x += 1 %></td>
-                        <td><%= player[0].pseudo %></td>
-                        <td><%= player[0].player_seasons[0].championship.name %></td>
-                        <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
-                        <td><%= player[0].player_seasons[0].number_of_points %></td>
-                      </tr>
-                    <% end %>
+                    <%# classementpro.to_a.sort_by{|k,v| v}.each do |player| %>
+                      <!-- <tr> -->
+                        <!-- <td scope="row"><%#= x += 1 %></td> -->
+                        <!-- <td><%#= player[0].pseudo %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].championship.name %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].number_of_points %></td> -->
+                      <!-- </tr> -->
+                    <%# end %>
+                    <%# classementsemi.to_a.sort_by{|k,v| v}.each do |player| %>
+                      <!-- <tr> -->
+                        <!-- <td scope="row"><%#= x += 1 %></td> -->
+                        <!-- <td><%#= player[0].pseudo %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].championship.name %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].number_of_points %></td> -->
+                      <!-- </tr> -->
+                    <%# end %>
+                    <%# classementama.to_a.sort_by{|k,v| v}.each do |player| %>
+                      <!-- <tr> -->
+                        <!-- <td scope="row"><%#= x += 1 %></td> -->
+                        <!-- <td><%#= player[0].pseudo %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].championship.name %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td> -->
+                        <!-- <td><%#= player[0].player_seasons[0].number_of_points %></td> -->
+                      <!-- </tr> -->
+                    <%# end %>
                   </tbody>
                 </table>
               </div>
