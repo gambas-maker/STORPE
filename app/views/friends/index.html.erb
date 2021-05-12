@@ -129,7 +129,7 @@
                       <td class="cla"><%= current_user.player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
                       <td class="cla"><%= current_user.player_seasons[0].number_of_points %></td>
                     </tr>
-                    <% classement.to_a.sort_by{|k,v| v}.each do |player| %>
+                    <% classement.to_a.sort_by{|k,v| v}.reverse.each do |player| %>
                       <tr>
                         <td scope="row"><%= x += 1 %></td>
                         <td><%= player[0].pseudo %></td>
