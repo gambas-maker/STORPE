@@ -78,13 +78,12 @@
   <h2 class="typo d-flex justify-content-center">Tous mes Championnats</h2>
   <% seasons = {} %>
   <% @seasons.each do |seaso| %>
-    <!-- Button trigger modal -->
     <% seasons[seaso.start_date] = seaso.id %>
   <% end %>
     <% seasons.sort_by{|k,v| k.to_date}.reverse.each do |season, value| %>
       <% if  current_user.forecasts.where(season_id: value, confirmed: true).empty? %>
       <% else %>
-        <button type="button" class="info typopo btn btn-light mb-5" data-toggle="modal" data-target="#seasonModalCenter-<%=value%>" data-whatever="@seasons">
+        <button type="button" class="typopo btn btn-success mb-5" data-toggle="modal" data-target="#seasonModalCenter-<%=value%>" data-whatever="@seasons">
           <div class="d-flex flex-column">
             <div>
               <p>Début du Championnat <%= season %> </p>
@@ -232,7 +231,7 @@
 </div>
 <footer class="footer-match">
   <div class="foot-phrase">
-    <p>Le sport c'est ici aussi 👉</p>
+    <p>Nos discussions sport 👉</p>
   </div>
   <div class="footer-links" style="display: flex; align-items: center;">
     <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
