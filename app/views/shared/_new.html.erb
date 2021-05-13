@@ -26,7 +26,7 @@
                 autofocus: true,
                 input_html: { autocomplete: "Le divin jour" } %>
     <%= f.input :club,
-                required: true,
+                :collection => %W[LOSC OM],
                 autofocus: true,
                 input_html: { autocomplete: "Le divin jour" } %>
     <%= f.input :name,
