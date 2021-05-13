@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_155060) do
+ActiveRecord::Schema.define(version: 2021_05_13_130949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,11 @@ ActiveRecord::Schema.define(version: 2021_04_05_155060) do
     t.index ["friendable_id", "friend_id"], name: "index_friendships_on_friendable_id_and_friend_id", unique: true
   end
 
+  create_table "mains", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "matches", force: :cascade do |t|
     t.string "result"
     t.string "team_home"
@@ -211,6 +216,8 @@ ActiveRecord::Schema.define(version: 2021_04_05_155060) do
     t.string "provider"
     t.string "uid"
     t.text "image"
+    t.date "date_of_birth"
+    t.string "club"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
