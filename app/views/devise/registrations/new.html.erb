@@ -24,6 +24,10 @@
         <%= f.date_field :date_of_birth,
                           required: true,
                           input_html: { autocomplete: "Le divin jour" } %>
+        <%= f.input :club,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "Le divin jour" } %>
         <%= f.input :name,
                     required: true,
                     autofocus: true,
