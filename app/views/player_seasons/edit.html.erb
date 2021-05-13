@@ -8,7 +8,7 @@
       <%= f.input :blason,
                   label: "Ton emblème, ta carrière",
                   as: :radio_buttons, collection:
-                  Blason.where(name: "LOSC").map{|blason| cl_image_tag blason.url},
+                  Blason.where(club: "LOSC").map{|blason| cl_image_tag blason.url},
                   wrapper: :custom_collection_inline %>
       <%= f.submit "Changer", class: "rejoins_1" %>
     <% end %>
