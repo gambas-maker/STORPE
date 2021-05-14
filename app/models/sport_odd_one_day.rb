@@ -5,7 +5,7 @@ require 'json'
 
 class SportOddOneDay < ApplicationRecord
   BASE_URL = "https://v2.api-football.com/"
-  LEAGUE_IDS = [2664, 2790, 2833, 2857, 2755, 2771, 2777, 1422, 925, 1073, 1252, 3079, 3026, 3081, 2791, 403]
+  LEAGUE_IDS = [2664, 2790, 2833, 2857, 2755, 2771, 2777, 1422, 925, 1073, 1252, 3079, 3026, 3081, 2791]
   # 2664 = France, 2790 = Angleterre, 2833 = Espagne, 2857 = Italie, 2755 = Allemagne, 2771 = Champions League, 2777 = Europa League, 1422 = Nations League, Bottola Pro = 925, CAN = 1073, World Cup South-Am-Qualif = 1252, World Cup - Qualification Europe = 3079, Women LDC = 3026, Coupe de France = 3081, FA Cup = 2791, Euro = 403
 
   def self.matches_for_last_days
