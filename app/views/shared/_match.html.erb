@@ -1,0 +1,473 @@
+<div class="position-relative">
+  <div class="topimage w-100 d-flex">
+    <h2 class="toptitle m-auto">MATCH</h2>
+  </div>
+  <div class="sticky" style="margin: 0 auto">
+    <div class="d-flex justify-content-center pt-3">
+      <div class="d-flex justify-content-around mb-3" style="width: 375px;">
+        <div>
+          <div class=" d-flex pt-2">
+            <h3 class="typos">Matchs pronostiqués</h3>
+            <h3 class="typos pts" style="font-weight: bold; padding-left: 5px;"><%= current_user.forecasts.where(confirmed: true, season_id: Season.last.id).count %>/40   +</h3>
+            <h3 class="plus typopo" style="margin-bottom: 8px;"></h3>
+          </div>
+        </div>
+        <div id = "panier">
+          <button type="button" class="btn btn-outline-light typomatch" data-toggle="modal" data-target="#exampleModal">Valider ma sélection</button>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="float-right p-2">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-header">
+                  <h2 class="stat m-auto ">Tu as validé ta sélection!</h2>
+                </div>
+                <div class="modal-body" style="z-index: 100;">
+                  <p class="typopo">Jette un coup d'oeil à ton classement 👀</p>
+                  <p class="typopo">Retrouve tes pronos ici 👇</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button type="button" class="rejoins typopo"><%= link_to 'Checker mes pronos', season_path(current_user)%></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="infobis">
+        <div class="filterbar d-flex justify-content-around flex-row">
+          <div>
+            <%= form_tag matches_path, method: :get do %>
+            <%= select_tag :query,
+            raw("<option class='dropdown-item' value=''>COMPÉTITION</option>
+              <option class='dropdown-item' value=''>Tout</option>
+              <option class='dropdown-item' value='NBA'>NBA</option>
+              <option class='dropdown-item' value='World Cup'>Coupe du Monde</option>
+              <option class='dropdown-item' value='UEFA Champions League'>Ligue des Champions</option>
+              <option class='dropdown-item' value='UEFA Europa League'>Ligue Europa</option>
+              <option class='dropdown-item' value='UEFA Nations League'>Ligue des Nations</option>
+              <option class='dropdown-item' value='Africa Cup of Nations - Qualification'>CAN</option>
+              <option class='dropdown-item' value='Ligue 1'>Ligue 1</option>
+              <option class='dropdown-item' value='Bundesliga 1'>Bundesliga</option>
+              <option class='dropdown-item' value='Primera Division'>Liga</option>
+              <option class='dropdown-item' value='Serie A'>Serie A</option>
+              <option class='dropdown-item' value='Premier League'>Premier league</option>"),
+              class: "btn btn-filter dropdown-toggle dropdownMenuButton"%>
+          </div>
+            <div class="mt-1">
+              <input type="submit" name="commit" value="OK" class="btn-ok" data-disable-with="OK"></div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="info">
+      <div class="d-flex justify-content-center">
+        <%= link_to 'Les récompenses', dashboard_path, class: "d-flex justify-content-center btn btn-success" %>
+      </div>
+        <% if current_user.forecasts.where(season_id: Season.last.id, confirmed: true).count == 40 %>
+          <%= render 'shared/modal' %>
+        <% else %>
+        <% end %>
+        <div class="d-flex justify-content-between flex-row m-3">
+          <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
+          <h3 class="typopo d-flex justify-content-center">PRONO</h3>
+          <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
+        </div>
+        <input type="hidden" id ="season_player" value="<%= @player %>">
+        <% @matches.sort_by{|v| v.kick_off}.each do |match| %>
+          <% if Time.parse(match.kick_off) > Time.now && match.points_home.present? && match.points_away.present? && match.negative_points_home %>
+            <% if match.sport == "football" %>
+            <!-- Button trigger modal -->
+              <% if match.goal_two_teams_yes.present? %>
+                <div class="d-flex justify-content-end mr-1">
+                  <button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
+                    Plus de pronos
+                  </button>
+                </div>
+              <% end %>
+            <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter-<%=match.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-center" id="exampleModalCenterTitle">Buffet à volonté</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="prono d-flex flex-row justify-content-around mb-4 mt-4">
+                        <div class="d-flex flex-column align-items-center col-4">
+                          <div class="row">
+                            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+                          </div>
+                          <div class="row text-align-center">
+                            <h3 class="tit"><%= match.team_home %></h3>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <p class="typopo text-center">VS</p>
+                        </div>
+                        <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+                          <h3 class="tit"><%= match.team_away  %></h3>
+                        </div>
+                      </div>
+                      <% if match.buteur_1.present? %>
+                        <p class="typo text-center">Buteurs</p>
+                        <div class="prono d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p class="tit pr-3"><%= match.nom_buteur_1 %></p>
+                              <div class="typopo pr-1">
+                                Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
+                              </div>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3" checked="true">- </input>
+                                </div>
+                              <% else %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3">- </input>
+                                </div>
+                              <% end %>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
+                                <div class="striker1" data-id="<%= match.id %>">
+                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4" checked="true"> </input>
+                                </div>
+                              <% else %>
+                                <div class="striker1" data-id="<%= match.id %>">
+                                   <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"> </input>
+                                </div>
+                              <% end %>
+                              <div class="typopo pl-1">
+                                Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
+                              </div>
+                              <p class="tit pl-3"><%= match.nom_buteur_2 %></p>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                      <% if match.goal_two_teams_yes.present? %>
+                        <p class="typo text-center">But pour les 2 équipes</p>
+                        <div class="prono d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p class="tit pr-3">OUI</p>
+                              <div class="typopo pr-2">
+                                Pts :  +<%= match.goal_two_teams_yes.to_i %>/ <%= match.negative_goal_two_teams_yes.to_i %>
+                              </div>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "7") %>
+                                <div class="b2e" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="7" checked="true"></input>
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="8"></input>
+                                </div>
+                              <% elsif current_user.forecasts.find_by(match_id: match.id, confirmed:true, outcome: "8") %>
+                                <div class="b2e" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="7"></input>
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="8" checked="true"></input>
+                                </div>
+                              <% else %>
+                                <div class="b2e" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="7"></input>
+                                  <input type="checkbox" class="square_b2e" onclick="updateCount()" data-outcome="8"></input>
+                                </div>
+                              <% end %>
+                              <div class="typopo pl-2">
+                                Pts :  +<%= match.goal_two_teams_no.to_i %>/ <%= match.negative_goal_two_teams_no.to_i %>
+                              </div>
+                              <p class="tit pl-3">NON</p>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+
+                          </div>
+                        </div>
+                      <% end %>
+                      <% if match.under_25.present? %>
+                        <p class="typo text-center">Nombre de buts</p>
+                        <div class="d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p class="tit pr-1">- de 2.5 buts</p>
+                              <div class="typopo pr-1">
+                                Pts :  +<%= match.under_25.to_i %>/ <%= match.negative_under25.to_i %>
+                              </div>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "9") %>
+                                <div class="under" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="9" checked="true"></input>
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="10"></input>
+                                </div>
+                              <% elsif current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "10") %>
+                                <div class="under" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="9"></input>
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="10" checked="true"></input>
+                                </div>
+                              <% else %>
+                                <div class="under" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="9"></input>
+                                  <input type="checkbox" class="square_under" onclick="updateCount()" data-outcome="10"></input>
+                                </div>
+                              <% end %>
+                              <div class="typopo pl-1">
+                                Pts :  +<%= match.over_25.to_i %>/ <%= match.negative_over25.to_i %>
+                              </div>
+                              <p class="tit pl-1">+ de 2.5 buts</p>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal -->
+              <div class="d-flex justify-content-center mb-2 mt-2">
+                <h4 class="typopo"><%= match.league %></h4>
+              </div>
+              <div class="d-flex justify-content-center mb-2 mt-2">
+                <h3 class="tit"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
+                <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
+              </div>
+              <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+                <div class="d-flex flex-column align-items-center col-4">
+                  <div class="row">
+                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+                  </div>
+                  <div class="row text-align-center">
+                    <h3 class="tit"><%= match.team_home %></h3>
+                  </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                  <p class="typopo text-center">VS</p>
+                  <div class="d-flex flex-row align-items-center col-4">
+                    <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "1") %>
+                       <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1" checked="true"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
+                      </div>
+                    <% elsif current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "NULL") %>
+                      <div class="displaysquares" data-id="<%= match.id %>">
+                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
+                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL" checked="true"></input>
+                          <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
+                        </div>
+                    <% elsif current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "2")%>
+                      <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2" checked="true"></input>
+                      </div>
+                    <% else %>
+                      <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="1"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="NULL"></input>
+                        <input type="checkbox" class="square" onclick="updateCount()" data-outcome="2"></input>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+                  <h3 class="tit"><%= match.team_away  %></h3>
+                </div>
+              </div>
+              <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
+                <div>
+                  Pts :  +<%= match.points_home.to_i %>/ <%= match.negative_points_home %>
+                </div>
+                <div>
+                  Pts : +<%= match.points_draw.to_i %> /<%= match.negative_points_draw %>
+                </div>
+                <div>
+                  Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+                </div>
+              </div>
+            <% else %>
+            <!-- Button trigger modal -->
+            <% if match.buteur_1.present? %>
+              <div class="d-flex justify-content-end mr-1">
+                <button type="button" class="btn-primary" data-toggle="modal" data-target="#exampleModalCenter-<%=match.id%>" data-whatever="@matches">
+                  Plus de pronos
+                </button>
+              </div>
+            <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter-<%=match.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-center" id="exampleModalCenterTitle">Buffet à volonté</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="prono d-flex flex-row justify-content-around mb-4 mt-4">
+                        <div class="d-flex flex-column align-items-center col-4">
+                          <div class="row">
+                            <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+                          </div>
+                          <div class="row text-align-center">
+                            <h3 class="tit"><%= match.team_home %></h3>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <p class="typopo text-center">VS</p>
+                        </div>
+                        <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                          <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+                          <h3 class="tit"><%= match.team_away  %></h3>
+                        </div>
+                      </div>
+                      <% if match.buteur_1.present? %>
+                        <p class="typo text-center">25 points ou plus</p>
+                        <div class="prono d-flex flex-row justify-content-center">
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <p class="tit pr-3"><%= match.nom_buteur_1 %></p>
+                              <div class="typopo pr-1">
+                                Pts :  +<%= match.buteur_1.to_i %>/ <%= match.negative_points_buteur1.to_i %>
+                              </div>
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "3") %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3" checked="true">- </input>
+                                </div>
+                              <% else %>
+                                <div data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="3">- </input>
+                                </div>
+                              <% end %>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column" data-id="<%= match.id %>">
+                            <div class="d-flex flex-row">
+                              <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "4") %>
+                                <div class="striker1" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4" checked="true"> </input>
+                                </div>
+                              <% else %>
+                                <div class="striker1" data-id="<%= match.id %>">
+                                  <input type="checkbox" class="square_striker1" onclick="updateCount()" data-outcome="4"> </input>
+                                </div>
+                              <% end %>
+                              <div class="typopo pl-1">
+                                Pts :  +<%= match.buteur_2.to_i %>/ <%= match.negative_points_buteur2.to_i %>
+                              </div>
+                              <p class="tit pl-3"><%= match.nom_buteur_2 %></p>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+            <% end %>
+              <div class="d-flex justify-content-center mb-2 mt-2">
+                <h4 class="typopo"><%= match.league %></h4>
+              </div>
+              <div class="d-flex justify-content-center mb-2 mt-2">
+                <h3 class="typopo"><%= DateTime.parse(match.kick_off).to_date%></h3><h3 class="typopo pl-2">-</h3>
+                <h3 class="typopo pl-2"><%= match.kick_off.to_s.gsub("T", " ").split[1].gsub("+", " ").split[0]%></h3>
+              </div>
+              <div class="d-flex flex-row justify-content-around mb-4 mt-4" data-id="<%= match.id %>">
+                <div class="d-flex flex-column align-items-center col-4">
+                  <div class="row">
+                    <h3 class="typopo"><%= image_tag "#{match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+                  </div>
+                  <div class="row text-align-center">
+                    <h3 class="typopo"><%= match.team_home %></h3>
+                  </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                  <p class="typopo text-center">VS</p>
+                  <div class="d-flex flex-row align-items-center col-4">
+                    <% if current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "1") %>
+                      <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" data-outcome="1" checked="true"></input>
+                        <input type="checkbox" class="square" data-outcome="2"></input>
+                      </div>
+                    <% elsif current_user.forecasts.find_by(match_id: match.id, confirmed: true, outcome: "2") %>
+                      <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" data-outcome="1"></input>
+                        <input type="checkbox" class="square" data-outcome="2" checked="true"></input>
+                      </div>
+                    <% else %>
+                      <div class="displaysquares" data-id="<%= match.id %>">
+                        <input type="checkbox" class="square" data-outcome="1"></input>
+                        <input type="checkbox" class="square" data-outcome="2"></input>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                  <h3 class="typopo"><%= image_tag "#{match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+                  <h3 class="typopo"><%= match.team_away  %></h3>
+                </div>
+              </div>
+              <div class="prono typo d-flex flex-row my-3 justify-content-between mx-5">
+                <div>
+                  Pts : +<%= match.points_home.to_i %> / <%= match.negative_points_home %>
+                </div>
+                <div>
+                  Pts : +<%= match.points_away.to_i %> / <%= match.negative_points_away %>
+                </div>
+              </div>
+          <% end %>
+        <% else %>
+        <% end %>
+      <% end %>
+    <div class="d-flex justify-content-center">
+      <footer class="footer-match">
+        <div class="footer-links" style="display: flex; align-items: center;">
+          <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+          <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+          <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+</div>
+
+<%=  render "shared/navbarbottom" %>
+
+<script type='text/javascript'>
+  (function()
+  {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+  })();
+</script>
+<!-- One Signal Code -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "71fa6b4f-43e7-460d-84ad-80bb84467b01",
+        });
+      });
+    </script>
+    <!-- END One Signal Code -->
