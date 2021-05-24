@@ -46,13 +46,25 @@
 }
 
 
-ul{
+.ulclassic{
   list-style: none;
   justify-content: space-around;
   display: flex;
   flex-direction: column;
   height: 500px;
   background-color: #322958;
+  width: 100px;
+  border-radius: 0 20px 20px 0 ;
+  box-shadow: 10px 0 5px -2px #2A233E;
+}
+
+.ullosc{
+  list-style: none;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  background-color: #101050;
   width: 100px;
   border-radius: 0 20px 20px 0 ;
   box-shadow: 10px 0 5px -2px #2A233E;

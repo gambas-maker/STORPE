@@ -1,0 +1,247 @@
+<div class="position-relative">
+  <div class="topimagechampionship w-100 d-flex mb-3">
+    <h2 class="toptitle m-auto">MES AMIS</h2>
+  </div>
+  <div class="d-flex justify-content-center mt-2 mb-2">
+    <div class="info  d-flex  flex-column">
+      <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
+        <div class="up">
+          <div class="params">
+            <%= link_to contact_path do  %>
+              <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_32/v1601900588/PARAMETERS_mksd9n.png" %>
+            <% end %>
+          </div>
+          <div class="blason">
+            <% if  current_user.player_seasons[0].blason.present?%>
+              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join("")%>
+              <% end %>
+            <% else %>
+              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <h3 class="typo">Pseudo: <%= current_user.pseudo %></h3>
+          <div class="btn-ranking d-flex justify-content-center">
+            <h3 class="typoleague mt-2" data-toggle="modal" data-target="#champModal" type="button">Division: <%= current_user.player_seasons[0].championship.name %></h3>
+          </div>
+          <div class="modal fade" id="champModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Championnat</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-column m-auto mt-4 text-white">
+                    <p>Légende</p>
+                    <p>Champion</p>
+                    <p>Pro</p>
+                    <p>Semi-Pro</p>
+                    <p>Amateur</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <svg class=" center-block mx-auto mt-1" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+      <table class="table table-borderless mb-4">
+        <thead>
+          <tr>
+            <th scope="col">PSEUDO</th>
+            <th scope="col">CHAMPIONNAT</th>
+            <th scope="col">PRONOS</th>
+            <th scope="col">PTS</th>
+          </tr>
+        </thead>
+        <% if current_user.friends == [] %>
+          <tbody>
+            <p class="typopo text-center">C'est le moment d'ajouter tes potes 🚀</p>
+          </tbody>
+        <% else %>
+          <% @user.friends.each do |friend| %>
+            <tbody>
+              <tr>
+                <td><%= friend.pseudo %></td>
+                <td><%= friend.player_seasons[0].championship.name %></td>
+                <td><%= friend.forecasts.where(season_id: Season.last.id).count %></td>
+                <td><%= friend.player_seasons[0].number_of_points %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        <% end %>
+      </table>
+      <div class="btn-ranking d-flex justify-content-center">
+        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-light btnbis typo">Voir le classement</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <%= link_to 'Ma carrière', player_season_path(current_user.id), class: "d-flex justify-content-center btn btn-success" %>
+      </div>
+      <div class="d-flex justify-content-center">
+        <%= link_to 'La Gazette', articles_path, class: "d-flex justify-content-center btn btn-light mt-4" %>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header sticky pt-5">
+              <h5 class="modal-title" id="exampleModalLabel">CLASSEMENT</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="d-flex flex-column m-auto mt-4">
+                <table class="table table-borderless mb-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">POS</th>
+                      <th scope="col">PSEUDO</th>
+                      <th scope="col">CHAMPIONNAT</th>
+                      <th scope="col">PRONOS</th>
+                      <th scope="col">PTS</th>
+                    </tr>
+                  </thead>
+                  <% classement = {} %>
+                  <% x = 0 %>
+                  <% @friends.each do |friend| %>
+                    <% classement[friend] = friend.player_seasons[0].number_of_points %>
+                  <% end %>
+                  <tbody>
+                    <tr>
+                      <td class="cla">0</td>
+                      <td class="cla"><%= current_user.pseudo %></td>
+                      <td class="cla"><%= current_user.player_seasons[0].championship.name %></td>
+                      <td class="cla"><%= current_user.player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
+                      <td class="cla"><%= current_user.player_seasons[0].number_of_points %></td>
+                    </tr>
+                    <% classement.to_a.sort_by{|k,v| v}.reverse.each do |player| %>
+                      <tr>
+                        <td scope="row"><%= x += 1 %></td>
+                        <td><%= player[0].pseudo %></td>
+                        <td><%= player[0].player_seasons[0].championship.name %></td>
+                        <td><%= player[0].player_seasons[0].forecasts.where(season_id: Season.last.id).count %></td>
+                        <td><%= player[0].player_seasons[0].number_of_points %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <header class="ui basic segment">
+      <h3 class="typo text-center mt-2">Ajoutes tes amis 👇 (attention à l'ortographe)</h3>
+    </header>
+    <!-- Test 1 -->
+      <!-- <div class="ui basic segment">
+        <%#= form_tag ({controller: 'friends', action: 'search'}) do %>
+          <div class="text-center mt-2">
+            <input type="align-items-center mt-2" name="search" id="search">
+          </div>
+          <input class="btn btn-light mt-3" type="submit" name="commit" value="Chercher" data-disable-with="Search">
+        <%# end %>
+      </div> -->
+      <!-- Test 2 -->
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-8" data-controller="search">
+             <div class="form">
+              <%= form_tag ({controller: 'friends', action: 'search'}) do %>
+                <input class="form-control" id="search-input" name="search" type="text" placeholder='Son doux pseudo' data-algolia-id = "<%= ENV["ALGOLIASEARCH_APPLICATION_ID"] %>" data-algolia-search-key = "<%= ENV["ALGOLIASEARCH_API_KEY_SEARCH"] %>" data-search-target="searchBar"/>
+                <input class="btn btn-light mt-3" type="submit" name="commit" value="Chercher" data-disable-with="Search">
+              <% end %>
+             </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+ <div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
+      <% if @user.friend_requests? %>
+        <div class="d-flex justify-content-center mt-2 mb-2">
+          <div class="info  d-flex  flex-column">
+            <header class="ui basic segment">
+              <h3 class="typo text-center mt-2">Requêtes d'amis:</h3>
+            </header>
+            <% @requests.each do |friend| %>
+              <section class="ui basic segment">
+                <span class="ui green header">
+                  <p class="typopo"> Pseudo: <%= friend.pseudo%></p>
+                  <p class="typopo"> Championnat: <%= friend.player_seasons[0].championship.name%></p>
+                  <p class="typopo"> Nombre de points: <%= friend.player_seasons[0].number_of_points%></p>
+                </span>
+                <div class="ui basic segment">
+                  <%= form_tag ({controller: 'friends', action: 'add', method: 'post', id: friend.id}) do %>
+                    <input class="btn btn-light mt-2" type=submit value='Accepter'>
+                  <% end %>
+                  <%= form_tag ({controller: 'friends', action: 'reject', method: 'post', id: friend.id}) do %>
+                    <input class="btn btn-danger text-center mt-3" type=submit value='Refuser'>
+                  <% end %>
+                </div>
+              </section>
+            <% end %>
+      <% else %>
+      <div class="d-flex justify-content-center mt-2 mb-2">
+        <div class="info  d-flex  flex-column">
+          <header class="ui basic segment">
+            <h3 class="typo text-center mt-2">Requêtes d'amis:</h3>
+          </header>
+          <p class="typopo mt-4">Tu n'as pas encore reçu de demandes 🤷‍♂️</p>
+        </div>
+      </div>
+      <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-2 mb-2">
+  <div class="info  d-flex  flex-column">
+    <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
+      <% if @user.requested_friends? %>
+        <div class="ui vertical segment">
+            <header class="ui basic segment">
+              <h3 class="typo text-center mt-2">Demandes en attentes:</h3>
+            </header>
+            <% @pending.each do |friend| %>
+              <section class="ui basic segment">
+                <span class="ui yellow header">
+                  <p class="typoleague text-center"><%= friend.pseudo%> ne t'a pas encore accepté ...</p>
+                </span>
+              </section>
+            <% end %>
+        </div>
+        <% else %>
+        <header class="ui basic segment">
+          <h3 class="typo text-center mt-2">Demandes en attentes:</h3>
+          <p class="typopo mt-4">Ils ne t'ont pas encore répondu 🤷‍♂️</p>
+        </header>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <footer class="footer-match">
+    <div class="footer-links" style="display: flex; align-items: center;">
+      <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+      <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+      <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+</div>
+
+<%=  render "shared/navbarbottom" %>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fa03faa8c2147b7"></script>
+

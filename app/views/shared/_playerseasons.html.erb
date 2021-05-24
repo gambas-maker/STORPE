@@ -1,0 +1,255 @@
+ <div class="position-relative">
+  <div class="topimageprofile w-100 d-flex mb-3">
+    <h2 class="toptitle m-auto">MON PROFIL</h2>
+  </div>
+
+<div class="d-flex justify-content-center mt-2 mb-2">
+    <div class="info  d-flex  flex-column">
+      <!-- <a href="/contact"><svg class="icon" width="32" height="32" viewBox="0 0 32.188 32.188"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M293.2,85.981a14.68,14.68,0,0,0-8.039,7.649,5.552,5.552,0,0,0,4.764,2.625A5.655,5.655,0,0,0,293.2,85.981Zm-2.959,7.941a2.389,2.389,0,0,1-2.358-2.355,2.357,2.357,0,0,1,4.713,0A2.389,2.389,0,0,1,290.243,93.922Z" transform="translate(-267.107 -73.946)"/><path class="a" d="M275.693,89.414A15.871,15.871,0,0,1,290.444,78.19a16.1,16.1,0,0,0-29.5,0A15.871,15.871,0,0,1,275.693,89.414Z" transform="translate(-259.598 -68.539)"/><path class="a" d="M290.378,84.558a.672.672,0,0,1-.075,0,14.4,14.4,0,0,0-3.491.432,7.177,7.177,0,0,1-5,12.342,7.062,7.062,0,0,1-5.4-2.447c-.391,1.289-1.33,4.7-1.33,4.7s-.938-3.411-1.33-4.7a7.066,7.066,0,0,1-5.4,2.447,7.176,7.176,0,0,1-5-12.342,14.408,14.408,0,0,0-3.491-.432c-.026,0-.049,0-.074-.006a16.094,16.094,0,1,0,30.576,0Z" transform="translate(-258.995 -73.504)"/><path class="a" d="M266.751,85.981a5.653,5.653,0,0,0,3.272,10.274,5.546,5.546,0,0,0,4.764-2.625A14.674,14.674,0,0,0,266.751,85.981Zm2.958,7.941a2.389,2.389,0,0,1-2.356-2.355,2.356,2.356,0,1,1,4.711,0A2.389,2.389,0,0,1,269.709,93.922Z" transform="translate(-260.657 -73.946)"/></svg></a> -->
+      <div class=" d-flex justify-content-around mt-4" style=" padding: 0 20%;">
+        <div class="up">
+          <div class="params">
+            <%= link_to contact_path do  %>
+              <%= cl_image_tag "https://res.cloudinary.com/dhu7op4vc/image/upload/c_scale,w_32/v1601900588/PARAMETERS_mksd9n.png" %>
+            <% end %>
+          </div>
+          <div class="blason">
+            <% if  current_user.player_seasons[0].blason.present?%>
+              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                <%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "48px", height: "56px"%>
+              <% end %>
+            <% else %>
+              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <h3 class="typo">Pseudo: <%= current_user.pseudo %></h3>
+          <h3 class="typoleague mt-2">Division: <%= @championship[0].name %></h3>
+          <p>Mes statistiques en carrière</p>
+        </div>
+      </div>
+      <svg class=" center-block mx-auto mt-1" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+      <div class="container mt-3" style=" padding: 0 20%;"  >
+        <div class="d-flex justify-content-between">
+          <h3 class="typo mr-3">MATCHS</h3>
+          <h3 class="typo"><%= current_user.forecasts.count %></h3>
+        </div>
+        <div class="d-flex justify-content-between">
+          <h3 class="typo mr-3">RATIO</h3>
+          <% if  current_user.forecasts.where(confirmed: true).count == 0 || current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive?}.count == 0%>
+            <h3 class="typo">0%</h3>
+          <% else %>
+            <% ratio = (current_user.forecasts.select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
+            <h3 class="typo"><%= ratio %>%</h3>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-between">
+          <h3 class="typo mr-3">POINTS REMPORTÉS</h3>
+          <h3 class="typo"><%= current_user.forecasts.where(confirmed:true).sum{|p| p.points_win + p.points_lose}%></h3>
+        </div>
+        <div class="d-flex justify-content-between">
+          <h3 class="typo mr-3">POINTS FOOTBALL</h3>
+          <% points = 0 %>
+          <% current_user.forecasts.where(confirmed:true).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+            <% if forecast.match.sport == "football"%>
+            <% points += (forecast.points_win + forecast.points_lose) %>
+            <% end %>
+          <% end %>
+          <h3 class="typo"><%= points %></h3>
+        </div>
+        <div class="d-flex justify-content-between">
+          <h3 class="typo mr-3">POINTS BASKETBALL</h3>
+          <% pointsb = 0 %>
+          <% current_user.forecasts.where(confirmed:true,).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+            <% if forecast.match.sport == "basketball" %>
+            <% pointsb += (forecast.points_win + forecast.points_lose) %>
+            <% end %>
+          <% end %>
+          <h3 class="typo"><%= pointsb %></h3>
+        </div>
+      </div>
+      <svg class=" center-block mx-auto mt-2" xmlns="https://www.w3.org/2000/svg" width="247.39" height="0.5" viewBox="0 0 247.39 0.5"><defs><style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}</style></defs><line class="a" x1="247.39" transform="translate(0 0.25)"/></svg>
+  </div>
+</div>
+   <%=  render "shared/navbarbottom" %>
+
+<div class="d-flex flex-column align-items-center">
+  <h2 class="typo d-flex justify-content-center">Tous mes Championnats</h2>
+  <% seasons = {} %>
+  <% @seasons.each do |seaso| %>
+    <% seasons[seaso.start_date] = seaso.id %>
+  <% end %>
+    <% seasons.sort_by{|k,v| k.to_date}.reverse.each do |season, value| %>
+      <% if  current_user.forecasts.where(season_id: value, confirmed: true).empty? %>
+      <% else %>
+        <button type="button" class="typopo btn btn-success mb-5" data-toggle="modal" data-target="#seasonModalCenter-<%=value%>" data-whatever="@seasons">
+          <div class="d-flex flex-column">
+            <div>
+              <p>Début du Championnat <%= season %> </p>
+            </div>
+            <div>
+              Nombre de points : <%= current_user.forecasts.where(season_id: value).sum{|p| p.points_win + p.points_lose}%>
+            </div>
+          </div>
+        </button>
+      <% end %>
+    <!-- Modal -->
+    <div class="modal fade" id="seasonModalCenter-<%=value%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header sticky pt-5">
+              <h2 class="tit text-center">MES PRONOSTICS</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="info container mt-3 py-2" style=" padding: 0 20%;" >
+              <div class="d-flex justify-content-between">
+                <h3 class="typo mr-3">MATCHS</h3>
+                <h3 class="typo"><%= current_user.forecasts.where(confirmed: true, season_id: value).count %>/40</h3>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">RATIO</h3>
+                <% if  current_user.forecasts.where(confirmed: true, season_id: value).count == 0 || current_user.forecasts.where(confirmed: true, season_id: value).select{|v| v.points_win.positive?}.count == 0%>
+                  <h3 class="typopo">0%</h3>
+                <% else %>
+                  <% ratio = (current_user.forecasts.where(confirmed: true, season_id: value).select{|v| v.points_win.positive?}.count/current_user.forecasts.where(confirmed: true, season_id: value).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
+                  <h3 class="typopo"><%= ratio %>%</h3>
+                <% end %>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">POINTS REMPORTÉS</h3>
+                <h3 class="typopo"><%= current_user.forecasts.where(season_id: value).sum{|p| p.points_win + p.points_lose} %></h3>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">POINTS FOOTBALL</h3>
+                <% points = 0 %>
+                <% current_user.forecasts.where(confirmed:true, season_id: value).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+                  <% if forecast.match.sport == "football" %>
+                    <% points += (forecast.points_win + forecast.points_lose) %>
+                  <% else %>
+                  <% end %>
+                <% end %>
+                <h3 class="typopo"><%= points %></h3>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h3 class="typopo mr-3">POINTS BASKETBALL</h3>
+                <% pointsb = 0 %>
+                <% current_user.forecasts.where(confirmed:true, season_id: value).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
+                  <% if forecast.match.sport == "basketball" %>
+                    <% pointsb += (forecast.points_win + forecast.points_lose) %>
+                  <% else %>
+                  <% end %>
+                <% end %>
+                <h3 class="typopo"><%= pointsb %></h3>
+              </div>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-between flex-row m-3 border-bottom">
+                  <h3 class="typopo d-flex justify-content-center">DOMICILE</h3>
+                  <h3 class="typopo d-flex justify-content-center">PRONO</h3>
+                  <h3 class="typopo d-flex justify-content-center">EXTERIEUR</h3>
+                </div>
+              <% current_user.forecasts.where(confirmed: true, season_id: value).sort_by{|v| v.match.kick_off}.each do |forecast| %>
+                <div class="d-flex flex-row justify-content-around mb-4 mt-4" >
+                  <div class="d-flex flex-column align-items-center col-4">
+                    <div class="row">
+                      <h3 class="typopo"><%= image_tag "#{forecast.match.team_home_logo_url}", width: 50, alt: "Équipe à domicile" %></h3>
+                    </div>
+                    <div class="row text-align-center">
+                      <h3 class="typopo"><%= forecast.match.team_home %></h3>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center">
+                    <% if  forecast.outcome == "NULL"%>
+                      <p class="typopo text-center">Nul</p>
+                    <% elsif forecast.match.sport == "basketball" && forecast.outcome == "3" %>
+                      <p class="typopo text-center">25 points ou plus <%= forecast.match.nom_buteur_1 %></p>
+                    <% elsif forecast.match.sport == "basketball" && forecast.outcome == "4" %>
+                      <p class="typopo text-center">25 points ou plus <%= forecast.match.nom_buteur_2 %></p>
+                    <% elsif forecast.outcome == "3" %>
+                      <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_1 %></p>
+                    <% elsif forecast.outcome == "4" %>
+                      <p class="typopo text-center">Buteur <%= forecast.match.nom_buteur_2 %></p>
+                    <% elsif forecast.outcome == "7" %>
+                      <p class="typopo text-center">But pour les 2 équipes OUI</p>
+                    <% elsif forecast.outcome == "8" %>
+                      <p class="typopo text-center">But pour les 2 équipes NON</p>
+                    <% elsif forecast.outcome == "9" %>
+                      <p class="typopo text-center">Moins de 2.5 buts dans le match</p>
+                    <% elsif forecast.outcome == "10" %>
+                      <p class="typopo text-center">Plus de 2.5 buts dans le match</p>
+                    <% elsif forecast.outcome == "1" %>
+                      <p class="typopo text-center">Vainqueur <%= forecast.match.team_home %></p>
+                    <% elsif forecast.outcome == "2" %>
+                      <p class="typopo text-center">Vainqueur <%= forecast.match.team_away %></p>
+                    <% end %>
+                    <% if  forecast.points_win.positive?%>
+                      <p class="typopo text-center text-success">+<%= forecast.points_win %>pts</p>
+                    <% elsif forecast.points_lose.negative?%>
+                      <p class="typopo text-center text-danger"><%= forecast.points_lose %>pts</p>
+                    <% else forecast.points_lose.zero? && forecast.points_lose.zero? %>
+                      <% if forecast.outcome == "1" %>
+                        <p class="typopo text-success-center"><%= forecast.match.points_home.round %>pts</p>
+                      <% elsif forecast.outcome == "2"%>
+                        <p class="typopo text-success-center"><%= forecast.match.points_away.round %>pts</p>
+                      <% elsif forecast.outcome == "3" %>
+                        <p class="typopo text-success-center"><%= forecast.match.buteur_1.round %>pts</p>
+                      <% elsif forecast.outcome == "4" %>
+                        <p class="typopo text-success-center"><%= forecast.match.buteur_2.round %>pts</p>
+                      <% elsif forecast.outcome == "7" %>
+                        <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_yes.round %>pts</p>
+                      <% elsif forecast.outcome == "8" %>
+                        <p class="typopo text-success-center"><%= forecast.match.goal_two_teams_no.round %>pts</p>
+                      <% elsif forecast.outcome == "9" %>
+                        <p class="typopo text-success-center"><%= forecast.match.under_25.round %>pts</p>
+                      <% elsif forecast.outcome == "10" %>
+                        <p class="typopo text-success-center"><%= forecast.match.over_25.round %>pts</p>
+                      <% else forecast.outcome == "NULL"%>
+                        <p class="typopo text-success-center"><%= forecast.match.points_draw.round %>pts</p>
+                      <% end %>
+                    <% end %>
+                    <% if forecast.match.result.present? %>
+                      <p class="typopo text-success-center">Score final : <%= forecast.match.result %></p>
+                    <% elsif forecast.match.result_home.present? && forecast.match.result_away.present? %>
+                      <p class="typopo text-success-center">Score final : <%= forecast.match.result_home %> - <%= forecast.match.result_away %></p>
+                    <% else %>
+                    <% end %>
+                  </div>
+                  <div class="d-flex flex-column align-items-center text-align-center col-4 ">
+                    <h3 class="typopo"><%= image_tag "#{forecast.match.team_away_logo_url}", width: 50, alt: "Équipe à l'extérieur" %></h3>
+                    <h3 class="typopo"><%= forecast.match.team_away %></h3>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+<footer class="footer-match">
+  <div class="foot-phrase">
+    <p>Nos discussions sport 👉</p>
+  </div>
+  <div class="footer-links" style="display: flex; align-items: center;">
+    <a href="twitter://STORPE4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-twitter"></i></a>
+    <a href="fb://group//1039435053063312" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-facebook-square"></i></a>
+    <a href="instagram://storpe4" style="text-decoration: none; padding: 0px 10px;"><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+<!-- One Signal Code -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "71fa6b4f-43e7-460d-84ad-80bb84467b01",
+        });
+      });
+    </script>
+    <!-- END One Signal Code -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fa03faa8c2147b7"></script>
+
+
