@@ -129,26 +129,19 @@
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-contentlosc">
         <div class="modal-header stickylosc pt-5">
-          <nav class="nav nav-pills nav-justified">
-            <a class="nav-link bg-transparent text-light typopo" aria-current="page">CLASSEMENT GÉNÉRAL</a>
-            <a class="nav-link bg-transparent text-light typopo" aria-current="page">CLASSEMENT CLUB</a>
+          <nav class="nav nav-pills nav-justified" id="ex1" role="tablist">
+            <a class="nav-link bg-transparent text-light typopo p-1" aria-current="page" id="ex1-tab-1" data-toggle="tab" href="#ex1-pills-1">CLASSEMENT GÉNÉRAL</a>
+            <p class="typopo m-0">|</p>
+            <a class="nav-link bg-transparent text-light typopo p-1" aria-current="page" id="ex1-tab-2" data-toggle="tab" href="#ex1-pills-2">CLASSEMENT CLUB</a>
           </nav>
-          <!-- <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link bg-transparent text-light" aria-current="page">CLASSEMENT GÉNÉRAL</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link bg-transparent text-light" aria-current="page">CLASSEMENT CLUB</a>
-            </li>
-          </ul> -->
           <!-- <h5 class="modal-title" id="exampleModalLabel">CLASSEMENT</h5> -->
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="tab-pane active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
           <div class="d-flex flex-column m-auto mt-4">
             <table class="table table-borderless mb-4">
               <thead>
