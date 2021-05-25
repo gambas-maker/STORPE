@@ -175,9 +175,9 @@
                             </td>
                             <td class="clalosc"><%=  current_user.pseudo %></td>
                           <% end %>
-                          <%#  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosm + pronosb %></td>
                           <td class="cla"><%=  valeur %></td>
                         </tr>
                       <% elsif classement.sort_by{|k,v|v}.reverse.first(8).to_h.include?(playerseason) %>
@@ -196,9 +196,9 @@
                                 <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
-                          <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
                           <td><%=  valeur %></td>
                         </tr>
                       <% else %>
@@ -217,9 +217,9 @@
                                 <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
-                          <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
                           <td><%=  valeur %></td>
                         </tr>
                       <% end %>
@@ -238,9 +238,9 @@
                               </td>
                               <td class="clalosc"><%=  current_user.pseudo %></td>
                             <% end %>
-                            <%#  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%#  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= playerseason.number_of_points %></td>
+                            <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                            <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                            <td class="cla"><%= pronosm + pronosb %></td>
                             <td class="cla"><%=  valeur %></td>
                           </tr>
                       <% elsif classement.sort_by{|k,v|v}.reverse.first(6).to_h.include?(playerseason) %>
@@ -259,9 +259,9 @@
                                   <%=  playerseason.user.pseudo %>
                                 </td>
                               </div>
-                            <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= playerseason.number_of_points %></td>
+                            <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                            <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                            <td class="cla"><%= pronosg + pronosn %></td>
                             <td><%=  valeur %></td>
                           </tr>
                       <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
@@ -280,9 +280,9 @@
                                     <%=  playerseason.user.pseudo %>
                                   </td>
                                 </div>
-                              <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                              <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                              <td class="cla"><%= playerseason.number_of_points %></td>
+                              <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                              <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                              <td class="cla"><%= pronosg + pronosn %></td>
                               <td><%=  valeur %></td>
                             </tr>
                       <% else %>
@@ -301,9 +301,9 @@
                                 <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
-                          <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
                           <td><%=  valeur %></td>
                         </tr>
                       <% end %>
@@ -322,9 +322,9 @@
                               </td>
                               <td class="clalosc"><%=  current_user.pseudo %></td>
                             <% end %>
-                            <%#  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%#  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= current_user.player_seasons[0].number_of_points %></td>
+                            <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                            <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                            <td class="cla"><%= pronosm + pronosb %></td>
                             <td class="cla"><%=  valeur %></td>
                           </tr>
                       <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
@@ -340,12 +340,12 @@
                             <% end %>
                               <div class="dropdown">
                                  <td>
-                                  <%=  playerseason.user.pseudo %>
+                                    <%=  playerseason.user.pseudo %>
                                 </td>
                               </div>
-                            <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= playerseason.number_of_points %></td>
+                            <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                            <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                            <td class="cla"><%= pronosg + pronosn %></td>
                             <td><%=  valeur %></td>
                           </tr>
                       <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
@@ -385,9 +385,9 @@
                                   <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
-                          <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
                           <td><%=  valeur %></td>
                         </tr>
                       <% end %>
@@ -406,9 +406,9 @@
                             </td>
                             <td class="clalosc"><%=  current_user.pseudo %></td>
                           <% end %>
-                          <%#  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosm + pronosb %></td>
                           <td class="cla"><%=  valeur %></td>
                         </tr>
                       <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
@@ -427,9 +427,9 @@
                                 <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
-                          <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
                           <td><%=  valeur %></td>
                         </tr>
                       <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
@@ -448,9 +448,9 @@
                                   <%=  playerseason.user.pseudo %>
                                 </td>
                               </div>
-                            <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= playerseason.number_of_points %></td>
+                            <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                            <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                            <td class="cla"><%= pronosg + pronosn %></td>
                             <td><%=  valeur %></td>
                           </tr>
 
@@ -470,9 +470,9 @@
                                 <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
-                          <%#  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%#  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= playerseason.number_of_points %></td>
+                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                          <td class="cla"><%= pronosg + pronosn %></td>
                           <td><%=  valeur %></td>
                         </tr>
                       <% end %>
