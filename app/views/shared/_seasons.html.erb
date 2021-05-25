@@ -188,34 +188,8 @@
                             </td>
                           <% end %>
                             <div class="dropdown">
-                               <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <%=  playerseason.user.pseudo %>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light">0%</p>
-                                <% else %>
-                                  <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                <% end %>
-                                <% pointsf = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "football" %>
-                                    <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Football</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                <% pointsba = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "basketball"%>
-                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                              </div>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
                           <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -235,34 +209,8 @@
                             </td>
                           <% end %>
                             <div class="dropdown">
-                              <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <%=  playerseason.user.pseudo %>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light">0%</p>
-                                <% else %>
-                                  <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                <% end %>
-                                <% pointsf = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "football" %>
-                                    <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Football</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                <% pointsba = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "basketball"%>
-                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                              </div>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
                           <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -303,34 +251,8 @@
                               </td>
                             <% end %>
                               <div class="dropdown">
-                                 <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <%=  playerseason.user.pseudo %>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                    <p class="dropdown-item font-weight-bold">Ratio</p>
-                                    <p class="dropdown-item font-weight-light">0%</p>
-                                  <% else %>
-                                    <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                    <p class="dropdown-item font-weight-bold">Ratio</p>
-                                    <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                  <% end %>
-                                  <% pointsf = 0 %>
-                                  <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                    <% if forecast.match.sport == "football" %>
-                                      <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                    <% end %>
-                                  <% end %>
-                                  <p class="dropdown-item font-weight-bold">Points Football</p>
-                                  <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                  <% pointsba = 0 %>
-                                  <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                    <% if forecast.match.sport == "basketball"%>
-                                      <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                    <% end %>
-                                  <% end %>
-                                  <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                  <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                                </div>
+                                <td>
+                                  <%=  playerseason.user.pseudo %>
                                 </td>
                               </div>
                             <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -350,34 +272,8 @@
                                 </td>
                               <% end %>
                                 <div class="dropdown">
-                                   <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <%=  playerseason.user.pseudo %>
-                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                      <p class="dropdown-item font-weight-bold">Ratio</p>
-                                      <p class="dropdown-item font-weight-light">0%</p>
-                                    <% else %>
-                                      <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                      <p class="dropdown-item font-weight-bold">Ratio</p>
-                                      <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                    <% end %>
-                                    <% pointsf = 0 %>
-                                    <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                      <% if forecast.match.sport == "football" %>
-                                        <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                      <% end %>
-                                    <% end %>
-                                    <p class="dropdown-item font-weight-bold">Points Football</p>
-                                    <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                    <% pointsba = 0 %>
-                                    <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                      <% if forecast.match.sport == "basketball"%>
-                                        <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                      <% end %>
-                                    <% end %>
-                                    <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                    <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                                  </div>
+                                  <td>
+                                    <%=  playerseason.user.pseudo %>
                                   </td>
                                 </div>
                               <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -397,34 +293,8 @@
                             </td>
                           <% end %>
                             <div class="dropdown">
-                               <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <%=  playerseason.user.pseudo %>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light">0%</p>
-                                <% else %>
-                                  <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                <% end %>
-                                <% pointsf = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "football" %>
-                                    <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Football</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                <% pointsba = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "basketball"%>
-                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                              </div>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
                           <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -465,34 +335,8 @@
                               </td>
                             <% end %>
                               <div class="dropdown">
-                                 <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <%=  playerseason.user.pseudo %>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                    <p class="dropdown-item font-weight-bold">Ratio</p>
-                                    <p class="dropdown-item font-weight-light">0%</p>
-                                  <% else %>
-                                    <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                    <p class="dropdown-item font-weight-bold">Ratio</p>
-                                    <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                  <% end %>
-                                  <% pointsf = 0 %>
-                                  <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                    <% if forecast.match.sport == "football" %>
-                                      <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                    <% end %>
-                                  <% end %>
-                                  <p class="dropdown-item font-weight-bold">Points Football</p>
-                                  <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                  <% pointsba = 0 %>
-                                  <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                    <% if forecast.match.sport == "basketball"%>
-                                      <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                    <% end %>
-                                  <% end %>
-                                  <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                  <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                                </div>
+                                <td>
+                                  <%=  playerseason.user.pseudo %>
                                 </td>
                               </div>
                             <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -512,34 +356,8 @@
                                 </td>
                               <% end %>
                                 <div class="dropdown">
-                                   <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <%=  playerseason.user.pseudo %>
-                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                      <p class="dropdown-item font-weight-bold">Ratio</p>
-                                      <p class="dropdown-item font-weight-light">0%</p>
-                                    <% else %>
-                                      <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                      <p class="dropdown-item font-weight-bold">Ratio</p>
-                                      <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                    <% end %>
-                                    <% pointsf = 0 %>
-                                    <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                      <% if forecast.match.sport == "football" %>
-                                        <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                      <% end %>
-                                    <% end %>
-                                    <p class="dropdown-item font-weight-bold">Points Football</p>
-                                    <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                    <% pointsba = 0 %>
-                                    <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                      <% if forecast.match.sport == "basketball"%>
-                                        <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                      <% end %>
-                                    <% end %>
-                                    <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                    <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                                  </div>
+                                  <td>
+                                    <%=  playerseason.user.pseudo %>
                                   </td>
                                 </div>
                               <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -559,34 +377,8 @@
                             </td>
                           <% end %>
                             <div class="dropdown">
-                               <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <%=  playerseason.user.pseudo %>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light">0%</p>
-                                <% else %>
-                                  <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                <% end %>
-                                <% pointsf = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "football" %>
-                                    <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Football</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                <% pointsba = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "basketball"%>
-                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                              </div>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
                           <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -627,34 +419,8 @@
                             </td>
                           <% end %>
                             <div class="dropdown">
-                               <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <%=  playerseason.user.pseudo %>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light">0%</p>
-                                <% else %>
-                                  <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                <% end %>
-                                <% pointsf = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "football" %>
-                                    <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Football</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                <% pointsba = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "basketball"%>
-                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                              </div>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
                           <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -674,34 +440,8 @@
                               </td>
                             <% end %>
                               <div class="dropdown">
-                                 <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <%=  playerseason.user.pseudo %>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                    <p class="dropdown-item font-weight-bold">Ratio</p>
-                                    <p class="dropdown-item font-weight-light">0%</p>
-                                  <% else %>
-                                    <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                    <p class="dropdown-item font-weight-bold">Ratio</p>
-                                    <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                  <% end %>
-                                  <% pointsf = 0 %>
-                                  <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                    <% if forecast.match.sport == "football" %>
-                                      <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                    <% end %>
-                                  <% end %>
-                                  <p class="dropdown-item font-weight-bold">Points Football</p>
-                                  <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                  <% pointsba = 0 %>
-                                  <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                    <% if forecast.match.sport == "basketball"%>
-                                      <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                    <% end %>
-                                  <% end %>
-                                  <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                  <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                                </div>
+                                <td>
+                                  <%=  playerseason.user.pseudo %>
                                 </td>
                               </div>
                             <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
@@ -722,34 +462,8 @@
                             </td>
                           <% end %>
                             <div class="dropdown">
-                               <td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <%=  playerseason.user.pseudo %>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <% if  playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).count == 0 || playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count == 0%>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light">0%</p>
-                                <% else %>
-                                  <% ratio = (playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive?}.count/playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.count.to_f * 100).round %>
-                                  <p class="dropdown-item font-weight-bold">Ratio</p>
-                                  <p class="dropdown-item font-weight-light"><%= ratio %>%</p>
-                                <% end %>
-                                <% pointsf = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "football" %>
-                                    <% pointsf += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Football</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsf %></p>
-                                <% pointsba = 0 %>
-                                <% playerseason.forecasts.where(confirmed:true, season_id:Season.last.id).select{|v| v.points_win.positive? || v.points_lose.negative?}.each do |forecast| %>
-                                  <% if forecast.match.sport == "basketball"%>
-                                    <% pointsba += (forecast.points_win + forecast.points_lose) %>
-                                  <% end %>
-                                <% end %>
-                                <p class="dropdown-item font-weight-bold">Points Basketball</p>
-                                <p class="dropdown-item font-weight-light"><%= pointsba %></p>
-                              </div>
+                              <td>
+                                <%=  playerseason.user.pseudo %>
                               </td>
                             </div>
                           <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>

@@ -128,373 +128,390 @@
   </div>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="tab-dialog" role="document" style="max-width: 500px; margin: 1.75rem auto;">
-      <div class="tab-content losc">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content losc">
         <div class="modal-header stickylosc pt-5">
-          <nav class="nav nav-pills nav-justified" id="ex1" role="tablist">
-            <a class="nav-link bg-transparent text-light typopo p-1 active" aria-current="page" id="ex1-tab-1" data-toggle="tab" href="#ex1-pills-1">CLASSEMENT GÉNÉRAL</a>
-            <p class="typopo m-0">|</p>
-            <a class="nav-link bg-transparent text-light typopo p-1" aria-current="page" id="ex1-tab-2" data-toggle="tab" href="#ex1-pills-2">CLASSEMENT CLUB</a>
-          </nav>
-          <!-- <h5 class="modal-title" id="exampleModalLabel">CLASSEMENT</h5> -->
+          <h5 class="modal-title" id="exampleModalLabel">CLASSEMENT</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="tab-pane active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-          <div class="d-flex flex-column m-auto mt-4">
-            <table class="table table-borderless mb-4">
-              <thead>
-                <tr>
-                  <th scope="col">POS</th>
-                  <th scope="col">EMBLÈME</th>
-                  <th scope="col">NOM</th>
-                  <th scope="col">Pronos</th>
-                  <th scope="col">PTS</th>
-                </tr>
-              </thead>
-              <% classement = {} %>
-              <% x = 0 %>
-              <% @playerseasons.each do |playerseason| %>
-                <% classement[playerseason] = playerseason.number_of_points %>
-              <% end %>
-                <% classement.to_a.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
-                  <tbody>
-                    <% if playerseason.championship.name == "Amateur" %>
-                      <% if current_user.id == playerseason.user_id%>
-                        <tr>
-                          <th class="cla" scope="row"><%= x += 1 %></th>
-                          <% if  current_user.player_seasons[0].blason.present? %>
-                            <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
-                            <td class="cla"><%= current_user.pseudo %> </td>
-                          <% else %>
-                            <td>
-                              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
-                                <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
-                              <% end %>
-                            </td>
-                            <td class="clalosc"><%=  current_user.pseudo %></td>
-                          <% end %>
-                          <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosm + pronosb %></td>
-                          <td class="cla"><%=  valeur %></td>
-                        </tr>
-                      <% elsif classement.sort_by{|k,v|v}.reverse.first(8).to_h.include?(playerseason) %>
-                        <tr class="monte">
-                          <th scope="row"><%= x += 1 %></th>
-                          <% if playerseason.blason == nil %>
-                            <td>
-                               <i class="fas fa-plus-circle" style="color: white;"></i>
-                            </td>
-                          <% else %>
-                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                            </td>
-                          <% end %>
-                            <div class="dropdown">
-                              <td>
-                                <%=  playerseason.user.pseudo %>
-                              </td>
-                            </div>
-                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosg + pronosn %></td>
-                          <td><%=  valeur %></td>
-                        </tr>
-                      <% else %>
-                        <tr>
-                          <th scope="row"><%= x += 1 %></th>
-                          <% if playerseason.blason == nil %>
-                            <td>
-                               <i class="fas fa-plus-circle" style="color: white;"></i>
-                            </td>
-                          <% else %>
-                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                            </td>
-                          <% end %>
-                            <div class="dropdown">
-                              <td>
-                                <%=  playerseason.user.pseudo %>
-                              </td>
-                            </div>
-                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosg + pronosn %></td>
-                          <td><%=  valeur %></td>
-                        </tr>
-                      <% end %>
-                    <% elsif playerseason.championship.name == "Semi-pro" %>
-                      <% if current_user.id == playerseason.user_id%>
-                          <tr>
-                            <th class="cla" scope="row"><%= x += 1 %></th>
-                            <% if  current_user.player_seasons[0].blason.present? %>
-                              <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
-                              <td class="cla"><%= current_user.pseudo %> </td>
-                            <% else %>
-                              <td>
-                                <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
-                                  <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
-                                <% end %>
-                              </td>
-                              <td class="clalosc"><%=  current_user.pseudo %></td>
-                            <% end %>
-                            <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= pronosm + pronosb %></td>
-                            <td class="cla"><%=  valeur %></td>
-                          </tr>
-                      <% elsif classement.sort_by{|k,v|v}.reverse.first(6).to_h.include?(playerseason) %>
-                          <tr class="monte">
-                            <th scope="row"><%= x += 1 %></th>
-                            <% if playerseason.blason == nil %>
-                              <td>
-                                 <i class="fas fa-plus-circle" style="color: white;"></i>
-                              </td>
-                            <% else %>
-                              <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                              </td>
-                            <% end %>
-                              <div class="dropdown">
-                                <td>
-                                  <%=  playerseason.user.pseudo %>
-                                </td>
-                              </div>
-                            <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= pronosg + pronosn %></td>
-                            <td><%=  valeur %></td>
-                          </tr>
-                      <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
-                            <tr class="descente">
-                              <th scope="row"><%= x += 1 %></th>
-                              <% if playerseason.blason == nil %>
-                                <td>
-                                   <i class="fas fa-plus-circle" style="color: white;"></i>
-                                </td>
-                              <% else %>
-                                <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                                </td>
-                              <% end %>
-                                <div class="dropdown">
-                                  <td>
-                                    <%=  playerseason.user.pseudo %>
-                                  </td>
-                                </div>
-                              <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                              <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                              <td class="cla"><%= pronosg + pronosn %></td>
-                              <td><%=  valeur %></td>
-                            </tr>
-                      <% else %>
-                        <tr>
-                          <th scope="row"><%= x += 1 %></th>
-                          <% if playerseason.blason == nil %>
-                            <td>
-                               <i class="fas fa-plus-circle" style="color: white;"></i>
-                            </td>
-                          <% else %>
-                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                            </td>
-                          <% end %>
-                            <div class="dropdown">
-                              <td>
-                                <%=  playerseason.user.pseudo %>
-                              </td>
-                            </div>
-                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosg + pronosn %></td>
-                          <td><%=  valeur %></td>
-                        </tr>
-                      <% end %>
-                    <% elsif playerseason.championship.name == "Pro" %>
-                      <% if current_user.id == playerseason.user_id%>
-                          <tr>
-                            <th class="cla" scope="row"><%= x += 1 %></th>
-                            <% if  current_user.player_seasons[0].blason.present? %>
-                              <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
-                              <td class="cla"><%= current_user.pseudo %> </td>
-                            <% else %>
-                              <td>
-                                <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
-                                  <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
-                                <% end %>
-                              </td>
-                              <td class="clalosc"><%=  current_user.pseudo %></td>
-                            <% end %>
-                            <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= pronosm + pronosb %></td>
-                            <td class="cla"><%=  valeur %></td>
-                          </tr>
-                      <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
-                          <tr class="monte">
-                            <th scope="row"><%= x += 1 %></th>
-                            <% if playerseason.blason == nil %>
-                              <td>
-                                 <i class="fas fa-plus-circle" style="color: white;"></i>
-                              </td>
-                            <% else %>
-                              <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                              </td>
-                            <% end %>
-                              <div class="dropdown">
-                                 <td>
-                                    <%=  playerseason.user.pseudo %>
-                                </td>
-                              </div>
-                            <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= pronosg + pronosn %></td>
-                            <td><%=  valeur %></td>
-                          </tr>
-                      <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
-                            <tr class="descente">
-                              <th scope="row"><%= x += 1 %></th>
-                              <% if playerseason.blason == nil %>
-                                <td>
-                                   <i class="fas fa-plus-circle" style="color: white;"></i>
-                                </td>
-                              <% else %>
-                                <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                                </td>
-                              <% end %>
-                                <div class="dropdown">
-                                  <td>
-                                    <%=  playerseason.user.pseudo %>
-                                  </td>
-                                </div>
-                              <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                              <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                              <td class="cla"><%= pronosg + pronosn %></td>
-                              <td><%=  valeur %></td>
-                            </tr>
-                      <% else %>
-                        <tr>
-                          <th scope="row"><%= x += 1 %></th>
-                          <% if playerseason.blason == nil %>
-                            <td>
-                               <i class="fas fa-plus-circle" style="color: white;"></i>
-                            </td>
-                          <% else %>
-                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                            </td>
-                          <% end %>
-                            <div class="dropdown">
-                               <td>
-                                  <%=  playerseason.user.pseudo %>
-                              </td>
-                            </div>
-                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosg + pronosn %></td>
-                          <td><%=  valeur %></td>
-                        </tr>
-                      <% end %>
-                    <% else %>
-                     <% if current_user.id == playerseason.user_id%>
-                        <tr>
-                          <th class="cla" scope="row"><%= x += 1 %></th>
-                          <% if  current_user.player_seasons[0].blason.present? %>
-                            <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
-                            <td class="cla"><%= current_user.pseudo %> </td>
-                          <% else %>
-                            <td>
-                              <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
-                                <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
-                              <% end %>
-                            </td>
-                            <td class="clalosc"><%=  current_user.pseudo %></td>
-                          <% end %>
-                          <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosm + pronosb %></td>
-                          <td class="cla"><%=  valeur %></td>
-                        </tr>
-                      <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
-                        <tr class="monte">
-                          <th scope="row"><%= x += 1 %></th>
-                          <% if playerseason.blason == nil %>
-                            <td>
-                               <i class="fas fa-plus-circle" style="color: white;"></i>
-                            </td>
-                          <% else %>
-                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                            </td>
-                          <% end %>
-                            <div class="dropdown">
-                              <td>
-                                <%=  playerseason.user.pseudo %>
-                              </td>
-                            </div>
-                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosg + pronosn %></td>
-                          <td><%=  valeur %></td>
-                        </tr>
-                      <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
-                          <tr class="descente">
-                            <th scope="row"><%= x += 1 %></th>
-                            <% if playerseason.blason == nil %>
-                              <td>
-                                 <i class="fas fa-plus-circle" style="color: white;"></i>
-                              </td>
-                            <% else %>
-                              <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                              </td>
-                            <% end %>
-                              <div class="dropdown">
-                                <td>
-                                  <%=  playerseason.user.pseudo %>
-                                </td>
-                              </div>
-                            <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                            <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                            <td class="cla"><%= pronosg + pronosn %></td>
-                            <td><%=  valeur %></td>
-                          </tr>
-
-                      <% else playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? %>
-                        <tr>
-                          <th scope="row"><%= x += 1 %></th>
-                          <% if playerseason.blason == nil %>
-                            <td>
-                               <i class="fas fa-plus-circle" style="color: white;"></i>
-                            </td>
-                          <% else %>
-                            <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
-                            </td>
-                          <% end %>
-                            <div class="dropdown">
-                              <td>
-                                <%=  playerseason.user.pseudo %>
-                              </td>
-                            </div>
-                          <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
-                          <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
-                          <td class="cla"><%= pronosg + pronosn %></td>
-                          <td><%=  valeur %></td>
-                        </tr>
-                      <% end %>
+        <div class="modal-body">
+          <div role="tabpanel">
+            <nav class="nav nav-tabs nav-justified" id="ex1" role="tablist">
+              <a class="nav-link bg-transparent text-light typopo p-1 active" aria-current="page" id="ex1-tab-1" data-toggle="tab" href="#ex1-pills-1">CLASSEMENT GÉNÉRAL</a>
+             <!--  <p class="typopo m-0">|</p> -->
+              <a class="nav-link bg-transparent text-light typopo p-1" aria-current="page" id="ex1-tab-2" data-toggle="tab" href="#ex1-pills-2">CLASSEMENT CLUB</a>
+            </nav>
+            <div class="tab-content">
+              <div class="tab-pane active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                <div class="d-flex flex-column m-auto mt-4">
+                  <table class="table mb-4">
+                    <thead>
+                      <tr>
+                        <th scope="col">POS</th>
+                        <th scope="col">EMBLÈME</th>
+                        <th scope="col">NOM</th>
+                        <th scope="col">Pronos</th>
+                        <th scope="col">PTS</th>
+                      </tr>
+                    </thead>
+                    <% classement = {} %>
+                    <% x = 0 %>
+                    <% @playerseasons.each do |playerseason| %>
+                      <% classement[playerseason] = playerseason.number_of_points %>
                     <% end %>
-                  </tbody>
-              <% end %>
-            </table>
-          </div>
-        </div>
-        <div class="tab-pane" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-          <div class="d-flex flex-column m-auto mt-4">
-            <table class="table table-borderless mb-4">
-              <thead>
-                <tr>
-                  <th scope="col">POS</th>
-                  <th scope="col">EMBLÈME</th>
-                  <th scope="col">NOM</th>
-                  <th scope="col">Pronos</th>
-                  <th scope="col">PTS</th>
-                </tr>
-              </thead>
-            </table>
+                    <% classement.to_a.sort_by {|k,v| v}.reverse.each do |playerseason, valeur| %>
+                      <tbody>
+                          <% if playerseason.championship.name == "Amateur" %>
+                            <% if current_user.id == playerseason.user_id%>
+                              <tr>
+                                <th class="cla" scope="row"><%= x += 1 %></th>
+                                <% if  current_user.player_seasons[0].blason.present? %>
+                                  <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
+                                  <td class="cla"><%= current_user.pseudo %> </td>
+                                <% else %>
+                                  <td>
+                                    <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                                      <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+                                    <% end %>
+                                  </td>
+                                  <td class="clalosc"><%=  current_user.pseudo %></td>
+                                <% end %>
+                                <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosm + pronosb %></td>
+                                <td class="cla"><%=  valeur %></td>
+                              </tr>
+                            <% elsif classement.sort_by{|k,v|v}.reverse.first(8).to_h.include?(playerseason) %>
+                              <tr class="monte">
+                                <th scope="row"><%= x += 1 %></th>
+                                <% if playerseason.blason == nil %>
+                                  <td>
+                                     <i class="fas fa-plus-circle" style="color: white;"></i>
+                                  </td>
+                                <% else %>
+                                  <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                  </td>
+                                <% end %>
+                                  <div class="dropdown">
+                                    <td>
+                                      <%=  playerseason.user.pseudo %>
+                                    </td>
+                                  </div>
+                                <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosg + pronosn %></td>
+                                <td><%=  valeur %></td>
+                              </tr>
+                            <% else %>
+                              <tr>
+                                <th scope="row"><%= x += 1 %></th>
+                                <% if playerseason.blason == nil %>
+                                  <td>
+                                     <i class="fas fa-plus-circle" style="color: white;"></i>
+                                  </td>
+                                <% else %>
+                                  <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                  </td>
+                                <% end %>
+                                  <div class="dropdown">
+                                    <td>
+                                      <%=  playerseason.user.pseudo %>
+                                    </td>
+                                  </div>
+                                <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosg + pronosn %></td>
+                                <td><%=  valeur %></td>
+                              </tr>
+                            <% end %>
+                          <% elsif playerseason.championship.name == "Semi-pro" %>
+                            <% if current_user.id == playerseason.user_id%>
+                                <tr>
+                                  <th class="cla" scope="row"><%= x += 1 %></th>
+                                  <% if  current_user.player_seasons[0].blason.present? %>
+                                    <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
+                                    <td class="cla"><%= current_user.pseudo %> </td>
+                                  <% else %>
+                                    <td>
+                                      <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                                        <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+                                      <% end %>
+                                    </td>
+                                    <td class="clalosc"><%=  current_user.pseudo %></td>
+                                  <% end %>
+                                  <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                  <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                  <td class="cla"><%= pronosm + pronosb %></td>
+                                  <td class="cla"><%=  valeur %></td>
+                                </tr>
+                            <% elsif classement.sort_by{|k,v|v}.reverse.first(6).to_h.include?(playerseason) %>
+                                <tr class="monte">
+                                  <th scope="row"><%= x += 1 %></th>
+                                  <% if playerseason.blason == nil %>
+                                    <td>
+                                       <i class="fas fa-plus-circle" style="color: white;"></i>
+                                    </td>
+                                  <% else %>
+                                    <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                    </td>
+                                  <% end %>
+                                    <div class="dropdown">
+                                      <td>
+                                        <%=  playerseason.user.pseudo %>
+                                      </td>
+                                    </div>
+                                  <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                  <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                  <td class="cla"><%= pronosg + pronosn %></td>
+                                  <td><%=  valeur %></td>
+                                </tr>
+                            <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
+                                  <tr class="descente">
+                                    <th scope="row"><%= x += 1 %></th>
+                                    <% if playerseason.blason == nil %>
+                                      <td>
+                                         <i class="fas fa-plus-circle" style="color: white;"></i>
+                                      </td>
+                                    <% else %>
+                                      <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                      </td>
+                                    <% end %>
+                                      <div class="dropdown">
+                                        <td>
+                                          <%=  playerseason.user.pseudo %>
+                                        </td>
+                                      </div>
+                                    <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                    <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                    <td class="cla"><%= pronosg + pronosn %></td>
+                                    <td><%=  valeur %></td>
+                                  </tr>
+                            <% else %>
+                              <tr>
+                                <th scope="row"><%= x += 1 %></th>
+                                <% if playerseason.blason == nil %>
+                                  <td>
+                                     <i class="fas fa-plus-circle" style="color: white;"></i>
+                                  </td>
+                                <% else %>
+                                  <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                  </td>
+                                <% end %>
+                                  <div class="dropdown">
+                                    <td>
+                                      <%=  playerseason.user.pseudo %>
+                                    </td>
+                                  </div>
+                                <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosg + pronosn %></td>
+                                <td><%=  valeur %></td>
+                              </tr>
+                            <% end %>
+                          <% elsif playerseason.championship.name == "Pro" %>
+                            <% if current_user.id == playerseason.user_id%>
+                                <tr>
+                                  <th class="cla" scope="row"><%= x += 1 %></th>
+                                  <% if  current_user.player_seasons[0].blason.present? %>
+                                    <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
+                                    <td class="cla"><%= current_user.pseudo %> </td>
+                                  <% else %>
+                                    <td>
+                                      <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                                        <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+                                      <% end %>
+                                    </td>
+                                    <td class="clalosc"><%=  current_user.pseudo %></td>
+                                  <% end %>
+                                  <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                  <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                  <td class="cla"><%= pronosm + pronosb %></td>
+                                  <td class="cla"><%=  valeur %></td>
+                                </tr>
+                            <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
+                                <tr class="monte">
+                                  <th scope="row"><%= x += 1 %></th>
+                                  <% if playerseason.blason == nil %>
+                                    <td>
+                                       <i class="fas fa-plus-circle" style="color: white;"></i>
+                                    </td>
+                                  <% else %>
+                                    <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                    </td>
+                                  <% end %>
+                                    <div class="dropdown">
+                                       <td>
+                                          <%=  playerseason.user.pseudo %>
+                                      </td>
+                                    </div>
+                                  <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                  <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                  <td class="cla"><%= pronosg + pronosn %></td>
+                                  <td><%=  valeur %></td>
+                                </tr>
+                            <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
+                                  <tr class="descente">
+                                    <th scope="row"><%= x += 1 %></th>
+                                    <% if playerseason.blason == nil %>
+                                      <td>
+                                         <i class="fas fa-plus-circle" style="color: white;"></i>
+                                      </td>
+                                    <% else %>
+                                      <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                      </td>
+                                    <% end %>
+                                      <div class="dropdown">
+                                        <td>
+                                          <%=  playerseason.user.pseudo %>
+                                        </td>
+                                      </div>
+                                    <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                    <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                    <td class="cla"><%= pronosg + pronosn %></td>
+                                    <td><%=  valeur %></td>
+                                  </tr>
+                            <% else %>
+                              <tr>
+                                <th scope="row"><%= x += 1 %></th>
+                                <% if playerseason.blason == nil %>
+                                  <td>
+                                     <i class="fas fa-plus-circle" style="color: white;"></i>
+                                  </td>
+                                <% else %>
+                                  <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                  </td>
+                                <% end %>
+                                  <div class="dropdown">
+                                     <td>
+                                        <%=  playerseason.user.pseudo %>
+                                    </td>
+                                  </div>
+                                <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosg + pronosn %></td>
+                                <td><%=  valeur %></td>
+                              </tr>
+                            <% end %>
+                          <% else %>
+                           <% if current_user.id == playerseason.user_id%>
+                              <tr>
+                                <th class="cla" scope="row"><%= x += 1 %></th>
+                                <% if  current_user.player_seasons[0].blason.present? %>
+                                  <td class="cla" ><%= cl_image_tag current_user.player_seasons[0].blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "25px", height: "30px" %></td>
+                                  <td class="cla"><%= current_user.pseudo %> </td>
+                                <% else %>
+                                  <td>
+                                    <%= link_to edit_player_season_path(current_user.player_seasons[0].id) do %>
+                                      <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
+                                    <% end %>
+                                  </td>
+                                  <td class="clalosc"><%=  current_user.pseudo %></td>
+                                <% end %>
+                                <%  pronosb = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosm = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosm + pronosb %></td>
+                                <td class="cla"><%=  valeur %></td>
+                              </tr>
+                            <% elsif classement.sort_by{|k,v|v}.reverse.first(4).to_h.include?(playerseason) %>
+                              <tr class="monte">
+                                <th scope="row"><%= x += 1 %></th>
+                                <% if playerseason.blason == nil %>
+                                  <td>
+                                     <i class="fas fa-plus-circle" style="color: white;"></i>
+                                  </td>
+                                <% else %>
+                                  <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                  </td>
+                                <% end %>
+                                  <div class="dropdown">
+                                    <td>
+                                      <%=  playerseason.user.pseudo %>
+                                    </td>
+                                  </div>
+                                <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosg + pronosn %></td>
+                                <td><%=  valeur %></td>
+                              </tr>
+                            <% elsif classement.sort_by{|k,v|v}.reverse.last(4).to_h.include?(playerseason) %>
+                                <tr class="descente">
+                                  <th scope="row"><%= x += 1 %></th>
+                                  <% if playerseason.blason == nil %>
+                                    <td>
+                                       <i class="fas fa-plus-circle" style="color: white;"></i>
+                                    </td>
+                                  <% else %>
+                                    <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                    </td>
+                                  <% end %>
+                                    <div class="dropdown">
+                                      <td>
+                                        <%=  playerseason.user.pseudo %>
+                                      </td>
+                                    </div>
+                                  <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                  <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                  <td class="cla"><%= pronosg + pronosn %></td>
+                                  <td><%=  valeur %></td>
+                                </tr>
+
+                            <% else playerseason.forecasts.where(confirmed: true, season_id: Season.last.id).exists? %>
+                              <tr>
+                                <th scope="row"><%= x += 1 %></th>
+                                <% if playerseason.blason == nil %>
+                                  <td>
+                                     <i class="fas fa-plus-circle" style="color: white;"></i>
+                                  </td>
+                                <% else %>
+                                  <td><%= cl_image_tag playerseason.blason.split('<img src="').join("").split('/>').join("").split('"').join(""), width: "27px", height: "32px" %>
+                                  </td>
+                                <% end %>
+                                  <div class="dropdown">
+                                     <td>
+                                        <%=  playerseason.user.pseudo %>
+                                    </td>
+                                  </div>
+                                <%  pronosg = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
+                                <%  pronosn = playerseason.forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
+                                <td class="cla"><%= pronosg + pronosn %></td>
+                                <td><%=  valeur %></td>
+                              </tr>
+                            <% end %>
+                          <% end %>
+                      </tbody>
+                    <% end %>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                <div class="d-flex flex-column m-auto mt-4">
+                  <table class="table mb-4">
+                    <thead>
+                      <tr>
+                        <th scope="col">POS</th>
+                        <th scope="col">EMBLÈME</th>
+                        <th scope="col">NOM</th>
+                        <th scope="col">Pronos</th>
+                        <th scope="col">PTS</th>
+                      </tr>
+                    </thead>
+                    <% classementclub = {} %>
+                    <% y = 0 %>
+                    <% @userslosc.each do |userlosc| %>
+                      <% classementclub[userlosc.player_seasons] = userlosc.player_seasons[0].number_of_points %>
+                    <% end %>
+                    <% classementclub.to_a.sort_by {|k,v| v}.reverse.each do |userlosc, valeurlosc| %>
+                      <tbody>
+                        <% if current_user.id == userlosc[0].id%>
+                        <% end %>
+                      </tbody>
+                    <% end %>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
