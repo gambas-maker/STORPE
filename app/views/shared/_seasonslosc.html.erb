@@ -493,7 +493,7 @@
                                   <i class="fas fa-plus-circle" style="color: #FBB03B;"></i>
                                 <% end %>
                               </td>
-                              <td class="clalosc"><%=  current_user.pseudo %></td>
+                              <td class="clalosc"><%= current_user.pseudo %></td>
                             <% end %>
                             <%  pronosb = userlosc[0].forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_win.positive?}.count %>
                             <%  pronosm = userlosc[0].forecasts.where(season_id: Season.last.id, confirmed: true).select{|v| v.points_lose.negative?}.count %>
@@ -503,7 +503,7 @@
                           <% elsif classementclub.sort_by{|k,v|v}.reverse.last(4).to_h.include?(userlosc) %>
                             <tr class="monte">
                               <th scope="row"><%= x += 1 %></th>
-                              <% if userlosc[0].blason == nil %>
+                              <% if userlosc[0].user.blason == nil %>
                                 <td>
                                     <i class="fas fa-plus-circle" style="color: red;"></i>
                                 </td>
@@ -524,7 +524,7 @@
                           <% else userlosc[0].forecasts.where(confirmed: true, season_id: Season.last.id).exists? %>
                             <tr>
                                <th scope="row"><%= x += 1 %></th>
-                               <% if userlosc[0].blason == nil %>
+                               <% if userlosc[0].user.blason == nil %>
                                  <td>
                                     <i class="fas fa-plus-circle" style="color: white;"></i>
                                  </td>

@@ -31,5 +31,9 @@ class PagesController < ApplicationController
     @championshipchamp = Championship.where(name: "Champion")
     @championshipsemi = Championship.where(name: "Semi-pro")
     @championshipama = Championship.where(name: "Amateur")
+    if current_user.club == "LOSC"
+      @userslosc = User.where(club: "LOSC")
+    else
+    end
   end
 end
