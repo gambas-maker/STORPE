@@ -31,8 +31,14 @@ class PagesController < ApplicationController
     @championshipchamp = Championship.where(name: "Champion")
     @championshipsemi = Championship.where(name: "Semi-pro")
     @championshipama = Championship.where(name: "Amateur")
+
+    classementclub = {}
     if current_user.club == "LOSC"
       @userslosc = User.where(club: "LOSC")
+      @userslosc.each do |userlosc|
+        classementclub[userlosc.player_seasons] = userlosc.player_seasons[0].number_of_points
+        @losc = classementclub.to_a.sort_by {|k,v| v}.reverse.first(3)
+      end
     else
     end
   end
