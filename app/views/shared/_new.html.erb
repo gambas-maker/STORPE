@@ -20,13 +20,13 @@
     <%= f.input :password,
                 required: true,
                 input_html: { autocomplete: "Mot de passe" } %>
-    <%= "Ta date de naissance :" %>
-    <%= f.date_field :date_of_birth,
+    <%#= "Ta date de naissance :" %>
+    <%#= f.date_field :date_of_birth,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "Le divin jour" } %>
-    <%= f.input :club,
-                :collection => %W[LOSC OM],
+    <%#= f.input :club,
+                :collection => %W[LOSC PAU],
                 autofocus: true,
                 input_html: { autocomplete: "Le divin jour" } %>
     <%= f.input :name,
