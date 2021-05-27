@@ -1,8 +1,7 @@
-
 <div class="topimagegazette w-100 d-flex mb-3">
   <h2 class="toptitle m-auto">Toutes nos gazettes</h2>
 </div>
-<%= will_paginate @articles %>
+<%#= will_paginate @articles %>
 <div class="d-flex justify-content-center">
   <div class="card" style="width: 18rem;">
     <% @articles.each do |article| %>
@@ -23,7 +22,7 @@
     <%= link_to 'Jouer à STORPE', new_user_registration_path, class: "d-flex justify-content-center btn btn-success" %>
   </div>
 </div>
-<%= will_paginate @articles %>
+<%#= will_paginate @articles %>
 <%=  render "shared/navbarbottom" %>
 <div class="d-flex justify-content-center">
   <footer class="footer-match">

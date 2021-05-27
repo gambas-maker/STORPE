@@ -34,7 +34,7 @@
 }
 .phone h2{
   font-size: 18px;
-  font-weight: bold;
+  // font-weight: bold;
 }
 .desktop p, h2 {
 margin-bottom: 10px;
@@ -46,7 +46,7 @@ margin-bottom: 10px;
 
 .desktop h2{
   font-size: 32px;
-  font-weight: bold;
+  // font-weight: bold;
 }
 .storpe{
   padding-top: 5px;
@@ -119,9 +119,9 @@ font-weight: normal;
   .mainhome{
     display: none;
   }
-  .nav{
-    display: none;
-  }
+  // .nav{
+    // display: none;
+  // }
 }
 
 @media (max-width: 960px){

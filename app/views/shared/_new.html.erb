@@ -7,22 +7,32 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                hint: "Ton email l'ami",
+                input_html: { autocomplete: "Email" }%>
+    <%= f.input :pseudo,
+                required: true,
+                autofocus: true,
+                hint: "12 caractères maximum l'ami",
+                input_html: {autocomplete: "Pseudo"} %>
+    <%= f.input :password,
+                required: true,
+                input_html: { autocomplete: "Mot de passe" } %>
+    <%#= "Ta date de naissance :" %>
+    <%#= f.date_field :date_of_birth,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "Le divin jour" } %>
+    <%#= f.input :club,
+                :collection => %W[LOSC PAU],
+                autofocus: true,
+                input_html: { autocomplete: "Le divin jour" } %>
     <%= f.input :name,
                 required: true,
                 autofocus: true,
                 input_html: {autocomplete: "Prénom : Roberto"} %>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "Email" }%>
-     <%= f.input :pseudo,
-                required: true,
-                autofocus: true,
-                hint: "12 caractères maximum l'ami !",
-                input_html: {autocomplete: "Pseudo"} %>
-    <%= f.input :password,
-                required: true,
-                input_html: { autocomplete: "nouveau mot de passe" } %>
       </div>
         <!-- <p style="margin-bottom: 0px;">En cliquant sur "S'inscrire", j'accepte les Termes et Conditions d'utilisation de STORPE.</p> -->
       <br>

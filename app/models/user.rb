@@ -10,6 +10,11 @@ class User < ApplicationRecord
   after_commit :async_update
   validates_uniqueness_of :pseudo
   has_friendship
+  include AlgoliaSearch
+
+  algoliasearch do
+    attributes :name, :pseudo
+  end
 
   after_create :mailer
 

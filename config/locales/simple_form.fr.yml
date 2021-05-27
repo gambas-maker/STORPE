@@ -1,5 +1,7 @@
 fr:
   simple_form:
+    error_notification:
+      default_message: "Attention tu as fait une erreur !"
     hints:
       account_alias:
         acct: Spécifiez l’identifiant@domaine du compte que vous souhaitez migrer

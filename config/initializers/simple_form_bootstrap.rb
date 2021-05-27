@@ -39,7 +39,7 @@ SimpleForm.setup do |config|
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
   # :to_sentence to list all errors for each field.
-  config.error_method = :to_sentence
+  # config.error_method = :to_sentence
 
   # add validation classes to `input_field`
   config.input_field_error_class = 'is-invalid'
@@ -59,7 +59,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :label
     b.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
-    b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+    # b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
@@ -151,7 +151,7 @@ SimpleForm.setup do |config|
     b.use :label, class: 'col-sm-3 col-form-label'
     b.wrapper :grid_wrapper, tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
-      ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      # ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
       ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     end
   end
@@ -255,7 +255,7 @@ SimpleForm.setup do |config|
     b.use :label, class: 'sr-only'
 
     b.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
-    b.use :error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+    # b.use :error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
     b.optional :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
@@ -279,7 +279,7 @@ SimpleForm.setup do |config|
     b.wrapper :form_check_wrapper, tag: 'div', class: 'custom-control custom-checkbox' do |bb|
       bb.use :input, class: 'custom-control-input', error_class: 'is-invalid', valid_class: 'is-valid'
       bb.use :label, class: 'custom-control-label'
-      bb.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      # bb.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
       bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     end
   end
@@ -291,7 +291,7 @@ SimpleForm.setup do |config|
     b.wrapper :form_check_wrapper, tag: 'div', class: 'custom-control custom-switch' do |bb|
       bb.use :input, class: 'custom-control-input', error_class: 'is-invalid', valid_class: 'is-valid'
       bb.use :label, class: 'custom-control-label'
-      bb.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      # bb.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
       bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     end
   end

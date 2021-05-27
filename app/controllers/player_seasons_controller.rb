@@ -1,7 +1,7 @@
 class PlayerSeasonsController < ApplicationController
   def show
     @championship = Championship.where(id: current_user.player_seasons[0].championship.id)
-    @seasons = Season.all
+    @seasons = Season.last(2)
   end
 
   def edit

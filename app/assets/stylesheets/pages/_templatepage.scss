@@ -5,11 +5,28 @@
   background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/v1598515055/4siwGa_2x_defzzt.png');
   background-size: cover;
 }
+
+.topimagelosc{
+  mix-blend-mode: lighten;
+  opacity: 1;
+  height: 250px;
+  background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/f_auto/v1621845965/lille_joie_eccwks.png');
+  background-size: cover;
+}
+
 .topimagechampionship {
   mix-blend-mode: lighten;
   opacity: 1;
   height: 250px;
   background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/v1598514437/r2Vv75_2x_uz4kwk.png');
+  background-size: cover;
+}
+
+.topimagechampionshiplosc {
+  mix-blend-mode: lighten;
+  opacity: 1;
+  height: 250px;
+  background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/f_auto/v1621850137/losc_player_season_wxu4as.png');
   background-size: cover;
 }
 
@@ -21,20 +38,36 @@
   background-size: cover;
 }
 
+.topimagedashboardlosc {
+  mix-blend-mode: lighten;
+  opacity: 1;
+  height: 250px;
+  background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/f_auto/v1621850137/losc_player_season_wxu4as.png');
+  background-size: cover;
+}
+
+
 .topimageprofile{
   mix-blend-mode: lighten;
   opacity: 1;
   height: 250px;
   background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/v1598515348/Group_129_2x_hvcxk0.png');
   background-size: cover;
+}
 
+.topimageprofilelosc{
+  mix-blend-mode: lighten;
+  opacity: 1;
+  height: 250px;
+  background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/f_auto/v1621859133/fonte_losc_aac7he.png');
+  background-size: cover;
 }
 
 .topimagegazette{
   mix-blend-mode: lighten;
   opacity: 1;
   height: 250px;
-  background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/v1611660384/pascal-swier-7de474KZIbs-unsplash_oe2sha.png');
+  background:url('https://res.cloudinary.com/dhu7op4vc/image/upload/v1620918812/group_gazette_dgqgrj.png');
   background-size: cover;
 }
 
@@ -117,6 +150,13 @@
   margin-bottom: 10px;
 }
 
+.infolosc{
+  width: 375px;
+  height: auto;
+  background-color: #242368;
+  margin-bottom: 10px;
+}
+
 .rank{
   height:1000px;
   padding: 20px;
@@ -154,12 +194,19 @@
 .typo {
   color: white;
   font-family: 'Montserrat';
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
 }
 
 .typoleague{
   color: #FBB03B;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  -webkit-appearance: button-bevel;
+}
+
+.typoleaguelosc{
+  color: #E01E17;
   font-family: 'Montserrat';
   font-size: 16px;
   -webkit-appearance: button-bevel;
@@ -189,6 +236,13 @@
   font-family: "Montserrat";
   font-weight:bold;
   color:#FBB03B;
+}
+
+.clalosc{
+  font-size:12px;
+  font-family: "Montserrat";
+  font-weight:bold;
+  color:#E01E17;
 }
 
 .table td {
@@ -228,6 +282,15 @@ td{
   top: 0px;
   z-index:100;
   background-color:#403a67;
+  width:100%;
+}
+
+.stickylosc {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index:100;
+  background-color:#242368;
   width:100%;
 }
 
