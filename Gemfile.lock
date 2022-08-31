@@ -146,7 +146,7 @@ GEM
       activerecord (>= 4.2.0, < 6.1)
       activesupport (>= 4.2.0, < 6.1)
       stateful_enum
-    hashie (4.1.0)
+    hashie (5.0.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -193,9 +193,9 @@ GEM
       racc (~> 1.4)
     nokogiri (1.12.5-x86-mingw32)
       racc (~> 1.4)
-    omniauth (1.0.0.pr2)
-      hashie
-      rack
+    omniauth (1.9.2)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
     orm_adapter (0.5.0)
     pg (1.2.3)
     pg (1.2.3-x64-mingw32)
@@ -220,7 +220,7 @@ GEM
     raabro (1.4.0)
     racc (1.5.2)
     racc (1.5.2-java)
-    rack (2.2.3)
+    rack (2.2.4)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
